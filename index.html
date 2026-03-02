@@ -5,85 +5,56 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Helloguysssssssssssssss/goodnight-math/refs/heads/main/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
-<!-- Core security & ads -->
-<script>
-window.addEventListener('beforeunload', function (event) {
-event.preventDefault();
-event.returnValue = '';
-return 'Are you sure you want to leave? Any unsaved changes will be lost.';
-});
-</script>
-<script async src="https://fundingchoicesmessages.google.com/i/pub-5521219086088837?ers=1"></script>
-<script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
-<script src="https://cdn.jsdelivr.net/gh/gn-math/gn-math.github.io@main/gnmath.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>gn-math · games</title>
+<title>gn-math · NEO</title>
 <meta name="title" content="GN-Math · NEO">
-<meta name="description" content="unblocked arcade. insane UI. 100x better.">
+<meta name="description" content="unblocked arcade. next-level UI. zero ads. tab cloaks included.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://gn-math.github.io/">
 <meta property="og:title" content="GN-Math · NEO">
-<meta property="og:description" content="unblocked arcade. insane UI. 100x better.">
+<meta property="og:description" content="unblocked arcade. next-level UI. zero ads. tab cloaks included.">
 <style>
-/* ------------------------------------------------------------------
- DESIGN SYSTEM: NEO — ABSOLUTE PEAK PERFORMANCE, 0% COMMENTS, 100% UI
- ------------------------------------------------------------------ */
+* {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+}
+
 :root {
- /* primary — electric */
  --primary: #fc2651;
  --primary-dark: #d91d42;
- --primary-glow: 0 0 30px rgba(252, 38, 81, 0.5);
- --primary-glow-strong: 0 0 60px rgba(252, 38, 81, 0.8);
- 
- /* glass & surface — deep space */
+ --primary-glow: 0 0 30px rgba(252,38,81,0.5);
+ --primary-glow-strong: 0 0 60px rgba(252,38,81,0.8);
  --bg-deep: #03050a;
- --bg-surface: rgba(12, 18, 28, 0.9);
- --bg-elevated: rgba(22, 30, 46, 0.8);
- --bg-inset: rgba(32, 42, 62, 0.7);
- --bg-card: rgba(18, 26, 40, 0.7);
- --bg-card-hover: rgba(28, 38, 58, 0.9);
- 
- /* text — luminous */
+ --bg-surface: rgba(12,18,28,0.9);
+ --bg-elevated: rgba(22,30,46,0.8);
+ --bg-inset: rgba(32,42,62,0.7);
+ --bg-card: rgba(18,26,40,0.7);
+ --bg-card-hover: rgba(28,38,58,0.9);
  --text-max: #ffffff;
- --text-high: rgba(255, 255, 255, 0.95);
- --text-medium: rgba(200, 220, 255, 0.8);
- --text-low: rgba(140, 160, 200, 0.6);
- 
- /* borders — subtle but sharp */
- --border-glass: rgba(252, 38, 81, 0.2);
- --border-glass-hover: rgba(252, 38, 81, 0.5);
- --border-light: rgba(255, 255, 255, 0.05);
- 
- /* shadows — infinite depth */
- --shadow-sm: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
- --shadow-md: 0 20px 50px -15px rgba(0, 0, 0, 0.9);
- --shadow-lg: 0 40px 80px -20px #000000;
- --shadow-xl: 0 60px 120px -20px #000000;
- --shadow-insane: 0 100px 200px -30px #000000;
- 
- /* radii — futuristic */
+ --text-high: rgba(255,255,255,0.95);
+ --text-medium: rgba(200,220,255,0.8);
+ --text-low: rgba(140,160,200,0.6);
+ --border-glass: rgba(252,38,81,0.2);
+ --border-glass-hover: rgba(252,38,81,0.5);
+ --border-light: rgba(255,255,255,0.05);
+ --shadow-sm: 0 10px 30px -10px rgba(0,0,0,0.8);
+ --shadow-md: 0 20px 50px -15px rgba(0,0,0,0.9);
+ --shadow-lg: 0 40px 80px -20px #000;
+ --shadow-xl: 0 60px 120px -20px #000;
+ --shadow-insane: 0 100px 200px -30px #000;
  --radius-sm: 16px;
  --radius-md: 24px;
  --radius-lg: 32px;
  --radius-xl: 40px;
  --radius-2xl: 60px;
  --radius-full: 9999px;
- 
- /* motion */
- --transition-fast: 0.15s cubic-bezier(0.2, 0, 0, 1);
- --transition-base: 0.25s cubic-bezier(0.2, 0, 0, 1);
- --transition-slow: 0.4s cubic-bezier(0.2, 0, 0, 1);
- 
- /* font */
+ --transition-fast: 0.15s cubic-bezier(0.2,0,0,1);
+ --transition-base: 0.25s cubic-bezier(0.2,0,0,1);
+ --transition-slow: 0.4s cubic-bezier(0.2,0,0,1);
  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
  --font-display: 'Inter', 'SF Pro Display', var(--font-sans);
-}
-
-* {
- margin: 0;
- padding: 0;
- box-sizing: border-box;
 }
 
 body {
@@ -97,14 +68,13 @@ body {
  overflow-x: hidden;
 }
 
-/* insane animated background */
 body::before {
  content: '';
  position: fixed;
  inset: 0;
- background: radial-gradient(circle at 30% 40%, rgba(252, 38, 81, 0.15) 0%, transparent 50%),
- radial-gradient(circle at 80% 70%, rgba(252, 38, 81, 0.1) 0%, transparent 50%),
- radial-gradient(circle at 10% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+ background: radial-gradient(circle at 30% 40%, rgba(252,38,81,0.15) 0%, transparent 50%),
+ radial-gradient(circle at 80% 70%, rgba(252,38,81,0.1) 0%, transparent 50%),
+ radial-gradient(circle at 10% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
  pointer-events: none;
  z-index: -1;
  animation: breathe 10s ease-in-out infinite alternate;
@@ -115,7 +85,6 @@ body::before {
  100% { opacity: 1; transform: scale(1.1); }
 }
 
-/* ----- HEADER — floating orb ----- */
 header {
  position: sticky;
  top: 20px;
@@ -123,18 +92,18 @@ header {
  max-width: 1600px;
  margin: 0 auto 20px;
  width: calc(100% - 40px);
- background: rgba(8, 14, 24, 0.7);
+ background: rgba(8,14,24,0.7);
  backdrop-filter: blur(20px) saturate(300%);
  -webkit-backdrop-filter: blur(20px) saturate(300%);
  border: 1px solid var(--border-glass);
  border-radius: var(--radius-full);
- box-shadow: var(--shadow-lg), 0 0 0 1px rgba(252, 38, 81, 0.1);
+ box-shadow: var(--shadow-lg), 0 0 0 1px rgba(252,38,81,0.1);
  transition: var(--transition-base);
 }
 
 header:hover {
  border-color: var(--border-glass-hover);
- box-shadow: var(--shadow-xl), 0 0 0 2px rgba(252, 38, 81, 0.2);
+ box-shadow: var(--shadow-xl), 0 0 0 2px rgba(252,38,81,0.2);
 }
 
 .header-content {
@@ -143,6 +112,7 @@ header:hover {
  align-items: center;
  justify-content: space-between;
  gap: 2rem;
+ flex-wrap: wrap;
 }
 
 .logo-area {
@@ -150,6 +120,7 @@ header:hover {
  align-items: center;
  gap: 1rem;
 }
+
 .logo {
  font-size: 2.2rem;
  font-weight: 800;
@@ -158,10 +129,11 @@ header:hover {
  -webkit-background-clip: text;
  -webkit-text-fill-color: transparent;
  background-clip: text;
- text-shadow: 0 0 40px rgba(252, 38, 81, 0.5);
+ text-shadow: 0 0 40px rgba(252,38,81,0.5);
 }
+
 .logo-badge {
- background: rgba(252, 38, 81, 0.2);
+ background: rgba(252,38,81,0.2);
  border: 1px solid var(--border-glass);
  color: var(--primary);
  padding: 0.3rem 1.2rem;
@@ -177,12 +149,13 @@ header:hover {
  display: flex;
  flex: 1 1 500px;
  gap: 0.5rem;
- background: rgba(0, 0, 0, 0.3);
+ background: rgba(0,0,0,0.3);
  border-radius: var(--radius-full);
  padding: 0.2rem;
  border: 1px solid var(--border-glass);
  transition: var(--transition-fast);
 }
+
 .search-container:focus-within {
  border-color: var(--primary);
  box-shadow: var(--primary-glow);
@@ -197,6 +170,7 @@ header:hover {
  font-size: 1rem;
  outline: none;
 }
+
 #searchBar::placeholder {
  color: var(--text-low);
  font-weight: 400;
@@ -204,7 +178,7 @@ header:hover {
 }
 
 #sortOptions {
- background: rgba(252, 38, 81, 0.2);
+ background: rgba(252,38,81,0.2);
  border: none;
  color: var(--text-max);
  padding: 0.5rem 2.5rem 0.5rem 1.5rem;
@@ -220,13 +194,14 @@ header:hover {
  border-left: 1px solid var(--border-glass);
  backdrop-filter: blur(10px);
 }
+
 #sortOptions option {
  background: var(--bg-deep);
  color: white;
 }
 
 #settings {
- background: rgba(252, 38, 81, 0.15);
+ background: rgba(252,38,81,0.15);
  border: 1px solid var(--border-glass);
  color: var(--text-max);
  padding: 0.7rem 2rem;
@@ -239,6 +214,7 @@ header:hover {
  backdrop-filter: blur(10px);
  letter-spacing: 0.5px;
 }
+
 #settings:hover {
  background: var(--primary);
  border-color: var(--primary);
@@ -247,21 +223,21 @@ header:hover {
  box-shadow: var(--primary-glow);
 }
 
-/* ----- HERO — absolutely insane ----- */
 .hero {
  max-width: 1600px;
  margin: 3rem auto 2rem;
  padding: 0 2rem;
 }
+
 .hero-card {
- background: radial-gradient(ellipse at 30% 30%, rgba(252, 38, 81, 0.2) 0%, transparent 70%),
- radial-gradient(ellipse at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 70%),
- rgba(10, 16, 28, 0.6);
+ background: radial-gradient(ellipse at 30% 30%, rgba(252,38,81,0.2) 0%, transparent 70%),
+ radial-gradient(ellipse at 80% 70%, rgba(255,255,255,0.1) 0%, transparent 70%),
+ rgba(10,16,28,0.6);
  backdrop-filter: blur(20px);
  border-radius: var(--radius-2xl);
  padding: 4rem 5rem;
  border: 1px solid var(--border-glass);
- box-shadow: var(--shadow-xl), 0 0 120px rgba(252, 38, 81, 0.3);
+ box-shadow: var(--shadow-xl), 0 0 120px rgba(252,38,81,0.3);
  display: flex;
  justify-content: space-between;
  align-items: center;
@@ -270,18 +246,21 @@ header:hover {
  position: relative;
  overflow: hidden;
 }
+
 .hero-card::before {
  content: '';
  position: absolute;
  inset: 0;
- background: radial-gradient(circle at var(--x, 30%) var(--y, 30%), rgba(252,38,81,0.4) 0%, transparent 50%);
+ background: radial-gradient(circle at var(--x,30%) var(--y,30%), rgba(252,38,81,0.4) 0%, transparent 50%);
  opacity: 0.5;
  transition: opacity 0.3s;
  pointer-events: none;
 }
+
 .hero-card:hover::before {
  opacity: 0.8;
 }
+
 .hero h1 {
  font-size: 4.5rem;
  font-weight: 800;
@@ -293,6 +272,7 @@ header:hover {
  background-clip: text;
  text-shadow: 0 0 60px rgba(252,38,81,0.5);
 }
+
 .hero p {
  color: var(--text-medium);
  font-size: 1.4rem;
@@ -301,6 +281,7 @@ header:hover {
  font-weight: 400;
  letter-spacing: -0.01em;
 }
+
 .hero-stats {
  display: flex;
  gap: 3rem;
@@ -310,9 +291,11 @@ header:hover {
  border: 1px solid var(--border-glass);
  backdrop-filter: blur(20px);
 }
+
 .stat-item {
  text-align: center;
 }
+
 .stat-value {
  font-size: 3rem;
  font-weight: 800;
@@ -320,6 +303,7 @@ header:hover {
  line-height: 1;
  text-shadow: 0 0 30px var(--primary);
 }
+
 .stat-label {
  color: var(--text-low);
  font-size: 1rem;
@@ -328,7 +312,6 @@ header:hover {
  margin-top: 0.3rem;
 }
 
-/* ----- MAIN SECTIONS — vaults of light ----- */
 main {
  max-width: 1600px;
  margin: 2rem auto;
@@ -336,7 +319,7 @@ main {
 }
 
 .vault {
- background: rgba(10, 16, 28, 0.4);
+ background: rgba(10,16,28,0.4);
  backdrop-filter: blur(16px);
  border-radius: var(--radius-2xl);
  border: 1px solid var(--border-glass);
@@ -345,6 +328,7 @@ main {
  box-shadow: var(--shadow-lg);
  transition: var(--transition-base);
 }
+
 .vault:hover {
  border-color: var(--border-glass-hover);
  box-shadow: var(--shadow-xl), 0 0 80px rgba(252,38,81,0.3);
@@ -357,14 +341,15 @@ main {
  font-size: 1.8rem;
  letter-spacing: -0.02em;
  color: var(--text-max);
- background: rgba(0, 0, 0, 0.2);
+ background: rgba(0,0,0,0.2);
  display: flex;
  justify-content: space-between;
  align-items: center;
 }
+
 .vault-header span {
  color: var(--primary);
- background: rgba(252, 38, 81, 0.2);
+ background: rgba(252,38,81,0.2);
  border: 1px solid var(--border-glass);
  padding: 0.3rem 1.5rem;
  border-radius: var(--radius-full);
@@ -381,7 +366,6 @@ main {
  padding: 2.5rem;
 }
 
-/* ----- GAME CARD — next-level insanity ----- */
 .zone-item {
  background: var(--bg-card);
  backdrop-filter: blur(20px);
@@ -396,6 +380,7 @@ main {
  position: relative;
  transform: translateY(0) scale(1);
 }
+
 .zone-item::after {
  content: '';
  position: absolute;
@@ -411,11 +396,13 @@ main {
  transition: opacity 0.4s;
  pointer-events: none;
 }
+
 .zone-item:hover {
  transform: translateY(-20px) scale(1.03);
  border-color: transparent;
  box-shadow: 0 40px 80px -20px #fc2651, var(--shadow-xl);
 }
+
 .zone-item:hover::after {
  opacity: 1;
 }
@@ -426,15 +413,18 @@ main {
  overflow: hidden;
  background: var(--bg-inset);
 }
+
 .zone-item img {
  width: 100%;
  height: 100%;
  object-fit: cover;
- transition: transform 0.6s cubic-bezier(0.2, 0, 0, 1);
+ transition: transform 0.6s cubic-bezier(0.2,0,0,1);
 }
+
 .zone-item:hover img {
  transform: scale(1.15);
 }
+
 .zone-overlay {
  position: absolute;
  top: 1rem;
@@ -453,6 +443,7 @@ main {
  text-transform: uppercase;
  letter-spacing: 1px;
 }
+
 .zone-item:hover .zone-overlay {
  opacity: 1;
  transform: translateY(0) scale(1);
@@ -460,12 +451,13 @@ main {
 
 .zone-content {
  padding: 1.5rem 1.2rem 1rem;
- background: rgba(0, 0, 0, 0.3);
+ background: rgba(0,0,0,0.3);
  border-top: 1px solid var(--border-glass);
  display: flex;
  flex-direction: column;
  gap: 0.5rem;
 }
+
 .zone-name {
  font-weight: 800;
  font-size: 1.2rem;
@@ -475,6 +467,7 @@ main {
  text-overflow: ellipsis;
  letter-spacing: -0.02em;
 }
+
 .zone-meta {
  display: flex;
  justify-content: space-between;
@@ -482,6 +475,7 @@ main {
  color: var(--text-low);
  font-size: 0.85rem;
 }
+
 .zone-author {
  color: var(--primary);
  font-weight: 600;
@@ -490,6 +484,7 @@ main {
  font-size: 0.75rem;
  letter-spacing: 0.5px;
 }
+
 .zone-item button {
  background: transparent;
  border: 2px solid var(--border-glass);
@@ -504,7 +499,9 @@ main {
  text-transform: uppercase;
  letter-spacing: 1px;
  backdrop-filter: blur(10px);
+ width: calc(100% - 2.4rem);
 }
+
 .zone-item button:hover {
  background: var(--primary);
  border-color: var(--primary);
@@ -513,23 +510,24 @@ main {
  box-shadow: var(--primary-glow);
 }
 
-/* ----- ZONE VIEWER — fullscreen cosmos ----- */
 #zoneViewer {
  position: fixed;
  inset: 0;
- background: rgba(3, 5, 10, 0.98);
+ background: rgba(3,5,10,0.98);
  backdrop-filter: blur(40px);
  z-index: 1000;
  display: none;
  flex-direction: column;
- animation: cosmicReveal 0.4s cubic-bezier(0.2, 0, 0, 1);
+ animation: cosmicReveal 0.4s cubic-bezier(0.2,0,0,1);
 }
+
 @keyframes cosmicReveal {
  0% { opacity: 0; transform: scale(0.96); backdrop-filter: blur(0); }
  100% { opacity: 1; transform: scale(1); backdrop-filter: blur(40px); }
 }
+
 .zone-viewer-header {
- background: rgba(8, 14, 24, 0.7);
+ background: rgba(8,14,24,0.7);
  backdrop-filter: blur(20px);
  border-bottom: 1px solid var(--border-glass);
  padding: 1rem 2.5rem;
@@ -540,12 +538,14 @@ main {
  gap: 1.5rem;
  box-shadow: var(--shadow-lg);
 }
+
 .zone-title-large {
  display: flex;
  align-items: baseline;
  gap: 2rem;
  flex-wrap: wrap;
 }
+
 #zoneName {
  font-size: 2.2rem;
  font-weight: 800;
@@ -554,6 +554,7 @@ main {
  -webkit-text-fill-color: transparent;
  background-clip: text;
 }
+
 #zoneAuthor {
  color: var(--text-low);
  text-decoration: none;
@@ -562,12 +563,14 @@ main {
  padding-left: 2rem;
  font-weight: 500;
 }
+
 .zone-controls {
  display: flex;
  gap: 0.8rem;
 }
+
 .zone-controls button {
- background: rgba(252, 38, 81, 0.15);
+ background: rgba(252,38,81,0.15);
  border: 1px solid var(--border-glass);
  padding: 0.7rem 1.8rem;
  border-radius: var(--radius-full);
@@ -579,6 +582,7 @@ main {
  letter-spacing: 0.5px;
  backdrop-filter: blur(10px);
 }
+
 .zone-controls button:hover {
  background: var(--primary);
  border-color: var(--primary);
@@ -586,6 +590,7 @@ main {
  transform: translateY(-2px) scale(1.02);
  box-shadow: var(--primary-glow);
 }
+
 #zoneFrame {
  flex: 1;
  width: 100%;
@@ -594,7 +599,6 @@ main {
  border-radius: 0;
 }
 
-/* ----- POPUP — crystalline ----- */
 #popupOverlay {
  position: fixed;
  inset: 0;
@@ -606,8 +610,9 @@ main {
  z-index: 2000;
  padding: 1.5rem;
 }
+
 .popup {
- background: rgba(12, 18, 28, 0.8);
+ background: rgba(12,18,28,0.8);
  backdrop-filter: blur(40px);
  border-radius: var(--radius-2xl);
  max-width: 500px;
@@ -616,6 +621,7 @@ main {
  box-shadow: var(--shadow-xl), 0 0 120px rgba(252,38,81,0.3);
  overflow: hidden;
 }
+
 .popup-header {
  background: rgba(0,0,0,0.3);
  padding: 1.5rem 2rem;
@@ -624,12 +630,14 @@ main {
  align-items: center;
  border-bottom: 1px solid var(--border-glass);
 }
+
 #popupTitle {
  font-size: 1.8rem;
  font-weight: 800;
  color: var(--text-max);
  letter-spacing: -0.02em;
 }
+
 #popupClose {
  background: rgba(255,255,255,0.05);
  border: 1px solid var(--border-glass);
@@ -644,17 +652,20 @@ main {
  justify-content: center;
  transition: 0.1s;
 }
+
 #popupClose:hover {
  background: var(--primary);
  border-color: var(--primary);
  color: white;
 }
+
 #popupBody {
  padding: 2rem;
  color: var(--text-high);
  max-height: 60vh;
  overflow-y: auto;
 }
+
 #popupBody input {
  width: 100%;
  padding: 1rem 1.5rem;
@@ -666,35 +677,38 @@ main {
  font-size: 1rem;
  backdrop-filter: blur(10px);
 }
-#settings-button {
- width: 100%;
- padding: 1.2rem;
- background: var(--primary);
- border: none;
+
+.cloak-btn {
+ background: rgba(252,38,81,0.2);
+ border: 1px solid var(--border-glass);
+ padding: 1rem 1.5rem;
  border-radius: var(--radius-full);
- color: white;
- font-weight: 800;
- font-size: 1rem;
- margin-bottom: 0.8rem;
+ font-weight: 700;
+ color: var(--text-max);
  cursor: pointer;
  transition: var(--transition-fast);
- text-transform: uppercase;
- letter-spacing: 1px;
-}
-#settings-button:hover {
- background: var(--primary-dark);
- transform: translateY(-3px) scale(1.02);
- box-shadow: var(--primary-glow-strong);
+ font-size: 1rem;
+ margin: 0.3rem 0;
+ width: 100%;
+ text-align: left;
+ backdrop-filter: blur(10px);
 }
 
-/* ----- FOOTER — floating crystal ----- */
+.cloak-btn:hover {
+ background: var(--primary);
+ border-color: var(--primary);
+ transform: translateX(5px);
+ box-shadow: var(--primary-glow);
+}
+
 footer {
  margin-top: 5rem;
  padding: 3rem 2rem;
- background: rgba(3, 5, 10, 0.5);
+ background: rgba(3,5,10,0.5);
  backdrop-filter: blur(20px);
  border-top: 1px solid var(--border-glass);
 }
+
 .footer-content {
  max-width: 1600px;
  margin: 0 auto;
@@ -704,10 +718,12 @@ footer {
  flex-wrap: wrap;
  gap: 2rem;
 }
+
 .footer-links {
  display: flex;
  gap: 3rem;
 }
+
 .footer-links a {
  color: var(--text-low);
  text-decoration: none;
@@ -718,23 +734,24 @@ footer {
  transition: var(--transition-fast);
  border: 1px solid transparent;
 }
+
 .footer-links a:hover {
  color: var(--text-max);
  background: rgba(252,38,81,0.2);
  border-color: var(--border-glass);
 }
+
 .footer-copy {
  color: var(--text-muted);
  font-size: 0.9rem;
  letter-spacing: 0.5px;
 }
 
-/* ----- toast — minimal but glowy ----- */
 .toast {
  position: fixed;
  bottom: 2rem;
  right: 2rem;
- background: rgba(252, 38, 81, 0.9);
+ background: rgba(252,38,81,0.9);
  backdrop-filter: blur(20px);
  border: 1px solid rgba(255,255,255,0.2);
  padding: 1rem 2rem;
@@ -745,12 +762,39 @@ footer {
  z-index: 3000;
  animation: toastIn 0.2s ease-out;
 }
+
 @keyframes toastIn {
  from { transform: translateX(100%); opacity: 0; }
  to { transform: translateX(0); opacity: 1; }
 }
 
-/* ----- responsive ----- */
+.loader {
+ display: flex;
+ justify-content: center;
+ padding: 4rem;
+}
+
+.loader div {
+ width: 20px;
+ height: 20px;
+ background: var(--primary);
+ border-radius: 50%;
+ margin: 0 10px;
+ animation: bounce 0.6s infinite alternate;
+}
+
+.loader div:nth-child(2) {
+ animation-delay: 0.2s;
+}
+
+.loader div:nth-child(3) {
+ animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+ to { transform: translateY(-30px); opacity: 0.5; }
+}
+
 @media (max-width: 900px) {
  .header-content { flex-direction: column; align-items: stretch; }
  .hero h1 { font-size: 3rem; }
@@ -783,7 +827,7 @@ footer {
  <div class="hero-card" id="heroCard">
  <div>
  <h1>unblocked<br>games</h1>
- <p>epstein fuck niggers</p>
+ <p>zero ads · infinite play · cloaks included</p>
  </div>
  <div class="hero-stats">
  <div class="stat-item">
@@ -791,23 +835,12 @@ footer {
  <div class="stat-label">games</div>
  </div>
  <div class="stat-item">
- <div class="stat-value" id="totalPlayersStat">∞</div>
+ <div class="stat-value">∞</div>
  <div class="stat-label">players</div>
  </div>
  </div>
  </div>
 </div>
-
-<!-- ads (minimal, but styled) -->
-<div style="max-width:1600px; margin:0 auto 2rem; padding:0 2rem;">
- <ins class="adsbygoogle"
- style="display:block; text-align:center; background: rgba(255,255,255,0.02); border-radius: var(--radius-full); padding:0.5rem; border:1px solid var(--border-glass);"
- data-ad-client="ca-pub-5521219086088837"
- data-ad-slot="5549138288"
- data-ad-format="auto"
- data-full-width-responsive="true"></ins>
-</div>
-<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
 <main>
  <div class="vault">
@@ -823,11 +856,10 @@ footer {
  all zones
  <span id="allCount">0</span>
  </div>
- <div id="container">loading...</div>
+ <div id="container"><div class="loader"><div></div><div></div><div></div></div></div>
  </div>
 </main>
 
-<!-- ZONE VIEWER (NO COMMENTS SECTION — REMOVED ENTIRELY) -->
 <div id="zoneViewer">
  <div class="zone-viewer-header">
  <div class="zone-title-large">
@@ -842,10 +874,8 @@ footer {
  </div>
  </div>
  <iframe id="zoneFrame"></iframe>
- <!-- NO COMMENT SECTION — PURGED -->
 </div>
 
-<!-- popup modal (settings only) -->
 <div id="popupOverlay">
  <div class="popup">
  <div class="popup-header">
@@ -856,8 +886,7 @@ footer {
  </div>
 </div>
 
-<!-- toast container (for notifications) -->
-<div id="toastContainer" style="position:fixed; bottom:2rem; right:2rem; z-index:3000;"></div>
+<div id="toastContainer"></div>
 
 <footer>
  <div class="footer-content">
@@ -868,18 +897,17 @@ footer {
  <a href="#" onclick="document.getElementById('importData').click(); return false;">import</a>
  <input type="file" id="importData" style="display: none;" onchange="loadData(event)">
  </div>
- <div class="footer-copy">gn·math · NEO · 100x UI</div>
+ <div class="footer-copy">gn·math · NEO · 100x UI · no ads</div>
  </div>
 </footer>
 
 <script>
-// ---------- GLOBAL STATE (NO COMMENTS, NO LOCALSTORAGE COMMENTS) ----------
-const container = document.getElementById('container');
-const zoneViewer = document.getElementById('zoneViewer');
+let container = document.getElementById('container');
+let zoneViewer = document.getElementById('zoneViewer');
 let zoneFrame = document.getElementById('zoneFrame');
-const searchBar = document.getElementById('searchBar');
-const sortOptions = document.getElementById('sortOptions');
-const featuredContainer = document.getElementById('featuredZones');
+let searchBar = document.getElementById('searchBar');
+let sortOptions = document.getElementById('sortOptions');
+let featuredContainer = document.getElementById('featuredZones');
 
 const zonesurls = [
  "https://cdn.jsdelivr.net/gh/gn-math/assets@main/zones.json",
@@ -894,108 +922,102 @@ const htmlURL = "https://cdn.jsdelivr.net/gh/gn-math/html@main";
 let zones = [];
 let popularityData = {};
 
-// ---------- helper: toast ----------
 function showToast(message, duration = 3000) {
- const toast = document.createElement('div');
+ let toast = document.createElement('div');
  toast.className = 'toast';
  toast.innerText = message;
  document.getElementById('toastContainer').appendChild(toast);
  setTimeout(() => toast.remove(), duration);
 }
 
-// ---------- fetch zones ----------
 async function listZones() {
  try {
- const response = await fetch(zonesURL+"?t="+Date.now());
- const json = await response.json();
+ let response = await fetch(zonesURL + "?t=" + Date.now());
+ let json = await response.json();
  zones = json;
- if (zones.length) zones[0].featured = true; 
+ if (zones.length) zones[0].featured = true;
  await fetchPopularity();
  sortZones();
  document.getElementById('totalGamesStat').innerText = zones.length;
-
- const urlParams = new URLSearchParams(window.location.search);
- const id = urlParams.get('id');
+ let urlParams = new URLSearchParams(window.location.search);
+ let id = urlParams.get('id');
  if (id) {
- const zone = zones.find(z => z.id + '' == id + '');
+ let zone = zones.find(z => z.id + '' == id + '');
  if (zone) openZone(zone);
  }
  } catch (error) {
- container.innerHTML = `error: ${error}`;
+ container.innerHTML = `<div style='padding:2rem;color:var(--text-low);'>loading error: ${error}</div>`;
  }
 }
 
 async function fetchPopularity() {
  try {
- const resp = await fetch("https://data.jsdelivr.com/v1/stats/packages/gh/gn-math/html@main/files?period=year");
- const data = await resp.json();
+ let resp = await fetch("https://data.jsdelivr.com/v1/stats/packages/gh/gn-math/html@main/files?period=year");
+ let data = await resp.json();
  data.forEach(file => {
- const idMatch = file.name.match(/\/(\d+)\.html$/);
+ let idMatch = file.name.match(/\/(\d+)\.html$/);
  if (idMatch) popularityData[parseInt(idMatch[1])] = file.hits.total;
  });
- } catch { /* ignore */ }
+ } catch {}
 }
 
 function sortZones() {
- const by = sortOptions.value;
+ let by = sortOptions.value;
  if (by === 'name') zones.sort((a,b) => a.name.localeCompare(b.name));
  else if (by === 'id') zones.sort((a,b) => a.id - b.id);
  else if (by === 'popular') zones.sort((a,b) => (popularityData[b.id]||0) - (popularityData[a.id]||0));
- zones.sort((a,b) => (a.id === -1 ? -1 : b.id === -1 ? 1 : 0));
-
  displayFeaturedZones(zones.filter(z => z.featured));
  displayZones(zones);
 }
 
 function displayFeaturedZones(featured) {
  featuredContainer.innerHTML = "";
- featured.forEach(file => featuredContainer.appendChild(createZoneCard(file)));
+ featured.forEach(f => featuredContainer.appendChild(createZoneCard(f)));
  document.getElementById('featuredCount').innerText = featured.length;
  lazyLoadImages('#featuredZones');
 }
 
 function displayZones(list) {
  container.innerHTML = "";
- list.forEach(file => container.appendChild(createZoneCard(file)));
+ list.forEach(f => container.appendChild(createZoneCard(f)));
  document.getElementById('allCount').innerText = list.length;
  lazyLoadImages('#container');
 }
 
 function createZoneCard(file) {
- const div = document.createElement('div');
+ let div = document.createElement('div');
  div.className = 'zone-item';
  div.onclick = () => openZone(file);
  
- const mediaDiv = document.createElement('div');
+ let mediaDiv = document.createElement('div');
  mediaDiv.className = 'zone-media';
- const img = document.createElement('img');
+ let img = document.createElement('img');
  img.dataset.src = file.cover?.replace("{COVER_URL}", coverURL).replace("{HTML_URL}", htmlURL) || '';
  img.alt = file.name;
  img.loading = 'lazy';
  img.classList.add('lazy-img');
  mediaDiv.appendChild(img);
  
- const overlay = document.createElement('div');
+ let overlay = document.createElement('div');
  overlay.className = 'zone-overlay';
  overlay.innerText = 'PLAY';
  mediaDiv.appendChild(overlay);
  
- const contentDiv = document.createElement('div');
+ let contentDiv = document.createElement('div');
  contentDiv.className = 'zone-content';
- const nameSpan = document.createElement('div');
+ let nameSpan = document.createElement('div');
  nameSpan.className = 'zone-name';
  nameSpan.innerText = file.name;
- const metaDiv = document.createElement('div');
+ let metaDiv = document.createElement('div');
  metaDiv.className = 'zone-meta';
- const authorSpan = document.createElement('span');
+ let authorSpan = document.createElement('span');
  authorSpan.className = 'zone-author';
  authorSpan.innerText = file.author;
  metaDiv.appendChild(authorSpan);
- // NO COMMENT COUNT
  contentDiv.appendChild(nameSpan);
  contentDiv.appendChild(metaDiv);
  
- const playBtn = document.createElement('button');
+ let playBtn = document.createElement('button');
  playBtn.innerText = 'launch';
  playBtn.onclick = (e) => { e.stopPropagation(); openZone(file); };
  
@@ -1006,10 +1028,10 @@ function createZoneCard(file) {
 }
 
 function lazyLoadImages(selector) {
- const obs = new IntersectionObserver((entries, ob) => {
+ let obs = new IntersectionObserver((entries, ob) => {
  entries.forEach(e => {
  if (e.isIntersecting) {
- const img = e.target;
+ let img = e.target;
  if (img.dataset.src) img.src = img.dataset.src;
  img.classList.remove('lazy-img');
  ob.unobserve(img);
@@ -1020,17 +1042,16 @@ function lazyLoadImages(selector) {
 }
 
 function filterZones() {
- const q = searchBar.value.toLowerCase();
+ let q = searchBar.value.toLowerCase();
  displayZones(zones.filter(z => z.name.toLowerCase().includes(q)));
 }
 
-// ---------- ZONE VIEWER (NO COMMENTS) ----------
 function openZone(file) {
  if (file.url.startsWith("http")) {
  window.open(file.url, "_blank");
  } else {
- const url = file.url.replace("{COVER_URL}", coverURL).replace("{HTML_URL}", htmlURL);
- fetch(url+"?t="+Date.now()).then(r => r.text()).then(html => {
+ let url = file.url.replace("{COVER_URL}", coverURL).replace("{HTML_URL}", htmlURL);
+ fetch(url + "?t=" + Date.now()).then(r => r.text()).then(html => {
  if (!zoneFrame || !zoneFrame.contentDocument) {
  zoneFrame = document.createElement("iframe");
  zoneFrame.id = "zoneFrame";
@@ -1040,15 +1061,14 @@ function openZone(file) {
  zoneFrame.contentDocument.write(html);
  zoneFrame.contentDocument.close();
  document.getElementById('zoneName').textContent = file.name;
- const authorEl = document.getElementById('zoneAuthor');
+ let authorEl = document.getElementById('zoneAuthor');
  authorEl.textContent = "by " + file.author;
  if (file.authorLink) authorEl.href = file.authorLink;
  zoneViewer.dataset.currentId = file.id;
- 
  zoneViewer.style.display = "flex";
  history.pushState(null, '', `?id=${file.id}`);
  showToast(`now playing: ${file.name}`);
- }).catch(e => alert("load error: "+e));
+ }).catch(e => alert("load error: " + e));
  }
 }
 
@@ -1060,23 +1080,23 @@ function closeZone() {
 }
 
 function aboutBlank() {
- const id = zoneViewer.dataset.currentId;
- const zone = zones.find(z => z.id + '' === id);
+ let id = zoneViewer.dataset.currentId;
+ let zone = zones.find(z => z.id + '' === id);
  if (!zone) return;
- const url = zone.url.replace("{COVER_URL}", coverURL).replace("{HTML_URL}", htmlURL);
- fetch(url+"?t="+Date.now()).then(r => r.text()).then(html => {
- const w = window.open("about:blank", "_blank");
+ let url = zone.url.replace("{COVER_URL}", coverURL).replace("{HTML_URL}", htmlURL);
+ fetch(url + "?t=" + Date.now()).then(r => r.text()).then(html => {
+ let w = window.open("about:blank", "_blank");
  if (w) { w.document.write(html); w.document.close(); }
  });
 }
 
 function downloadZone() {
- const id = zoneViewer.dataset.currentId;
- const zone = zones.find(z => z.id + '' === id);
+ let id = zoneViewer.dataset.currentId;
+ let zone = zones.find(z => z.id + '' === id);
  if (!zone) return;
- fetch(zone.url.replace("{HTML_URL}", htmlURL)+"?t="+Date.now()).then(r => r.text()).then(text => {
- const blob = new Blob([text], {type: "text/html"});
- const a = document.createElement('a');
+ fetch(zone.url.replace("{HTML_URL}", htmlURL) + "?t=" + Date.now()).then(r => r.text()).then(text => {
+ let blob = new Blob([text], {type: "text/html"});
+ let a = document.createElement('a');
  a.href = URL.createObjectURL(blob);
  a.download = zone.name + ".html";
  a.click();
@@ -1085,20 +1105,49 @@ function downloadZone() {
 }
 
 function fullscreenZone() {
- const iframe = document.getElementById('zoneFrame');
+ let iframe = document.getElementById('zoneFrame');
  if (iframe?.requestFullscreen) iframe.requestFullscreen();
  else if (iframe?.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
 }
 
-// ---------- SETTINGS & POPUP (NO COMMENT OPTIONS) ----------
 document.getElementById('settings').addEventListener('click', () => {
- document.getElementById('popupTitle').textContent = "settings";
+ document.getElementById('popupTitle').textContent = "settings & tab cloaks";
  document.getElementById('popupBody').innerHTML = `
- <button id="settings-button" onclick="darkMode()">dark mode</button>
- <button id="settings-button" onclick="tabCloak()">tab cloak</button>
+ <div style="display:flex; flex-direction:column; gap:0.8rem;">
+ <button class="cloak-btn" onclick="applyCloak('Google Classroom','https://classroom.google.com/favicon.ico')">📚 Google Classroom</button>
+ <button class="cloak-btn" onclick="applyCloak('Google Docs','https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico')">📝 Google Docs</button>
+ <button class="cloak-btn" onclick="applyCloak('Google','https://www.google.com/favicon.ico')">🔍 Google</button>
+ <button class="cloak-btn" onclick="applyCloak('gn-math · NEO','favicon.png')">↺ reset to default</button>
+ <hr style="border-color:var(--border-glass); margin:1rem 0;">
+ <label>custom tab title</label>
+ <input type="text" id="cloakTitle" placeholder="enter title..." oninput="cloakName(this.value)">
+ <label>custom icon URL</label>
+ <input type="text" id="cloakIcon" placeholder="https://.../icon.png" oninput="cloakIcon(this.value)">
+ </div>
  `;
  document.getElementById('popupOverlay').style.display = "flex";
 });
+
+function applyCloak(title, iconUrl) {
+ document.title = title;
+ let link = document.querySelector("link[rel~='icon']") || document.createElement('link');
+ link.rel = 'icon';
+ link.href = iconUrl;
+ document.head.appendChild(link);
+ closePopup();
+ showToast(`cloak set to ${title}`);
+}
+
+function cloakName(t) {
+ document.title = t.trim() || "gn-math · NEO";
+}
+
+function cloakIcon(url) {
+ let link = document.querySelector("link[rel~='icon']") || document.createElement('link');
+ link.rel = 'icon';
+ link.href = url.trim() || "favicon.png";
+ document.head.appendChild(link);
+}
 
 function showContact() {
  document.getElementById('popupTitle').textContent = "contact";
@@ -1108,55 +1157,43 @@ function showContact() {
 
 function loadPrivacy() {
  document.getElementById('popupTitle').textContent = "privacy";
- document.getElementById('popupBody').innerHTML = `<p>no personal data collected. ads by google. full policy on discord.</p>`;
+ document.getElementById('popupBody').innerHTML = `<p>no personal data collected · zero ads · full policy on discord.</p>`;
  document.getElementById('popupOverlay').style.display = "flex";
 }
 
-function tabCloak() {
- closePopup();
- document.getElementById('popupTitle').textContent = "tab cloak";
- document.getElementById('popupBody').innerHTML = `
- <label>tab title</label>
- <input type="text" id="cloakTitle" placeholder="gn-math" oninput="cloakName(this.value)">
- <label>icon url</label>
- <input type="text" id="cloakIcon" placeholder="https://.../favicon.png" oninput="cloakIcon(this.value)">
- `;
- document.getElementById('popupOverlay').style.display = "flex";
+function closePopup() {
+ document.getElementById('popupOverlay').style.display = "none";
 }
 
-function cloakName(t) { document.title = t.trim() || "gn-math · NEO"; }
-function cloakIcon(url) {
- let link = document.querySelector("link[rel~='icon']") || document.createElement('link');
- link.rel = 'icon';
- link.href = url.trim() || "favicon.png";
- document.head.appendChild(link);
+function saveData() {
+ alert("export placeholder (full export in console)");
 }
-function darkMode() { document.body.classList.toggle("dark-mode"); }
-function closePopup() { document.getElementById('popupOverlay').style.display = "none"; }
 
-// stub original export/import (keep)
-async function saveData() { alert("full browser data export - see console (placeholder)"); }
-async function loadData(e) { alert("import placeholder"); }
+function loadData(e) {
+ alert("import placeholder");
+}
 
-// ---------- blocking (original) ----------
 const schoolList = ["deledao","goguardian","lightspeed","linewize","securly",".edu/"];
 function isBlockedDomain(u) {
  try { let d = new URL(u, location.origin).hostname + "/"; return schoolList.some(s => d.includes(s)); } catch { return false; }
 }
 const originalFetch = window.fetch;
-window.fetch = function(u, opts) { if (isBlockedDomain(u)) return Promise.reject("blocked"); return originalFetch.apply(this, arguments); };
+window.fetch = function(u, opts) {
+ if (isBlockedDomain(u)) return Promise.reject("blocked");
+ return originalFetch.apply(this, arguments);
+};
 const originalOpen = XMLHttpRequest.prototype.open;
-XMLHttpRequest.prototype.open = function(m, u) { if (!isBlockedDomain(u)) return originalOpen.apply(this, arguments); };
+XMLHttpRequest.prototype.open = function(m, u) {
+ if (!isBlockedDomain(u)) return originalOpen.apply(this, arguments);
+};
 HTMLCanvasElement.prototype.toDataURL = function() { return ""; };
 
-// start
 listZones();
 
-// interactive hero gradient (mouse follow)
 document.getElementById('heroCard')?.addEventListener('mousemove', (e) => {
- const rect = e.currentTarget.getBoundingClientRect();
- const x = ((e.clientX - rect.left) / rect.width) * 100;
- const y = ((e.clientY - rect.top) / rect.height) * 100;
+ let rect = e.currentTarget.getBoundingClientRect();
+ let x = ((e.clientX - rect.left) / rect.width) * 100;
+ let y = ((e.clientY - rect.top) / rect.height) * 100;
  e.currentTarget.style.setProperty('--x', x + '%');
  e.currentTarget.style.setProperty('--y', y + '%');
 });

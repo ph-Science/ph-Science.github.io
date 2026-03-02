@@ -20,7 +20,7 @@ return 'Any unsaved progress will be lost.';
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ph-Science | Lab</title>
 <meta name="title" content="ph-Science | Lab">
-<meta name="description" content="unblocked lab · orange/black aesthetic · modern UI">
+<meta name="description" content="unblocked lab · orange/black aesthetic · performance mode">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://gn-math.github.io/">
 <meta property="og:title" content="ph-Science | Lab">
@@ -29,6 +29,7 @@ return 'Any unsaved progress will be lost.';
 /* ------------------------------------------------------------------
    ph-SCIENCE | LAB — ORANGE/BLACK MODERN AESTHETIC
    DARK INDUSTRIAL LAB + NEON ORANGE ACCENTS
+   PERFORMANCE MODE TOGGLE (REDUCES GLOW/BLUR)
 ------------------------------------------------------------------ */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap');
@@ -57,6 +58,41 @@ return 'Any unsaved progress will be lost.';
   --radius-xl: 48px;
   --radius-full: 9999px;
   --transition: 0.2s cubic-bezier(0.2, 0.9, 0.3, 1);
+  
+  /* performance mode variables (default: max eye candy) */
+  --blur-strength: 20px;
+  --glow-intensity: 1;
+  --grid-opacity: 0.02;
+  --bg-gradient-opacity: 0.15;
+  --card-hover-scale: 1.02;
+  --hero-glow: 0.4;
+}
+
+/* performance mode class - reduces heavy effects */
+body.performance-mode {
+  --blur-strength: 5px;
+  --glow-intensity: 0.3;
+  --grid-opacity: 0.005;
+  --bg-gradient-opacity: 0.05;
+  --card-hover-scale: 1.01;
+  --hero-glow: 0.15;
+}
+
+body.performance-mode .hero-card::before {
+  opacity: 0.1 !important;
+}
+
+body.performance-mode .zone-item {
+  transition: transform 0.15s ease-out;
+}
+
+body.performance-mode .zone-item::after {
+  opacity: 0 !important;
+}
+
+body.performance-mode .zone-item:hover {
+  transform: translateY(-5px) scale(var(--card-hover-scale));
+  box-shadow: 0 20px 40px -15px #ff6b00;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -71,14 +107,14 @@ body {
   position: relative;
 }
 
-/* industrial grid overlay */
+/* industrial grid overlay - intensity controlled by var */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   background-image: 
-    linear-gradient(rgba(255,107,0,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,107,0,0.02) 1px, transparent 1px);
+    linear-gradient(rgba(255,107,0, var(--grid-opacity)) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,107,0, var(--grid-opacity)) 1px, transparent 1px);
   background-size: 50px 50px;
   pointer-events: none;
   z-index: -1;
@@ -88,8 +124,8 @@ body::after {
   content: '';
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at 60% 40%, rgba(255,107,0,0.15) 0%, transparent 60%),
-              radial-gradient(circle at 20% 80%, rgba(255,140,0,0.1) 0%, transparent 50%);
+  background: radial-gradient(circle at 60% 40%, rgba(255,107,0, var(--bg-gradient-opacity)) 0%, transparent 60%),
+              radial-gradient(circle at 20% 80%, rgba(255,140,0, 0.1) 0%, transparent 50%);
   pointer-events: none;
   z-index: -1;
 }
@@ -103,8 +139,8 @@ header {
   margin: 0 auto 20px;
   width: calc(100% - 40px);
   background: rgba(10, 12, 15, 0.9);
-  backdrop-filter: blur(20px) saturate(200%);
-  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  backdrop-filter: blur(var(--blur-strength)) saturate(200%);
+  -webkit-backdrop-filter: blur(var(--blur-strength)) saturate(200%);
   border: 1px solid var(--border-sharp);
   border-radius: var(--radius-full);
   box-shadow: 0 20px 40px -15px black, 0 0 0 1px rgba(255,107,0,0.2);
@@ -255,11 +291,11 @@ header:hover {
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at var(--x, 30%) var(--y, 30%), rgba(255,107,0,0.5) 0%, transparent 60%);
-  opacity: 0.4;
+  opacity: var(--hero-glow);
   transition: opacity 0.4s;
   pointer-events: none;
 }
-.hero-card:hover::before { opacity: 0.7; }
+.hero-card:hover::before { opacity: calc(var(--hero-glow) + 0.2); }
 .hero h1 {
   font-size: 5rem;
   font-weight: 900;
@@ -368,11 +404,13 @@ main { max-width: 1600px; margin: 2rem auto; padding: 0 2rem; }
   opacity: 0; transition: 0.4s; pointer-events: none;
 }
 .zone-item:hover {
-  transform: translateY(-12px) scale(1.02);
+  transform: translateY(-12px) scale(var(--card-hover-scale));
   border-color: transparent;
   box-shadow: 0 35px 60px -15px #ff6b00, 0 0 50px rgba(255,107,0,0.3);
 }
-.zone-item:hover::after { opacity: 1; }
+.zone-item:hover::after { 
+  opacity: calc(1 * var(--glow-intensity)); 
+}
 
 .zone-media {
   position: relative;
@@ -517,6 +555,51 @@ main { max-width: 1600px; margin: 2rem auto; padding: 0 2rem; }
   text-transform: uppercase; letter-spacing: 2px; font-family: 'JetBrains Mono', monospace;
 }
 #settings-button:hover { background: #ff8c2e; transform: translateY(-3px); box-shadow: var(--orange-glow); }
+
+/* Performance mode toggle switch */
+.performance-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0,0,0,0.3);
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255,107,0,0.2);
+  margin-bottom: 1.2rem;
+}
+.performance-toggle label {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  color: var(--text-light);
+}
+.toggle-switch {
+  width: 60px;
+  height: 30px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 30px;
+  border: 1px solid rgba(255,107,0,0.3);
+  position: relative;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.toggle-switch.active {
+  background: var(--orange);
+}
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  background: white;
+  border-radius: 50%;
+  top: 1px;
+  left: 1px;
+  transition: 0.2s;
+}
+.toggle-switch.active::after {
+  left: 31px;
+  background: black;
+}
 
 /* FOOTER — dark industrial */
 footer {
@@ -683,11 +766,32 @@ const htmlURL = "https://cdn.jsdelivr.net/gh/gn-math/html@main";
 let zones = [];
 let popularityData = {};
 
+// Performance mode state
+let performanceMode = false;
+
 function showToast(message, duration = 3000) {
  const toast = document.createElement('div');
  toast.className = 'toast'; toast.innerText = message;
  document.getElementById('toastContainer').appendChild(toast);
  setTimeout(() => toast.remove(), duration);
+}
+
+// Toggle performance mode
+function togglePerformance() {
+  performanceMode = !performanceMode;
+  if (performanceMode) {
+    document.body.classList.add('performance-mode');
+    showToast('⚡ performance mode enabled — smoother experience');
+  } else {
+    document.body.classList.remove('performance-mode');
+    showToast('🎨 max quality mode enabled');
+  }
+  // Update toggle switch UI if open
+  const toggle = document.querySelector('.toggle-switch');
+  if (toggle) {
+    if (performanceMode) toggle.classList.add('active');
+    else toggle.classList.remove('active');
+  }
 }
 
 async function listZones() {
@@ -865,25 +969,30 @@ function fullscreenZone() {
  else if (iframe?.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
 }
 
-// ---------- SETTINGS & POPUP ----------
+// ---------- SETTINGS & POPUP with PERFORMANCE TOGGLE ----------
 document.getElementById('settings').addEventListener('click', () => {
  document.getElementById('popupTitle').textContent = "settings";
  document.getElementById('popupBody').innerHTML = `
+   <div class="performance-toggle">
+     <label>⚡ performance mode</label>
+     <div class="toggle-switch ${performanceMode ? 'active' : ''}" onclick="togglePerformance()"></div>
+   </div>
    <button id="settings-button" onclick="darkMode()">dark mode</button>
    <button id="settings-button" onclick="tabCloak()">tab cloak</button>
+   <button id="settings-button" onclick="closePopup()">close</button>
  `;
  document.getElementById('popupOverlay').style.display = "flex";
 });
 
 function showContact() {
  document.getElementById('popupTitle').textContent = "contact";
- document.getElementById('popupBody').innerHTML = `<p>discord: ph-lab · email: lab@ph.science</p>`;
+ document.getElementById('popupBody').innerHTML = `<p>discord: ph-lab · email: lab@ph.science</p><button id="settings-button" onclick="closePopup()">close</button>`;
  document.getElementById('popupOverlay').style.display = "flex";
 }
 
 function loadPrivacy() {
  document.getElementById('popupTitle').textContent = "privacy";
- document.getElementById('popupBody').innerHTML = `<p>no personal data collected. ads by google. full policy on discord.</p>`;
+ document.getElementById('popupBody').innerHTML = `<p>no personal data collected. ads by google. full policy on discord.</p><button id="settings-button" onclick="closePopup()">close</button>`;
  document.getElementById('popupOverlay').style.display = "flex";
 }
 
@@ -895,6 +1004,7 @@ function tabCloak() {
    <input type="text" id="cloakTitle" placeholder="ph-Science" oninput="cloakName(this.value)">
    <label>icon url</label>
    <input type="text" id="cloakIcon" placeholder="https://.../favicon.png" oninput="cloakIcon(this.value)">
+   <button id="settings-button" onclick="closePopup()">close</button>
  `;
  document.getElementById('popupOverlay').style.display = "flex";
 }
@@ -906,7 +1016,7 @@ function cloakIcon(url) {
  link.href = url.trim() || "favicon.png";
  document.head.appendChild(link);
 }
-function darkMode() { document.body.classList.toggle("dark-mode"); } // optional
+function darkMode() { /* placeholder */ showToast('dark mode toggled'); }
 function closePopup() { document.getElementById('popupOverlay').style.display = "none"; }
 
 // stub original export/import

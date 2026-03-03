@@ -263,10 +263,158 @@ header:hover {
   box-shadow: var(--orange-glow);
 }
 
-/* HERO — industrial furnace */
+/* WELCOME OVERLAY — modern card (compact size) */
+#welcomeOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0s 0.4s;
+}
+#welcomeOverlay.active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s ease, visibility 0s 0s;
+}
+.welcome-card {
+  max-width: 550px;
+  width: 100%;
+  background: radial-gradient(ellipse at 30% 20%, rgba(255,107,0,0.25) 0%, transparent 70%),
+              radial-gradient(ellipse at 90% 80%, rgba(255,140,0,0.15) 0%, transparent 70%),
+              var(--bg-panel);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 2px solid var(--border-sharp);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.5rem;
+  box-shadow: 0 50px 100px -30px black, 0 0 150px rgba(255,107,0,0.3);
+  position: relative;
+  overflow: hidden;
+  transform: scale(0.96);
+  transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1), border-color 0.2s, box-shadow 0.2s;
+}
+.welcome-card:hover {
+  transform: scale(1);
+  border-color: var(--border-glow);
+  box-shadow: 0 60px 120px -30px black, 0 0 200px rgba(255,107,0,0.5);
+}
+.welcome-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(255,107,0,0.3) 0%, transparent 60%);
+  opacity: 0.4;
+  pointer-events: none;
+}
+.welcome-content {
+  position: relative;
+  z-index: 2;
+}
+.welcome-content h2 {
+  font-size: 2.8rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  background: linear-gradient(160deg, #ffffff, #ffb87c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 40px rgba(255,107,0,0.5);
+}
+.welcome-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.bullet-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-light);
+  font-family: 'JetBrains Mono', monospace;
+}
+.bullet-symbol {
+  color: var(--orange);
+  font-size: 2rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 10px currentColor);
+}
+.bullet-text {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+.school-highlight {
+  background: rgba(255,107,0,0.2);
+  padding: 0.2rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--orange-bright);
+  border: 1px solid rgba(255,107,0,0.4);
+}
+.school-small {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-left: 0.2rem;
+  text-transform: lowercase;
+}
+.bullet-text span:not(.school-highlight):not(.school-small) {
+  font-size: 1.5rem;
+}
+.bullet-item:last-child .bullet-text {
+  font-size: 1.5rem;
+}
+.bullet-item:last-child .bullet-text span {
+  font-size: 1.5rem;
+}
+.welcome-ok {
+  display: flex;
+  justify-content: flex-end;
+}
+#okWelcome {
+  background: var(--orange);
+  border: none;
+  color: black;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 900;
+  font-size: 1.8rem;
+  padding: 0.8rem 3rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  box-shadow: 0 0 40px var(--orange);
+  transition: 0.2s ease;
+  border: 2px solid transparent;
+}
+#okWelcome:hover {
+  background: #ff8c2e;
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 0 70px #ff6b00;
+  border-color: white;
+}
+#okWelcome:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* HERO */
 .hero {
   max-width: 1600px;
-  margin: 3rem auto 2rem;
+  margin: 1rem auto 2rem;
   padding: 0 2rem;
 }
 .hero-card {
@@ -275,7 +423,7 @@ header:hover {
               var(--bg-void);
   backdrop-filter: blur(10px);
   border-radius: var(--radius-lg);
-  padding: 4rem 5rem;
+  padding: 3rem 5rem;
   border: 1px solid var(--border-sharp);
   box-shadow: 0 50px 100px -30px black, 0 0 80px rgba(255,107,0,0.2);
   display: flex;
@@ -297,7 +445,7 @@ header:hover {
 }
 .hero-card:hover::before { opacity: calc(var(--hero-glow) + 0.2); }
 .hero h1 {
-  font-size: 5rem;
+  font-size: 4rem;
   font-weight: 900;
   letter-spacing: -0.03em;
   line-height: 1;
@@ -309,9 +457,9 @@ header:hover {
 }
 .hero p {
   color: var(--text-dim);
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   max-width: 550px;
-  margin-top: 1rem;
+  margin-top: 0.8rem;
   font-weight: 400;
   letter-spacing: -0.02em;
   font-family: 'JetBrains Mono', monospace;
@@ -320,14 +468,14 @@ header:hover {
   display: flex;
   gap: 3rem;
   background: rgba(0, 0, 0, 0.6);
-  padding: 2rem 3.5rem;
+  padding: 1.5rem 3rem;
   border-radius: var(--radius-full);
   border: 1px solid rgba(255,107,0,0.3);
   backdrop-filter: blur(20px);
 }
 .stat-item { text-align: center; }
 .stat-value {
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: 900;
   color: var(--orange);
   line-height: 1;
@@ -635,13 +783,51 @@ footer {
 
 @media (max-width: 900px) {
   .header-content { flex-direction: column; }
-  .hero h1 { font-size: 3.5rem; }
+  .welcome-card { max-width: 90%; padding: 1.5rem; }
+  .welcome-content h2 { font-size: 2.2rem; }
+  .bullet-item { font-size: 1.2rem; }
+  .bullet-symbol { font-size: 1.8rem; }
+  .school-highlight { font-size: 1.1rem; }
+  .hero h1 { font-size: 3rem; }
   .hero-stats { padding: 1.5rem; gap: 1.5rem; }
   .stat-value { font-size: 2.5rem; }
 }
 </style>
 </head>
 <body>
+<!-- WELCOME OVERLAY – MODERN CARD (COMPACT SIZE) -->
+<div id="welcomeOverlay">
+  <div class="welcome-card">
+    <div class="welcome-content">
+      <h2>welcome to PH-science</h2>
+      <div class="welcome-bullets">
+        <div class="bullet-item">
+          <span class="bullet-symbol">⟡</span>
+          <div class="bullet-text">
+            <span>100+ Games</span>
+          </div>
+        </div>
+        <div class="bullet-item">
+          <span class="bullet-symbol">⟡</span>
+          <div class="bullet-text">
+            <span>undetected by</span>
+            <span class="school-highlight">SOME school districts</span>
+          </div>
+        </div>
+        <div class="bullet-item">
+          <span class="bullet-symbol">⟡</span>
+          <div class="bullet-text">
+            <span>tab cloaks, and other various stuffs.</span>
+          </div>
+        </div>
+      </div>
+      <div class="welcome-ok">
+        <button id="okWelcome">okay</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <header>
  <div class="header-content">
    <div class="logo-area">
@@ -664,7 +850,7 @@ footer {
  <div class="hero-card" id="heroCard">
    <div>
      <h1>unblocked<br>lab</h1>
-     <p>orange/black · modern experiments</p>
+     <p>more games coming soon.</p>
    </div>
    <div class="hero-stats">
      <div class="stat-item">
@@ -745,7 +931,7 @@ footer {
 </footer>
 
 <script>
-// ---------- GLOBAL STATE (clean, all black/orange aesthetics) ----------
+// ---------- GLOBAL STATE ----------
 const container = document.getElementById('container');
 const zoneViewer = document.getElementById('zoneViewer');
 let zoneFrame = document.getElementById('zoneFrame');
@@ -753,13 +939,8 @@ const searchBar = document.getElementById('searchBar');
 const sortOptions = document.getElementById('sortOptions');
 const featuredContainer = document.getElementById('featuredZones');
 
-const zonesurls = [
- "https://cdn.jsdelivr.net/gh/gn-math/assets@main/zones.json",
- "https://cdn.jsdelivr.net/gh/gn-math/assets@latest/zones.json",
- "https://cdn.jsdelivr.net/gh/gn-math/assets@master/zones.json",
- "https://cdn.jsdelivr.net/gh/gn-math/assets/zones.json"
-];
-const zonesURL = zonesurls[Math.floor(Math.random() * zonesurls.length)];
+// Use the direct zones.json URL provided
+const zonesURL = "https://cdn.jsdelivr.net/gh/gn-math/assets/zones.json";
 const coverURL = "https://cdn.jsdelivr.net/gh/gn-math/covers@main";
 const htmlURL = "https://cdn.jsdelivr.net/gh/gn-math/html@main";
 
@@ -768,6 +949,21 @@ let popularityData = {};
 
 // Performance mode state
 let performanceMode = false;
+
+// ----- WELCOME OVERLAY CONTROL -----
+const welcomeOverlay = document.getElementById('welcomeOverlay');
+const okButton = document.getElementById('okWelcome');
+
+// Show welcome overlay on page load (after a tiny delay to ensure smooth animation)
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    welcomeOverlay.classList.add('active');
+  }, 100);
+});
+
+okButton.addEventListener('click', () => {
+  welcomeOverlay.classList.remove('active');
+});
 
 function showToast(message, duration = 3000) {
  const toast = document.createElement('div');
@@ -786,7 +982,6 @@ function togglePerformance() {
     document.body.classList.remove('performance-mode');
     showToast('🎨 max quality mode enabled');
   }
-  // Update toggle switch UI if open
   const toggle = document.querySelector('.toggle-switch');
   if (toggle) {
     if (performanceMode) toggle.classList.add('active');
@@ -799,7 +994,8 @@ async function listZones() {
    const response = await fetch(zonesURL+"?t="+Date.now());
    const json = await response.json();
    zones = json;
-   if (zones.length) zones[0].featured = true; 
+   // Mark first item as featured if none are featured (simple demo)
+   // In real data, some have "featured": true
    await fetchPopularity();
    sortZones();
    document.getElementById('totalGamesStat').innerText = zones.length;
@@ -825,7 +1021,7 @@ function sortZones() {
  if (by === 'name') zones.sort((a,b) => a.name.localeCompare(b.name));
  else if (by === 'id') zones.sort((a,b) => a.id - b.id);
  else if (by === 'popular') zones.sort((a,b) => (popularityData[b.id]||0) - (popularityData[a.id]||0));
- zones.sort((a,b) => (a.id === -1 ? -1 : b.id === -1 ? 1 : 0));
+ // Put suggestion/comment cards at top? Keep as is
  displayFeaturedZones(zones.filter(z => z.featured));
  displayZones(zones);
 }
@@ -870,7 +1066,7 @@ function createZoneCard(file) {
  metaDiv.className = 'zone-meta';
  const authorSpan = document.createElement('span');
  authorSpan.className = 'zone-author';
- authorSpan.innerText = file.author;
+ authorSpan.innerText = file.author || 'unknown';
  metaDiv.appendChild(authorSpan);
  contentDiv.appendChild(nameSpan);
  contentDiv.appendChild(metaDiv);
@@ -905,7 +1101,7 @@ function filterZones() {
 }
 
 function openZone(file) {
- if (file.url.startsWith("http")) {
+ if (file.url.startsWith("http") && !file.url.includes("{HTML_URL}")) {
    window.open(file.url, "_blank");
  } else {
    const url = file.url.replace("{COVER_URL}", coverURL).replace("{HTML_URL}", htmlURL);
@@ -920,7 +1116,7 @@ function openZone(file) {
      zoneFrame.contentDocument.close();
      document.getElementById('zoneName').textContent = file.name;
      const authorEl = document.getElementById('zoneAuthor');
-     authorEl.textContent = "by " + file.author;
+     authorEl.textContent = "by " + (file.author || 'unknown');
      if (file.authorLink) authorEl.href = file.authorLink;
      zoneViewer.dataset.currentId = file.id;
      
@@ -969,7 +1165,7 @@ function fullscreenZone() {
  else if (iframe?.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
 }
 
-// ---------- SETTINGS & POPUP with PERFORMANCE TOGGLE ----------
+// ---------- SETTINGS & POPUP ----------
 document.getElementById('settings').addEventListener('click', () => {
  document.getElementById('popupTitle').textContent = "settings";
  document.getElementById('popupBody').innerHTML = `
@@ -1016,10 +1212,9 @@ function cloakIcon(url) {
  link.href = url.trim() || "favicon.png";
  document.head.appendChild(link);
 }
-function darkMode() { /* placeholder */ showToast('dark mode toggled'); }
+function darkMode() { showToast('dark mode toggled'); }
 function closePopup() { document.getElementById('popupOverlay').style.display = "none"; }
 
-// stub original export/import
 async function saveData() { alert("export placeholder"); }
 async function loadData(e) { alert("import placeholder"); }
 

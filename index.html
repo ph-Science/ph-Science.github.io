@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
 <link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1246719291517308929/1478561249032798268/New_Project_3.png?ex=69a8d8f8&is=69a78778&hm=abee371c7fede1116bf9773b6dcdd858b1c7c7ddb4b2425b7774a0381481756a&=&format=webp&quality=lossless&width=40&height=40">
 <link rel="apple-touch-icon" href="https://media.discordapp.net/attachments/1246719291517308929/1478561249032798268/New_Project_3.png?ex=69a8d8f8&is=69a78778&hm=abee371c7fede1116bf9773b6dcdd858b1c7c7ddb4b2425b7774a0381481756a&=&format=webp&quality=lossless&width=40&height=40">
 
@@ -957,6 +958,35 @@ main {
   transform: scale(1.15);
 }
 
+.favorite-star {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 2.2rem;
+  color: rgba(255,215,0,0.5);
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-shadow: 0 0 20px rgba(255,215,0,0.5);
+}
+
+.favorite-star:hover {
+  transform: scale(1.2) rotate(5deg);
+  color: rgba(255,215,0,0.8);
+}
+
+.favorite-star.active {
+  color: gold;
+  text-shadow: 0 0 30px gold;
+  animation: starPulse 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes starPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4) rotate(10deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
 .zone-overlay {
   position: absolute;
   top: 1.2rem;
@@ -980,7 +1010,7 @@ main {
 }
 
 .zone-content {
-  padding: 1.2rem 1.2rem 0.8rem;
+  padding: 1.5rem 1.2rem 0.8rem;
   background: rgba(0,0,0,0.3);
   border-top: 1px solid var(--border-color);
   transition: all 0.3s ease;
@@ -988,43 +1018,6 @@ main {
 
 .zone-item:hover .zone-content {
   background: rgba(255,107,0,0.1);
-}
-
-/* NEW: Improved title container with star */
-.zone-title-container {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  width: 100%;
-}
-
-/* NEW: Better star positioning - now beside the title */
-.favorite-star {
-  font-size: 1.8rem;
-  color: rgba(255,215,0,0.5);
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  text-shadow: 0 0 20px rgba(255,215,0,0.5);
-  flex-shrink: 0;
-  line-height: 1;
-  margin-right: 0.25rem;
-}
-
-.favorite-star:hover {
-  transform: scale(1.2) rotate(5deg);
-  color: rgba(255,215,0,0.8);
-}
-
-.favorite-star.active {
-  color: gold;
-  text-shadow: 0 0 30px gold;
-  animation: starPulse 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes starPulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.4) rotate(10deg); }
-  100% { transform: scale(1) rotate(0); }
 }
 
 .zone-name {
@@ -1035,7 +1028,6 @@ main {
   overflow: hidden;
   text-overflow: ellipsis;
   font-family: 'JetBrains Mono', monospace;
-  flex: 1;
 }
 
 .zone-meta {
@@ -1045,7 +1037,6 @@ main {
   color: var(--text-muted);
   font-size: 0.85rem;
   margin-top: 0.5rem;
-  padding-left: 2.3rem; /* Offset to align with title after star */
 }
 
 .zone-author {
@@ -1353,9 +1344,6 @@ footer {
   }
   #zoneName { font-size: 2rem; }
   .zone-controls { flex-wrap: wrap; justify-content: center; }
-  .zone-meta {
-    padding-left: 0; /* Remove offset on mobile */
-  }
 }
 </style>
 </head>
@@ -1431,6 +1419,19 @@ footer {
       <label>show favorites only</label>
       <input type="checkbox" id="showFavOnly" onchange="filterFavorites()" style="width:20px; height:20px;">
     </div>
+    <div class="setting-item" onclick="syncFavorites()">
+      <label>sync favorites now</label>
+      <span style="color: var(--orange);">↻</span>
+    </div>
+    <div class="setting-item" onclick="exportFavorites()">
+      <label>export favorites</label>
+      <span style="color: var(--orange);">↓</span>
+    </div>
+    <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importFavorites(this)">
+    <div class="setting-item" onclick="document.getElementById('importFile').click()">
+      <label>import favorites</label>
+      <span style="color: var(--orange);">↑</span>
+    </div>
   </div>
 
   <div class="settings-section">
@@ -1450,6 +1451,18 @@ footer {
       <input type="text" id="customTitle" placeholder="custom title">
       <input type="text" id="customIcon" placeholder="icon URL">
       <button class="cloak-btn" onclick="applyCustomCloak()">apply</button>
+    </div>
+  </div>
+
+  <div class="settings-section" id="accountSection">
+    <h3>account</h3>
+    <div class="setting-item" onclick="showAccountModal()" id="signInSetting">
+      <label>sign in / create account</label>
+      <span style="color: var(--orange);">→</span>
+    </div>
+    <div class="setting-item" onclick="logout()" id="logoutSetting" style="display:none;">
+      <label>sign out</label>
+      <span style="color: var(--orange);">←</span>
     </div>
   </div>
 </div>
@@ -1577,9 +1590,10 @@ const auth = firebase.auth();
 const database = firebase.database();
 
 let zones = [];
-let favorites = JSON.parse(localStorage.getItem('ph_favorites')) || [];
+let favorites = [];
 let showFavOnly = false;
 let currentUser = null;
+let favoritesLoaded = false;
 
 const coverURL = "https://cdn.jsdelivr.net/gh/gn-math/covers@main";
 const htmlURL = "https://cdn.jsdelivr.net/gh/gn-math/html@main";
@@ -1630,6 +1644,10 @@ function showToast(message, duration = 3000) {
 }
 
 window.showAccountModal = function() {
+  if (currentUser && currentUser !== 'guest') {
+    showToast(`👋 signed in as ${currentUser}`);
+    return;
+  }
   const modal = document.getElementById('accountModal');
   modal.style.display = 'flex';
   setTimeout(() => modal.classList.add('active'), 10);
@@ -1738,9 +1756,11 @@ window.login = function() {
 window.logout = function() {
   auth.signOut().then(() => {
     showToast('👋 logged out');
-    document.getElementById('accountBtn').innerHTML = '✨ sign in';
+    updateAccountButton();
+    document.getElementById('signInSetting').style.display = 'block';
+    document.getElementById('logoutSetting').style.display = 'none';
     favorites = [];
-    localStorage.setItem('ph_favorites', '[]');
+    localStorage.removeItem('ph_favorites');
     if (typeof displayZones === 'function') {
       displayZones(zones);
       displayFavorites();
@@ -1759,37 +1779,84 @@ window.continueAsGuest = function() {
     });
 };
 
-auth.onAuthStateChanged((user) => {
+function updateAccountButton() {
   const accountBtn = document.getElementById('accountBtn');
-  if (user && !user.isAnonymous) {
-    currentUser = user.displayName || user.email.split('@')[0];
+  if (currentUser && currentUser !== 'guest') {
     accountBtn.innerHTML = `👤 ${currentUser}`;
-    
-    database.ref('users/' + user.uid + '/favorites').once('value')
-      .then((snapshot) => {
-        const favs = snapshot.val();
-        if (favs) {
-          favorites = favs;
-        } else {
-          favorites = [];
-        }
-        localStorage.setItem('ph_favorites', JSON.stringify(favorites));
-        if (typeof displayZones === 'function') {
-          displayZones(zones);
-          displayFavorites();
-        }
-      });
-  } else if (user && user.isAnonymous) {
+    document.getElementById('signInSetting').style.display = 'none';
+    document.getElementById('logoutSetting').style.display = 'block';
+  } else if (currentUser === 'guest') {
     accountBtn.innerHTML = '👤 guest';
-    currentUser = 'guest';
+    document.getElementById('signInSetting').style.display = 'block';
+    document.getElementById('logoutSetting').style.display = 'block';
   } else {
     accountBtn.innerHTML = '✨ sign in';
+    document.getElementById('signInSetting').style.display = 'block';
+    document.getElementById('logoutSetting').style.display = 'none';
+  }
+}
+
+auth.onAuthStateChanged((user) => {
+  if (user && !user.isAnonymous) {
+    currentUser = user.displayName || user.email.split('@')[0];
+    updateAccountButton();
+    
+    database.ref('users/' + user.uid + '/favorites').on('value', (snapshot) => {
+      const favs = snapshot.val();
+      if (favs) {
+        favorites = favs;
+      } else {
+        favorites = [];
+      }
+      localStorage.setItem('ph_favorites', JSON.stringify(favorites));
+      favoritesLoaded = true;
+      if (typeof displayZones === 'function') {
+        displayZones(zones);
+        displayFavorites();
+      }
+    });
+  } else if (user && user.isAnonymous) {
+    currentUser = 'guest';
+    updateAccountButton();
+    favorites = JSON.parse(localStorage.getItem('ph_favorites')) || [];
+    favoritesLoaded = true;
+    if (typeof displayZones === 'function') {
+      displayZones(zones);
+      displayFavorites();
+    }
+  } else {
     currentUser = null;
+    updateAccountButton();
+    favorites = [];
+    localStorage.removeItem('ph_favorites');
+    favoritesLoaded = true;
+    if (typeof displayZones === 'function') {
+      displayZones(zones);
+      displayFavorites();
+    }
   }
 });
 
 window.toggleFavorite = function(gameId, event) {
   event.stopPropagation();
+  
+  // Check if user is guest or not logged in
+  if (!currentUser || currentUser === 'guest') {
+    if (!currentUser) {
+      showToast('❌ Can\'t favorite, maybe create an account?');
+    } else {
+      showToast('❌ Guests can\'t save favorites - create an account!');
+    }
+    
+    // Pulse the account button to draw attention
+    const accountBtn = document.getElementById('accountBtn');
+    accountBtn.style.animation = 'pulse 0.5s';
+    setTimeout(() => accountBtn.style.animation = '', 500);
+    
+    // Show account modal after a brief delay
+    setTimeout(() => showAccountModal(), 600);
+    return;
+  }
   
   const index = favorites.indexOf(gameId);
   if (index === -1) {
@@ -1799,8 +1866,6 @@ window.toggleFavorite = function(gameId, event) {
     favorites.splice(index, 1);
     showToast('☆ removed from favorites');
   }
-  
-  localStorage.setItem('ph_favorites', JSON.stringify(favorites));
   
   const user = auth.currentUser;
   if (user && !user.isAnonymous) {
@@ -1827,7 +1892,13 @@ function displayFavorites() {
   document.getElementById('favoritesCount').innerText = favoriteGames.length;
   
   if (favoriteGames.length === 0) {
-    container.innerHTML = '<div class="empty-favorites">✨ star games to see them here</div>';
+    if (!currentUser) {
+      container.innerHTML = '<div class="empty-favorites">🔒 Sign in to save favorites across devices!</div>';
+    } else if (currentUser === 'guest') {
+      container.innerHTML = '<div class="empty-favorites">👤 Guests can\'t save favorites - create an account!</div>';
+    } else {
+      container.innerHTML = '<div class="empty-favorites">✨ Star games to see them here</div>';
+    }
   } else {
     container.innerHTML = '';
     favoriteGames.forEach(file => container.appendChild(createZoneCard(file)));
@@ -1842,6 +1913,67 @@ window.filterFavorites = function() {
   } else {
     displayZones(zones);
   }
+};
+
+window.syncFavorites = function() {
+  const user = auth.currentUser;
+  if (user && !user.isAnonymous) {
+    database.ref('users/' + user.uid + '/favorites').set(favorites)
+      .then(() => showToast('✅ favorites synced to cloud'))
+      .catch(() => showToast('❌ sync failed'));
+  } else {
+    showToast('🔒 sign in to sync favorites');
+  }
+};
+
+window.exportFavorites = function() {
+  const data = { 
+    favorites: favorites,
+    exported: new Date().toISOString(),
+    user: currentUser || 'guest'
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `ph_science_favorites_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  showToast('✅ favorites exported');
+};
+
+window.importFavorites = function(input) {
+  const file = input.files[0];
+  if (!file) return;
+  
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (data.favorites && Array.isArray(data.favorites)) {
+        favorites = data.favorites;
+        
+        const user = auth.currentUser;
+        if (user && !user.isAnonymous) {
+          database.ref('users/' + user.uid + '/favorites').set(favorites)
+            .then(() => {
+              showToast('✅ favorites imported and synced');
+              displayZones(zones);
+              displayFavorites();
+            });
+        } else {
+          localStorage.setItem('ph_favorites', JSON.stringify(favorites));
+          showToast('✅ favorites imported (local only)');
+          displayZones(zones);
+          displayFavorites();
+        }
+      } else {
+        showToast('❌ invalid file format');
+      }
+    } catch {
+      showToast('❌ invalid file');
+    }
+    input.value = '';
+  };
+  reader.readAsText(file);
 };
 
 async function listZones() {
@@ -1886,7 +2018,6 @@ function displayZones(list) {
   document.getElementById('allCount').innerText = list.length;
 }
 
-// UPDATED: createZoneCard function with star beside title
 function createZoneCard(file) {
   const div = document.createElement('div');
   div.className = 'zone-item';
@@ -1902,7 +2033,11 @@ function createZoneCard(file) {
   img.loading = 'lazy';
   mediaDiv.appendChild(img);
   
-  // REMOVED: star from mediaDiv
+  const star = document.createElement('span');
+  star.className = 'favorite-star' + (favorites.includes(file.id) ? ' active' : '');
+  star.innerHTML = '★';
+  star.onclick = (e) => toggleFavorite(file.id, e);
+  mediaDiv.appendChild(star);
   
   const overlay = document.createElement('div');
   overlay.className = 'zone-overlay';
@@ -1912,21 +2047,9 @@ function createZoneCard(file) {
   const contentDiv = document.createElement('div');
   contentDiv.className = 'zone-content';
   
-  // NEW: Title container with star
-  const titleContainer = document.createElement('div');
-  titleContainer.className = 'zone-title-container';
-  
-  // NEW: Star element now in title container
-  const star = document.createElement('span');
-  star.className = 'favorite-star' + (favorites.includes(file.id) ? ' active' : '');
-  star.innerHTML = '★';
-  star.onclick = (e) => toggleFavorite(file.id, e);
-  titleContainer.appendChild(star);
-  
   const nameSpan = document.createElement('div');
   nameSpan.className = 'zone-name';
   nameSpan.innerText = file.name;
-  titleContainer.appendChild(nameSpan);
   
   const metaDiv = document.createElement('div');
   metaDiv.className = 'zone-meta';
@@ -1936,7 +2059,7 @@ function createZoneCard(file) {
   authorSpan.innerText = file.author || 'unknown';
   metaDiv.appendChild(authorSpan);
   
-  contentDiv.appendChild(titleContainer);
+  contentDiv.appendChild(nameSpan);
   contentDiv.appendChild(metaDiv);
   
   const playBtn = document.createElement('button');
@@ -2052,34 +2175,16 @@ window.showPrivacy = function() {
   showToast('no personal data collected. ads by google.');
 };
 
-window.exportData = function() {
-  const data = { favorites: favorites };
-  const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'ph_science_favorites.json';
-  a.click();
-  showToast('favorites exported');
-};
-
-window.importData = function(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    try {
-      const data = JSON.parse(e.target.result);
-      if (data.favorites) {
-        favorites = data.favorites;
-        localStorage.setItem('ph_favorites', JSON.stringify(favorites));
-        showToast('favorites imported');
-        displayZones(zones);
-        displayFavorites();
-      }
-    } catch { showToast('invalid file'); }
-  };
-  reader.readAsText(file);
-};
+// Add pulse animation
+const style = document.createElement('style');
+style.textContent = `
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); box-shadow: 0 0 30px rgba(255,107,0,0.8); }
+  100% { transform: scale(1); }
+}
+`;
+document.head.appendChild(style);
 
 document.getElementById('heroCard').addEventListener('mousemove', (e) => {
   const rect = e.currentTarget.getBoundingClientRect();
@@ -2097,7 +2202,21 @@ window.addEventListener('click', (e) => {
 });
 
 listZones();
-console.log('loaded.');
+console.log('saving dem');
 </script>
+
+<footer>
+  <div class="footer-content">
+    <div style="display:flex; gap:2rem; align-items:center;">
+      <span class="logo" style="font-size:1.8rem;">PH·SCIENCE</span>
+      <span style="color:var(--text-muted);">© 2024</span>
+    </div>
+    <div class="footer-links">
+      <a onclick="showContact()">contact</a>
+      <a onclick="showPrivacy()">privacy</a>
+      <a onclick="exportFavorites()">export</a>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

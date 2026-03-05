@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1246719291517308929/1478561249032798268/New_Project_3.png">
 <link rel="apple-touch-icon" href="https://media.discordapp.net/attachments/1246719291517308929/1478561249032798268/New_Project_3.png">
 
-<title>PH - Science</title>
+<title>PH Social - Communities & Chat</title>
 
 <script async src="https://tenor.com/embed.js"></script>
 
@@ -76,6 +76,7 @@ body {
   line-height: 1.5;
   min-height: 100vh;
   transition: background-color 0.3s, color 0.3s;
+  overflow-x: hidden;
 }
 
 body::before {
@@ -334,7 +335,7 @@ header {
   text-align: right;
 }
 
-/* Toast Notifications (Bottom Right) */
+/* Toast Notifications */
 .toast-container {
   position: fixed;
   bottom: 20px;
@@ -399,7 +400,7 @@ header {
   }
 }
 
-/* Messages Panel - Always Visible */
+/* Messages Panel */
 .messages-panel {
   position: fixed;
   right: 20px;
@@ -520,9 +521,10 @@ header {
   margin-left: 280px;
   margin-right: 350px;
   transition: margin 0.3s;
+  min-height: calc(100vh - 200px);
 }
 
-/* Communities Sidebar - REDESIGNED like Reddit */
+/* Communities Sidebar */
 .communities-sidebar {
   position: fixed;
   left: 20px;
@@ -650,49 +652,56 @@ header {
   border-color: var(--orange);
 }
 
-/* Community Dashboard - NEW */
+/* Community Dashboard */
 .community-dashboard {
   background: var(--bg-panel);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-xl);
-  padding: 1.5rem;
+  padding: 2rem;
   margin-bottom: 2rem;
 }
 
 .community-dashboard-header {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1.5rem;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
   border-bottom: 1px solid var(--border-color);
 }
 
 .community-dashboard-icon {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--orange), var(--orange-bright));
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: 800;
   color: black;
 }
 
+.community-dashboard-info {
+  flex: 1;
+}
+
 .community-dashboard-info h2 {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 2.5rem;
+  font-size: 3rem;
   background: linear-gradient(135deg, #ff6b00, #ffa64d);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 0.5rem;
+  display: inline-block;
 }
 
-.community-dashboard-info p {
-  color: var(--text-muted);
-  margin-bottom: 0.5rem;
+.community-description {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
 }
 
 .community-stats {
@@ -711,6 +720,7 @@ header {
 .community-stat-value {
   font-weight: 700;
   color: var(--orange);
+  font-size: 1.2rem;
 }
 
 .community-dashboard-grid {
@@ -719,7 +729,6 @@ header {
   gap: 2rem;
 }
 
-/* Community Posts */
 .community-posts {
   background: rgba(0,0,0,0.2);
   border-radius: var(--radius-lg);
@@ -768,7 +777,6 @@ header {
   color: var(--text-muted);
 }
 
-/* Community Sidebar */
 .community-info-sidebar {
   background: rgba(0,0,0,0.2);
   border-radius: var(--radius-lg);
@@ -782,11 +790,18 @@ header {
   font-size: 1rem;
 }
 
-.community-description {
+.rules-list {
   color: var(--text-secondary);
   margin-bottom: 1.5rem;
   font-size: 0.9rem;
   line-height: 1.6;
+  list-style-position: inside;
+}
+
+.rules-list li {
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .mod-list {
@@ -854,6 +869,26 @@ header {
   padding: 0.2rem 0.4rem;
   border-radius: var(--radius-full);
   margin-left: 0.3rem;
+}
+
+.manage-community-btn {
+  background: linear-gradient(135deg, var(--orange), var(--orange-bright));
+  border: none;
+  color: black;
+  font-weight: 800;
+  padding: 0.8rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  transition: var(--transition-bounce);
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.manage-community-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(255,107,0,0.5);
 }
 
 .join-community-btn {
@@ -1983,10 +2018,10 @@ header {
   max-height: 200px;
 }
 
-.tenor-embed iframe {
+.tenor-embed img {
   width: 100%;
-  height: 200px;
-  border: none;
+  max-height: 200px;
+  object-fit: contain;
 }
 
 .modal-actions {
@@ -2414,6 +2449,136 @@ header {
   font-weight: 700;
 }
 
+/* Community Management Modal */
+.community-manage-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(20px);
+  z-index: 10003;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.community-manage-modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+.community-manage-content {
+  max-width: 600px;
+  width: 90%;
+  background: var(--bg-panel);
+  border: 2px solid var(--border-glow);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  box-shadow: 0 50px 100px -30px black;
+  transform: scale(0.9);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.community-manage-content.active {
+  transform: scale(1);
+}
+
+.community-manage-content h2 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2rem;
+  background: linear-gradient(135deg, #ff6b00, #ffa64d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+}
+
+.rule-item {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  align-items: center;
+}
+
+.rule-item input {
+  flex: 1;
+  padding: 0.8rem;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  color: var(--text-primary);
+}
+
+.remove-rule-btn {
+  background: rgba(255,68,68,0.2);
+  border: 1px solid #ff4444;
+  color: #ff8888;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.remove-rule-btn:hover {
+  background: #ff4444;
+  color: white;
+}
+
+.add-rule-btn {
+  background: rgba(255,107,0,0.1);
+  border: 1px dashed var(--border-color);
+  color: var(--text-primary);
+  padding: 0.8rem;
+  border-radius: var(--radius-full);
+  width: 100%;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.mod-search {
+  margin-bottom: 1rem;
+}
+
+.mod-search input {
+  width: 100%;
+  padding: 0.8rem;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  color: var(--text-primary);
+}
+
+.current-mods {
+  margin-bottom: 1.5rem;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.current-mod-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background: rgba(0,0,0,0.2);
+  border-radius: var(--radius-lg);
+  margin-bottom: 0.3rem;
+}
+
+.remove-mod-btn {
+  background: rgba(255,68,68,0.2);
+  border: 1px solid #ff4444;
+  color: #ff8888;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
 /* Loading */
 .loading-spinner {
   width: 50px;
@@ -2577,6 +2742,32 @@ header {
   </div>
 </div>
 
+<!-- Community Management Modal -->
+<div class="community-manage-modal" id="communityManageModal">
+  <div class="community-manage-content">
+    <button class="modal-close" onclick="closeCommunityManageModal()">✕</button>
+    <h2>manage community</h2>
+    
+    <h3>community rules</h3>
+    <div id="rulesList"></div>
+    <button class="add-rule-btn" onclick="addRule()">➕ add rule</button>
+    
+    <h3>moderators</h3>
+    <div class="mod-search">
+      <input type="text" id="modSearch" placeholder="search users to add as mod..." oninput="searchMods()">
+    </div>
+    <div id="modSearchResults" class="user-results" style="margin-bottom: 1rem;"></div>
+    
+    <h4>current moderators</h4>
+    <div id="currentMods" class="current-mods"></div>
+    
+    <div class="modal-actions">
+      <button class="modal-btn secondary" onclick="closeCommunityManageModal()">cancel</button>
+      <button class="modal-btn primary" onclick="saveCommunitySettings()">save changes</button>
+    </div>
+  </div>
+</div>
+
 <!-- Notifications Panel -->
 <div class="notifications-panel" id="notificationsPanel">
   <div class="notifications-header">
@@ -2610,7 +2801,7 @@ header {
   </div>
 </header>
 
-<!-- Communities Sidebar - REDESIGNED -->
+<!-- Communities Sidebar -->
 <div class="communities-sidebar">
   <h3>
     communities
@@ -2624,14 +2815,13 @@ header {
         <span class="community-meta">everything</span>
       </div>
     </div>
-    <!-- Dynamic communities will load here -->
   </div>
   <button class="create-community-btn" onclick="createCommunity()">
     <span>➕</span> create community
   </button>
 </div>
 
-<!-- Messages Panel - Always Visible -->
+<!-- Messages Panel -->
 <div class="messages-panel">
   <h3>
     messages
@@ -2641,7 +2831,6 @@ header {
     <div style="color: var(--text-muted); padding: 1rem; text-align: center;">sign in to message</div>
   </div>
   
-  <!-- Community Info Section (appears when community selected) -->
   <div id="communityInfoPanel" style="display: none; margin-top: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
     <h3 style="font-size: 1rem; margin-bottom: 1rem;">
       <span id="communityInfoName">community</span>
@@ -2660,23 +2849,19 @@ header {
     </div>
     
     <h4 style="font-size: 0.9rem; color: var(--orange); margin-bottom: 0.5rem;">moderators</h4>
-    <div id="modList" class="mod-list" style="max-height: 150px; overflow-y: auto;">
-      <!-- Mods will load here -->
-    </div>
+    <div id="modList" class="mod-list" style="max-height: 150px; overflow-y: auto;"></div>
     
     <button class="join-community-btn" id="joinCommunityBtn" onclick="toggleJoinCommunity()" style="display: none;">join</button>
+    <button class="manage-community-btn" id="manageCommunityBtn" onclick="openCommunityManageModal()" style="display: none; margin-top: 0.5rem;">manage community</button>
   </div>
 </div>
 
-<!-- Toast Container (Bottom Right) -->
+<!-- Toast Container -->
 <div class="toast-container" id="toastContainer"></div>
 
 <div class="main-content">
   <div class="main-feed" id="mainFeed">
-    <!-- Community Dashboard (shows when community selected) -->
-    <div id="communityDashboard" style="display: none;">
-      <!-- Dynamic community dashboard -->
-    </div>
+    <div id="communityDashboard" style="display: none;"></div>
     
     <div id="forumView" style="display: block;">
       <div class="forum-header">
@@ -2710,12 +2895,7 @@ header {
         
         <div class="form-group">
           <label class="form-label">community</label>
-          <select id="postCommunity" class="form-input">
-            <option value="general">general</option>
-            <option value="gaming">gaming</option>
-            <option value="tech">tech</option>
-            <option value="creative">creative</option>
-          </select>
+          <select id="postCommunity" class="form-input"></select>
         </div>
         
         <div class="form-group">
@@ -2827,6 +3007,8 @@ let unreadNotifications = 0;
 let communities = [];
 let currentCommunityData = null;
 let isCommunityMember = false;
+let currentRules = [];
+let currentMods = [];
 
 const OWNER_USERNAME = 'ricky';
 
@@ -2839,10 +3021,8 @@ const REACTIONS = [
   { emoji: '🔥', name: 'fire' }
 ];
 
-// Tenor API key
 const TENOR_API_KEY = 'AIzaSyDxVnJZ7_l0Zn8X2aXQMQfZNX5l2U5y5oM';
 
-// Initialize communities
 function loadCommunities() {
   db.collection('communities').onSnapshot((snapshot) => {
     communities = [];
@@ -2855,6 +3035,7 @@ function loadCommunities() {
     
     updateCommunityList();
     document.getElementById('communityCount').textContent = communities.length;
+    updatePostCommunitySelect();
   });
 }
 
@@ -2862,7 +3043,6 @@ function updateCommunityList() {
   const container = document.getElementById('communityList');
   if (!container) return;
   
-  // Keep the "all" item
   container.innerHTML = `
     <div class="community-item ${currentCommunity === 'all' ? 'active' : ''}" onclick="selectCommunity('all')">
       <div class="community-icon">🌐</div>
@@ -2890,15 +3070,29 @@ function updateCommunityList() {
   });
 }
 
+function updatePostCommunitySelect() {
+  const select = document.getElementById('postCommunity');
+  if (!select) return;
+  
+  select.innerHTML = '';
+  communities.forEach(community => {
+    const option = document.createElement('option');
+    option.value = community.id;
+    option.textContent = community.name;
+    select.appendChild(option);
+  });
+}
+
 window.selectCommunity = function(communityId) {
+  if (currentCommunity === communityId) return;
+  
   currentCommunity = communityId;
   
-  // Update UI
   document.querySelectorAll('.community-item').forEach(item => item.classList.remove('active'));
-  if (event && event.target) {
-    const item = event.target.closest('.community-item');
-    if (item) item.classList.add('active');
-  }
+  const activeItem = Array.from(document.querySelectorAll('.community-item')).find(
+    item => item.getAttribute('onclick')?.includes(`'${communityId}'`)
+  );
+  if (activeItem) activeItem.classList.add('active');
   
   if (communityId === 'all') {
     document.getElementById('communityDashboard').style.display = 'none';
@@ -2909,7 +3103,6 @@ window.selectCommunity = function(communityId) {
     document.getElementById('postsHeaderTitle').textContent = 'latest posts';
     loadPosts();
   } else {
-    // Load community data
     loadCommunityData(communityId);
   }
 };
@@ -2918,38 +3111,45 @@ function loadCommunityData(communityId) {
   db.collection('communities').doc(communityId).get().then((doc) => {
     if (doc.exists) {
       currentCommunityData = { id: doc.id, ...doc.data() };
+      currentRules = currentCommunityData.rules || ['Be respectful', 'No spam', 'Follow site rules'];
+      currentMods = currentCommunityData.moderators || [];
       
-      // Check if user is member
       isCommunityMember = currentUser && currentCommunityData.members?.includes(currentUser.uid);
       
-      // Show community dashboard
       showCommunityDashboard(currentCommunityData);
-      
-      // Update messages panel with community info
       updateCommunityInfoPanel(currentCommunityData);
-      
-      // Load community posts
       loadCommunityPosts(communityId);
+      
+      document.getElementById('communityDashboard').style.display = 'block';
+      document.getElementById('forumView').style.display = 'none';
     }
   });
 }
 
 function showCommunityDashboard(community) {
   const dashboard = document.getElementById('communityDashboard');
-  const forumView = document.getElementById('forumView');
-  
-  dashboard.style.display = 'block';
-  forumView.style.display = 'none';
+  if (!dashboard) return;
   
   const isOwner = community.createdBy === currentUser?.uid || currentUser?.displayName === OWNER_USERNAME;
+  
+  let rulesHtml = '';
+  if (community.rules && community.rules.length > 0) {
+    rulesHtml = '<ul class="rules-list">';
+    community.rules.forEach(rule => {
+      rulesHtml += `<li>${escapeHtml(rule)}</li>`;
+    });
+    rulesHtml += '</ul>';
+  } else {
+    rulesHtml = '<div style="color: var(--text-muted);">No rules set.</div>';
+  }
   
   dashboard.innerHTML = `
     <div class="community-dashboard">
       <div class="community-dashboard-header">
         <div class="community-dashboard-icon">${community.name[0].toUpperCase()}</div>
         <div class="community-dashboard-info">
-          <h2>${community.name}</h2>
-          <p>${community.description || 'A community on PH Social'}</p>
+          <h2>${escapeHtml(community.name)}</h2>
+          <div class="community-description">${escapeHtml(community.description || 'A community on PH Social')}</div>
           <div class="community-stats">
             <div class="community-stat">
               <span class="community-stat-value">${community.members?.length || 0}</span>
@@ -2973,7 +3173,7 @@ function showCommunityDashboard(community) {
       
       <div class="community-dashboard-grid">
         <div class="community-posts">
-          <h3>📝 posts in ${community.name}</h3>
+          <h3>📝 posts in ${escapeHtml(community.name)}</h3>
           <div id="communityPostsList" class="community-posts-list">
             <div class="loading-spinner"></div>
           </div>
@@ -2981,30 +3181,18 @@ function showCommunityDashboard(community) {
         
         <div class="community-info-sidebar">
           <h4>about community</h4>
-          <div class="community-description">
-            ${community.description || 'No description yet.'}
-          </div>
+          ${rulesHtml}
           
           <h4 style="margin-top: 1.5rem;">👑 owner</h4>
-          <div id="communityOwnerDisplay" class="mod-list">
-            <div class="loading-spinner" style="width: 30px; height: 30px;"></div>
-          </div>
+          <div id="communityOwnerDisplay" class="mod-list"></div>
           
           <h4 style="margin-top: 1.5rem;">🛡️ moderators</h4>
-          <div id="communityModsDisplay" class="mod-list">
-            <div class="loading-spinner" style="width: 30px; height: 30px;"></div>
-          </div>
-          
-          <h4 style="margin-top: 1.5rem;">📊 rules</h4>
-          <div style="color: var(--text-secondary); font-size: 0.9rem;">
-            ${community.rules ? community.rules.map((r, i) => `${i+1}. ${r}`).join('<br>') : 'No rules set.'}
-          </div>
+          <div id="communityModsDisplay" class="mod-list"></div>
         </div>
       </div>
     </div>
   `;
   
-  // Load owner and mods
   loadCommunityOwner(community.createdBy);
   loadCommunityMods(community.moderators || []);
 }
@@ -3019,7 +3207,7 @@ function loadCommunityOwner(ownerId) {
           <div class="mod-item" onclick="viewUserProfile('${ownerId}')">
             <div class="mod-avatar">${user.username ? user.username[0].toUpperCase() : '?'}</div>
             <div class="mod-info">
-              <span class="mod-name">${user.username} <span class="mod-badge">👑</span></span>
+              <span class="mod-name">${escapeHtml(user.username)} <span class="mod-badge">👑</span></span>
             </div>
           </div>
         `;
@@ -3029,8 +3217,11 @@ function loadCommunityOwner(ownerId) {
 }
 
 function loadCommunityMods(modIds) {
+  const modsDisplay = document.getElementById('communityModsDisplay');
+  if (!modsDisplay) return;
+  
   if (!modIds || modIds.length === 0) {
-    document.getElementById('communityModsDisplay').innerHTML = '<div style="color: var(--text-muted);">no moderators</div>';
+    modsDisplay.innerHTML = '<div style="color: var(--text-muted);">no moderators</div>';
     return;
   }
   
@@ -3045,7 +3236,7 @@ function loadCommunityMods(modIds) {
           <div class="mod-item" onclick="viewUserProfile('${modId}')">
             <div class="mod-avatar">${user.username ? user.username[0].toUpperCase() : '?'}</div>
             <div class="mod-info">
-              <span class="mod-name">${user.username}</span>
+              <span class="mod-name">${escapeHtml(user.username)}</span>
               <span class="mod-role">moderator</span>
             </div>
           </div>
@@ -3053,7 +3244,7 @@ function loadCommunityMods(modIds) {
       }
       loaded++;
       if (loaded === modIds.length) {
-        document.getElementById('communityModsDisplay').innerHTML = html || '<div style="color: var(--text-muted);">no moderators</div>';
+        modsDisplay.innerHTML = html || '<div style="color: var(--text-muted);">no moderators</div>';
       }
     });
   });
@@ -3104,25 +3295,23 @@ function updateCommunityInfoPanel(community) {
   const postCount = document.getElementById('communityPostCount');
   const modList = document.getElementById('modList');
   const joinBtn = document.getElementById('joinCommunityBtn');
+  const manageBtn = document.getElementById('manageCommunityBtn');
   const ownerBadge = document.getElementById('communityOwnerBadge');
   
   panel.style.display = 'block';
   nameSpan.textContent = community.name;
   memberCount.textContent = community.members?.length || 0;
   
-  // Count posts
   db.collection('posts').where('community', '==', community.id).get().then((snapshot) => {
     postCount.textContent = snapshot.size;
   });
   
-  // Show owner badge
   if (community.createdBy === currentUser?.uid || currentUser?.displayName === OWNER_USERNAME) {
     ownerBadge.style.display = 'inline-block';
   } else {
     ownerBadge.style.display = 'none';
   }
   
-  // Load mods
   const mods = community.moderators || [];
   if (mods.length === 0) {
     modList.innerHTML = '<div style="color: var(--text-muted);">no moderators</div>';
@@ -3136,7 +3325,7 @@ function updateCommunityInfoPanel(community) {
             <div class="mod-item" onclick="viewUserProfile('${modId}')">
               <div class="mod-avatar">${user.username ? user.username[0].toUpperCase() : '?'}</div>
               <div class="mod-info">
-                <span class="mod-name">${user.username}</span>
+                <span class="mod-name">${escapeHtml(user.username)}</span>
               </div>
             </div>
           `;
@@ -3146,7 +3335,6 @@ function updateCommunityInfoPanel(community) {
     });
   }
   
-  // Show join button if not member and signed in
   if (currentUser && !currentUser.isAnonymous) {
     const isMember = community.members?.includes(currentUser.uid);
     if (isMember) {
@@ -3156,8 +3344,16 @@ function updateCommunityInfoPanel(community) {
       joinBtn.textContent = 'join';
       joinBtn.style.display = 'block';
     }
+    
+    const canManage = community.createdBy === currentUser.uid || currentUser.displayName === OWNER_USERNAME;
+    if (canManage) {
+      manageBtn.style.display = 'block';
+    } else {
+      manageBtn.style.display = 'none';
+    }
   } else {
     joinBtn.style.display = 'none';
+    manageBtn.style.display = 'none';
   }
 }
 
@@ -3167,24 +3363,22 @@ window.toggleJoinCommunity = function() {
   const isMember = currentCommunityData.members?.includes(currentUser.uid);
   
   if (isMember) {
-    // Leave
     const newMembers = (currentCommunityData.members || []).filter(id => id !== currentUser.uid);
     db.collection('communities').doc(currentCommunityData.id).update({
       members: newMembers
     }).then(() => {
       showToast('👋 left community');
       isCommunityMember = false;
-      updateCommunityInfoPanel(currentCommunityData);
+      loadCommunityData(currentCommunityData.id);
     });
   } else {
-    // Join
     const newMembers = [...(currentCommunityData.members || []), currentUser.uid];
     db.collection('communities').doc(currentCommunityData.id).update({
       members: newMembers
     }).then(() => {
       showToast('✅ joined community');
       isCommunityMember = true;
-      updateCommunityInfoPanel(currentCommunityData);
+      loadCommunityData(currentCommunityData.id);
     });
   }
 };
@@ -3249,7 +3443,165 @@ window.createCommunity = function() {
     });
 };
 
+window.openCommunityManageModal = function() {
+  if (!currentCommunityData) return;
+  
+  const modal = document.getElementById('communityManageModal');
+  const rulesList = document.getElementById('rulesList');
+  const currentModsDiv = document.getElementById('currentMods');
+  
+  currentRules = [...(currentCommunityData.rules || ['Be respectful', 'No spam', 'Follow site rules'])];
+  currentMods = [...(currentCommunityData.moderators || [])];
+  
+  renderRules();
+  renderCurrentMods();
+  
+  modal.classList.add('active');
+};
+
+function renderRules() {
+  const rulesList = document.getElementById('rulesList');
+  if (!rulesList) return;
+  
+  let html = '';
+  currentRules.forEach((rule, index) => {
+    html += `
+      <div class="rule-item">
+        <input type="text" value="${escapeHtml(rule)}" placeholder="rule ${index + 1}" onchange="updateRule(${index}, this.value)">
+        <button class="remove-rule-btn" onclick="removeRule(${index})">✕</button>
+      </div>
+    `;
+  });
+  
+  rulesList.innerHTML = html;
+}
+
+function renderCurrentMods() {
+  const currentModsDiv = document.getElementById('currentMods');
+  if (!currentModsDiv) return;
+  
+  if (currentMods.length === 0) {
+    currentModsDiv.innerHTML = '<div style="color: var(--text-muted);">no moderators</div>';
+    return;
+  }
+  
+  let html = '';
+  currentMods.forEach(modId => {
+    db.collection('users').doc(modId).get().then((doc) => {
+      if (doc.exists) {
+        const user = doc.data();
+        html += `
+          <div class="current-mod-item">
+            <span>${escapeHtml(user.username)}</span>
+            <button class="remove-mod-btn" onclick="removeMod('${modId}')">remove</button>
+          </div>
+        `;
+        currentModsDiv.innerHTML = html;
+      }
+    });
+  });
+}
+
+window.updateRule = function(index, value) {
+  currentRules[index] = value;
+};
+
+window.removeRule = function(index) {
+  currentRules.splice(index, 1);
+  renderRules();
+};
+
+window.addRule = function() {
+  currentRules.push('New rule');
+  renderRules();
+};
+
+window.searchMods = function() {
+  const searchInput = document.getElementById('modSearch');
+  if (!searchInput) return;
+  
+  const searchTerm = searchInput.value.trim().toLowerCase();
+  const resultsDiv = document.getElementById('modSearchResults');
+  
+  if (searchTerm.length < 2) {
+    resultsDiv.innerHTML = '';
+    return;
+  }
+  
+  db.collection('users')
+    .where('username', '>=', searchTerm)
+    .where('username', '<=', searchTerm + '\uf8ff')
+    .limit(5)
+    .get()
+    .then((snapshot) => {
+      if (snapshot.empty) {
+        resultsDiv.innerHTML = '<div style="padding: 1rem; color: var(--text-muted);">no users found</div>';
+        return;
+      }
+      
+      let html = '';
+      snapshot.forEach(doc => {
+        if (doc.id !== currentUser.uid && !currentMods.includes(doc.id)) {
+          html += `
+            <div class="user-result-item" onclick="addMod('${doc.id}', '${doc.data().username}')">
+              <div class="user-result-avatar">${doc.data().username[0].toUpperCase()}</div>
+              <span>${doc.data().username}</span>
+            </div>
+          `;
+        }
+      });
+      
+      resultsDiv.innerHTML = html || '<div style="padding: 1rem; color: var(--text-muted);">no users to add</div>';
+    });
+};
+
+window.addMod = function(userId, username) {
+  if (!currentMods.includes(userId)) {
+    currentMods.push(userId);
+    renderCurrentMods();
+    document.getElementById('modSearch').value = '';
+    document.getElementById('modSearchResults').innerHTML = '';
+  }
+};
+
+window.removeMod = function(userId) {
+  currentMods = currentMods.filter(id => id !== userId);
+  renderCurrentMods();
+};
+
+window.saveCommunitySettings = function() {
+  if (!currentCommunityData) return;
+  
+  db.collection('communities').doc(currentCommunityData.id).update({
+    rules: currentRules,
+    moderators: currentMods
+  }).then(() => {
+    showToast('✅ community settings saved');
+    closeCommunityManageModal();
+    loadCommunityData(currentCommunityData.id);
+  }).catch(error => {
+    console.error(error);
+    showToast('❌ failed to save');
+  });
+};
+
+window.closeCommunityManageModal = function() {
+  document.getElementById('communityManageModal').classList.remove('active');
+};
+
 window.showView = function(view) {
+  if (view === 'profile' && (!currentUser || currentUser.isAnonymous)) {
+    showToast('🔒 please sign in to view profile');
+    showSmartAccountModal();
+    return;
+  }
+  
+  if (view === 'newPost' && (!currentUser || currentUser.isAnonymous)) {
+    showToast('🔒 please sign in to create posts');
+    showSmartAccountModal();
+    return;
+  }
+  
   currentView = view;
   
   const forumView = document.getElementById('forumView');
@@ -3269,36 +3621,24 @@ window.showView = function(view) {
   switch(view) {
     case 'forum':
       if (currentCommunity === 'all') {
-        if (forumView) forumView.style.display = 'block';
+        forumView.style.display = 'block';
       } else {
-        if (communityDashboard) communityDashboard.style.display = 'block';
+        communityDashboard.style.display = 'block';
       }
       document.querySelectorAll('.nav-link')[0]?.classList.add('active');
       if (currentCommunity === 'all') loadPosts();
       break;
     case 'newPost':
-      if (!auth.currentUser || auth.currentUser.isAnonymous) {
-        showToast('🔒 please sign in to create posts');
-        showView('forum');
-        setTimeout(() => showSmartAccountModal(), 300);
-        return;
-      }
-      if (newPostView) newPostView.style.display = 'block';
+      newPostView.style.display = 'block';
       document.querySelectorAll('.nav-link')[1]?.classList.add('active');
       break;
     case 'profile':
-      if (!auth.currentUser || auth.currentUser.isAnonymous) {
-        showToast('🔒 please sign in to view profile');
-        showView('forum');
-        setTimeout(() => showSmartAccountModal(), 300);
-        return;
-      }
-      if (profileView) profileView.style.display = 'block';
+      profileView.style.display = 'block';
       document.querySelectorAll('.nav-link')[2]?.classList.add('active');
       loadProfile();
       break;
     case 'postDetail':
-      if (postDetailView) postDetailView.style.display = 'block';
+      postDetailView.style.display = 'block';
       break;
   }
 };
@@ -3313,7 +3653,7 @@ window.showSmartAccountModal = function() {
     content.innerHTML = `
       <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
       <h2>PH Social</h2>
-      <div style="color: var(--orange); margin-bottom: 2rem;">👋 ${user.displayName || 'user'} ${isOwner ? '<span class="owner-badge">👑 OWNER</span>' : ''}</div>
+      <div style="color: var(--orange); margin-bottom: 2rem;">👋 ${escapeHtml(user.displayName || 'user')} ${isOwner ? '<span class="owner-badge">👑 OWNER</span>' : ''}</div>
       <div class="modal-buttons">
         <button class="modal-btn warning" onclick="logout()">🚪 log out</button>
         <button class="modal-btn secondary" onclick="switchAccounts()">🔄 switch</button>
@@ -3347,7 +3687,7 @@ window.showSmartAccountModal = function() {
 };
 
 window.closeAllModals = function() {
-  document.querySelectorAll('.account-modal, .message-modal').forEach(modal => {
+  document.querySelectorAll('.account-modal, .message-modal, .community-manage-modal').forEach(modal => {
     modal.classList.remove('active');
     setTimeout(() => {
       modal.style.display = 'none';
@@ -3498,25 +3838,19 @@ auth.onAuthStateChanged((user) => {
   const accountBtn = document.getElementById('accountBtn');
   
   console.log("User signed in:", user);
-  if (user) {
-    console.log("User email:", user.email);
-    console.log("User UID:", user.uid);
-    console.log("Is anonymous:", user.isAnonymous);
-    console.log("Display name:", user.displayName);
-    
-    if (!user.isAnonymous) {
-      if (accountBtn) accountBtn.innerHTML = `👤 ${user.displayName || 'user'}`;
-      db.collection('users').doc(user.uid).update({
-        lastSeen: Date.now()
-      }).catch(() => {});
-      loadConversations();
-      loadNotifications();
-    } else {
-      if (accountBtn) accountBtn.innerHTML = '👤 guest';
-      const conversationList = document.getElementById('conversationList');
-      if (conversationList) {
-        conversationList.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; text-align: center;">guests cannot message</div>';
-      }
+  
+  if (user && !user.isAnonymous) {
+    if (accountBtn) accountBtn.innerHTML = `👤 ${escapeHtml(user.displayName || 'user')}`;
+    db.collection('users').doc(user.uid).update({
+      lastSeen: Date.now()
+    }).catch(() => {});
+    loadConversations();
+    loadNotifications();
+  } else if (user && user.isAnonymous) {
+    if (accountBtn) accountBtn.innerHTML = '👤 guest';
+    const conversationList = document.getElementById('conversationList');
+    if (conversationList) {
+      conversationList.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; text-align: center;">guests cannot message</div>';
     }
   } else {
     if (accountBtn) accountBtn.innerHTML = '✨ sign in';
@@ -3529,7 +3863,6 @@ auth.onAuthStateChanged((user) => {
     unreadNotifications = 0;
   }
   
-  // Reload community data if needed
   if (currentCommunity !== 'all' && currentCommunityData) {
     loadCommunityData(currentCommunity);
   }
@@ -3540,16 +3873,17 @@ auth.onAuthStateChanged((user) => {
     } else if (currentCommunityData) {
       showView('forum');
     }
-  } else if (currentView === 'profile') loadProfile();
-  else if (currentView === 'postDetail' && currentPostId) loadPostDetails(currentPostId);
+  } else if (currentView === 'profile') {
+    loadProfile();
+  } else if (currentView === 'postDetail' && currentPostId) {
+    loadPostDetails(currentPostId);
+  }
 });
 
 function loadPosts() {
   if (postsUnsubscribe) postsUnsubscribe();
   
-  let query = db.collection('posts').orderBy('createdAt', 'desc');
-  
-  postsUnsubscribe = query.onSnapshot((snapshot) => {
+  postsUnsubscribe = db.collection('posts').orderBy('createdAt', 'desc').onSnapshot((snapshot) => {
     posts = [];
     snapshot.forEach(doc => {
       posts.push({
@@ -3558,7 +3892,6 @@ function loadPosts() {
       });
     });
     
-    // Filter in JavaScript
     if (currentCommunity !== 'all') {
       const filteredPosts = posts.filter(post => post.community === currentCommunity);
       displayPosts(filteredPosts);
@@ -3592,7 +3925,7 @@ function displayPosts(postsToShow) {
       <div class="empty-state">
         <div class="empty-state-icon">🔕</div>
         <h3>no posts yet</h3>
-        <p>be the first to post in ${currentCommunity === 'all' ? 'any community' : currentCommunity}!</p>
+        <p>be the first to post!</p>
         <button class="empty-state-btn" onclick="showView('newPost')">
           <span>✏️</span> create post
         </button>
@@ -3620,6 +3953,8 @@ function createPostCard(post) {
     totalReactions = Object.values(post.reactions).reduce((sum, r) => sum + (r.count || 0), 0);
   }
   
+  const community = communities.find(c => c.id === post.community);
+  
   div.innerHTML = `
     <div class="post-header">
       <div class="post-author-avatar" onclick="event.stopPropagation(); viewUserProfile('${post.author}')">
@@ -3632,7 +3967,7 @@ function createPostCard(post) {
         </div>
         <div class="post-meta">
           <span>🕒 ${timeAgo(post.createdAt)}</span>
-          ${post.community ? `<span class="post-community-tag" onclick="event.stopPropagation(); selectCommunity('${post.community}')">${post.community}</span>` : ''}
+          ${community ? `<span class="post-community-tag" onclick="event.stopPropagation(); selectCommunity('${community.id}')">${escapeHtml(community.name)}</span>` : ''}
           ${post.nsfw ? '<span class="nsfw-badge">NSFW</span>' : ''}
         </div>
       </div>
@@ -3652,7 +3987,7 @@ function createPostCard(post) {
 
 function escapeHtml(unsafe) {
   if (!unsafe) return '';
-  return unsafe
+  return String(unsafe)
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
@@ -3714,7 +4049,7 @@ function loadPostDetails(postId) {
                   ${isOwner ? '<span class="owner-badge">👑 OWNER</span>' : ''}
                 </h3>
                 <p>joined ${userData.joined ? new Date(userData.joined).toLocaleDateString() : 'recently'}</p>
-                ${post.community ? `<p>community: ${post.community}</p>` : ''}
+                ${post.community ? `<p>community: ${communities.find(c => c.id === post.community)?.name || post.community}</p>` : ''}
               </div>
             `;
           }
@@ -4038,7 +4373,7 @@ window.createPost = function() {
   const title = postTitle.value.trim();
   const body = postBody.value.trim();
   const nsfw = nsfwTag ? nsfwTag.checked : false;
-  const community = postCommunity ? postCommunity.value : 'general';
+  const community = postCommunity ? postCommunity.value : (communities[0]?.id || 'general');
   const imageFile = imageUpload ? imageUpload.files[0] : null;
   
   if (!title || !body) {
@@ -4261,11 +4596,9 @@ window.changeAvatar = function() {
     const file = e.target.files[0];
     if (!file) return;
     
-    // Create a unique filename
     const fileName = `avatars/${currentUser.uid}_${Date.now()}.${file.name.split('.').pop()}`;
     const storageRef = storage.ref(fileName);
     
-    // Upload with metadata
     const metadata = {
       contentType: file.type,
       customMetadata: {
@@ -4293,24 +4626,12 @@ window.changeAvatar = function() {
       })
       .catch(error => {
         console.error('Upload error:', error);
-        console.error('Error code:', error.code);
-        console.error('Error message:', error.message);
-        
-        if (error.code === 'storage/unauthorized') {
-          showToast('❌ permission denied - check storage rules');
-        } else if (error.code === 'storage/canceled') {
-          showToast('❌ upload canceled');
-        } else if (error.code === 'storage/unknown') {
-          showToast('❌ unknown error - check CORS settings');
-        } else {
-          showToast('❌ failed to upload: ' + error.message);
-        }
+        showToast('❌ failed to upload: ' + error.message);
       });
   };
   input.click();
 };
 
-// Load conversations
 function loadConversations() {
   console.log("Loading conversations for user:", currentUser);
   
@@ -4342,14 +4663,11 @@ function loadConversations() {
       
       console.log("Conversations found:", snapshot.size);
       
-      let unreadCount = 0;
-      
       if (snapshot.empty) {
         container.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; text-align: center;">no messages yet</div>';
         return;
       }
       
-      // Convert to array and sort in JavaScript
       let conversations = [];
       snapshot.forEach(doc => {
         conversations.push({
@@ -4358,20 +4676,18 @@ function loadConversations() {
         });
       });
       
-      // Sort by lastMessageAt descending
       conversations.sort((a, b) => (b.lastMessageAt || 0) - (a.lastMessageAt || 0));
       
       let html = '';
       conversations.forEach(conv => {
         const otherUserId = conv.participants.find(id => id !== currentUser.uid);
         const isUnread = conv.lastMessage && conv.lastMessage.sender !== currentUser.uid && !conv.readBy?.[currentUser.uid];
-        if (isUnread) unreadCount++;
         
         html += `
           <div class="conversation-item ${isUnread ? 'unread' : ''}" onclick="openConversation('${conv.id}', '${otherUserId}')">
             <div class="conversation-header">
               <div class="conversation-avatar">${conv.otherUserInitial || '?'}</div>
-              <span class="conversation-name">${conv.otherUserName || 'user'}</span>
+              <span class="conversation-name">${escapeHtml(conv.otherUserName || 'user')}</span>
             </div>
             <div class="conversation-last">${conv.lastMessage?.text?.substring(0, 30) || ''}${conv.lastMessage?.text?.length > 30 ? '...' : ''}</div>
             ${isUnread ? '<span class="unread-badge">●</span>' : ''}
@@ -4389,13 +4705,11 @@ function loadConversations() {
     });
 }
 
-// Load notifications
 function loadNotifications() {
   if (!currentUser || currentUser.isAnonymous) return;
   
   if (notificationsUnsubscribe) notificationsUnsubscribe();
   
-  // Try-catch to handle missing collection
   try {
     notificationsUnsubscribe = db.collection('notifications')
       .where('userId', '==', currentUser.uid)
@@ -4415,14 +4729,12 @@ function loadNotifications() {
         updateNotificationsList();
       }, (error) => {
         console.log("Notifications not available yet:", error.message);
-        // Don't show error to user, just disable notifications
         document.getElementById('notificationBadge').style.display = 'none';
       });
   } catch (error) {
     console.log("Notifications not enabled");
   }
 }
-
 
 function updateNotificationBadge() {
   const badge = document.getElementById('notificationBadge');
@@ -4473,7 +4785,6 @@ window.toggleNotifications = function() {
       panel.classList.remove('active');
     } else {
       panel.classList.add('active');
-      // Mark all as read when opening
       notifications.forEach(notif => {
         if (!notif.read) {
           db.collection('notifications').doc(notif.id).update({
@@ -4490,7 +4801,6 @@ window.closeNotifications = function() {
 };
 
 function showMessageNotification(senderName, messagePreview, conversationId) {
-  // Add to notifications panel
   const notification = {
     userId: currentUser.uid,
     title: 'New Message!',
@@ -4503,7 +4813,6 @@ function showMessageNotification(senderName, messagePreview, conversationId) {
   
   db.collection('notifications').add(notification).catch(() => {});
   
-  // Show toast
   showMessageToast(senderName, messagePreview, conversationId);
 }
 
@@ -4514,8 +4823,6 @@ function showMessageToast(senderName, messagePreview, conversationId) {
   const toast = document.createElement('div');
   toast.className = 'toast';
   toast.onclick = () => {
-    // Open the conversation
-    // You'll need to find the conversation
     const conversations = document.querySelectorAll('.conversation-item');
     if (conversations.length > 0) {
       conversations[0].click();
@@ -4536,7 +4843,6 @@ function showMessageToast(senderName, messagePreview, conversationId) {
   }, 5000);
 }
 
-// Message functions
 window.openMessageModal = function() {
   console.log("Opening message modal, current user:", currentUser);
   
@@ -4567,6 +4873,7 @@ window.openMessageModal = function() {
     if (gifPicker) gifPicker.classList.remove('active');
     
     selectedRecipient = null;
+    window.selectedGifUrl = null;
   }
 };
 
@@ -4626,6 +4933,7 @@ window.closeMessageModal = function() {
   if (modal) modal.classList.remove('active');
   document.getElementById('gifPicker')?.classList.remove('active');
   document.getElementById('selectedGif').style.display = 'none';
+  window.selectedGifUrl = null;
 };
 
 window.searchUsers = function() {
@@ -4659,7 +4967,7 @@ window.searchUsers = function() {
           html += `
             <div class="user-result-item" onclick="selectUser('${doc.id}', '${doc.data().username}')">
               <div class="user-result-avatar">${doc.data().username[0].toUpperCase()}</div>
-              <span>${doc.data().username}</span>
+              <span>${escapeHtml(doc.data().username)}</span>
             </div>
           `;
         }
@@ -4689,7 +4997,7 @@ window.toggleGifPicker = function() {
       picker.classList.remove('active');
     } else {
       picker.classList.add('active');
-      searchGifs(); // Load trending GIFs
+      searchGifs();
     }
   }
 };
@@ -4701,7 +5009,7 @@ window.toggleConversationGifPicker = function() {
       picker.classList.remove('active');
     } else {
       picker.classList.add('active');
-      searchConversationGifs(); // Load trending GIFs
+      searchConversationGifs();
     }
   }
 };
@@ -4724,10 +5032,8 @@ function searchTenor(query, resultDivId) {
   
   let url;
   if (query.trim() === '') {
-    // Get trending GIFs
     url = `https://tenor.googleapis.com/v2/featured?key=${TENOR_API_KEY}&limit=10`;
   } else {
-    // Search GIFs
     url = `https://tenor.googleapis.com/v2/search?q=${encodeURIComponent(query)}&key=${TENOR_API_KEY}&limit=10`;
   }
   
@@ -4754,7 +5060,7 @@ function searchTenor(query, resultDivId) {
       resultsDiv.innerHTML = '<div style="color: var(--text-muted);">error loading GIFs</div>';
     });
 }
-  
+
 window.selectGif = function(gifUrl, source) {
   if (!gifUrl) return;
   
@@ -4805,45 +5111,6 @@ function sendGifMessage(gifUrl) {
   });
 }
 
-// FIXED sendConversationMessage function
-window.sendConversationMessage = function() {
-  const input = document.getElementById('conversationInput');
-  if (!input) return;
-  
-  const messageText = input.value.trim();
-  
-  if (!messageText || !window.currentConversationId || !currentUser) return;
-  
-  const message = {
-    text: messageText,
-    sender: currentUser.uid,
-    senderName: currentUser.displayName,
-    timestamp: Date.now(),
-    read: false
-  };
-  
-  const batch = db.batch();
-  
-  batch.set(db.collection('conversations').doc(window.currentConversationId).collection('messages').doc(), message);
-  batch.update(db.collection('conversations').doc(window.currentConversationId), {
-    lastMessage: {
-      text: messageText,
-      sender: currentUser.uid,
-      senderName: currentUser.displayName,
-      timestamp: Date.now()
-    },
-    lastMessageAt: Date.now(),
-    [`readBy.${currentUser.uid}`]: true
-  });
-  
-  batch.commit().then(() => {
-    input.value = '';
-  }).catch(error => {
-    console.error(error);
-    showToast('❌ failed to send');
-  });
-};
-  
 window.sendMessage = function() {
   console.log("Sending message...");
   
@@ -4853,7 +5120,7 @@ window.sendMessage = function() {
   }
   
   const messageText = document.getElementById('messageText');
-  const gifUrl = window.selectedGifUrl; // This might be undefined
+  const gifUrl = window.selectedGifUrl;
   
   const text = messageText ? messageText.value.trim() : '';
   
@@ -4865,7 +5132,6 @@ window.sendMessage = function() {
   const conversationId = [currentUser.uid, selectedRecipient.id].sort().join('_');
   console.log("Conversation ID:", conversationId);
   
-  // Create message object WITHOUT undefined fields
   const message = {
     sender: currentUser.uid,
     senderName: currentUser.displayName,
@@ -4873,16 +5139,13 @@ window.sendMessage = function() {
     read: false
   };
   
-  // Only add fields that have values
   if (text) message.text = text;
   if (gifUrl) message.gifUrl = gifUrl;
   
   const batch = db.batch();
   
   const conversationRef = db.collection('conversations').doc(conversationId);
-  console.log("Conversation ref:", conversationRef.path);
   
-  // Create lastMessage object WITHOUT undefined fields
   const lastMessage = {
     sender: currentUser.uid,
     senderName: currentUser.displayName,
@@ -4912,7 +5175,6 @@ window.sendMessage = function() {
   const messageRef = conversationRef.collection('messages').doc();
   batch.set(messageRef, message);
   
-  console.log("Committing batch...");
   batch.commit().then(() => {
     console.log("✅ Batch commit successful!");
     showToast('✅ message sent');
@@ -4943,7 +5205,7 @@ window.openConversation = function(conversationId, otherUserId) {
           ${userData.avatar ? `<img src="${userData.avatar}" alt="avatar">` : (userData.username ? userData.username[0].toUpperCase() : '?')}
         </div>
         <div class="conversation-user-info">
-          <h3>${userData.username || 'user'} ${isOwner ? '<span class="owner-badge">👑</span>' : ''}</h3>
+          <h3>${escapeHtml(userData.username || 'user')} ${isOwner ? '<span class="owner-badge">👑</span>' : ''}</h3>
           <p>last seen ${timeAgo(userData.lastSeen || Date.now())}</p>
         </div>
       `;
@@ -5017,18 +5279,18 @@ window.sendConversationMessage = function() {
   
   batch.set(db.collection('conversations').doc(window.currentConversationId).collection('messages').doc(), message);
   batch.update(db.collection('conversations').doc(window.currentConversationId), {
-    lastMessage: message,
+    lastMessage: {
+      text: messageText,
+      sender: currentUser.uid,
+      senderName: currentUser.displayName,
+      timestamp: Date.now()
+    },
     lastMessageAt: Date.now(),
     [`readBy.${currentUser.uid}`]: true
   });
   
   batch.commit().then(() => {
     input.value = '';
-    
-    // Show notification to other user
-    if (window.currentOtherUserId) {
-      showMessageNotification(currentUser.displayName, messageText, window.currentConversationId);
-    }
   }).catch(error => {
     console.error(error);
     showToast('❌ failed to send');
@@ -5163,7 +5425,6 @@ document.getElementById('notificationIcon')?.addEventListener('click', (e) => {
   e.stopPropagation();
 });
 
-// Initialize communities
 loadCommunities();
 
 const urlParams = new URLSearchParams(window.location.search);

@@ -12,6 +12,7 @@
 <meta name="description" content="Join communities, share thoughts, and message friends.">
 
 <script>
+// Suppress extension errors
 window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = window.__REACT_DEVTOOLS_GLOBAL_HOOK__ || {};
 </script>
 
@@ -478,7 +479,7 @@ header {
   box-shadow: 0 10px 30px rgba(255,107,0,0.5);
 }
 
-/* Posts Grid */
+/* Posts Container */
 .posts-container {
   background: var(--bg-panel);
   border: 1px solid var(--border-color);
@@ -721,196 +722,6 @@ header {
   color: var(--orange);
 }
 
-/* Reactions */
-.reactions-container {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  flex-wrap: wrap;
-}
-
-.reaction-btn {
-  background: rgba(255,107,0,0.1);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-full);
-  padding: 0.4rem 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  transition: var(--transition);
-  font-size: 1rem;
-}
-
-.reaction-btn:hover {
-  background: rgba(255,107,0,0.2);
-  transform: translateY(-2px);
-}
-
-.reaction-btn.active {
-  background: var(--orange);
-  border-color: var(--orange);
-  color: black;
-}
-
-.reaction-count {
-  font-weight: 700;
-  color: var(--text-secondary);
-}
-
-.reaction-btn.active .reaction-count {
-  color: black;
-}
-
-/* New Post Form */
-.new-post-section {
-  background: var(--bg-panel);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-xl);
-  padding: 2rem;
-  margin-bottom: 2rem;
-}
-
-.new-post-section h2 {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 2rem;
-  background: linear-gradient(135deg, #ff6b00, #ffa64d);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 1.5rem;
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-.form-label {
-  display: block;
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: var(--text-secondary);
-}
-
-.form-input {
-  width: 100%;
-  padding: 1rem 1.5rem;
-  background: rgba(0,0,0,0.3);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-full);
-  color: var(--text-primary);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 1rem;
-  transition: var(--transition);
-}
-
-.form-input:focus {
-  border-color: var(--orange);
-  box-shadow: 0 0 0 4px rgba(255,107,0,0.2);
-  outline: none;
-}
-
-.form-textarea {
-  width: 100%;
-  padding: 1.5rem;
-  background: rgba(0,0,0,0.3);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  color: var(--text-primary);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 1rem;
-  min-height: 150px;
-  resize: vertical;
-  transition: var(--transition);
-}
-
-.form-textarea:focus {
-  border-color: var(--orange);
-  box-shadow: 0 0 0 4px rgba(255,107,0,0.2);
-  outline: none;
-}
-
-.form-row {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.nsfw-checkbox {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(255,68,68,0.1);
-  padding: 0.8rem 1.5rem;
-  border-radius: var(--radius-full);
-  border: 1px solid #ff4444;
-  cursor: pointer;
-}
-
-.nsfw-checkbox input {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-}
-
-.image-upload-btn {
-  background: rgba(255,107,0,0.1);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  padding: 0.8rem 2rem;
-  border-radius: var(--radius-full);
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 700;
-  cursor: pointer;
-  transition: var(--transition);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.image-upload-btn:hover {
-  background: rgba(255,107,0,0.2);
-  transform: translateY(-2px);
-}
-
-#imagePreview {
-  margin-top: 1rem;
-  max-width: 300px;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  display: none;
-}
-
-#imagePreview img {
-  width: 100%;
-  height: auto;
-}
-
-.submit-post {
-  background: linear-gradient(135deg, var(--orange), var(--orange-bright));
-  border: none;
-  color: black;
-  font-weight: 800;
-  padding: 1.2rem 3rem;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 1.2rem;
-  transition: var(--transition-bounce);
-  width: 100%;
-}
-
-.submit-post:hover:not(:disabled) {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 10px 30px rgba(255,107,0,0.5);
-}
-
-.submit-post:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 /* Post Detail View */
 .post-detail {
   background: var(--bg-panel);
@@ -1063,7 +874,7 @@ header {
   color: black;
 }
 
-/* Reactions Detail */
+/* Reactions */
 .reactions-detail {
   margin: 2rem 0;
   padding: 1rem;
@@ -1376,6 +1187,155 @@ header {
   color: black;
 }
 
+/* New Post Form */
+.new-post-section {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.new-post-section h2 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2rem;
+  background: linear-gradient(135deg, #ff6b00, #ffa64d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.form-input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.form-input:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 4px rgba(255,107,0,0.2);
+  outline: none;
+}
+
+.form-textarea {
+  width: 100%;
+  padding: 1.5rem;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  min-height: 150px;
+  resize: vertical;
+  transition: var(--transition);
+}
+
+.form-textarea:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 4px rgba(255,107,0,0.2);
+  outline: none;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nsfw-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,68,68,0.1);
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--radius-full);
+  border: 1px solid #ff4444;
+  cursor: pointer;
+}
+
+.nsfw-checkbox input {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.image-upload-btn {
+  background: rgba(255,107,0,0.1);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.8rem 2rem;
+  border-radius: var(--radius-full);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.image-upload-btn:hover {
+  background: rgba(255,107,0,0.2);
+  transform: translateY(-2px);
+}
+
+#imagePreview {
+  margin-top: 1rem;
+  max-width: 300px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: none;
+}
+
+#imagePreview img {
+  width: 100%;
+  height: auto;
+}
+
+.submit-post {
+  background: linear-gradient(135deg, var(--orange), var(--orange-bright));
+  border: none;
+  color: black;
+  font-weight: 800;
+  padding: 1.2rem 3rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  transition: var(--transition-bounce);
+  width: 100%;
+}
+
+.submit-post:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(255,107,0,0.5);
+}
+
+.submit-post:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* Message Modal */
 .message-modal {
   position: fixed;
@@ -1405,10 +1365,34 @@ header {
   box-shadow: 0 50px 100px -30px black;
   transform: scale(0.9);
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
 }
 
 .message-modal.active .message-modal-content {
   transform: scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.modal-close:hover {
+  background: rgba(255,107,0,0.2);
+  color: var(--orange);
 }
 
 .message-modal h2 {
@@ -1712,6 +1696,7 @@ header {
   transform: scale(0.9);
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   text-align: center;
+  position: relative;
 }
 
 .account-modal.active .modal-content {
@@ -1725,6 +1710,29 @@ header {
   background: linear-gradient(135deg, #ff6b00, #ffa64d);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.modal-close-btn:hover {
+  background: rgba(255,107,0,0.2);
+  color: var(--orange);
 }
 
 .modal-buttons {
@@ -1877,10 +1885,6 @@ header {
 }
 
 @media (max-width: 1000px) {
-  .forum-sections {
-    grid-template-columns: 1fr;
-  }
-  
   .profile-header {
     flex-direction: column;
     text-align: center;
@@ -1914,6 +1918,7 @@ header {
 <!-- Account Modal -->
 <div class="account-modal" id="accountModal">
   <div class="modal-content" id="accountModalContent">
+    <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
     <!-- Dynamic content -->
   </div>
 </div>
@@ -1921,6 +1926,7 @@ header {
 <!-- Login Modal -->
 <div class="account-modal" id="loginModal">
   <div class="modal-content">
+    <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
     <h2>welcome back</h2>
     <p>sign in to your account</p>
     
@@ -1941,6 +1947,7 @@ header {
 <!-- Signup Modal -->
 <div class="account-modal" id="signupModal">
   <div class="modal-content">
+    <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
     <h2>create account</h2>
     <p>join the community</p>
     
@@ -1961,6 +1968,7 @@ header {
 <!-- Message Modal -->
 <div class="message-modal" id="messageModal">
   <div class="message-modal-content">
+    <button class="modal-close" onclick="closeMessageModal()">✕</button>
     <h2>new message</h2>
     
     <div class="user-search">
@@ -2054,7 +2062,7 @@ header {
     <button class="new-message-btn" onclick="openMessageModal()">✏️</button>
   </h3>
   <div class="conversation-list" id="conversationList">
-    <!-- Conversations will load here -->
+    <div style="color: var(--text-muted); padding: 1rem; text-align: center;">sign in to message</div>
   </div>
 </div>
 
@@ -2192,9 +2200,9 @@ header {
 <div class="toast-container" id="toastContainer"></div>
 
 <script>
-//===================================================
+ 
 // FIREBASE CONFIG
-//===================================================
+ 
 const firebaseConfig = {
   apiKey: "AIzaSyA-68XKNt_PD0I1TJbNcyotT4qMbgHh-tI",
   authDomain: "ph-science.firebaseapp.com",
@@ -2210,7 +2218,7 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 const storage = firebase.storage();
 
-// Enable offline persistence
+// Fix the persistence warning
 db.enablePersistence()
   .catch((err) => {
     if (err.code == 'failed-precondition') {
@@ -2220,9 +2228,9 @@ db.enablePersistence()
     }
   });
 
-//===================================================
+ 
 // GLOBAL VARIABLES
-//===================================================
+ 
 let currentUser = null;
 let currentPostId = null;
 let currentView = 'forum';
@@ -2242,23 +2250,28 @@ const REACTIONS = [
   { emoji: '🔥', name: 'fire' }
 ];
 
-//===================================================
+ 
 // VIEW MANAGEMENT
-//===================================================
+ 
 window.showView = function(view) {
   currentView = view;
   
-  document.getElementById('forumView').style.display = 'none';
-  document.getElementById('newPostView').style.display = 'none';
-  document.getElementById('postDetailView').style.display = 'none';
-  document.getElementById('profileView').style.display = 'none';
+  const forumView = document.getElementById('forumView');
+  const newPostView = document.getElementById('newPostView');
+  const postDetailView = document.getElementById('postDetailView');
+  const profileView = document.getElementById('profileView');
+  
+  if (forumView) forumView.style.display = 'none';
+  if (newPostView) newPostView.style.display = 'none';
+  if (postDetailView) postDetailView.style.display = 'none';
+  if (profileView) profileView.style.display = 'none';
   
   document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
   
   switch(view) {
     case 'forum':
-      document.getElementById('forumView').style.display = 'block';
-      document.querySelectorAll('.nav-link')[0].classList.add('active');
+      if (forumView) forumView.style.display = 'block';
+      document.querySelectorAll('.nav-link')[0]?.classList.add('active');
       loadPosts();
       break;
     case 'newPost':
@@ -2268,8 +2281,8 @@ window.showView = function(view) {
         setTimeout(() => showSmartAccountModal(), 300);
         return;
       }
-      document.getElementById('newPostView').style.display = 'block';
-      document.querySelectorAll('.nav-link')[1].classList.add('active');
+      if (newPostView) newPostView.style.display = 'block';
+      document.querySelectorAll('.nav-link')[1]?.classList.add('active');
       break;
     case 'profile':
       if (!auth.currentUser || auth.currentUser.isAnonymous) {
@@ -2278,19 +2291,19 @@ window.showView = function(view) {
         setTimeout(() => showSmartAccountModal(), 300);
         return;
       }
-      document.getElementById('profileView').style.display = 'block';
-      document.querySelectorAll('.nav-link')[2].classList.add('active');
+      if (profileView) profileView.style.display = 'block';
+      document.querySelectorAll('.nav-link')[2]?.classList.add('active');
       loadProfile();
       break;
     case 'postDetail':
-      document.getElementById('postDetailView').style.display = 'block';
+      if (postDetailView) postDetailView.style.display = 'block';
       break;
   }
 };
 
-//===================================================
+ 
 // COMMUNITIES
-//===================================================
+ 
 window.selectCommunity = function(community) {
   currentCommunity = community;
   document.querySelectorAll('.community-item').forEach(item => item.classList.remove('active'));
@@ -2308,23 +2321,43 @@ window.createCommunity = function() {
   const name = prompt('Enter community name:');
   if (!name) return;
   
-  db.collection('communities').add({
-    name: name,
-    createdBy: currentUser.uid,
-    createdAt: Date.now(),
-    members: [currentUser.uid]
-  }).then(() => {
-    showToast('✅ community created!');
-    // Reload communities (you'd need to implement this)
-  }).catch(error => {
-    console.error(error);
-    showToast('❌ failed to create community');
-  });
+  // Check if community already exists
+  db.collection('communities').where('name', '==', name).get()
+    .then((snapshot) => {
+      if (!snapshot.empty) {
+        showToast('❌ community already exists');
+        return;
+      }
+      
+      return db.collection('communities').add({
+        name: name,
+        createdBy: currentUser.uid,
+        createdAt: Date.now(),
+        members: [currentUser.uid]
+      });
+    })
+    .then(() => {
+      showToast('✅ community created!');
+      // Add to sidebar dynamically
+      const communityList = document.getElementById('communityList');
+      const newCommunity = document.createElement('div');
+      newCommunity.className = 'community-item';
+      newCommunity.onclick = () => selectCommunity(name.toLowerCase());
+      newCommunity.innerHTML = `
+        <div class="community-icon">#</div>
+        <span>${name}</span>
+      `;
+      communityList.appendChild(newCommunity);
+    })
+    .catch(error => {
+      console.error(error);
+      showToast('❌ failed to create community');
+    });
 };
 
-//===================================================
+ 
 // AUTHENTICATION
-//===================================================
+ 
 window.showSmartAccountModal = function() {
   const modal = document.getElementById('accountModal');
   const content = document.getElementById('accountModalContent');
@@ -2332,6 +2365,7 @@ window.showSmartAccountModal = function() {
   
   if (user && !user.isAnonymous) {
     content.innerHTML = `
+      <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
       <h2>PH Social</h2>
       <div style="color: var(--orange); margin-bottom: 2rem;">👋 ${user.displayName || 'user'}</div>
       <div class="modal-buttons">
@@ -2341,6 +2375,7 @@ window.showSmartAccountModal = function() {
     `;
   } else if (user && user.isAnonymous) {
     content.innerHTML = `
+      <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
       <h2>PH Social</h2>
       <div style="color: var(--orange); margin-bottom: 2rem;">👤 guest mode</div>
       <div class="modal-buttons">
@@ -2350,6 +2385,7 @@ window.showSmartAccountModal = function() {
     `;
   } else {
     content.innerHTML = `
+      <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
       <h2>PH Social</h2>
       <p>join the community</p>
       <div class="modal-buttons">
@@ -2370,6 +2406,10 @@ window.closeAllModals = function() {
     setTimeout(() => {
       modal.style.display = 'none';
     }, 300);
+  });
+  
+  document.querySelectorAll('.message-modal').forEach(modal => {
+    modal.classList.remove('active');
   });
 };
 
@@ -2482,8 +2522,17 @@ window.logout = function() {
   auth.signOut().then(() => {
     showToast('👋 logged out');
     closeAllModals();
-    document.getElementById('accountBtn').innerHTML = '✨ sign in';
+    const accountBtn = document.getElementById('accountBtn');
+    if (accountBtn) accountBtn.innerHTML = '✨ sign in';
     showView('forum');
+    
+    const conversationList = document.getElementById('conversationList');
+    if (conversationList) {
+      conversationList.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; text-align: center;">sign in to message</div>';
+    }
+    
+    const messageBadge = document.getElementById('messageBadge');
+    if (messageBadge) messageBadge.style.display = 'none';
   });
 };
 
@@ -2503,19 +2552,27 @@ auth.onAuthStateChanged((user) => {
   
   if (user) {
     if (!user.isAnonymous) {
-      accountBtn.innerHTML = `👤 ${user.displayName || 'user'}`;
+      if (accountBtn) accountBtn.innerHTML = `👤 ${user.displayName || 'user'}`;
       // Update last seen
       db.collection('users').doc(user.uid).update({
         lastSeen: Date.now()
       }).catch(() => {});
       loadConversations();
     } else {
-      accountBtn.innerHTML = '👤 guest';
+      if (accountBtn) accountBtn.innerHTML = '👤 guest';
+      const conversationList = document.getElementById('conversationList');
+      if (conversationList) {
+        conversationList.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; text-align: center;">sign in to message</div>';
+      }
     }
   } else {
-    accountBtn.innerHTML = '✨ sign in';
-    document.getElementById('conversationList').innerHTML = '<div style="color: var(--text-muted); padding: 1rem;">sign in to message</div>';
-    document.getElementById('messageBadge').style.display = 'none';
+    if (accountBtn) accountBtn.innerHTML = '✨ sign in';
+    const conversationList = document.getElementById('conversationList');
+    if (conversationList) {
+      conversationList.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; text-align: center;">sign in to message</div>';
+    }
+    const messageBadge = document.getElementById('messageBadge');
+    if (messageBadge) messageBadge.style.display = 'none';
   }
   
   if (currentView === 'forum') loadPosts();
@@ -2523,9 +2580,9 @@ auth.onAuthStateChanged((user) => {
   else if (currentView === 'postDetail' && currentPostId) loadPostDetails(currentPostId);
 });
 
-//===================================================
+ 
 // POSTS FUNCTIONS
-//===================================================
+ 
 function loadPosts() {
   if (postsUnsubscribe) postsUnsubscribe();
   
@@ -2549,18 +2606,22 @@ function loadPosts() {
     loadTrending();
   }, (error) => {
     console.error("Error loading posts:", error);
-    document.getElementById('postsList').innerHTML = `
-      <div class="empty-state">
-        <div class="empty-state-icon">⚠️</div>
-        <h3>connection error</h3>
-        <p>please refresh</p>
-      </div>
-    `;
+    const postsList = document.getElementById('postsList');
+    if (postsList) {
+      postsList.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-state-icon">⚠️</div>
+          <h3>connection error</h3>
+          <p>please refresh</p>
+        </div>
+      `;
+    }
   });
 }
 
 function displayPosts(postsToShow) {
   const container = document.getElementById('postsList');
+  if (!container) return;
   
   if (postsToShow.length === 0) {
     container.innerHTML = `
@@ -2645,7 +2706,11 @@ function openPost(postId) {
 function loadPostDetails(postId) {
   db.collection('posts').doc(postId).get()
     .then((doc) => {
-      if (!doc.exists) return;
+      if (!doc.exists) {
+        showToast('❌ post not found');
+        showView('forum');
+        return;
+      }
       
       const post = {
         id: doc.id,
@@ -2658,37 +2723,48 @@ function loadPostDetails(postId) {
           const avatarUrl = userData?.avatar || null;
           const authorInitial = post.authorName ? post.authorName[0].toUpperCase() : '?';
           
-          document.getElementById('detailTitle').textContent = post.title;
-          document.getElementById('detailBody').textContent = post.body;
+          const detailTitle = document.getElementById('detailTitle');
+          const detailBody = document.getElementById('detailBody');
+          const detailAuthor = document.getElementById('detailAuthor');
+          const detailMedia = document.getElementById('detailMedia');
+          const detailViews = document.getElementById('detailViews');
+          const detailComments = document.getElementById('detailComments');
+          const deleteBtn = document.getElementById('deleteBtn');
           
-          const authorDiv = document.getElementById('detailAuthor');
-          authorDiv.innerHTML = `
-            <div class="detail-avatar" onclick="viewUserProfile('${post.author}')">
-              ${avatarUrl ? `<img src="${avatarUrl}" alt="avatar">` : authorInitial}
-            </div>
-            <div class="detail-author-info">
-              <h3 onclick="viewUserProfile('${post.author}')">${escapeHtml(post.authorName || 'unknown')}</h3>
-              <p>joined ${userData.joined ? new Date(userData.joined).toLocaleDateString() : 'recently'}</p>
-              ${post.community ? `<p>community: ${post.community}</p>` : ''}
-            </div>
-          `;
+          if (detailTitle) detailTitle.textContent = post.title;
+          if (detailBody) detailBody.textContent = post.body;
           
-          const mediaDiv = document.getElementById('detailMedia');
-          if (post.imageUrl) {
-            mediaDiv.innerHTML = `<img src="${post.imageUrl}" alt="post image">`;
-            mediaDiv.style.display = 'flex';
-          } else {
-            mediaDiv.style.display = 'none';
+          if (detailAuthor) {
+            detailAuthor.innerHTML = `
+              <div class="detail-avatar" onclick="viewUserProfile('${post.author}')">
+                ${avatarUrl ? `<img src="${avatarUrl}" alt="avatar">` : authorInitial}
+              </div>
+              <div class="detail-author-info">
+                <h3 onclick="viewUserProfile('${post.author}')">${escapeHtml(post.authorName || 'unknown')}</h3>
+                <p>joined ${userData.joined ? new Date(userData.joined).toLocaleDateString() : 'recently'}</p>
+                ${post.community ? `<p>community: ${post.community}</p>` : ''}
+              </div>
+            `;
           }
           
-          document.getElementById('detailViews').innerHTML = `👁️ ${post.views || 0}`;
-          document.getElementById('detailComments').innerHTML = `💬 ${post.comments || 0}`;
+          if (detailMedia) {
+            if (post.imageUrl) {
+              detailMedia.innerHTML = `<img src="${post.imageUrl}" alt="post image">`;
+              detailMedia.style.display = 'flex';
+            } else {
+              detailMedia.style.display = 'none';
+            }
+          }
           
-          const deleteBtn = document.getElementById('deleteBtn');
-          if (currentUser && currentUser.uid === post.author) {
-            deleteBtn.style.display = 'inline-flex';
-          } else {
-            deleteBtn.style.display = 'none';
+          if (detailViews) detailViews.innerHTML = `👁️ ${post.views || 0}`;
+          if (detailComments) detailComments.innerHTML = `💬 ${post.comments || 0}`;
+          
+          if (deleteBtn) {
+            if (currentUser && currentUser.uid === post.author) {
+              deleteBtn.style.display = 'inline-flex';
+            } else {
+              deleteBtn.style.display = 'none';
+            }
           }
           
           displayReactions(post);
@@ -2701,11 +2777,13 @@ function loadPostDetails(postId) {
     });
 }
 
-//===================================================
+ 
 // REACTIONS - FIXED FOR EVERYONE
-//===================================================
+ 
 function displayReactions(post) {
   const container = document.getElementById('reactionsGrid');
+  if (!container) return;
+  
   const userReactions = (post.userReactions && currentUser) ? post.userReactions[currentUser.uid] : {};
   
   let html = '';
@@ -2798,15 +2876,16 @@ window.addReaction = function(postId, reactionName, reactionEmoji) {
   });
 };
 
-//===================================================
+ 
 // COMMENTS - FIXED FOR EVERYONE
-//===================================================
+ 
 function loadComments(postId) {
   db.collection('posts').doc(postId).collection('comments')
     .orderBy('createdAt', 'desc')
     .get()
     .then((snapshot) => {
       const commentsList = document.getElementById('commentsList');
+      if (!commentsList) return;
       
       if (snapshot.empty) {
         commentsList.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--text-muted);">💭 no comments yet. be the first!</div>';
@@ -2860,7 +2939,10 @@ function loadComments(postId) {
 }
 
 window.addComment = function() {
-  const commentText = document.getElementById('commentInput').value.trim();
+  const commentInput = document.getElementById('commentInput');
+  if (!commentInput) return;
+  
+  const commentText = commentInput.value.trim();
   
   if (!commentText) {
     showToast('❌ enter a comment');
@@ -2876,14 +2958,15 @@ window.addComment = function() {
   if (!currentPostId) return;
   
   const submitBtn = document.getElementById('commentSubmitBtn');
-  submitBtn.disabled = true;
+  if (submitBtn) submitBtn.disabled = true;
   
   const commentData = {
     text: commentText,
     author: currentUser.uid,
     authorName: currentUser.displayName || (currentUser.isAnonymous ? 'guest' : 'user'),
     createdAt: Date.now(),
-    reactions: {}
+    reactions: {},
+    userReactions: {}
   };
   
   const postRef = db.collection('posts').doc(currentPostId);
@@ -2895,13 +2978,16 @@ window.addComment = function() {
       });
     })
     .then(() => {
-      document.getElementById('commentInput').value = '';
+      if (commentInput) commentInput.value = '';
       showToast('💬 comment added');
       loadComments(currentPostId);
       
       postRef.get().then((doc) => {
         if (doc.exists) {
-          document.getElementById('detailComments').innerHTML = `💬 ${doc.data().comments || 0}`;
+          const detailComments = document.getElementById('detailComments');
+          if (detailComments) {
+            detailComments.innerHTML = `💬 ${doc.data().comments || 0}`;
+          }
         }
       });
     })
@@ -2910,7 +2996,7 @@ window.addComment = function() {
       showToast('❌ failed to add comment');
     })
     .finally(() => {
-      submitBtn.disabled = false;
+      if (submitBtn) submitBtn.disabled = false;
     });
 };
 
@@ -2978,15 +3064,23 @@ window.addCommentReaction = function(commentId, reactionName, reactionEmoji) {
   });
 };
 
-//===================================================
+ 
 // CREATE POST
-//===================================================
+ 
 window.createPost = function() {
-  const title = document.getElementById('postTitle').value.trim();
-  const body = document.getElementById('postBody').value.trim();
-  const nsfw = document.getElementById('nsfwTag').checked;
-  const community = document.getElementById('postCommunity').value;
-  const imageFile = document.getElementById('imageUpload').files[0];
+  const postTitle = document.getElementById('postTitle');
+  const postBody = document.getElementById('postBody');
+  const nsfwTag = document.getElementById('nsfwTag');
+  const postCommunity = document.getElementById('postCommunity');
+  const imageUpload = document.getElementById('imageUpload');
+  
+  if (!postTitle || !postBody) return;
+  
+  const title = postTitle.value.trim();
+  const body = postBody.value.trim();
+  const nsfw = nsfwTag ? nsfwTag.checked : false;
+  const community = postCommunity ? postCommunity.value : 'general';
+  const imageFile = imageUpload ? imageUpload.files[0] : null;
   
   if (!title || !body) {
     showToast('❌ fill in title and body');
@@ -3000,8 +3094,10 @@ window.createPost = function() {
   }
   
   const submitBtn = document.getElementById('submitPostBtn');
-  submitBtn.disabled = true;
-  submitBtn.textContent = '📤 posting...';
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = '📤 posting...';
+  }
   
   const postData = {
     title: title,
@@ -3043,12 +3139,20 @@ function savePost(postData) {
         posts: firebase.firestore.FieldValue.increment(1)
       }).catch(() => {});
       
-      document.getElementById('postTitle').value = '';
-      document.getElementById('postBody').value = '';
-      document.getElementById('nsfwTag').checked = false;
-      document.getElementById('imagePreview').innerHTML = '';
-      document.getElementById('imagePreview').style.display = 'none';
-      document.getElementById('imageUpload').value = '';
+      const postTitle = document.getElementById('postTitle');
+      const postBody = document.getElementById('postBody');
+      const nsfwTag = document.getElementById('nsfwTag');
+      const imagePreview = document.getElementById('imagePreview');
+      const imageUpload = document.getElementById('imageUpload');
+      
+      if (postTitle) postTitle.value = '';
+      if (postBody) postBody.value = '';
+      if (nsfwTag) nsfwTag.checked = false;
+      if (imagePreview) {
+        imagePreview.innerHTML = '';
+        imagePreview.style.display = 'none';
+      }
+      if (imageUpload) imageUpload.value = '';
       
       showView('forum');
     })
@@ -3058,8 +3162,10 @@ function savePost(postData) {
     })
     .finally(() => {
       const submitBtn = document.getElementById('submitPostBtn');
-      submitBtn.disabled = false;
-      submitBtn.textContent = '📬 publish';
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '📬 publish';
+      }
     });
 }
 
@@ -3079,11 +3185,15 @@ window.deletePost = function() {
     });
 };
 
+ 
+// PROFILE
+ 
 function loadProfile(userId = null) {
   const targetUserId = userId || currentUser?.uid;
   if (!targetUserId) return;
   
   const profileSection = document.getElementById('profileSection');
+  if (!profileSection) return;
   
   db.collection('users').doc(targetUserId).get()
     .then((doc) => {
@@ -3139,8 +3249,9 @@ window.viewUserProfile = function(userId) {
 };
 
 function loadUserPosts(userId) {
-  document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.profile-tab')[0].classList.add('active');
+  const tabs = document.querySelectorAll('.profile-tab');
+  tabs.forEach(t => t.classList.remove('active'));
+  if (tabs[0]) tabs[0].classList.add('active');
   
   db.collection('posts')
     .where('author', '==', userId)
@@ -3156,6 +3267,7 @@ function loadUserPosts(userId) {
       });
       
       const container = document.getElementById('userContent');
+      if (!container) return;
       
       if (userPosts.length === 0) {
         container.innerHTML = `
@@ -3204,12 +3316,15 @@ window.changeAvatar = function() {
   input.click();
 };
 
-//===================================================
-// MESSAGING SYSTEM
-//===================================================
+ 
+// MESSAGING SYSTEM - FIXED
+ 
 function loadConversations() {
   if (!currentUser || currentUser.isAnonymous) {
-    document.getElementById('conversationList').innerHTML = '<div style="color: var(--text-muted); padding: 1rem;">sign in to message</div>';
+    const conversationList = document.getElementById('conversationList');
+    if (conversationList) {
+      conversationList.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; text-align: center;">sign in to message</div>';
+    }
     return;
   }
   
@@ -3220,11 +3335,14 @@ function loadConversations() {
     .orderBy('lastMessageAt', 'desc')
     .onSnapshot((snapshot) => {
       const container = document.getElementById('conversationList');
+      if (!container) return;
+      
       let unreadCount = 0;
       
       if (snapshot.empty) {
-        container.innerHTML = '<div style="color: var(--text-muted); padding: 1rem;">no messages yet</div>';
-        document.getElementById('messageBadge').style.display = 'none';
+        container.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; text-align: center;">no messages yet</div>';
+        const messageBadge = document.getElementById('messageBadge');
+        if (messageBadge) messageBadge.style.display = 'none';
         return;
       }
       
@@ -3241,7 +3359,7 @@ function loadConversations() {
               <div class="conversation-avatar">${conv.otherUserInitial || '?'}</div>
               <span class="conversation-name">${conv.otherUserName || 'user'}</span>
             </div>
-            <div class="conversation-last">${conv.lastMessage?.text || ''}</div>
+            <div class="conversation-last">${conv.lastMessage?.text?.substring(0, 30) || ''}${conv.lastMessage?.text?.length > 30 ? '...' : ''}</div>
             ${isUnread ? '<span class="unread-badge">●</span>' : ''}
           </div>
         `;
@@ -3249,11 +3367,14 @@ function loadConversations() {
       
       container.innerHTML = html;
       
-      if (unreadCount > 0) {
-        document.getElementById('messageBadge').style.display = 'block';
-        document.getElementById('messageBadge').textContent = unreadCount;
-      } else {
-        document.getElementById('messageBadge').style.display = 'none';
+      const messageBadge = document.getElementById('messageBadge');
+      if (messageBadge) {
+        if (unreadCount > 0) {
+          messageBadge.style.display = 'block';
+          messageBadge.textContent = unreadCount;
+        } else {
+          messageBadge.style.display = 'none';
+        }
       }
     }, (error) => {
       console.error("Error loading conversations:", error);
@@ -3267,17 +3388,44 @@ window.openMessageModal = function() {
     return;
   }
   
-  document.getElementById('messageModal').classList.add('active');
-  document.getElementById('userSearch').value = '';
-  document.getElementById('userResults').innerHTML = '';
-  document.getElementById('messageText').value = '';
-  selectedRecipient = null;
+  const modal = document.getElementById('messageModal');
+  if (modal) {
+    modal.classList.add('active');
+    
+    const userSearch = document.getElementById('userSearch');
+    const userResults = document.getElementById('userResults');
+    const messageText = document.getElementById('messageText');
+    
+    if (userSearch) userSearch.value = '';
+    if (userResults) userResults.innerHTML = '';
+    if (messageText) messageText.value = '';
+    
+    selectedRecipient = null;
+  }
 };
 
 window.openMessageModalWithUser = function(userId) {
+  if (!userId) {
+    // If no userId provided, try to get from current post
+    if (currentPostId) {
+      db.collection('posts').doc(currentPostId).get().then((doc) => {
+        if (doc.exists) {
+          const post = doc.data();
+          openMessageModalWithUser(post.author);
+        }
+      });
+    }
+    return;
+  }
+  
   if (!currentUser || currentUser.isAnonymous) {
     showToast('🔒 sign in to message');
     showSmartAccountModal();
+    return;
+  }
+  
+  if (userId === currentUser.uid) {
+    showToast('❌ cannot message yourself');
     return;
   }
   
@@ -3287,22 +3435,38 @@ window.openMessageModalWithUser = function(userId) {
         id: userId,
         name: doc.data().username
       };
-      document.getElementById('messageModal').classList.add('active');
-      document.getElementById('userSearch').value = doc.data().username;
-      document.getElementById('userResults').innerHTML = '';
-      document.getElementById('messageText').value = '';
+      
+      const modal = document.getElementById('messageModal');
+      if (modal) {
+        modal.classList.add('active');
+        
+        const userSearch = document.getElementById('userSearch');
+        const messageText = document.getElementById('messageText');
+        
+        if (userSearch) userSearch.value = doc.data().username;
+        if (messageText) messageText.value = '';
+        
+        const userResults = document.getElementById('userResults');
+        if (userResults) userResults.innerHTML = '';
+      }
     }
   });
 };
 
 window.closeMessageModal = function() {
-  document.getElementById('messageModal').classList.remove('active');
+  const modal = document.getElementById('messageModal');
+  if (modal) modal.classList.remove('active');
 };
 
 window.searchUsers = function() {
-  const searchTerm = document.getElementById('userSearch').value.trim().toLowerCase();
+  const searchInput = document.getElementById('userSearch');
+  if (!searchInput) return;
+  
+  const searchTerm = searchInput.value.trim().toLowerCase();
+  const resultsDiv = document.getElementById('userResults');
+  
   if (searchTerm.length < 2) {
-    document.getElementById('userResults').innerHTML = '';
+    if (resultsDiv) resultsDiv.innerHTML = '';
     return;
   }
   
@@ -3312,9 +3476,10 @@ window.searchUsers = function() {
     .limit(5)
     .get()
     .then((snapshot) => {
-      const results = document.getElementById('userResults');
+      if (!resultsDiv) return;
+      
       if (snapshot.empty) {
-        results.innerHTML = '<div style="padding: 1rem; color: var(--text-muted);">no users found</div>';
+        resultsDiv.innerHTML = '<div style="padding: 1rem; color: var(--text-muted);">no users found</div>';
         return;
       }
       
@@ -3330,14 +3495,21 @@ window.searchUsers = function() {
         }
       });
       
-      results.innerHTML = html || '<div style="padding: 1rem; color: var(--text-muted);">no other users</div>';
+      resultsDiv.innerHTML = html || '<div style="padding: 1rem; color: var(--text-muted);">no other users</div>';
+    })
+    .catch(error => {
+      console.error("Error searching users:", error);
     });
 };
 
 window.selectUser = function(userId, username) {
   selectedRecipient = { id: userId, name: username };
-  document.getElementById('userSearch').value = username;
-  document.getElementById('userResults').innerHTML = '';
+  
+  const userSearch = document.getElementById('userSearch');
+  const userResults = document.getElementById('userResults');
+  
+  if (userSearch) userSearch.value = username;
+  if (userResults) userResults.innerHTML = '';
 };
 
 window.sendMessage = function() {
@@ -3346,8 +3518,11 @@ window.sendMessage = function() {
     return;
   }
   
-  const messageText = document.getElementById('messageText').value.trim();
-  if (!messageText) {
+  const messageText = document.getElementById('messageText');
+  if (!messageText) return;
+  
+  const text = messageText.value.trim();
+  if (!text) {
     showToast('❌ enter a message');
     return;
   }
@@ -3355,7 +3530,7 @@ window.sendMessage = function() {
   const conversationId = [currentUser.uid, selectedRecipient.id].sort().join('_');
   
   const message = {
-    text: messageText,
+    text: text,
     sender: currentUser.uid,
     senderName: currentUser.displayName,
     timestamp: Date.now(),
@@ -3387,6 +3562,8 @@ window.sendMessage = function() {
 };
 
 window.openConversation = function(conversationId, otherUserId) {
+  if (!currentUser) return;
+  
   // Mark as read
   db.collection('conversations').doc(conversationId).update({
     [`readBy.${currentUser.uid}`]: true
@@ -3395,17 +3572,22 @@ window.openConversation = function(conversationId, otherUserId) {
   db.collection('users').doc(otherUserId).get().then((doc) => {
     const userData = doc.data() || {};
     
-    document.getElementById('conversationUser').innerHTML = `
-      <div class="conversation-user-avatar">
-        ${userData.avatar ? `<img src="${userData.avatar}" alt="avatar">` : (userData.username ? userData.username[0].toUpperCase() : '?')}
-      </div>
-      <div class="conversation-user-info">
-        <h3>${userData.username || 'user'}</h3>
-        <p>last seen ${timeAgo(userData.lastSeen || Date.now())}</p>
-      </div>
-    `;
+    const conversationUser = document.getElementById('conversationUser');
+    if (conversationUser) {
+      conversationUser.innerHTML = `
+        <div class="conversation-user-avatar">
+          ${userData.avatar ? `<img src="${userData.avatar}" alt="avatar">` : (userData.username ? userData.username[0].toUpperCase() : '?')}
+        </div>
+        <div class="conversation-user-info">
+          <h3>${userData.username || 'user'}</h3>
+          <p>last seen ${timeAgo(userData.lastSeen || Date.now())}</p>
+        </div>
+      `;
+    }
     
-    document.getElementById('conversationView').classList.add('active');
+    const conversationView = document.getElementById('conversationView');
+    if (conversationView) conversationView.classList.add('active');
+    
     loadMessages(conversationId);
     
     // Store current conversation
@@ -3415,7 +3597,9 @@ window.openConversation = function(conversationId, otherUserId) {
 };
 
 window.closeConversation = function() {
-  document.getElementById('conversationView').classList.remove('active');
+  const conversationView = document.getElementById('conversationView');
+  if (conversationView) conversationView.classList.remove('active');
+  
   window.currentConversationId = null;
   window.currentOtherUserId = null;
 };
@@ -3425,6 +3609,8 @@ function loadMessages(conversationId) {
     .orderBy('timestamp', 'asc')
     .onSnapshot((snapshot) => {
       const container = document.getElementById('messagesContainer');
+      if (!container) return;
+      
       let html = '';
       
       snapshot.forEach(doc => {
@@ -3441,14 +3627,18 @@ function loadMessages(conversationId) {
       
       container.innerHTML = html;
       container.scrollTop = container.scrollHeight;
+    }, (error) => {
+      console.error("Error loading messages:", error);
     });
 }
 
 window.sendConversationMessage = function() {
   const input = document.getElementById('conversationInput');
+  if (!input) return;
+  
   const messageText = input.value.trim();
   
-  if (!messageText || !window.currentConversationId) return;
+  if (!messageText || !window.currentConversationId || !currentUser) return;
   
   const message = {
     text: messageText,
@@ -3475,12 +3665,12 @@ window.sendConversationMessage = function() {
   });
 };
 
-//===================================================
+ 
 // FILTERS & UTILITIES
-//===================================================
+ 
 window.filterPosts = function(filter) {
   document.querySelectorAll('.filter-tab').forEach(tab => tab.classList.remove('active'));
-  event.target.classList.add('active');
+  if (event && event.target) event.target.classList.add('active');
   
   let filtered = [...posts];
   
@@ -3501,14 +3691,14 @@ window.filterPosts = function(filter) {
 };
 
 function loadTrending() {
+  const container = document.getElementById('trendingPosts');
+  if (!container) return;
+  
   const trending = [...posts].sort((a, b) => {
     const aReactions = a.reactions ? Object.values(a.reactions).reduce((sum, r) => sum + (r.count || 0), 0) : 0;
     const bReactions = b.reactions ? Object.values(b.reactions).reduce((sum, r) => sum + (r.count || 0), 0) : 0;
     return bReactions - aReactions;
   }).slice(0, 5);
-  
-  const container = document.getElementById('trendingPosts');
-  if (!container) return;
   
   if (trending.length === 0) {
     container.innerHTML = '<div style="color: var(--text-muted); padding: 1rem;">no trending posts</div>';
@@ -3532,11 +3722,25 @@ function loadTrending() {
 }
 
 function updateStats() {
-  document.getElementById('totalPostsStat').textContent = posts.length;
+  const totalPostsStat = document.getElementById('totalPostsStat');
+  const totalUsersStat = document.getElementById('totalUsersStat');
+  const onlineNowStat = document.getElementById('onlineNowStat');
   
-  db.collection('users').get().then((snapshot) => {
-    document.getElementById('totalUsersStat').textContent = snapshot.size;
-  }).catch(() => {});
+  if (totalPostsStat) totalPostsStat.textContent = posts.length;
+  
+  if (totalUsersStat) {
+    db.collection('users').get().then((snapshot) => {
+      totalUsersStat.textContent = snapshot.size;
+    }).catch(() => {});
+  }
+  
+  if (onlineNowStat) {
+    // Simple online count - users active in last 5 minutes
+    const fiveMinAgo = Date.now() - 300000;
+    db.collection('users').where('lastSeen', '>', fiveMinAgo).get().then((snapshot) => {
+      onlineNowStat.textContent = snapshot.size;
+    }).catch(() => {});
+  }
 }
 
 function timeAgo(timestamp) {
@@ -3555,8 +3759,10 @@ window.previewImage = function(event) {
     const reader = new FileReader();
     reader.onload = (e) => {
       const preview = document.getElementById('imagePreview');
-      preview.innerHTML = `<img src="${e.target.result}" alt="preview">`;
-      preview.style.display = 'block';
+      if (preview) {
+        preview.innerHTML = `<img src="${e.target.result}" alt="preview">`;
+        preview.style.display = 'block';
+      }
     };
     reader.readAsDataURL(file);
   }
@@ -3575,6 +3781,8 @@ window.sharePost = function() {
 
 function showToast(message) {
   const container = document.getElementById('toastContainer');
+  if (!container) return;
+  
   const toast = document.createElement('div');
   toast.className = 'toast';
   toast.textContent = message;
@@ -3585,10 +3793,7 @@ function showToast(message) {
   }, 3000);
 }
 
-//===================================================
-// INIT
-//===================================================
-document.getElementById('settingsBtn').addEventListener('click', () => {
+document.getElementById('settingsBtn')?.addEventListener('click', () => {
   showToast('💬 messages - click a conversation');
 });
 

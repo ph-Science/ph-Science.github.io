@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<base href="https://cdn.jsdelivr.net/gh/gn-math/gn-math.github.io@main/">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1246719291517308929/1478561249032798268/New_Project_3.png?ex=69a8d8f8&is=69a78778&hm=abee371c7fede1116bf9773b6dcdd858b1c7c7ddb4b2425b7774a0381481756a&=&format=webp&quality=lossless&width=40&height=40">
 <link rel="apple-touch-icon" href="https://media.discordapp.net/attachments/1246719291517308929/1478561249032798268/New_Project_3.png?ex=69a8d8f8&is=69a78778&hm=abee371c7fede1116bf9773b6dcdd858b1c7c7ddb4b2425b7774a0381481756a&=&format=webp&quality=lossless&width=40&height=40">
 
-<title>PH - Science</title>
-<meta name="title" content="PH Science | Learn Biology the Easy Way">
-<meta name="description" content="Access 700+ science worksheets designed to help you master biology quickly and easily.">
+<title>PH Social - Communities & Chat</title>
+<meta name="title" content="PH Social | Connect with Others">
+<meta name="description" content="Join communities, share thoughts, and message friends.">
 
 <script>
-// Suppress extension errors
 window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = window.__REACT_DEVTOOLS_GLOBAL_HOOK__ || {};
 </script>
 
 <script async src="https://fundingchoicesmessages.google.com/i/pub-5521219086088837?ers=1"></script>
 <script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
-<script src="https://cdn.jsdelivr.net/gh/gn-math/gn-math.github.io@main/gnmath.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
@@ -147,6 +144,9 @@ header {
   cursor: pointer;
   transition: var(--transition);
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .nav-link:hover {
@@ -172,6 +172,9 @@ header {
   transition: var(--transition-bounce);
   box-shadow: 0 4px 15px rgba(255,107,0,0.3);
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .account-btn:hover {
@@ -192,6 +195,7 @@ header {
   font-size: 1.5rem;
   cursor: pointer;
   transition: var(--transition);
+  position: relative;
 }
 
 .settings-icon:hover {
@@ -200,11 +204,228 @@ header {
   transform: rotate(180deg) scale(1.1);
 }
 
+.message-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ff4444;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.4rem;
+  border-radius: var(--radius-full);
+  min-width: 18px;
+  text-align: center;
+}
+
 /* Main Content */
 .main-content {
   max-width: 1400px;
   margin: 2rem auto;
   padding: 0 2rem;
+}
+
+/* Communities Sidebar */
+.communities-sidebar {
+  position: fixed;
+  left: 20px;
+  top: 120px;
+  width: 250px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  z-index: 90;
+}
+
+.communities-sidebar h3 {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--orange);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.community-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.community-item {
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.community-item:hover {
+  background: rgba(255,107,0,0.1);
+  color: var(--orange);
+  transform: translateX(5px);
+}
+
+.community-item.active {
+  background: var(--orange);
+  color: black;
+  font-weight: 700;
+}
+
+.community-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: black;
+}
+
+.create-community-btn {
+  background: rgba(255,107,0,0.1);
+  border: 1px dashed var(--border-color);
+  color: var(--text-primary);
+  padding: 0.8rem;
+  border-radius: var(--radius-full);
+  width: 100%;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.create-community-btn:hover {
+  background: rgba(255,107,0,0.2);
+  border-color: var(--orange);
+}
+
+/* Messages Panel */
+.messages-panel {
+  position: fixed;
+  right: 20px;
+  top: 120px;
+  width: 300px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  z-index: 90;
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+}
+
+.messages-panel h3 {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--orange);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.new-message-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-full);
+  transition: var(--transition);
+}
+
+.new-message-btn:hover {
+  background: var(--orange);
+  color: black;
+}
+
+.conversation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.conversation-item {
+  padding: 0.8rem;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: var(--transition);
+  background: rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.conversation-item:hover {
+  background: rgba(255,107,0,0.1);
+  transform: translateX(-5px);
+}
+
+.conversation-item.unread {
+  border-left: 3px solid var(--orange);
+}
+
+.conversation-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.conversation-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--orange), var(--orange-bright));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: black;
+}
+
+.conversation-name {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.conversation-last {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.unread-badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: var(--orange);
+  color: black;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.4rem;
+  border-radius: var(--radius-full);
+  min-width: 18px;
+  text-align: center;
+}
+
+/* Main Feed */
+.main-feed {
+  margin-left: 280px;
+  margin-right: 330px;
+  transition: margin 0.3s;
 }
 
 /* Forum Header */
@@ -255,13 +476,6 @@ header {
 .new-post-btn:hover {
   transform: translateY(-3px) scale(1.05);
   box-shadow: 0 10px 30px rgba(255,107,0,0.5);
-}
-
-/* Forum Sections */
-.forum-sections {
-  display: grid;
-  grid-template-columns: 1fr 350px;
-  gap: 2rem;
 }
 
 /* Posts Grid */
@@ -403,6 +617,7 @@ header {
   color: black;
   flex-shrink: 0;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .post-author-avatar img {
@@ -421,6 +636,12 @@ header {
   font-size: 1.1rem;
   color: var(--orange);
   margin-bottom: 0.25rem;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.post-author-name:hover {
+  text-decoration: underline;
 }
 
 .post-meta {
@@ -428,6 +649,15 @@ header {
   gap: 1rem;
   color: var(--text-muted);
   font-size: 0.9rem;
+}
+
+.post-community-tag {
+  background: rgba(255,107,0,0.2);
+  color: var(--orange);
+  padding: 0.2rem 0.8rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
 }
 
 .post-title {
@@ -484,6 +714,7 @@ header {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  cursor: pointer;
 }
 
 .stat-item:hover {
@@ -529,73 +760,6 @@ header {
 
 .reaction-btn.active .reaction-count {
   color: black;
-}
-
-/* Sidebar */
-.forum-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.sidebar-card {
-  background: var(--bg-panel);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-xl);
-  padding: 1.5rem;
-}
-
-.sidebar-card h3 {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 1.2rem;
-  color: var(--orange);
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.stats-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.stat-row {
-  display: flex;
-  justify-content: space-between;
-  color: var(--text-secondary);
-  font-family: 'JetBrains Mono', monospace;
-}
-
-.stat-value {
-  color: var(--orange);
-  font-weight: 700;
-}
-
-.trending-post {
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--border-color);
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.trending-post:hover {
-  transform: translateX(5px);
-}
-
-.trending-post:last-child {
-  border-bottom: none;
-}
-
-.trending-title {
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-  color: var(--text-primary);
-}
-
-.trending-meta {
-  font-size: 0.8rem;
-  color: var(--text-muted);
 }
 
 /* New Post Form */
@@ -806,6 +970,7 @@ header {
   font-weight: 800;
   color: black;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .detail-avatar img {
@@ -819,6 +984,11 @@ header {
   font-size: 2rem;
   color: var(--orange);
   margin-bottom: 0.25rem;
+  cursor: pointer;
+}
+
+.detail-author-info h3:hover {
+  text-decoration: underline;
 }
 
 .detail-author-info p {
@@ -1035,6 +1205,7 @@ header {
   font-weight: 800;
   color: black;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .comment-avatar img {
@@ -1047,6 +1218,11 @@ header {
   font-family: 'JetBrains Mono', monospace;
   font-weight: 700;
   color: var(--orange);
+  cursor: pointer;
+}
+
+.comment-author:hover {
+  text-decoration: underline;
 }
 
 .comment-date {
@@ -1058,6 +1234,31 @@ header {
   color: var(--text-secondary);
   margin-left: 3rem;
   line-height: 1.6;
+}
+
+.comment-reactions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  margin-left: 3rem;
+}
+
+.comment-reaction-btn {
+  background: rgba(255,107,0,0.1);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  padding: 0.2rem 0.8rem;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.comment-reaction-btn:hover {
+  background: rgba(255,107,0,0.2);
+  transform: translateY(-2px);
 }
 
 /* Profile View */
@@ -1173,6 +1374,312 @@ header {
 .profile-tab.active {
   background: var(--orange);
   color: black;
+}
+
+/* Message Modal */
+.message-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(20px);
+  z-index: 10001;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.message-modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+.message-modal-content {
+  max-width: 500px;
+  width: 90%;
+  background: var(--bg-panel);
+  border: 2px solid var(--border-glow);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  box-shadow: 0 50px 100px -30px black;
+  transform: scale(0.9);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.message-modal.active .message-modal-content {
+  transform: scale(1);
+}
+
+.message-modal h2 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2rem;
+  background: linear-gradient(135deg, #ff6b00, #ffa64d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+}
+
+.user-search {
+  margin-bottom: 1rem;
+}
+
+.user-search input {
+  width: 100%;
+  padding: 1rem;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.user-search input:focus {
+  border-color: var(--orange);
+  outline: none;
+}
+
+.user-results {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.2);
+  border-radius: var(--radius-lg);
+  padding: 0.5rem;
+}
+
+.user-result-item {
+  padding: 0.8rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.user-result-item:hover {
+  background: rgba(255,107,0,0.2);
+}
+
+.user-result-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--orange), var(--orange-bright));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: black;
+}
+
+.message-textarea {
+  width: 100%;
+  padding: 1rem;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  min-height: 100px;
+  margin-bottom: 1rem;
+  resize: vertical;
+}
+
+.message-textarea:focus {
+  border-color: var(--orange);
+  outline: none;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.modal-btn {
+  flex: 1;
+  padding: 1rem;
+  border-radius: var(--radius-full);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+}
+
+.modal-btn.primary {
+  background: var(--orange);
+  color: black;
+}
+
+.modal-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(255,107,0,0.5);
+}
+
+.modal-btn.secondary {
+  background: rgba(255,107,0,0.1);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.modal-btn.secondary:hover {
+  background: rgba(255,107,0,0.2);
+}
+
+/* Conversation View */
+.conversation-view {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-primary);
+  z-index: 10002;
+  display: none;
+  flex-direction: column;
+}
+
+.conversation-view.active {
+  display: flex;
+}
+
+.conversation-header {
+  padding: 1rem 2rem;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.conversation-back {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.conversation-back:hover {
+  background: rgba(255,107,0,0.1);
+  color: var(--orange);
+}
+
+.conversation-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.conversation-user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--orange), var(--orange-bright));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: black;
+  overflow: hidden;
+}
+
+.conversation-user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.conversation-user-info h3 {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--orange);
+  margin-bottom: 0.25rem;
+}
+
+.conversation-user-info p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.message-bubble {
+  max-width: 60%;
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  position: relative;
+}
+
+.message-bubble.sent {
+  align-self: flex-end;
+  background: var(--orange);
+  color: black;
+  border-bottom-right-radius: 4px;
+}
+
+.message-bubble.received {
+  align-self: flex-start;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border-bottom-left-radius: 4px;
+}
+
+.message-time {
+  font-size: 0.7rem;
+  margin-top: 0.3rem;
+  opacity: 0.7;
+}
+
+.message-input-area {
+  padding: 1rem 2rem;
+  background: var(--bg-panel);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  gap: 1rem;
+}
+
+.message-input {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+}
+
+.message-input:focus {
+  border-color: var(--orange);
+  outline: none;
+}
+
+.message-send-btn {
+  background: var(--orange);
+  border: none;
+  color: black;
+  font-weight: 700;
+  padding: 0 2rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  transition: var(--transition);
+}
+
+.message-send-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255,107,0,0.5);
 }
 
 /* Account Modal */
@@ -1357,6 +1864,18 @@ header {
 }
 
 /* Responsive */
+@media (max-width: 1200px) {
+  .main-feed {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .communities-sidebar,
+  .messages-panel {
+    display: none;
+  }
+}
+
 @media (max-width: 1000px) {
   .forum-sections {
     grid-template-columns: 1fr;
@@ -1439,41 +1958,122 @@ header {
   </div>
 </div>
 
+<!-- Message Modal -->
+<div class="message-modal" id="messageModal">
+  <div class="message-modal-content">
+    <h2>new message</h2>
+    
+    <div class="user-search">
+      <input type="text" id="userSearch" placeholder="search users..." oninput="searchUsers()">
+    </div>
+    
+    <div id="userResults" class="user-results"></div>
+    
+    <textarea id="messageText" class="message-textarea" placeholder="write your message..."></textarea>
+    
+    <div class="modal-actions">
+      <button class="modal-btn secondary" onclick="closeMessageModal()">cancel</button>
+      <button class="modal-btn primary" onclick="sendMessage()">send</button>
+    </div>
+  </div>
+</div>
+
+<!-- Conversation View -->
+<div class="conversation-view" id="conversationView">
+  <div class="conversation-header">
+    <button class="conversation-back" onclick="closeConversation()">←</button>
+    <div class="conversation-user" id="conversationUser">
+      <!-- Dynamic content -->
+    </div>
+  </div>
+  
+  <div class="messages-container" id="messagesContainer"></div>
+  
+  <div class="message-input-area">
+    <input type="text" id="conversationInput" class="message-input" placeholder="type a message..." onkeypress="if(event.key==='Enter') sendConversationMessage()">
+    <button class="message-send-btn" onclick="sendConversationMessage()">send</button>
+  </div>
+</div>
+
 <header>
   <div class="header-content">
     <div style="display:flex; align-items:center; gap:1.2rem;">
-      <span class="logo" onclick="showView('forum')">PH - Science</span>
+      <span class="logo" onclick="showView('forum')">PH Social</span>
     </div>
     
     <div class="nav-links">
-      <a class="nav-link active" onclick="showView('forum')">📫 forum</a>
-      <a class="nav-link" onclick="showView('newPost')">✏️ new post</a>
+      <a class="nav-link active" onclick="showView('forum')">📫 feed</a>
+      <a class="nav-link" onclick="showView('newPost')">✏️ create</a>
       <a class="nav-link" onclick="showView('profile')">👤 profile</a>
     </div>
     
     <div style="display:flex; gap:1rem;">
       <button class="account-btn" id="accountBtn" onclick="showSmartAccountModal()">✨ sign in</button>
-      <div class="settings-icon" id="settingsBtn">⚙️</div>
+      <div class="settings-icon" id="settingsBtn">
+        💬
+        <span class="message-badge" id="messageBadge" style="display: none;">0</span>
+      </div>
     </div>
   </div>
 </header>
 
-<div class="main-content">
-  <div id="forumView" style="display: block;">
-    <div class="forum-header">
-      <div class="forum-title">
-        <h1>FORUMS</h1>
-        <p>talk freely.</p>
-      </div>
-      <button class="new-post-btn" onclick="showView('newPost')">
-        <span>✏️</span> create new post
-      </button>
+<!-- Communities Sidebar -->
+<div class="communities-sidebar">
+  <h3>communities</h3>
+  <div class="community-list" id="communityList">
+    <div class="community-item active" onclick="selectCommunity('all')">
+      <div class="community-icon">🌐</div>
+      <span>all</span>
     </div>
-    
-    <div class="forum-sections">
+    <div class="community-item" onclick="selectCommunity('general')">
+      <div class="community-icon">💬</div>
+      <span>general</span>
+    </div>
+    <div class="community-item" onclick="selectCommunity('gaming')">
+      <div class="community-icon">🎮</div>
+      <span>gaming</span>
+    </div>
+    <div class="community-item" onclick="selectCommunity('tech')">
+      <div class="community-icon">💻</div>
+      <span>tech</span>
+    </div>
+    <div class="community-item" onclick="selectCommunity('creative')">
+      <div class="community-icon">🎨</div>
+      <span>creative</span>
+    </div>
+  </div>
+  <button class="create-community-btn" onclick="createCommunity()">
+    <span>➕</span> create community
+  </button>
+</div>
+
+<!-- Messages Panel -->
+<div class="messages-panel">
+  <h3>
+    messages
+    <button class="new-message-btn" onclick="openMessageModal()">✏️</button>
+  </h3>
+  <div class="conversation-list" id="conversationList">
+    <!-- Conversations will load here -->
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="main-feed" id="mainFeed">
+    <div id="forumView" style="display: block;">
+      <div class="forum-header">
+        <div class="forum-title">
+          <h1>feed</h1>
+          <p>connect with the community</p>
+        </div>
+        <button class="new-post-btn" onclick="showView('newPost')">
+          <span>✏️</span> create post
+        </button>
+      </div>
+      
       <div class="posts-container">
         <div class="posts-header">
-          <h2>latest discussions</h2>
+          <h2>latest posts</h2>
           <div class="filter-tabs">
             <span class="filter-tab active" onclick="filterPosts('all')">all</span>
             <span class="filter-tab" onclick="filterPosts('hot')">🔥 hot</span>
@@ -1484,123 +2084,107 @@ header {
           <div class="loading-spinner"></div>
         </div>
       </div>
-      
-      <div class="forum-sidebar">
-        <div class="sidebar-card">
-          <h3>📊 stats</h3>
-          <div class="stats-list">
-            <div class="stat-row">
-              <span>total posts</span>
-              <span class="stat-value" id="totalPostsStat">0</span>
-            </div>
-            <div class="stat-row">
-              <span>total users</span>
-              <span class="stat-value" id="totalUsersStat">0</span>
-            </div>
-            <div class="stat-row">
-              <span>online now</span>
-              <span class="stat-value" id="onlineNowStat">1</span>
-            </div>
+    </div>
+    
+    <!-- NEW POST VIEW -->
+    <div id="newPostView" style="display: none;">
+      <div class="new-post-section">
+        <h2>create post</h2>
+        
+        <div class="form-group">
+          <label class="form-label">community</label>
+          <select id="postCommunity" class="form-input">
+            <option value="general">general</option>
+            <option value="gaming">gaming</option>
+            <option value="tech">tech</option>
+            <option value="creative">creative</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">title</label>
+          <input type="text" id="postTitle" class="form-input" placeholder="what's on your mind?">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">body</label>
+          <textarea id="postBody" class="form-textarea" placeholder="write your post..."></textarea>
+        </div>
+        
+        <div class="form-row">
+          <div class="nsfw-checkbox">
+            <input type="checkbox" id="nsfwTag"> 
+            <span>🔞 mark as NSFW</span>
+          </div>
+          
+          <div style="flex:1;"></div>
+          
+          <label for="imageUpload" class="image-upload-btn">
+            <span>🖼️</span> upload image
+          </label>
+          <input type="file" id="imageUpload" accept="image/*" style="display: none;" onchange="previewImage(event)">
+        </div>
+        
+        <div id="imagePreview"></div>
+        
+        <button class="submit-post" id="submitPostBtn" onclick="createPost()">📬 publish</button>
+      </div>
+    </div>
+    
+    <!-- POST DETAIL VIEW -->
+    <div id="postDetailView" style="display: none;">
+      <div class="post-detail">
+        <div class="post-detail-header">
+          <button class="back-btn" onclick="showView('forum')">← back</button>
+          <div class="post-stats">
+            <span class="stat-item" id="detailViews">👁️ 0</span>
+            <span class="stat-item" id="detailComments">💬 0</span>
           </div>
         </div>
         
-        <div class="sidebar-card">
-          <h3>🔥 trending</h3>
-          <div id="trendingPosts" class="trending-list">
-            <!-- Trending posts will load here -->
+        <div class="post-detail-author" id="detailAuthor">
+          <!-- Author info will load here -->
+        </div>
+        
+        <h1 class="post-detail-title" id="detailTitle"></h1>
+        
+        <div class="post-detail-body" id="detailBody"></div>
+        
+        <div class="post-detail-media" id="detailMedia"></div>
+        
+        <div class="reactions-detail">
+          <h4>reactions</h4>
+          <div class="reactions-grid" id="reactionsGrid">
+            <!-- Reactions will load here -->
+          </div>
+        </div>
+        
+        <div class="post-detail-actions">
+          <button class="action-btn" id="deleteBtn" style="display: none;" onclick="deletePost()">🗑️ delete</button>
+          <button class="action-btn" onclick="sharePost()">🔗 share</button>
+          <button class="action-btn" onclick="openMessageModalWithUser()">💬 message OP</button>
+        </div>
+        
+        <div class="comment-section">
+          <h3>comments</h3>
+          
+          <div class="comment-form">
+            <input type="text" id="commentInput" class="comment-input" placeholder="write a comment...">
+            <button class="comment-submit" onclick="addComment()" id="commentSubmitBtn">post</button>
+          </div>
+          
+          <div id="commentsList" class="comments-list">
+            <!-- Comments will load here -->
           </div>
         </div>
       </div>
     </div>
-  </div>
-  
-  <!-- NEW POST VIEW -->
-  <div id="newPostView" style="display: none;">
-    <div class="new-post-section">
-      <h2>create new post</h2>
-      
-      <div class="form-group">
-        <label class="form-label">title</label>
-        <input type="text" id="postTitle" class="form-input" placeholder="what's on your mind?">
+    
+    <!-- PROFILE VIEW -->
+    <div id="profileView" style="display: none;">
+      <div class="profile-section" id="profileSection">
+        <!-- Profile content will load here -->
       </div>
-      
-      <div class="form-group">
-        <label class="form-label">body</label>
-        <textarea id="postBody" class="form-textarea" placeholder="write your post..."></textarea>
-      </div>
-      
-      <div class="form-row">
-        <div class="nsfw-checkbox">
-          <input type="checkbox" id="nsfwTag"> 
-          <span>🔞 mark as NSFW</span>
-        </div>
-        
-        <div style="flex:1;"></div>
-        
-        <label for="imageUpload" class="image-upload-btn">
-          <span>🖼️</span> upload image
-        </label>
-        <input type="file" id="imageUpload" accept="image/*" style="display: none;" onchange="previewImage(event)">
-      </div>
-      
-      <div id="imagePreview"></div>
-      
-      <button class="submit-post" id="submitPostBtn" onclick="createPost()">📬 publish post</button>
-    </div>
-  </div>
-  
-  <!-- POST DETAIL VIEW -->
-  <div id="postDetailView" style="display: none;">
-    <div class="post-detail">
-      <div class="post-detail-header">
-        <button class="back-btn" onclick="showView('forum')">← back to forum</button>
-        <div class="post-stats">
-          <span class="stat-item" id="detailViews">👁️ 0</span>
-          <span class="stat-item" id="detailComments">💬 0</span>
-        </div>
-      </div>
-      
-      <div class="post-detail-author" id="detailAuthor">
-        <!-- Author info will load here -->
-      </div>
-      
-      <h1 class="post-detail-title" id="detailTitle"></h1>
-      
-      <div class="post-detail-body" id="detailBody"></div>
-      
-      <div class="post-detail-media" id="detailMedia"></div>
-      
-      <div class="reactions-detail">
-        <h4>reactions</h4>
-        <div class="reactions-grid" id="reactionsGrid">
-          <!-- Reactions will load here -->
-        </div>
-      </div>
-      
-      <div class="post-detail-actions">
-        <button class="action-btn" id="deleteBtn" style="display: none;" onclick="deletePost()">🗑️ delete</button>
-        <button class="action-btn" onclick="sharePost()">🔗 share</button>
-      </div>
-      
-      <div class="comment-section">
-        <h3>comments</h3>
-        
-        <div class="comment-form">
-          <input type="text" id="commentInput" class="comment-input" placeholder="write a comment...">
-          <button class="comment-submit" onclick="addComment()" id="commentSubmitBtn">post</button>
-        </div>
-        
-        <div id="commentsList" class="comments-list">
-          <!-- Comments will load here -->
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- PROFILE VIEW -->
-  <div id="profileView" style="display: none;">
-    <div class="profile-section" id="profileSection">
-      <!-- Profile content will load here -->
     </div>
   </div>
 </div>
@@ -1609,7 +2193,7 @@ header {
 
 <script>
 //===================================================
-// FIREBASE CONFIG - FIRESTORE VERSION
+// FIREBASE CONFIG
 //===================================================
 const firebaseConfig = {
   apiKey: "AIzaSyA-68XKNt_PD0I1TJbNcyotT4qMbgHh-tI",
@@ -1617,17 +2201,16 @@ const firebaseConfig = {
   projectId: "ph-science",
   storageBucket: "ph-science.firebasestorage.app",
   messagingSenderId: "883067098385",
-  appId: "1:883067098385:web:036ccc248ffa4f44cf28b0",
-  measurementId: "G-54XJK643G2"
+  appId: "1:883067098385:web:036ccc248ffa4f44cf28b0"
 };
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
-const db = firebase.firestore(); // Using Firestore, NOT Realtime Database!
+const db = firebase.firestore();
 const storage = firebase.storage();
 
-// Enable offline persistence (optional)
+// Enable offline persistence
 db.enablePersistence()
   .catch((err) => {
     if (err.code == 'failed-precondition') {
@@ -1645,6 +2228,9 @@ let currentPostId = null;
 let currentView = 'forum';
 let posts = [];
 let postsUnsubscribe = null;
+let conversationsUnsubscribe = null;
+let currentCommunity = 'all';
+let selectedRecipient = null;
 
 // Available reactions
 const REACTIONS = [
@@ -1662,16 +2248,13 @@ const REACTIONS = [
 window.showView = function(view) {
   currentView = view;
   
-  // Hide all views
   document.getElementById('forumView').style.display = 'none';
   document.getElementById('newPostView').style.display = 'none';
   document.getElementById('postDetailView').style.display = 'none';
   document.getElementById('profileView').style.display = 'none';
   
-  // Update nav links
   document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
   
-  // Show selected view
   switch(view) {
     case 'forum':
       document.getElementById('forumView').style.display = 'block';
@@ -1706,6 +2289,40 @@ window.showView = function(view) {
 };
 
 //===================================================
+// COMMUNITIES
+//===================================================
+window.selectCommunity = function(community) {
+  currentCommunity = community;
+  document.querySelectorAll('.community-item').forEach(item => item.classList.remove('active'));
+  event.target.closest('.community-item').classList.add('active');
+  loadPosts();
+};
+
+window.createCommunity = function() {
+  if (!currentUser || currentUser.isAnonymous) {
+    showToast('🔒 please sign in to create a community');
+    showSmartAccountModal();
+    return;
+  }
+  
+  const name = prompt('Enter community name:');
+  if (!name) return;
+  
+  db.collection('communities').add({
+    name: name,
+    createdBy: currentUser.uid,
+    createdAt: Date.now(),
+    members: [currentUser.uid]
+  }).then(() => {
+    showToast('✅ community created!');
+    // Reload communities (you'd need to implement this)
+  }).catch(error => {
+    console.error(error);
+    showToast('❌ failed to create community');
+  });
+};
+
+//===================================================
 // AUTHENTICATION
 //===================================================
 window.showSmartAccountModal = function() {
@@ -1715,16 +2332,16 @@ window.showSmartAccountModal = function() {
   
   if (user && !user.isAnonymous) {
     content.innerHTML = `
-      <h2>PH·FORUM</h2>
-      <div style="color: var(--orange); margin-bottom: 2rem;">👋 ${user.displayName || 'player'}</div>
+      <h2>PH Social</h2>
+      <div style="color: var(--orange); margin-bottom: 2rem;">👋 ${user.displayName || 'user'}</div>
       <div class="modal-buttons">
         <button class="modal-btn warning" onclick="logout()">🚪 log out</button>
-        <button class="modal-btn secondary" onclick="switchAccounts()">🔄 switch accounts</button>
+        <button class="modal-btn secondary" onclick="switchAccounts()">🔄 switch</button>
       </div>
     `;
   } else if (user && user.isAnonymous) {
     content.innerHTML = `
-      <h2>PH·FORUM</h2>
+      <h2>PH Social</h2>
       <div style="color: var(--orange); margin-bottom: 2rem;">👤 guest mode</div>
       <div class="modal-buttons">
         <button class="modal-btn primary" onclick="showSignup()">✨ create account</button>
@@ -1733,7 +2350,7 @@ window.showSmartAccountModal = function() {
     `;
   } else {
     content.innerHTML = `
-      <h2>PH·FORUM</h2>
+      <h2>PH Social</h2>
       <p>join the community</p>
       <div class="modal-buttons">
         <button class="modal-btn primary" onclick="showSignup()">create account</button>
@@ -1803,13 +2420,13 @@ window.register = function() {
     .then((userCredential) => {
       const user = userCredential.user;
       return user.updateProfile({ displayName: username }).then(() => {
-        // Store user in Firestore
         return db.collection('users').doc(user.uid).set({
           username: username,
           avatar: null,
           createdAt: Date.now(),
           posts: 0,
-          joined: new Date().toISOString()
+          joined: new Date().toISOString(),
+          lastSeen: Date.now()
         });
       });
     })
@@ -1859,11 +2476,8 @@ window.continueAsGuest = function() {
 };
 
 window.logout = function() {
-  // Unsubscribe from real-time updates
-  if (postsUnsubscribe) {
-    postsUnsubscribe();
-    postsUnsubscribe = null;
-  }
+  if (postsUnsubscribe) postsUnsubscribe();
+  if (conversationsUnsubscribe) conversationsUnsubscribe();
   
   auth.signOut().then(() => {
     showToast('👋 logged out');
@@ -1874,11 +2488,8 @@ window.logout = function() {
 };
 
 window.switchAccounts = function() {
-  // Unsubscribe from real-time updates
-  if (postsUnsubscribe) {
-    postsUnsubscribe();
-    postsUnsubscribe = null;
-  }
+  if (postsUnsubscribe) postsUnsubscribe();
+  if (conversationsUnsubscribe) conversationsUnsubscribe();
   
   auth.signOut().then(() => {
     closeAllModals();
@@ -1893,54 +2504,59 @@ auth.onAuthStateChanged((user) => {
   if (user) {
     if (!user.isAnonymous) {
       accountBtn.innerHTML = `👤 ${user.displayName || 'user'}`;
+      // Update last seen
+      db.collection('users').doc(user.uid).update({
+        lastSeen: Date.now()
+      }).catch(() => {});
+      loadConversations();
     } else {
       accountBtn.innerHTML = '👤 guest';
     }
   } else {
     accountBtn.innerHTML = '✨ sign in';
+    document.getElementById('conversationList').innerHTML = '<div style="color: var(--text-muted); padding: 1rem;">sign in to message</div>';
+    document.getElementById('messageBadge').style.display = 'none';
   }
   
-  // Reload current view
   if (currentView === 'forum') loadPosts();
   else if (currentView === 'profile') loadProfile();
   else if (currentView === 'postDetail' && currentPostId) loadPostDetails(currentPostId);
 });
 
 //===================================================
-// POSTS FUNCTIONS - FIRESTORE VERSION
+// POSTS FUNCTIONS
 //===================================================
 function loadPosts() {
-  // Unsubscribe from previous listener if exists
-  if (postsUnsubscribe) {
-    postsUnsubscribe();
+  if (postsUnsubscribe) postsUnsubscribe();
+  
+  let query = db.collection('posts').orderBy('createdAt', 'desc');
+  
+  if (currentCommunity !== 'all') {
+    query = query.where('community', '==', currentCommunity);
   }
   
-  // Set up real-time listener
-  postsUnsubscribe = db.collection('posts')
-    .orderBy('createdAt', 'desc')
-    .onSnapshot((snapshot) => {
-      posts = [];
-      snapshot.forEach(doc => {
-        posts.push({
-          id: doc.id,
-          ...doc.data()
-        });
+  postsUnsubscribe = query.onSnapshot((snapshot) => {
+    posts = [];
+    snapshot.forEach(doc => {
+      posts.push({
+        id: doc.id,
+        ...doc.data()
       });
-      
-      displayPosts(posts);
-      updateStats();
-      loadTrending();
-    }, (error) => {
-      console.error("Error loading posts:", error);
-      showToast('❌ failed to load posts');
-      document.getElementById('postsList').innerHTML = `
-        <div class="empty-state">
-          <div class="empty-state-icon">⚠️</div>
-          <h3>connection error</h3>
-          <p>please check your internet and refresh</p>
-        </div>
-      `;
     });
+    
+    displayPosts(posts);
+    updateStats();
+    loadTrending();
+  }, (error) => {
+    console.error("Error loading posts:", error);
+    document.getElementById('postsList').innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">⚠️</div>
+        <h3>connection error</h3>
+        <p>please refresh</p>
+      </div>
+    `;
+  });
 }
 
 function displayPosts(postsToShow) {
@@ -1951,9 +2567,9 @@ function displayPosts(postsToShow) {
       <div class="empty-state">
         <div class="empty-state-icon">🔕</div>
         <h3>no posts yet</h3>
-        <p>maybe you should start one!</p>
+        <p>be the first to post in ${currentCommunity === 'all' ? 'any community' : currentCommunity}!</p>
         <button class="empty-state-btn" onclick="showView('newPost')">
-          <span>✏️</span> create first post
+          <span>✏️</span> create post
         </button>
       </div>
     `;
@@ -1973,7 +2589,6 @@ function createPostCard(post) {
   
   const authorInitial = post.authorName ? post.authorName[0].toUpperCase() : '?';
   
-  // Calculate total reactions
   let totalReactions = 0;
   if (post.reactions) {
     totalReactions = Object.values(post.reactions).reduce((sum, r) => sum + (r.count || 0), 0);
@@ -1981,13 +2596,14 @@ function createPostCard(post) {
   
   div.innerHTML = `
     <div class="post-header">
-      <div class="post-author-avatar">
+      <div class="post-author-avatar" onclick="event.stopPropagation(); viewUserProfile('${post.author}')">
         ${post.authorAvatar ? `<img src="${post.authorAvatar}" alt="avatar">` : authorInitial}
       </div>
       <div class="post-author-info">
-        <div class="post-author-name">${escapeHtml(post.authorName || 'unknown')}</div>
+        <div class="post-author-name" onclick="event.stopPropagation(); viewUserProfile('${post.author}')">${escapeHtml(post.authorName || 'unknown')}</div>
         <div class="post-meta">
           <span>🕒 ${timeAgo(post.createdAt)}</span>
+          ${post.community ? `<span class="post-community-tag">${post.community}</span>` : ''}
           ${post.nsfw ? '<span class="nsfw-badge">NSFW</span>' : ''}
         </div>
       </div>
@@ -2018,10 +2634,9 @@ function escapeHtml(unsafe) {
 function openPost(postId) {
   currentPostId = postId;
   
-  // Increment views
   db.collection('posts').doc(postId).update({
     views: firebase.firestore.FieldValue.increment(1)
-  }).catch(error => console.error("Error updating views:", error));
+  }).catch(() => {});
   
   loadPostDetails(postId);
   showView('postDetail');
@@ -2037,7 +2652,6 @@ function loadPostDetails(postId) {
         ...doc.data()
       };
       
-      // Load author info
       return db.collection('users').doc(post.author).get()
         .then((userDoc) => {
           const userData = userDoc.data() || {};
@@ -2047,19 +2661,18 @@ function loadPostDetails(postId) {
           document.getElementById('detailTitle').textContent = post.title;
           document.getElementById('detailBody').textContent = post.body;
           
-          // Author section
           const authorDiv = document.getElementById('detailAuthor');
           authorDiv.innerHTML = `
-            <div class="detail-avatar">
+            <div class="detail-avatar" onclick="viewUserProfile('${post.author}')">
               ${avatarUrl ? `<img src="${avatarUrl}" alt="avatar">` : authorInitial}
             </div>
             <div class="detail-author-info">
-              <h3>${escapeHtml(post.authorName || 'unknown')}</h3>
+              <h3 onclick="viewUserProfile('${post.author}')">${escapeHtml(post.authorName || 'unknown')}</h3>
               <p>joined ${userData.joined ? new Date(userData.joined).toLocaleDateString() : 'recently'}</p>
+              ${post.community ? `<p>community: ${post.community}</p>` : ''}
             </div>
           `;
           
-          // Media
           const mediaDiv = document.getElementById('detailMedia');
           if (post.imageUrl) {
             mediaDiv.innerHTML = `<img src="${post.imageUrl}" alt="post image">`;
@@ -2068,11 +2681,9 @@ function loadPostDetails(postId) {
             mediaDiv.style.display = 'none';
           }
           
-          // Stats
           document.getElementById('detailViews').innerHTML = `👁️ ${post.views || 0}`;
           document.getElementById('detailComments').innerHTML = `💬 ${post.comments || 0}`;
           
-          // Delete button (only for author)
           const deleteBtn = document.getElementById('deleteBtn');
           if (currentUser && currentUser.uid === post.author) {
             deleteBtn.style.display = 'inline-flex';
@@ -2080,10 +2691,7 @@ function loadPostDetails(postId) {
             deleteBtn.style.display = 'none';
           }
           
-          // Load reactions
           displayReactions(post);
-          
-          // Load comments
           loadComments(postId);
         });
     })
@@ -2094,7 +2702,7 @@ function loadPostDetails(postId) {
 }
 
 //===================================================
-// REACTIONS (available to everyone, including guests)
+// REACTIONS - FIXED FOR EVERYONE
 //===================================================
 function displayReactions(post) {
   const container = document.getElementById('reactionsGrid');
@@ -2118,180 +2726,80 @@ function displayReactions(post) {
 
 window.addReaction = function(postId, reactionName, reactionEmoji) {
   if (!currentUser) {
-    showToast('👤 sign in or continue as guest to react');
+    showToast('👤 sign in to react');
     showSmartAccountModal();
     return;
   }
   
   const postRef = db.collection('posts').doc(postId);
   
-  db.runTransaction((transaction) => {
-    return transaction.get(postRef).then((postDoc) => {
-      if (!postDoc.exists) {
-        throw new Error("Post does not exist!");
+  // Simple update without transaction to avoid permission issues
+  postRef.get().then((doc) => {
+    if (!doc.exists) return;
+    
+    const post = doc.data();
+    const userReactions = post.userReactions || {};
+    const userReacted = userReactions[currentUser.uid] && userReactions[currentUser.uid][reactionName];
+    
+    if (userReacted) {
+      // Remove reaction
+      const newUserReactions = { ...userReactions };
+      if (newUserReactions[currentUser.uid]) {
+        delete newUserReactions[currentUser.uid][reactionName];
+        if (Object.keys(newUserReactions[currentUser.uid]).length === 0) {
+          delete newUserReactions[currentUser.uid];
+        }
       }
       
-      const post = postDoc.data();
-      const userReactions = post.userReactions || {};
-      const userReacted = userReactions[currentUser.uid] && userReactions[currentUser.uid][reactionName];
-      
-      if (userReacted) {
-        // Remove reaction
-        const newUserReactions = { ...userReactions };
-        if (newUserReactions[currentUser.uid]) {
-          delete newUserReactions[currentUser.uid][reactionName];
-          if (Object.keys(newUserReactions[currentUser.uid]).length === 0) {
-            delete newUserReactions[currentUser.uid];
-          }
-        }
-        
-        // Decrement count
-        const currentCount = (post.reactions && post.reactions[reactionName]) ? (post.reactions[reactionName].count || 0) : 0;
-        const newReactions = { ...(post.reactions || {}) };
-        if (newReactions[reactionName]) {
-          newReactions[reactionName] = {
-            ...newReactions[reactionName],
-            count: Math.max(0, currentCount - 1)
-          };
-        }
-        
-        transaction.update(postRef, {
-          userReactions: newUserReactions,
-          reactions: newReactions
-        });
-      } else {
-        // Add reaction
-        const newUserReactions = { ...userReactions };
-        if (!newUserReactions[currentUser.uid]) {
-          newUserReactions[currentUser.uid] = {};
-        }
-        newUserReactions[currentUser.uid][reactionName] = true;
-        
-        // Increment count
-        const currentCount = (post.reactions && post.reactions[reactionName]) ? (post.reactions[reactionName].count || 0) : 0;
-        const newReactions = { ...(post.reactions || {}) };
+      const currentCount = (post.reactions && post.reactions[reactionName]) ? (post.reactions[reactionName].count || 0) : 0;
+      const newReactions = { ...(post.reactions || {}) };
+      if (newReactions[reactionName]) {
         newReactions[reactionName] = {
-          count: currentCount + 1,
-          emoji: reactionEmoji
+          ...newReactions[reactionName],
+          count: Math.max(0, currentCount - 1)
         };
-        
-        transaction.update(postRef, {
-          userReactions: newUserReactions,
-          reactions: newReactions
-        });
       }
-    });
-  }).then(() => {
-    loadPostDetails(postId);
-  }).catch(error => {
-    console.error(error);
-    showToast('❌ failed to update reaction');
+      
+      postRef.update({
+        userReactions: newUserReactions,
+        reactions: newReactions
+      }).then(() => {
+        loadPostDetails(postId);
+      }).catch(error => {
+        console.error(error);
+        showToast('❌ failed to update');
+      });
+    } else {
+      // Add reaction
+      const newUserReactions = { ...userReactions };
+      if (!newUserReactions[currentUser.uid]) {
+        newUserReactions[currentUser.uid] = {};
+      }
+      newUserReactions[currentUser.uid][reactionName] = true;
+      
+      const currentCount = (post.reactions && post.reactions[reactionName]) ? (post.reactions[reactionName].count || 0) : 0;
+      const newReactions = { ...(post.reactions || {}) };
+      newReactions[reactionName] = {
+        count: currentCount + 1,
+        emoji: reactionEmoji
+      };
+      
+      postRef.update({
+        userReactions: newUserReactions,
+        reactions: newReactions
+      }).then(() => {
+        loadPostDetails(postId);
+        showToast(`added ${reactionEmoji}`);
+      }).catch(error => {
+        console.error(error);
+        showToast('❌ failed to update');
+      });
+    }
   });
 };
 
 //===================================================
-// CREATE POST (signed in users only)
-//===================================================
-window.createPost = function() {
-  const title = document.getElementById('postTitle').value.trim();
-  const body = document.getElementById('postBody').value.trim();
-  const nsfw = document.getElementById('nsfwTag').checked;
-  const imageFile = document.getElementById('imageUpload').files[0];
-  
-  if (!title || !body) {
-    showToast('❌ please fill in title and body');
-    return;
-  }
-  
-  if (!currentUser || currentUser.isAnonymous) {
-    showToast('🔒 please sign in to post');
-    showView('forum');
-    return;
-  }
-  
-  const submitBtn = document.getElementById('submitPostBtn');
-  submitBtn.disabled = true;
-  submitBtn.textContent = '📤 posting...';
-  
-  const postData = {
-    title: title,
-    body: body,
-    author: currentUser.uid,
-    authorName: currentUser.displayName,
-    nsfw: nsfw,
-    createdAt: Date.now(),
-    views: 0,
-    comments: 0,
-    reactions: {},
-    userReactions: {}
-  };
-  
-  if (imageFile) {
-    const storageRef = storage.ref('post-images/' + Date.now() + '_' + imageFile.name);
-    storageRef.put(imageFile).then(snapshot => {
-      return snapshot.ref.getDownloadURL();
-    }).then(downloadUrl => {
-      postData.imageUrl = downloadUrl;
-      return savePost(postData);
-    }).catch(error => {
-      console.error(error);
-      showToast('❌ failed to upload image');
-      savePost(postData);
-    });
-  } else {
-    savePost(postData);
-  }
-};
-
-function savePost(postData) {
-  db.collection('posts').add(postData)
-    .then(() => {
-      showToast('✅ post created!');
-      
-      // Increment user post count
-      db.collection('users').doc(currentUser.uid).update({
-        posts: firebase.firestore.FieldValue.increment(1)
-      }).catch(error => console.error("Error updating user post count:", error));
-      
-      // Clear form
-      document.getElementById('postTitle').value = '';
-      document.getElementById('postBody').value = '';
-      document.getElementById('nsfwTag').checked = false;
-      document.getElementById('imagePreview').innerHTML = '';
-      document.getElementById('imagePreview').style.display = 'none';
-      document.getElementById('imageUpload').value = '';
-      
-      showView('forum');
-    })
-    .catch(error => {
-      console.error(error);
-      showToast('❌ failed to create post');
-    })
-    .finally(() => {
-      const submitBtn = document.getElementById('submitPostBtn');
-      submitBtn.disabled = false;
-      submitBtn.textContent = '📬 publish post';
-    });
-}
-
-window.deletePost = function() {
-  if (!currentPostId || !currentUser) return;
-  
-  if (!confirm('⚠️ delete this post? this cannot be undone.')) return;
-  
-  db.collection('posts').doc(currentPostId).delete()
-    .then(() => {
-      showToast('🗑️ post deleted');
-      showView('forum');
-    })
-    .catch(error => {
-      console.error(error);
-      showToast('❌ failed to delete post');
-    });
-};
-
-//===================================================
-// COMMENTS
+// COMMENTS - FIXED FOR EVERYONE
 //===================================================
 function loadComments(postId) {
   db.collection('posts').doc(postId).collection('comments')
@@ -2326,13 +2834,20 @@ function loadComments(postId) {
             
             commentDiv.innerHTML = `
               <div class="comment-header">
-                <div class="comment-avatar">
+                <div class="comment-avatar" onclick="viewUserProfile('${comment.author}')">
                   ${avatarUrl ? `<img src="${avatarUrl}" alt="avatar">` : authorInitial}
                 </div>
-                <span class="comment-author">${escapeHtml(comment.authorName || 'unknown')}</span>
+                <span class="comment-author" onclick="viewUserProfile('${comment.author}')">${escapeHtml(comment.authorName || 'unknown')}</span>
                 <span class="comment-date">${timeAgo(comment.createdAt)}</span>
               </div>
               <div class="comment-text">${escapeHtml(comment.text)}</div>
+              <div class="comment-reactions">
+                ${REACTIONS.map(r => `
+                  <div class="comment-reaction-btn" onclick="addCommentReaction('${comment.id}', '${r.name}', '${r.emoji}')">
+                    ${r.emoji} <span class="count">${comment.reactions && comment.reactions[r.name] ? comment.reactions[r.name].count || 0 : 0}</span>
+                  </div>
+                `).join('')}
+              </div>
             `;
           });
         
@@ -2348,12 +2863,12 @@ window.addComment = function() {
   const commentText = document.getElementById('commentInput').value.trim();
   
   if (!commentText) {
-    showToast('❌ please enter a comment');
+    showToast('❌ enter a comment');
     return;
   }
   
   if (!currentUser) {
-    showToast('👤 sign in or continue as guest to comment');
+    showToast('👤 sign in to comment');
     showSmartAccountModal();
     return;
   }
@@ -2366,27 +2881,24 @@ window.addComment = function() {
   const commentData = {
     text: commentText,
     author: currentUser.uid,
-    authorName: currentUser.displayName || 'guest',
-    createdAt: Date.now()
+    authorName: currentUser.displayName || (currentUser.isAnonymous ? 'guest' : 'user'),
+    createdAt: Date.now(),
+    reactions: {}
   };
   
   const postRef = db.collection('posts').doc(currentPostId);
   
-  // Use batched write to add comment and update count
-  const batch = db.batch();
-  const commentRef = postRef.collection('comments').doc();
-  batch.set(commentRef, commentData);
-  batch.update(postRef, {
-    comments: firebase.firestore.FieldValue.increment(1)
-  });
-  
-  batch.commit()
+  postRef.collection('comments').add(commentData)
+    .then(() => {
+      return postRef.update({
+        comments: firebase.firestore.FieldValue.increment(1)
+      });
+    })
     .then(() => {
       document.getElementById('commentInput').value = '';
       showToast('💬 comment added');
       loadComments(currentPostId);
       
-      // Update comment count in detail view
       postRef.get().then((doc) => {
         if (doc.exists) {
           document.getElementById('detailComments').innerHTML = `💬 ${doc.data().comments || 0}`;
@@ -2402,28 +2914,192 @@ window.addComment = function() {
     });
 };
 
+window.addCommentReaction = function(commentId, reactionName, reactionEmoji) {
+  if (!currentUser) {
+    showToast('👤 sign in to react');
+    showSmartAccountModal();
+    return;
+  }
+  
+  const commentRef = db.collection('posts').doc(currentPostId).collection('comments').doc(commentId);
+  
+  commentRef.get().then((doc) => {
+    if (!doc.exists) return;
+    
+    const comment = doc.data();
+    const userReactions = comment.userReactions || {};
+    const userReacted = userReactions[currentUser.uid] && userReactions[currentUser.uid][reactionName];
+    
+    if (userReacted) {
+      const newUserReactions = { ...userReactions };
+      if (newUserReactions[currentUser.uid]) {
+        delete newUserReactions[currentUser.uid][reactionName];
+        if (Object.keys(newUserReactions[currentUser.uid]).length === 0) {
+          delete newUserReactions[currentUser.uid];
+        }
+      }
+      
+      const currentCount = (comment.reactions && comment.reactions[reactionName]) ? (comment.reactions[reactionName].count || 0) : 0;
+      const newReactions = { ...(comment.reactions || {}) };
+      if (newReactions[reactionName]) {
+        newReactions[reactionName] = {
+          ...newReactions[reactionName],
+          count: Math.max(0, currentCount - 1)
+        };
+      }
+      
+      commentRef.update({
+        userReactions: newUserReactions,
+        reactions: newReactions
+      }).then(() => {
+        loadComments(currentPostId);
+      });
+    } else {
+      const newUserReactions = { ...userReactions };
+      if (!newUserReactions[currentUser.uid]) {
+        newUserReactions[currentUser.uid] = {};
+      }
+      newUserReactions[currentUser.uid][reactionName] = true;
+      
+      const currentCount = (comment.reactions && comment.reactions[reactionName]) ? (comment.reactions[reactionName].count || 0) : 0;
+      const newReactions = { ...(comment.reactions || {}) };
+      newReactions[reactionName] = {
+        count: currentCount + 1,
+        emoji: reactionEmoji
+      };
+      
+      commentRef.update({
+        userReactions: newUserReactions,
+        reactions: newReactions
+      }).then(() => {
+        loadComments(currentPostId);
+      });
+    }
+  });
+};
+
 //===================================================
-// PROFILE
+// CREATE POST
 //===================================================
-function loadProfile() {
-  if (!currentUser || currentUser.isAnonymous) return;
+window.createPost = function() {
+  const title = document.getElementById('postTitle').value.trim();
+  const body = document.getElementById('postBody').value.trim();
+  const nsfw = document.getElementById('nsfwTag').checked;
+  const community = document.getElementById('postCommunity').value;
+  const imageFile = document.getElementById('imageUpload').files[0];
+  
+  if (!title || !body) {
+    showToast('❌ fill in title and body');
+    return;
+  }
+  
+  if (!currentUser || currentUser.isAnonymous) {
+    showToast('🔒 sign in to post');
+    showView('forum');
+    return;
+  }
+  
+  const submitBtn = document.getElementById('submitPostBtn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = '📤 posting...';
+  
+  const postData = {
+    title: title,
+    body: body,
+    author: currentUser.uid,
+    authorName: currentUser.displayName,
+    community: community,
+    nsfw: nsfw,
+    createdAt: Date.now(),
+    views: 0,
+    comments: 0,
+    reactions: {},
+    userReactions: {}
+  };
+  
+  if (imageFile) {
+    const storageRef = storage.ref('post-images/' + Date.now() + '_' + imageFile.name);
+    storageRef.put(imageFile).then(snapshot => {
+      return snapshot.ref.getDownloadURL();
+    }).then(downloadUrl => {
+      postData.imageUrl = downloadUrl;
+      return savePost(postData);
+    }).catch(error => {
+      console.error(error);
+      showToast('❌ failed to upload image');
+      savePost(postData);
+    });
+  } else {
+    savePost(postData);
+  }
+};
+
+function savePost(postData) {
+  db.collection('posts').add(postData)
+    .then(() => {
+      showToast('✅ post created!');
+      
+      db.collection('users').doc(currentUser.uid).update({
+        posts: firebase.firestore.FieldValue.increment(1)
+      }).catch(() => {});
+      
+      document.getElementById('postTitle').value = '';
+      document.getElementById('postBody').value = '';
+      document.getElementById('nsfwTag').checked = false;
+      document.getElementById('imagePreview').innerHTML = '';
+      document.getElementById('imagePreview').style.display = 'none';
+      document.getElementById('imageUpload').value = '';
+      
+      showView('forum');
+    })
+    .catch(error => {
+      console.error(error);
+      showToast('❌ failed to create post');
+    })
+    .finally(() => {
+      const submitBtn = document.getElementById('submitPostBtn');
+      submitBtn.disabled = false;
+      submitBtn.textContent = '📬 publish';
+    });
+}
+
+window.deletePost = function() {
+  if (!currentPostId || !currentUser) return;
+  
+  if (!confirm('⚠️ delete this post?')) return;
+  
+  db.collection('posts').doc(currentPostId).delete()
+    .then(() => {
+      showToast('🗑️ post deleted');
+      showView('forum');
+    })
+    .catch(error => {
+      console.error(error);
+      showToast('❌ failed to delete');
+    });
+};
+
+function loadProfile(userId = null) {
+  const targetUserId = userId || currentUser?.uid;
+  if (!targetUserId) return;
   
   const profileSection = document.getElementById('profileSection');
   
-  db.collection('users').doc(currentUser.uid).get()
+  db.collection('users').doc(targetUserId).get()
     .then((doc) => {
       const userData = doc.data() || {};
       const avatarUrl = userData.avatar || null;
-      const authorInitial = currentUser.displayName ? currentUser.displayName[0].toUpperCase() : '?';
+      const displayName = userId ? userData.username : (currentUser.displayName || 'user');
+      const authorInitial = displayName ? displayName[0].toUpperCase() : '?';
       
       profileSection.innerHTML = `
         <div class="profile-header">
-          <div class="profile-avatar-large" onclick="changeAvatar()">
+          <div class="profile-avatar-large" ${!userId ? 'onclick="changeAvatar()"' : ''}>
             ${avatarUrl ? `<img src="${avatarUrl}" alt="avatar">` : authorInitial}
-            <div class="avatar-overlay">📷 change</div>
+            ${!userId ? '<div class="avatar-overlay">📷 change</div>' : ''}
           </div>
           <div class="profile-info">
-            <h2>${escapeHtml(currentUser.displayName)}</h2>
+            <h2>${escapeHtml(displayName)}</h2>
             <p>joined ${userData.joined ? new Date(userData.joined).toLocaleDateString() : 'recently'}</p>
             <div class="profile-stats">
               <div class="profile-stat">
@@ -2431,11 +3107,16 @@ function loadProfile() {
                 <div class="profile-stat-label">posts</div>
               </div>
             </div>
+            ${userId && userId !== currentUser?.uid ? `
+              <button class="new-post-btn" style="margin-top: 1rem;" onclick="openMessageModalWithUser('${userId}')">
+                💬 message
+              </button>
+            ` : ''}
           </div>
         </div>
         
         <div class="profile-tabs">
-          <span class="profile-tab active" onclick="loadUserPosts()">📝 my posts</span>
+          <span class="profile-tab active" onclick="loadUserPosts('${targetUserId}')">📝 posts</span>
         </div>
         
         <div id="userContent" class="posts-list">
@@ -2443,19 +3124,26 @@ function loadProfile() {
         </div>
       `;
       
-      loadUserPosts();
+      loadUserPosts(targetUserId);
     })
     .catch(error => {
       console.error("Error loading profile:", error);
     });
 }
 
-function loadUserPosts() {
+window.viewUserProfile = function(userId) {
+  if (!userId) return;
+  currentView = 'profile';
+  loadProfile(userId);
+  showView('profile');
+};
+
+function loadUserPosts(userId) {
   document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.profile-tab')[0].classList.add('active');
   
   db.collection('posts')
-    .where('author', '==', currentUser.uid)
+    .where('author', '==', userId)
     .orderBy('createdAt', 'desc')
     .get()
     .then((snapshot) => {
@@ -2474,10 +3162,7 @@ function loadUserPosts() {
           <div class="empty-state">
             <div class="empty-state-icon">📝</div>
             <h3>no posts yet</h3>
-            <p>share something with the community!</p>
-            <button class="empty-state-btn" onclick="showView('newPost')">
-              <span>✏️</span> create post
-            </button>
+            <p>this user hasn't posted anything</p>
           </div>
         `;
         return;
@@ -2513,10 +3198,281 @@ window.changeAvatar = function() {
       loadProfile();
     }).catch(error => {
       console.error(error);
-      showToast('❌ failed to upload avatar');
+      showToast('❌ failed to upload');
     });
   };
   input.click();
+};
+
+//===================================================
+// MESSAGING SYSTEM
+//===================================================
+function loadConversations() {
+  if (!currentUser || currentUser.isAnonymous) {
+    document.getElementById('conversationList').innerHTML = '<div style="color: var(--text-muted); padding: 1rem;">sign in to message</div>';
+    return;
+  }
+  
+  if (conversationsUnsubscribe) conversationsUnsubscribe();
+  
+  conversationsUnsubscribe = db.collection('conversations')
+    .where('participants', 'array-contains', currentUser.uid)
+    .orderBy('lastMessageAt', 'desc')
+    .onSnapshot((snapshot) => {
+      const container = document.getElementById('conversationList');
+      let unreadCount = 0;
+      
+      if (snapshot.empty) {
+        container.innerHTML = '<div style="color: var(--text-muted); padding: 1rem;">no messages yet</div>';
+        document.getElementById('messageBadge').style.display = 'none';
+        return;
+      }
+      
+      let html = '';
+      snapshot.forEach(doc => {
+        const conv = doc.data();
+        const otherUserId = conv.participants.find(id => id !== currentUser.uid);
+        const isUnread = conv.lastMessage && conv.lastMessage.sender !== currentUser.uid && !conv.readBy?.[currentUser.uid];
+        if (isUnread) unreadCount++;
+        
+        html += `
+          <div class="conversation-item ${isUnread ? 'unread' : ''}" onclick="openConversation('${doc.id}', '${otherUserId}')">
+            <div class="conversation-header">
+              <div class="conversation-avatar">${conv.otherUserInitial || '?'}</div>
+              <span class="conversation-name">${conv.otherUserName || 'user'}</span>
+            </div>
+            <div class="conversation-last">${conv.lastMessage?.text || ''}</div>
+            ${isUnread ? '<span class="unread-badge">●</span>' : ''}
+          </div>
+        `;
+      });
+      
+      container.innerHTML = html;
+      
+      if (unreadCount > 0) {
+        document.getElementById('messageBadge').style.display = 'block';
+        document.getElementById('messageBadge').textContent = unreadCount;
+      } else {
+        document.getElementById('messageBadge').style.display = 'none';
+      }
+    }, (error) => {
+      console.error("Error loading conversations:", error);
+    });
+}
+
+window.openMessageModal = function() {
+  if (!currentUser || currentUser.isAnonymous) {
+    showToast('🔒 sign in to message');
+    showSmartAccountModal();
+    return;
+  }
+  
+  document.getElementById('messageModal').classList.add('active');
+  document.getElementById('userSearch').value = '';
+  document.getElementById('userResults').innerHTML = '';
+  document.getElementById('messageText').value = '';
+  selectedRecipient = null;
+};
+
+window.openMessageModalWithUser = function(userId) {
+  if (!currentUser || currentUser.isAnonymous) {
+    showToast('🔒 sign in to message');
+    showSmartAccountModal();
+    return;
+  }
+  
+  db.collection('users').doc(userId).get().then((doc) => {
+    if (doc.exists) {
+      selectedRecipient = {
+        id: userId,
+        name: doc.data().username
+      };
+      document.getElementById('messageModal').classList.add('active');
+      document.getElementById('userSearch').value = doc.data().username;
+      document.getElementById('userResults').innerHTML = '';
+      document.getElementById('messageText').value = '';
+    }
+  });
+};
+
+window.closeMessageModal = function() {
+  document.getElementById('messageModal').classList.remove('active');
+};
+
+window.searchUsers = function() {
+  const searchTerm = document.getElementById('userSearch').value.trim().toLowerCase();
+  if (searchTerm.length < 2) {
+    document.getElementById('userResults').innerHTML = '';
+    return;
+  }
+  
+  db.collection('users')
+    .where('username', '>=', searchTerm)
+    .where('username', '<=', searchTerm + '\uf8ff')
+    .limit(5)
+    .get()
+    .then((snapshot) => {
+      const results = document.getElementById('userResults');
+      if (snapshot.empty) {
+        results.innerHTML = '<div style="padding: 1rem; color: var(--text-muted);">no users found</div>';
+        return;
+      }
+      
+      let html = '';
+      snapshot.forEach(doc => {
+        if (doc.id !== currentUser.uid) {
+          html += `
+            <div class="user-result-item" onclick="selectUser('${doc.id}', '${doc.data().username}')">
+              <div class="user-result-avatar">${doc.data().username[0].toUpperCase()}</div>
+              <span>${doc.data().username}</span>
+            </div>
+          `;
+        }
+      });
+      
+      results.innerHTML = html || '<div style="padding: 1rem; color: var(--text-muted);">no other users</div>';
+    });
+};
+
+window.selectUser = function(userId, username) {
+  selectedRecipient = { id: userId, name: username };
+  document.getElementById('userSearch').value = username;
+  document.getElementById('userResults').innerHTML = '';
+};
+
+window.sendMessage = function() {
+  if (!selectedRecipient) {
+    showToast('❌ select a user');
+    return;
+  }
+  
+  const messageText = document.getElementById('messageText').value.trim();
+  if (!messageText) {
+    showToast('❌ enter a message');
+    return;
+  }
+  
+  const conversationId = [currentUser.uid, selectedRecipient.id].sort().join('_');
+  
+  const message = {
+    text: messageText,
+    sender: currentUser.uid,
+    senderName: currentUser.displayName,
+    timestamp: Date.now(),
+    read: false
+  };
+  
+  const batch = db.batch();
+  
+  batch.set(db.collection('conversations').doc(conversationId), {
+    participants: [currentUser.uid, selectedRecipient.id],
+    lastMessage: message,
+    lastMessageAt: Date.now(),
+    otherUserName: selectedRecipient.name,
+    otherUserInitial: selectedRecipient.name[0].toUpperCase(),
+    readBy: {
+      [currentUser.uid]: true
+    }
+  }, { merge: true });
+  
+  batch.set(db.collection('conversations').doc(conversationId).collection('messages').doc(), message);
+  
+  batch.commit().then(() => {
+    showToast('✅ message sent');
+    closeMessageModal();
+  }).catch(error => {
+    console.error(error);
+    showToast('❌ failed to send');
+  });
+};
+
+window.openConversation = function(conversationId, otherUserId) {
+  // Mark as read
+  db.collection('conversations').doc(conversationId).update({
+    [`readBy.${currentUser.uid}`]: true
+  }).catch(() => {});
+  
+  db.collection('users').doc(otherUserId).get().then((doc) => {
+    const userData = doc.data() || {};
+    
+    document.getElementById('conversationUser').innerHTML = `
+      <div class="conversation-user-avatar">
+        ${userData.avatar ? `<img src="${userData.avatar}" alt="avatar">` : (userData.username ? userData.username[0].toUpperCase() : '?')}
+      </div>
+      <div class="conversation-user-info">
+        <h3>${userData.username || 'user'}</h3>
+        <p>last seen ${timeAgo(userData.lastSeen || Date.now())}</p>
+      </div>
+    `;
+    
+    document.getElementById('conversationView').classList.add('active');
+    loadMessages(conversationId);
+    
+    // Store current conversation
+    window.currentConversationId = conversationId;
+    window.currentOtherUserId = otherUserId;
+  });
+};
+
+window.closeConversation = function() {
+  document.getElementById('conversationView').classList.remove('active');
+  window.currentConversationId = null;
+  window.currentOtherUserId = null;
+};
+
+function loadMessages(conversationId) {
+  db.collection('conversations').doc(conversationId).collection('messages')
+    .orderBy('timestamp', 'asc')
+    .onSnapshot((snapshot) => {
+      const container = document.getElementById('messagesContainer');
+      let html = '';
+      
+      snapshot.forEach(doc => {
+        const msg = doc.data();
+        const isSent = msg.sender === currentUser.uid;
+        
+        html += `
+          <div class="message-bubble ${isSent ? 'sent' : 'received'}">
+            <div>${escapeHtml(msg.text)}</div>
+            <div class="message-time">${timeAgo(msg.timestamp)}</div>
+          </div>
+        `;
+      });
+      
+      container.innerHTML = html;
+      container.scrollTop = container.scrollHeight;
+    });
+}
+
+window.sendConversationMessage = function() {
+  const input = document.getElementById('conversationInput');
+  const messageText = input.value.trim();
+  
+  if (!messageText || !window.currentConversationId) return;
+  
+  const message = {
+    text: messageText,
+    sender: currentUser.uid,
+    senderName: currentUser.displayName,
+    timestamp: Date.now(),
+    read: false
+  };
+  
+  const batch = db.batch();
+  
+  batch.set(db.collection('conversations').doc(window.currentConversationId).collection('messages').doc(), message);
+  batch.update(db.collection('conversations').doc(window.currentConversationId), {
+    lastMessage: message,
+    lastMessageAt: Date.now(),
+    [`readBy.${currentUser.uid}`]: true
+  });
+  
+  batch.commit().then(() => {
+    input.value = '';
+  }).catch(error => {
+    console.error(error);
+    showToast('❌ failed to send');
+  });
 };
 
 //===================================================
@@ -2552,9 +3508,10 @@ function loadTrending() {
   }).slice(0, 5);
   
   const container = document.getElementById('trendingPosts');
+  if (!container) return;
   
   if (trending.length === 0) {
-    container.innerHTML = '<div style="color: var(--text-muted); text-align: center; padding: 1rem;">no trending posts yet</div>';
+    container.innerHTML = '<div style="color: var(--text-muted); padding: 1rem;">no trending posts</div>';
     return;
   }
   
@@ -2579,9 +3536,7 @@ function updateStats() {
   
   db.collection('users').get().then((snapshot) => {
     document.getElementById('totalUsersStat').textContent = snapshot.size;
-  }).catch(error => {
-    console.error("Error loading stats:", error);
-  });
+  }).catch(() => {});
 }
 
 function timeAgo(timestamp) {
@@ -2611,9 +3566,9 @@ window.sharePost = function() {
   if (currentPostId) {
     const url = window.location.href.split('?')[0] + '?post=' + currentPostId;
     navigator.clipboard.writeText(url).then(() => {
-      showToast('🔗 link copied to clipboard');
+      showToast('🔗 link copied');
     }).catch(() => {
-      showToast('❌ failed to copy link');
+      showToast('❌ failed to copy');
     });
   }
 };
@@ -2631,20 +3586,18 @@ function showToast(message) {
 }
 
 //===================================================
-// SETTINGS & INIT
+// INIT
 //===================================================
 document.getElementById('settingsBtn').addEventListener('click', () => {
-  showToast('⚙️ settings panel coming soon');
+  showToast('💬 messages - click a conversation');
 });
 
-// Check for post ID in URL
 const urlParams = new URLSearchParams(window.location.search);
 const postIdFromUrl = urlParams.get('post');
 if (postIdFromUrl) {
   setTimeout(() => openPost(postIdFromUrl), 1000);
 }
 
-// Initialize
 showView('forum');
 </script>
 </body>

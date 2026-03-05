@@ -1931,6 +1931,15 @@ const bannedIds = [-1, 596];
 const coverURL = "https://cdn.jsdelivr.net/gh/gn-math/covers@main";
 const htmlURL = "https://cdn.jsdelivr.net/gh/gn-math/html@main";
 
+// Custom forum zone
+const forumZone = {
+  id: "forum",
+  name: "Forums",
+  author: "Community",
+  cover: "https://media.discordapp.net/attachments/1246719291517308929/1479061650022727680/image_1.png?ex=69aaab01&is=69a95981&hm=0deadaed3877b789438454fd562b17f78e5cfb151a46b53b322dbb90163601c5&=&format=webp&quality=lossless&width=858&height=858",
+  url: "/forum.html"
+};
+
 //===================================================
 // SMART ACCOUNT MODAL (context-aware)
 //===================================================
@@ -2400,6 +2409,9 @@ async function listZones() {
     const json = await response.json();
     zones = json.filter(game => !bannedIds.includes(game.id));
     
+    // Add forum zone at the beginning
+    zones.unshift(forumZone);
+    
     // Randomly select 50% for unlocked in guest mode
     const shuffled = [...zones].sort(() => 0.5 - Math.random());
     unlockedGames = shuffled.slice(0, Math.floor(zones.length / 2)).map(g => g.id);
@@ -2415,6 +2427,13 @@ window.sortZones = function() {
   const by = document.getElementById('sortOptions').value;
   if (by === 'name') zones.sort((a, b) => a.name.localeCompare(b.name));
   else if (by === 'id') zones.sort((a, b) => a.id - b.id);
+  
+  // Make sure forum is always first when sorting by name or id
+  const forumIndex = zones.findIndex(z => z.id === 'forum');
+  if (forumIndex > 0) {
+    const forum = zones.splice(forumIndex, 1)[0];
+    zones.unshift(forum);
+  }
   
   displayFavorites();
   displayRecentlyPlayed();
@@ -2462,17 +2481,18 @@ function createZoneCard(file) {
   const user = auth.currentUser;
   const isSignedIn = user && !user.isAnonymous;
   
-  // Determine if game is locked
-  let isLocked = false;
-  let lockMessage = '';
+  // Determine if game is locked (forum is never locked)
+  let isLocked = file.id !== 'forum' ? (() => {
+    if (!user) {
+      return true;
+    } else if (user.isAnonymous) {
+      return file.forcedLock !== undefined ? file.forcedLock : !unlockedGames.includes(file.id);
+    } else {
+      return false;
+    }
+  })() : false;
   
-  if (!user) {
-    isLocked = true;
-    lockMessage = '🔒 You need to sign up to unlock games, it\'s free.';
-  } else if (user.isAnonymous) {
-    isLocked = file.forcedLock !== undefined ? file.forcedLock : !unlockedGames.includes(file.id);
-    lockMessage = '🔒 You need to create an account to unlock the full experience, it\'s free.';
-  }
+  let lockMessage = '🔒 You need to sign up to unlock games, it\'s free.';
   
   if (isLocked) div.classList.add('locked');
   
@@ -2481,7 +2501,11 @@ function createZoneCard(file) {
       showToast(lockMessage);
       showSmartAccountModal();
     } else {
-      openZone(file);
+      if (file.id === 'forum') {
+        window.location.href = '/forum.html';
+      } else {
+        openZone(file);
+      }
     }
   };
   
@@ -2510,7 +2534,7 @@ function createZoneCard(file) {
   
   const overlay = document.createElement('div');
   overlay.className = 'zone-overlay';
-  overlay.innerText = isLocked ? 'LOCKED' : 'PLAY';
+  overlay.innerText = file.id === 'forum' ? 'JOIN' : (isLocked ? 'LOCKED' : 'PLAY');
   mediaDiv.appendChild(overlay);
   
   const contentDiv = document.createElement('div');
@@ -2519,25 +2543,28 @@ function createZoneCard(file) {
   const titleContainer = document.createElement('div');
   titleContainer.className = 'zone-title-container';
   
-  const star = document.createElement('span');
-  const canFavorite = isSignedIn;
-  const isFavorited = favorites.includes(file.id);
-  
-  star.className = 'favorite-star' + (isFavorited ? ' active' : '') + (!canFavorite ? ' guest-disabled' : '');
-  star.innerHTML = '★';
-  star.onclick = (e) => {
-    e.stopPropagation();
-    if (!canFavorite) {
-      showToast('🔒 Sign in to favorite games');
-      showSmartAccountModal();
-    } else {
-      toggleFavorite(file.id, e);
-    }
-  };
-  
-  if (!canFavorite) star.title = 'Sign in to favorite games';
-  
-  titleContainer.appendChild(star);
+  // Only show favorite star for non-forum games
+  if (file.id !== 'forum') {
+    const star = document.createElement('span');
+    const canFavorite = isSignedIn;
+    const isFavorited = favorites.includes(file.id);
+    
+    star.className = 'favorite-star' + (isFavorited ? ' active' : '') + (!canFavorite ? ' guest-disabled' : '');
+    star.innerHTML = '★';
+    star.onclick = (e) => {
+      e.stopPropagation();
+      if (!canFavorite) {
+        showToast('🔒 Sign in to favorite games');
+        showSmartAccountModal();
+      } else {
+        toggleFavorite(file.id, e);
+      }
+    };
+    
+    if (!canFavorite) star.title = 'Sign in to favorite games';
+    
+    titleContainer.appendChild(star);
+  }
   
   const nameSpan = document.createElement('div');
   nameSpan.className = 'zone-name';
@@ -2556,14 +2583,18 @@ function createZoneCard(file) {
   contentDiv.appendChild(metaDiv);
   
   const playBtn = document.createElement('button');
-  playBtn.innerText = isLocked ? 'sign up to play' : 'launch';
+  playBtn.innerText = file.id === 'forum' ? 'join discussion' : (isLocked ? 'sign up to play' : 'launch');
   playBtn.onclick = (e) => { 
     e.stopPropagation(); 
     if (isLocked) {
       showToast(lockMessage);
       showSmartAccountModal();
     } else {
-      openZone(file);
+      if (file.id === 'forum') {
+        window.location.href = '/forum.html';
+      } else {
+        openZone(file);
+      }
     }
   };
   

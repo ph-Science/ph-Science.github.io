@@ -3957,9 +3957,9 @@ function createPostCard(post) {
   
   div.innerHTML = `
     <div class="post-header">
-      <div class="post-author-avatar" onclick="event.stopPropagation(); viewUserProfile('${post.author}')">
-        ${post.authorAvatar ? `<img src="${post.authorAvatar}" alt="avatar">` : authorInitial}
-      </div>
+<div class="post-author-avatar">
+  ${post.authorAvatar ? `<img src="${post.authorAvatar}" alt="avatar">` : authorInitial}
+</div>
       <div class="post-author-info">
         <div class="post-author-name" onclick="event.stopPropagation(); viewUserProfile('${post.author}')">
           ${escapeHtml(post.authorName || 'unknown')}
@@ -4589,46 +4589,70 @@ window.changeAvatar = function() {
     return;
   }
   
+  // Create file input
   const input = document.createElement('input');
   input.type = 'file';
   input.accept = 'image/*';
+  
   input.onchange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
     
-    const fileName = `avatars/${currentUser.uid}_${Date.now()}.${file.name.split('.').pop()}`;
-    const storageRef = storage.ref(fileName);
+    // Check file size (max 2MB)
+    if (file.size > 2 * 1024 * 1024) {
+      showToast('❌ image too large (max 2MB)');
+      return;
+    }
     
-    const metadata = {
-      contentType: file.type,
-      customMetadata: {
-        'uploadedBy': currentUser.uid,
-        'uploadedAt': new Date().toISOString()
-      }
+    showToast('📤 processing...');
+    
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    
+    reader.onload = () => {
+      const base64Data = reader.result; // This is the full base64 string
+      
+      // Create an image element to resize
+      const img = new Image();
+      img.src = base64Data;
+      
+      img.onload = () => {
+        // Create canvas for resizing
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Resize to 200x200 (perfect for avatars)
+        canvas.width = 200;
+        canvas.height = 200;
+        ctx.drawImage(img, 0, 0, 200, 200);
+        
+        // Convert to compressed base64 (0.8 quality = 80%)
+        const resizedBase64 = canvas.toDataURL('image/jpeg', 0.8);
+        
+        showToast('📤 saving to database...');
+        
+        // Store directly in Firestore - NO STORAGE NEEDED!
+        db.collection('users').doc(currentUser.uid).update({
+          avatar: resizedBase64
+        }).then(() => {
+          showToast('✅ avatar updated!');
+          loadProfile(); // Refresh profile view
+        }).catch(error => {
+          console.error('Error saving avatar:', error);
+          showToast('❌ failed to save: ' + error.message);
+        });
+      };
+      
+      img.onerror = () => {
+        showToast('❌ failed to process image');
+      };
     };
     
-    showToast('📤 uploading...');
-    
-    storageRef.put(file, metadata)
-      .then(snapshot => {
-        console.log('Upload successful:', snapshot);
-        return snapshot.ref.getDownloadURL();
-      })
-      .then(url => {
-        console.log('Download URL:', url);
-        return db.collection('users').doc(currentUser.uid).update({
-          avatar: url
-        });
-      })
-      .then(() => {
-        showToast('✅ avatar updated!');
-        loadProfile();
-      })
-      .catch(error => {
-        console.error('Upload error:', error);
-        showToast('❌ failed to upload: ' + error.message);
-      });
+    reader.onerror = () => {
+      showToast('❌ failed to read file');
+    };
   };
+  
   input.click();
 };
 

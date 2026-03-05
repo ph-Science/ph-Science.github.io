@@ -3498,6 +3498,10 @@ window.selectUser = function(userId, username) {
 };
 
 window.sendMessage = function() {
+  console.log("=== SEND MESSAGE DEBUG ===");
+  console.log("Current user:", currentUser);
+  console.log("Selected recipient:", selectedRecipient);
+  
   if (!selectedRecipient) {
     showToast('❌ select a user');
     return;
@@ -3513,6 +3517,7 @@ window.sendMessage = function() {
   }
   
   const conversationId = [currentUser.uid, selectedRecipient.id].sort().join('_');
+  console.log("Conversation ID:", conversationId);
   
   const message = {
     text: text,
@@ -3521,10 +3526,16 @@ window.sendMessage = function() {
     timestamp: Date.now(),
     read: false
   };
+  console.log("Message object:", message);
   
   const batch = db.batch();
   
-  batch.set(db.collection('conversations').doc(conversationId), {
+  // Create conversation document reference
+  const conversationRef = db.collection('conversations').doc(conversationId);
+  console.log("Conversation ref:", conversationRef.path);
+  
+  // Set conversation data
+  const conversationData = {
     participants: [currentUser.uid, selectedRecipient.id],
     lastMessage: message,
     lastMessageAt: Date.now(),
@@ -3533,16 +3544,28 @@ window.sendMessage = function() {
     readBy: {
       [currentUser.uid]: true
     }
-  }, { merge: true });
+  };
+  console.log("Conversation data:", conversationData);
   
-  batch.set(db.collection('conversations').doc(conversationId).collection('messages').doc(), message);
+  batch.set(conversationRef, conversationData, { merge: true });
   
+  // Create message document
+  const messageRef = conversationRef.collection('messages').doc();
+  console.log("Message ref:", messageRef.path);
+  
+  batch.set(messageRef, message);
+  
+  console.log("Committing batch...");
   batch.commit().then(() => {
+    console.log("✅ Batch commit successful!");
     showToast('✅ message sent');
     closeMessageModal();
   }).catch(error => {
-    console.error(error);
-    showToast('❌ failed to send');
+    console.error("❌ Batch commit failed:", error);
+    console.error("Error code:", error.code);
+    console.error("Error message:", error.message);
+    if (error.details) console.error("Error details:", error.details);
+    showToast('❌ failed to send: ' + error.message);
   });
 };
 

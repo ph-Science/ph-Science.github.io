@@ -4395,26 +4395,34 @@ function loadNotifications() {
   
   if (notificationsUnsubscribe) notificationsUnsubscribe();
   
-  notificationsUnsubscribe = db.collection('notifications')
-    .where('userId', '==', currentUser.uid)
-    .orderBy('timestamp', 'desc')
-    .onSnapshot((snapshot) => {
-      notifications = [];
-      let unread = 0;
-      
-      snapshot.forEach(doc => {
-        const notif = { id: doc.id, ...doc.data() };
-        notifications.push(notif);
-        if (!notif.read) unread++;
+  // Try-catch to handle missing collection
+  try {
+    notificationsUnsubscribe = db.collection('notifications')
+      .where('userId', '==', currentUser.uid)
+      .orderBy('timestamp', 'desc')
+      .onSnapshot((snapshot) => {
+        notifications = [];
+        let unread = 0;
+        
+        snapshot.forEach(doc => {
+          const notif = { id: doc.id, ...doc.data() };
+          notifications.push(notif);
+          if (!notif.read) unread++;
+        });
+        
+        unreadNotifications = unread;
+        updateNotificationBadge();
+        updateNotificationsList();
+      }, (error) => {
+        console.log("Notifications not available yet:", error.message);
+        // Don't show error to user, just disable notifications
+        document.getElementById('notificationBadge').style.display = 'none';
       });
-      
-      unreadNotifications = unread;
-      updateNotificationBadge();
-      updateNotificationsList();
-    }, (error) => {
-      console.error("Error loading notifications:", error);
-    });
+  } catch (error) {
+    console.log("Notifications not enabled");
+  }
 }
+
 
 function updateNotificationBadge() {
   const badge = document.getElementById('notificationBadge');
@@ -4746,30 +4754,68 @@ function searchTenor(query, resultDivId) {
       resultsDiv.innerHTML = '<div style="color: var(--text-muted);">error loading GIFs</div>';
     });
 }
-
+  
 window.selectGif = function(gifUrl, source) {
+  if (!gifUrl) return;
+  
   if (source === 'gifResults') {
-    // For new message modal
     const selectedGif = document.getElementById('selectedGif');
-    selectedGif.innerHTML = `<iframe src="${gifUrl}" frameborder="0"></iframe>`;
+    selectedGif.innerHTML = `<img src="${gifUrl}" style="max-width: 100%; max-height: 200px;">`;
     selectedGif.style.display = 'block';
     document.getElementById('gifPicker').classList.remove('active');
-    
-    // Store GIF URL to send with message
     window.selectedGifUrl = gifUrl;
   } else {
-    // For conversation view
     sendGifMessage(gifUrl);
     document.getElementById('conversationGifPicker').classList.remove('active');
   }
 };
 
 function sendGifMessage(gifUrl) {
-  if (!window.currentConversationId || !currentUser) return;
+  if (!window.currentConversationId || !currentUser || !gifUrl) return;
   
   const message = {
-    text: '',
     gifUrl: gifUrl,
+    sender: currentUser.uid,
+    senderName: currentUser.displayName,
+    timestamp: Date.now(),
+    read: false,
+    text: 'sent a GIF'
+  };
+  
+  const batch = db.batch();
+  
+  batch.set(db.collection('conversations').doc(window.currentConversationId).collection('messages').doc(), message);
+  batch.update(db.collection('conversations').doc(window.currentConversationId), {
+    lastMessage: {
+      text: 'sent a GIF',
+      gifUrl: gifUrl,
+      sender: currentUser.uid,
+      senderName: currentUser.displayName,
+      timestamp: Date.now()
+    },
+    lastMessageAt: Date.now(),
+    [`readBy.${currentUser.uid}`]: true
+  });
+  
+  batch.commit().then(() => {
+    showToast('✅ GIF sent');
+  }).catch(error => {
+    console.error(error);
+    showToast('❌ failed to send GIF');
+  });
+}
+
+// FIXED sendConversationMessage function
+window.sendConversationMessage = function() {
+  const input = document.getElementById('conversationInput');
+  if (!input) return;
+  
+  const messageText = input.value.trim();
+  
+  if (!messageText || !window.currentConversationId || !currentUser) return;
+  
+  const message = {
+    text: messageText,
     sender: currentUser.uid,
     senderName: currentUser.displayName,
     timestamp: Date.now(),
@@ -4780,22 +4826,24 @@ function sendGifMessage(gifUrl) {
   
   batch.set(db.collection('conversations').doc(window.currentConversationId).collection('messages').doc(), message);
   batch.update(db.collection('conversations').doc(window.currentConversationId), {
-    lastMessage: { ...message, text: 'sent a GIF' },
+    lastMessage: {
+      text: messageText,
+      sender: currentUser.uid,
+      senderName: currentUser.displayName,
+      timestamp: Date.now()
+    },
     lastMessageAt: Date.now(),
     [`readBy.${currentUser.uid}`]: true
   });
   
   batch.commit().then(() => {
-    // Show notification to other user
-    if (window.currentOtherUserId) {
-      showMessageNotification(currentUser.displayName, 'sent a GIF', window.currentConversationId);
-    }
+    input.value = '';
   }).catch(error => {
     console.error(error);
-    showToast('❌ failed to send GIF');
+    showToast('❌ failed to send');
   });
-}
-
+};
+  
 window.sendMessage = function() {
   console.log("Sending message...");
   
@@ -4805,8 +4853,7 @@ window.sendMessage = function() {
   }
   
   const messageText = document.getElementById('messageText');
-  const selectedGif = document.getElementById('selectedGif');
-  const gifUrl = window.selectedGifUrl;
+  const gifUrl = window.selectedGifUrl; // This might be undefined
   
   const text = messageText ? messageText.value.trim() : '';
   
@@ -4818,23 +4865,40 @@ window.sendMessage = function() {
   const conversationId = [currentUser.uid, selectedRecipient.id].sort().join('_');
   console.log("Conversation ID:", conversationId);
   
+  // Create message object WITHOUT undefined fields
   const message = {
-    text: text,
-    gifUrl: gifUrl,
     sender: currentUser.uid,
     senderName: currentUser.displayName,
     timestamp: Date.now(),
     read: false
   };
   
+  // Only add fields that have values
+  if (text) message.text = text;
+  if (gifUrl) message.gifUrl = gifUrl;
+  
   const batch = db.batch();
   
   const conversationRef = db.collection('conversations').doc(conversationId);
   console.log("Conversation ref:", conversationRef.path);
   
+  // Create lastMessage object WITHOUT undefined fields
+  const lastMessage = {
+    sender: currentUser.uid,
+    senderName: currentUser.displayName,
+    timestamp: Date.now()
+  };
+  
+  if (text) {
+    lastMessage.text = text;
+  } else if (gifUrl) {
+    lastMessage.text = 'sent a GIF';
+    lastMessage.gifUrl = gifUrl;
+  }
+  
   const conversationData = {
     participants: [currentUser.uid, selectedRecipient.id],
-    lastMessage: { ...message, text: text || 'sent a GIF' },
+    lastMessage: lastMessage,
     lastMessageAt: Date.now(),
     otherUserName: selectedRecipient.name,
     otherUserInitial: selectedRecipient.name[0].toUpperCase(),
@@ -4853,15 +4917,10 @@ window.sendMessage = function() {
     console.log("✅ Batch commit successful!");
     showToast('✅ message sent');
     
-    // Show notification to other user
-    showMessageNotification(currentUser.displayName, text || 'sent a GIF', conversationId);
-    
     closeMessageModal();
     window.selectedGifUrl = null;
   }).catch(error => {
     console.error("❌ Batch commit failed:", error);
-    console.error("Error code:", error.code);
-    console.error("Error message:", error.message);
     showToast('❌ failed to send: ' + error.message);
   });
 };

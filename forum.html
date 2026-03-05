@@ -12,7 +12,6 @@
 <meta name="description" content="Join communities, share thoughts, and message friends.">
 
 <script>
-// Suppress extension errors
 window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = window.__REACT_DEVTOOLS_GLOBAL_HOOK__ || {};
 </script>
 
@@ -219,14 +218,23 @@ header {
   text-align: center;
 }
 
-/* Main Content */
+.owner-badge {
+  background: gold;
+  color: black;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-full);
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
 .main-content {
   max-width: 1400px;
   margin: 2rem auto;
   padding: 0 2rem;
 }
 
-/* Communities Sidebar */
 .communities-sidebar {
   position: fixed;
   left: 20px;
@@ -310,7 +318,6 @@ header {
   border-color: var(--orange);
 }
 
-/* Messages Panel */
 .messages-panel {
   position: fixed;
   right: 20px;
@@ -422,14 +429,12 @@ header {
   text-align: center;
 }
 
-/* Main Feed */
 .main-feed {
   margin-left: 280px;
   margin-right: 330px;
   transition: margin 0.3s;
 }
 
-/* Forum Header */
 .forum-header {
   background: var(--bg-panel);
   border: 1px solid var(--border-color);
@@ -479,7 +484,6 @@ header {
   box-shadow: 0 10px 30px rgba(255,107,0,0.5);
 }
 
-/* Posts Container */
 .posts-container {
   background: var(--bg-panel);
   border: 1px solid var(--border-color);
@@ -527,7 +531,6 @@ header {
   color: black;
 }
 
-/* Empty State */
 .empty-state {
   padding: 5rem 2rem;
   text-align: center;
@@ -581,7 +584,6 @@ header {
   box-shadow: 0 10px 30px rgba(255,107,0,0.5);
 }
 
-/* Post Card */
 .post-card {
   padding: 2rem;
   border-bottom: 1px solid var(--border-color);
@@ -722,7 +724,6 @@ header {
   color: var(--orange);
 }
 
-/* Post Detail View */
 .post-detail {
   background: var(--bg-panel);
   border: 1px solid var(--border-color);
@@ -796,6 +797,7 @@ header {
   color: var(--orange);
   margin-bottom: 0.25rem;
   cursor: pointer;
+  display: inline-block;
 }
 
 .detail-author-info h3:hover {
@@ -874,7 +876,6 @@ header {
   color: black;
 }
 
-/* Reactions */
 .reactions-detail {
   margin: 2rem 0;
   padding: 1rem;
@@ -929,7 +930,6 @@ header {
   color: black;
 }
 
-/* Comment Section */
 .comment-section {
   margin-top: 2rem;
 }
@@ -1052,6 +1052,7 @@ header {
   gap: 0.5rem;
   margin-top: 0.5rem;
   margin-left: 3rem;
+  flex-wrap: wrap;
 }
 
 .comment-reaction-btn {
@@ -1072,7 +1073,15 @@ header {
   transform: translateY(-2px);
 }
 
-/* Profile View */
+.comment-reaction-btn.active {
+  background: var(--orange);
+  border-color: var(--orange);
+}
+
+.comment-reaction-btn .count {
+  font-weight: 700;
+}
+
 .profile-section {
   background: var(--bg-panel);
   border: 1px solid var(--border-color);
@@ -1136,6 +1145,7 @@ header {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 0.5rem;
+  display: inline-block;
 }
 
 .profile-stats {
@@ -1187,7 +1197,6 @@ header {
   color: black;
 }
 
-/* New Post Form */
 .new-post-section {
   background: var(--bg-panel);
   border: 1px solid var(--border-color);
@@ -1336,7 +1345,6 @@ header {
   cursor: not-allowed;
 }
 
-/* Message Modal */
 .message-modal {
   position: fixed;
   inset: 0;
@@ -1513,7 +1521,6 @@ header {
   background: rgba(255,107,0,0.2);
 }
 
-/* Conversation View */
 .conversation-view {
   position: fixed;
   inset: 0;
@@ -1666,7 +1673,6 @@ header {
   box-shadow: 0 0 20px rgba(255,107,0,0.5);
 }
 
-/* Account Modal */
 .account-modal {
   position: fixed;
   inset: 0;
@@ -1820,7 +1826,6 @@ header {
   font-weight: 700;
 }
 
-/* Toast */
 .toast-container {
   position: fixed;
   top: 2rem;
@@ -1856,7 +1861,6 @@ header {
   }
 }
 
-/* Loading */
 .loading-spinner {
   width: 50px;
   height: 50px;
@@ -1871,7 +1875,6 @@ header {
   to { transform: rotate(360deg); }
 }
 
-/* Responsive */
 @media (max-width: 1200px) {
   .main-feed {
     margin-left: 0;
@@ -1915,15 +1918,12 @@ header {
 </head>
 <body>
 
-<!-- Account Modal -->
 <div class="account-modal" id="accountModal">
   <div class="modal-content" id="accountModalContent">
     <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
-    <!-- Dynamic content -->
   </div>
 </div>
 
-<!-- Login Modal -->
 <div class="account-modal" id="loginModal">
   <div class="modal-content">
     <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
@@ -1944,7 +1944,6 @@ header {
   </div>
 </div>
 
-<!-- Signup Modal -->
 <div class="account-modal" id="signupModal">
   <div class="modal-content">
     <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
@@ -1965,7 +1964,6 @@ header {
   </div>
 </div>
 
-<!-- Message Modal -->
 <div class="message-modal" id="messageModal">
   <div class="message-modal-content">
     <button class="modal-close" onclick="closeMessageModal()">✕</button>
@@ -1986,13 +1984,10 @@ header {
   </div>
 </div>
 
-<!-- Conversation View -->
 <div class="conversation-view" id="conversationView">
   <div class="conversation-header">
     <button class="conversation-back" onclick="closeConversation()">←</button>
-    <div class="conversation-user" id="conversationUser">
-      <!-- Dynamic content -->
-    </div>
+    <div class="conversation-user" id="conversationUser"></div>
   </div>
   
   <div class="messages-container" id="messagesContainer"></div>
@@ -2025,7 +2020,6 @@ header {
   </div>
 </header>
 
-<!-- Communities Sidebar -->
 <div class="communities-sidebar">
   <h3>communities</h3>
   <div class="community-list" id="communityList">
@@ -2055,7 +2049,6 @@ header {
   </button>
 </div>
 
-<!-- Messages Panel -->
 <div class="messages-panel">
   <h3>
     messages
@@ -2094,7 +2087,6 @@ header {
       </div>
     </div>
     
-    <!-- NEW POST VIEW -->
     <div id="newPostView" style="display: none;">
       <div class="new-post-section">
         <h2>create post</h2>
@@ -2139,7 +2131,6 @@ header {
       </div>
     </div>
     
-    <!-- POST DETAIL VIEW -->
     <div id="postDetailView" style="display: none;">
       <div class="post-detail">
         <div class="post-detail-header">
@@ -2150,9 +2141,7 @@ header {
           </div>
         </div>
         
-        <div class="post-detail-author" id="detailAuthor">
-          <!-- Author info will load here -->
-        </div>
+        <div class="post-detail-author" id="detailAuthor"></div>
         
         <h1 class="post-detail-title" id="detailTitle"></h1>
         
@@ -2162,9 +2151,7 @@ header {
         
         <div class="reactions-detail">
           <h4>reactions</h4>
-          <div class="reactions-grid" id="reactionsGrid">
-            <!-- Reactions will load here -->
-          </div>
+          <div class="reactions-grid" id="reactionsGrid"></div>
         </div>
         
         <div class="post-detail-actions">
@@ -2181,18 +2168,13 @@ header {
             <button class="comment-submit" onclick="addComment()" id="commentSubmitBtn">post</button>
           </div>
           
-          <div id="commentsList" class="comments-list">
-            <!-- Comments will load here -->
-          </div>
+          <div id="commentsList" class="comments-list"></div>
         </div>
       </div>
     </div>
     
-    <!-- PROFILE VIEW -->
     <div id="profileView" style="display: none;">
-      <div class="profile-section" id="profileSection">
-        <!-- Profile content will load here -->
-      </div>
+      <div class="profile-section" id="profileSection"></div>
     </div>
   </div>
 </div>
@@ -2200,9 +2182,6 @@ header {
 <div class="toast-container" id="toastContainer"></div>
 
 <script>
- 
-// FIREBASE CONFIG
- 
 const firebaseConfig = {
   apiKey: "AIzaSyA-68XKNt_PD0I1TJbNcyotT4qMbgHh-tI",
   authDomain: "ph-science.firebaseapp.com",
@@ -2212,25 +2191,13 @@ const firebaseConfig = {
   appId: "1:883067098385:web:036ccc248ffa4f44cf28b0"
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 const storage = firebase.storage();
 
-// Fix the persistence warning
-db.enablePersistence()
-  .catch((err) => {
-    if (err.code == 'failed-precondition') {
-      console.log('Persistence failed');
-    } else if (err.code == 'unimplemented') {
-      console.log('Persistence not available');
-    }
-  });
+db.enablePersistence().catch(() => {});
 
- 
-// GLOBAL VARIABLES
- 
 let currentUser = null;
 let currentPostId = null;
 let currentView = 'forum';
@@ -2240,7 +2207,8 @@ let conversationsUnsubscribe = null;
 let currentCommunity = 'all';
 let selectedRecipient = null;
 
-// Available reactions
+const OWNER_USERNAME = 'OWNER';
+
 const REACTIONS = [
   { emoji: '👍', name: 'like' },
   { emoji: '❤️', name: 'love' },
@@ -2250,9 +2218,6 @@ const REACTIONS = [
   { emoji: '🔥', name: 'fire' }
 ];
 
- 
-// VIEW MANAGEMENT
- 
 window.showView = function(view) {
   currentView = view;
   
@@ -2301,13 +2266,13 @@ window.showView = function(view) {
   }
 };
 
- 
-// COMMUNITIES
- 
 window.selectCommunity = function(community) {
   currentCommunity = community;
   document.querySelectorAll('.community-item').forEach(item => item.classList.remove('active'));
-  event.target.closest('.community-item').classList.add('active');
+  if (event && event.target) {
+    const item = event.target.closest('.community-item');
+    if (item) item.classList.add('active');
+  }
   loadPosts();
 };
 
@@ -2321,14 +2286,12 @@ window.createCommunity = function() {
   const name = prompt('Enter community name:');
   if (!name) return;
   
-  // Check if community already exists
   db.collection('communities').where('name', '==', name).get()
     .then((snapshot) => {
       if (!snapshot.empty) {
         showToast('❌ community already exists');
-        return;
+        return null;
       }
-      
       return db.collection('communities').add({
         name: name,
         createdBy: currentUser.uid,
@@ -2336,18 +2299,19 @@ window.createCommunity = function() {
         members: [currentUser.uid]
       });
     })
-    .then(() => {
-      showToast('✅ community created!');
-      // Add to sidebar dynamically
-      const communityList = document.getElementById('communityList');
-      const newCommunity = document.createElement('div');
-      newCommunity.className = 'community-item';
-      newCommunity.onclick = () => selectCommunity(name.toLowerCase());
-      newCommunity.innerHTML = `
-        <div class="community-icon">#</div>
-        <span>${name}</span>
-      `;
-      communityList.appendChild(newCommunity);
+    .then((docRef) => {
+      if (docRef) {
+        showToast('✅ community created!');
+        const communityList = document.getElementById('communityList');
+        const newCommunity = document.createElement('div');
+        newCommunity.className = 'community-item';
+        newCommunity.setAttribute('onclick', `selectCommunity('${name.toLowerCase()}')`);
+        newCommunity.innerHTML = `
+          <div class="community-icon">#</div>
+          <span>${name}</span>
+        `;
+        communityList.appendChild(newCommunity);
+      }
     })
     .catch(error => {
       console.error(error);
@@ -2355,19 +2319,17 @@ window.createCommunity = function() {
     });
 };
 
- 
-// AUTHENTICATION
- 
 window.showSmartAccountModal = function() {
   const modal = document.getElementById('accountModal');
   const content = document.getElementById('accountModalContent');
   const user = auth.currentUser;
   
   if (user && !user.isAnonymous) {
+    const isOwner = user.displayName === OWNER_USERNAME;
     content.innerHTML = `
       <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
       <h2>PH Social</h2>
-      <div style="color: var(--orange); margin-bottom: 2rem;">👋 ${user.displayName || 'user'}</div>
+      <div style="color: var(--orange); margin-bottom: 2rem;">👋 ${user.displayName || 'user'} ${isOwner ? '<span class="owner-badge">👑 OWNER</span>' : ''}</div>
       <div class="modal-buttons">
         <button class="modal-btn warning" onclick="logout()">🚪 log out</button>
         <button class="modal-btn secondary" onclick="switchAccounts()">🔄 switch</button>
@@ -2377,7 +2339,7 @@ window.showSmartAccountModal = function() {
     content.innerHTML = `
       <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
       <h2>PH Social</h2>
-      <div style="color: var(--orange); margin-bottom: 2rem;">👤 guest mode</div>
+      <div style="color: var(--orange); margin-bottom: 2rem;">👤 guest mode (view only)</div>
       <div class="modal-buttons">
         <button class="modal-btn primary" onclick="showSignup()">✨ create account</button>
         <button class="modal-btn warning" onclick="logout()">🚪 log out</button>
@@ -2401,15 +2363,11 @@ window.showSmartAccountModal = function() {
 };
 
 window.closeAllModals = function() {
-  document.querySelectorAll('.account-modal').forEach(modal => {
+  document.querySelectorAll('.account-modal, .message-modal').forEach(modal => {
     modal.classList.remove('active');
     setTimeout(() => {
       modal.style.display = 'none';
     }, 300);
-  });
-  
-  document.querySelectorAll('.message-modal').forEach(modal => {
-    modal.classList.remove('active');
   });
 };
 
@@ -2505,7 +2463,7 @@ window.login = function() {
 window.continueAsGuest = function() {
   auth.signInAnonymously()
     .then(() => {
-      showToast('👤 continuing as guest');
+      showToast('👤 continuing as guest (view only)');
       closeAllModals();
       showView('forum');
     })
@@ -2553,7 +2511,6 @@ auth.onAuthStateChanged((user) => {
   if (user) {
     if (!user.isAnonymous) {
       if (accountBtn) accountBtn.innerHTML = `👤 ${user.displayName || 'user'}`;
-      // Update last seen
       db.collection('users').doc(user.uid).update({
         lastSeen: Date.now()
       }).catch(() => {});
@@ -2562,7 +2519,7 @@ auth.onAuthStateChanged((user) => {
       if (accountBtn) accountBtn.innerHTML = '👤 guest';
       const conversationList = document.getElementById('conversationList');
       if (conversationList) {
-        conversationList.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; text-align: center;">sign in to message</div>';
+        conversationList.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; text-align: center;">guests cannot message</div>';
       }
     }
   } else {
@@ -2580,9 +2537,6 @@ auth.onAuthStateChanged((user) => {
   else if (currentView === 'postDetail' && currentPostId) loadPostDetails(currentPostId);
 });
 
- 
-// POSTS FUNCTIONS
- 
 function loadPosts() {
   if (postsUnsubscribe) postsUnsubscribe();
   
@@ -2649,6 +2603,7 @@ function createPostCard(post) {
   div.onclick = () => openPost(post.id);
   
   const authorInitial = post.authorName ? post.authorName[0].toUpperCase() : '?';
+  const isOwner = post.authorName === OWNER_USERNAME;
   
   let totalReactions = 0;
   if (post.reactions) {
@@ -2661,7 +2616,10 @@ function createPostCard(post) {
         ${post.authorAvatar ? `<img src="${post.authorAvatar}" alt="avatar">` : authorInitial}
       </div>
       <div class="post-author-info">
-        <div class="post-author-name" onclick="event.stopPropagation(); viewUserProfile('${post.author}')">${escapeHtml(post.authorName || 'unknown')}</div>
+        <div class="post-author-name" onclick="event.stopPropagation(); viewUserProfile('${post.author}')">
+          ${escapeHtml(post.authorName || 'unknown')}
+          ${isOwner ? '<span class="owner-badge">👑</span>' : ''}
+        </div>
         <div class="post-meta">
           <span>🕒 ${timeAgo(post.createdAt)}</span>
           ${post.community ? `<span class="post-community-tag">${post.community}</span>` : ''}
@@ -2722,6 +2680,7 @@ function loadPostDetails(postId) {
           const userData = userDoc.data() || {};
           const avatarUrl = userData?.avatar || null;
           const authorInitial = post.authorName ? post.authorName[0].toUpperCase() : '?';
+          const isOwner = post.authorName === OWNER_USERNAME;
           
           const detailTitle = document.getElementById('detailTitle');
           const detailBody = document.getElementById('detailBody');
@@ -2740,7 +2699,10 @@ function loadPostDetails(postId) {
                 ${avatarUrl ? `<img src="${avatarUrl}" alt="avatar">` : authorInitial}
               </div>
               <div class="detail-author-info">
-                <h3 onclick="viewUserProfile('${post.author}')">${escapeHtml(post.authorName || 'unknown')}</h3>
+                <h3 onclick="viewUserProfile('${post.author}')">
+                  ${escapeHtml(post.authorName || 'unknown')}
+                  ${isOwner ? '<span class="owner-badge">👑 OWNER</span>' : ''}
+                </h3>
                 <p>joined ${userData.joined ? new Date(userData.joined).toLocaleDateString() : 'recently'}</p>
                 ${post.community ? `<p>community: ${post.community}</p>` : ''}
               </div>
@@ -2760,11 +2722,8 @@ function loadPostDetails(postId) {
           if (detailComments) detailComments.innerHTML = `💬 ${post.comments || 0}`;
           
           if (deleteBtn) {
-            if (currentUser && currentUser.uid === post.author) {
-              deleteBtn.style.display = 'inline-flex';
-            } else {
-              deleteBtn.style.display = 'none';
-            }
+            const canDelete = (currentUser && (currentUser.uid === post.author || currentUser.displayName === OWNER_USERNAME));
+            deleteBtn.style.display = canDelete ? 'inline-flex' : 'none';
           }
           
           displayReactions(post);
@@ -2777,14 +2736,11 @@ function loadPostDetails(postId) {
     });
 }
 
- 
-// REACTIONS - FIXED FOR EVERYONE
- 
 function displayReactions(post) {
   const container = document.getElementById('reactionsGrid');
   if (!container) return;
   
-  const userReactions = (post.userReactions && currentUser) ? post.userReactions[currentUser.uid] : {};
+  const userReactions = (post.userReactions && currentUser && !currentUser.isAnonymous) ? post.userReactions[currentUser.uid] : {};
   
   let html = '';
   REACTIONS.forEach(reaction => {
@@ -2803,24 +2759,23 @@ function displayReactions(post) {
 }
 
 window.addReaction = function(postId, reactionName, reactionEmoji) {
-  if (!currentUser) {
-    showToast('👤 sign in to react');
+  if (!currentUser || currentUser.isAnonymous) {
+    showToast('👤 guests cannot react - create an account!');
     showSmartAccountModal();
     return;
   }
   
   const postRef = db.collection('posts').doc(postId);
   
-  // Simple update without transaction to avoid permission issues
-  postRef.get().then((doc) => {
-    if (!doc.exists) return;
+  db.runTransaction(async (transaction) => {
+    const postDoc = await transaction.get(postRef);
+    if (!postDoc.exists) throw "Post doesn't exist";
     
-    const post = doc.data();
+    const post = postDoc.data();
     const userReactions = post.userReactions || {};
     const userReacted = userReactions[currentUser.uid] && userReactions[currentUser.uid][reactionName];
     
     if (userReacted) {
-      // Remove reaction
       const newUserReactions = { ...userReactions };
       if (newUserReactions[currentUser.uid]) {
         delete newUserReactions[currentUser.uid][reactionName];
@@ -2838,17 +2793,11 @@ window.addReaction = function(postId, reactionName, reactionEmoji) {
         };
       }
       
-      postRef.update({
+      transaction.update(postRef, {
         userReactions: newUserReactions,
         reactions: newReactions
-      }).then(() => {
-        loadPostDetails(postId);
-      }).catch(error => {
-        console.error(error);
-        showToast('❌ failed to update');
       });
     } else {
-      // Add reaction
       const newUserReactions = { ...userReactions };
       if (!newUserReactions[currentUser.uid]) {
         newUserReactions[currentUser.uid] = {};
@@ -2862,23 +2811,20 @@ window.addReaction = function(postId, reactionName, reactionEmoji) {
         emoji: reactionEmoji
       };
       
-      postRef.update({
+      transaction.update(postRef, {
         userReactions: newUserReactions,
         reactions: newReactions
-      }).then(() => {
-        loadPostDetails(postId);
-        showToast(`added ${reactionEmoji}`);
-      }).catch(error => {
-        console.error(error);
-        showToast('❌ failed to update');
       });
     }
+  }).then(() => {
+    loadPostDetails(postId);
+    if (!userReacted) showToast(`added ${reactionEmoji}`);
+  }).catch(error => {
+    console.error(error);
+    showToast('❌ failed to update');
   });
 };
 
- 
-// COMMENTS - FIXED FOR EVERYONE
- 
 function loadComments(postId) {
   db.collection('posts').doc(postId).collection('comments')
     .orderBy('createdAt', 'desc')
@@ -2892,43 +2838,47 @@ function loadComments(postId) {
         return;
       }
       
-      const comments = [];
-      snapshot.forEach(doc => {
-        comments.push({
-          id: doc.id,
-          ...doc.data()
-        });
-      });
-      
       commentsList.innerHTML = '';
-      comments.forEach(comment => {
+      snapshot.forEach(doc => {
+        const comment = doc.data();
         const commentDiv = document.createElement('div');
         commentDiv.className = 'comment';
         
-        db.collection('users').doc(comment.author).get()
-          .then((userDoc) => {
-            const userData = userDoc.data() || {};
-            const avatarUrl = userData?.avatar || null;
-            const authorInitial = comment.authorName ? comment.authorName[0].toUpperCase() : '?';
+        db.collection('users').doc(comment.author).get().then((userDoc) => {
+          const userData = userDoc.data() || {};
+          const avatarUrl = userData?.avatar || null;
+          const authorInitial = comment.authorName ? comment.authorName[0].toUpperCase() : '?';
+          const isOwner = comment.authorName === OWNER_USERNAME;
+          
+          const userCommentReactions = (comment.userReactions && currentUser && !currentUser.isAnonymous) ? comment.userReactions[currentUser.uid] : {};
+          
+          let reactionsHtml = '';
+          REACTIONS.forEach(r => {
+            const count = (comment.reactions && comment.reactions[r.name]) ? comment.reactions[r.name].count || 0 : 0;
+            const isActive = userCommentReactions && userCommentReactions[r.name] === true;
             
-            commentDiv.innerHTML = `
-              <div class="comment-header">
-                <div class="comment-avatar" onclick="viewUserProfile('${comment.author}')">
-                  ${avatarUrl ? `<img src="${avatarUrl}" alt="avatar">` : authorInitial}
-                </div>
-                <span class="comment-author" onclick="viewUserProfile('${comment.author}')">${escapeHtml(comment.authorName || 'unknown')}</span>
-                <span class="comment-date">${timeAgo(comment.createdAt)}</span>
-              </div>
-              <div class="comment-text">${escapeHtml(comment.text)}</div>
-              <div class="comment-reactions">
-                ${REACTIONS.map(r => `
-                  <div class="comment-reaction-btn" onclick="addCommentReaction('${comment.id}', '${r.name}', '${r.emoji}')">
-                    ${r.emoji} <span class="count">${comment.reactions && comment.reactions[r.name] ? comment.reactions[r.name].count || 0 : 0}</span>
-                  </div>
-                `).join('')}
+            reactionsHtml += `
+              <div class="comment-reaction-btn ${isActive ? 'active' : ''}" onclick="addCommentReaction('${doc.id}', '${r.name}', '${r.emoji}')">
+                ${r.emoji} <span class="count">${count}</span>
               </div>
             `;
           });
+          
+          commentDiv.innerHTML = `
+            <div class="comment-header">
+              <div class="comment-avatar" onclick="viewUserProfile('${comment.author}')">
+                ${avatarUrl ? `<img src="${avatarUrl}" alt="avatar">` : authorInitial}
+              </div>
+              <span class="comment-author" onclick="viewUserProfile('${comment.author}')">
+                ${escapeHtml(comment.authorName || 'unknown')}
+                ${isOwner ? '<span class="owner-badge">👑</span>' : ''}
+              </span>
+              <span class="comment-date">${timeAgo(comment.createdAt)}</span>
+            </div>
+            <div class="comment-text">${escapeHtml(comment.text)}</div>
+            <div class="comment-reactions">${reactionsHtml}</div>
+          `;
+        });
         
         commentsList.appendChild(commentDiv);
       });
@@ -2949,8 +2899,8 @@ window.addComment = function() {
     return;
   }
   
-  if (!currentUser) {
-    showToast('👤 sign in to comment');
+  if (!currentUser || currentUser.isAnonymous) {
+    showToast('👤 guests cannot comment - create an account!');
     showSmartAccountModal();
     return;
   }
@@ -2963,7 +2913,7 @@ window.addComment = function() {
   const commentData = {
     text: commentText,
     author: currentUser.uid,
-    authorName: currentUser.displayName || (currentUser.isAnonymous ? 'guest' : 'user'),
+    authorName: currentUser.displayName,
     createdAt: Date.now(),
     reactions: {},
     userReactions: {}
@@ -3001,18 +2951,19 @@ window.addComment = function() {
 };
 
 window.addCommentReaction = function(commentId, reactionName, reactionEmoji) {
-  if (!currentUser) {
-    showToast('👤 sign in to react');
+  if (!currentUser || currentUser.isAnonymous) {
+    showToast('👤 guests cannot react - create an account!');
     showSmartAccountModal();
     return;
   }
   
   const commentRef = db.collection('posts').doc(currentPostId).collection('comments').doc(commentId);
   
-  commentRef.get().then((doc) => {
-    if (!doc.exists) return;
+  db.runTransaction(async (transaction) => {
+    const commentDoc = await transaction.get(commentRef);
+    if (!commentDoc.exists) throw "Comment doesn't exist";
     
-    const comment = doc.data();
+    const comment = commentDoc.data();
     const userReactions = comment.userReactions || {};
     const userReacted = userReactions[currentUser.uid] && userReactions[currentUser.uid][reactionName];
     
@@ -3025,7 +2976,7 @@ window.addCommentReaction = function(commentId, reactionName, reactionEmoji) {
         }
       }
       
-      const currentCount = (comment.reactions && comment.reactions[reactionName]) ? (comment.reactions[reactionName].count || 0) : 0;
+      const currentCount = (comment.reactions && comment.reactions[reactionName]) ? comment.reactions[reactionName].count || 0 : 0;
       const newReactions = { ...(comment.reactions || {}) };
       if (newReactions[reactionName]) {
         newReactions[reactionName] = {
@@ -3034,11 +2985,9 @@ window.addCommentReaction = function(commentId, reactionName, reactionEmoji) {
         };
       }
       
-      commentRef.update({
+      transaction.update(commentRef, {
         userReactions: newUserReactions,
         reactions: newReactions
-      }).then(() => {
-        loadComments(currentPostId);
       });
     } else {
       const newUserReactions = { ...userReactions };
@@ -3047,26 +2996,26 @@ window.addCommentReaction = function(commentId, reactionName, reactionEmoji) {
       }
       newUserReactions[currentUser.uid][reactionName] = true;
       
-      const currentCount = (comment.reactions && comment.reactions[reactionName]) ? (comment.reactions[reactionName].count || 0) : 0;
+      const currentCount = (comment.reactions && comment.reactions[reactionName]) ? comment.reactions[reactionName].count || 0 : 0;
       const newReactions = { ...(comment.reactions || {}) };
       newReactions[reactionName] = {
         count: currentCount + 1,
         emoji: reactionEmoji
       };
       
-      commentRef.update({
+      transaction.update(commentRef, {
         userReactions: newUserReactions,
         reactions: newReactions
-      }).then(() => {
-        loadComments(currentPostId);
       });
     }
+  }).then(() => {
+    loadComments(currentPostId);
+  }).catch(error => {
+    console.error(error);
+    showToast('❌ failed to update');
   });
 };
 
- 
-// CREATE POST
- 
 window.createPost = function() {
   const postTitle = document.getElementById('postTitle');
   const postBody = document.getElementById('postBody');
@@ -3185,9 +3134,6 @@ window.deletePost = function() {
     });
 };
 
- 
-// PROFILE
- 
 function loadProfile(userId = null) {
   const targetUserId = userId || currentUser?.uid;
   if (!targetUserId) return;
@@ -3201,15 +3147,17 @@ function loadProfile(userId = null) {
       const avatarUrl = userData.avatar || null;
       const displayName = userId ? userData.username : (currentUser.displayName || 'user');
       const authorInitial = displayName ? displayName[0].toUpperCase() : '?';
+      const isOwner = displayName === OWNER_USERNAME;
+      const isOwnProfile = !userId || userId === currentUser?.uid;
       
       profileSection.innerHTML = `
         <div class="profile-header">
-          <div class="profile-avatar-large" ${!userId ? 'onclick="changeAvatar()"' : ''}>
+          <div class="profile-avatar-large" ${isOwnProfile && !currentUser?.isAnonymous ? 'onclick="changeAvatar()"' : ''}>
             ${avatarUrl ? `<img src="${avatarUrl}" alt="avatar">` : authorInitial}
-            ${!userId ? '<div class="avatar-overlay">📷 change</div>' : ''}
+            ${isOwnProfile && !currentUser?.isAnonymous ? '<div class="avatar-overlay">📷 change</div>' : ''}
           </div>
           <div class="profile-info">
-            <h2>${escapeHtml(displayName)}</h2>
+            <h2>${escapeHtml(displayName)} ${isOwner ? '<span class="owner-badge">👑 OWNER</span>' : ''}</h2>
             <p>joined ${userData.joined ? new Date(userData.joined).toLocaleDateString() : 'recently'}</p>
             <div class="profile-stats">
               <div class="profile-stat">
@@ -3217,7 +3165,7 @@ function loadProfile(userId = null) {
                 <div class="profile-stat-label">posts</div>
               </div>
             </div>
-            ${userId && userId !== currentUser?.uid ? `
+            ${userId && userId !== currentUser?.uid && !currentUser?.isAnonymous ? `
               <button class="new-post-btn" style="margin-top: 1rem;" onclick="openMessageModalWithUser('${userId}')">
                 💬 message
               </button>
@@ -3291,6 +3239,11 @@ function loadUserPosts(userId) {
 }
 
 window.changeAvatar = function() {
+  if (!currentUser || currentUser.isAnonymous) {
+    showToast('🔒 guests cannot change avatar');
+    return;
+  }
+  
   const input = document.createElement('input');
   input.type = 'file';
   input.accept = 'image/*';
@@ -3316,14 +3269,11 @@ window.changeAvatar = function() {
   input.click();
 };
 
- 
-// MESSAGING SYSTEM - FIXED
- 
 function loadConversations() {
   if (!currentUser || currentUser.isAnonymous) {
     const conversationList = document.getElementById('conversationList');
     if (conversationList) {
-      conversationList.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; text-align: center;">sign in to message</div>';
+      conversationList.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; text-align: center;">guests cannot message</div>';
     }
     return;
   }
@@ -3383,7 +3333,7 @@ function loadConversations() {
 
 window.openMessageModal = function() {
   if (!currentUser || currentUser.isAnonymous) {
-    showToast('🔒 sign in to message');
+    showToast('🔒 guests cannot message - create an account!');
     showSmartAccountModal();
     return;
   }
@@ -3406,7 +3356,6 @@ window.openMessageModal = function() {
 
 window.openMessageModalWithUser = function(userId) {
   if (!userId) {
-    // If no userId provided, try to get from current post
     if (currentPostId) {
       db.collection('posts').doc(currentPostId).get().then((doc) => {
         if (doc.exists) {
@@ -3419,7 +3368,7 @@ window.openMessageModalWithUser = function(userId) {
   }
   
   if (!currentUser || currentUser.isAnonymous) {
-    showToast('🔒 sign in to message');
+    showToast('🔒 guests cannot message - create an account!');
     showSmartAccountModal();
     return;
   }
@@ -3564,13 +3513,13 @@ window.sendMessage = function() {
 window.openConversation = function(conversationId, otherUserId) {
   if (!currentUser) return;
   
-  // Mark as read
   db.collection('conversations').doc(conversationId).update({
     [`readBy.${currentUser.uid}`]: true
   }).catch(() => {});
   
   db.collection('users').doc(otherUserId).get().then((doc) => {
     const userData = doc.data() || {};
+    const isOwner = userData.username === OWNER_USERNAME;
     
     const conversationUser = document.getElementById('conversationUser');
     if (conversationUser) {
@@ -3579,7 +3528,7 @@ window.openConversation = function(conversationId, otherUserId) {
           ${userData.avatar ? `<img src="${userData.avatar}" alt="avatar">` : (userData.username ? userData.username[0].toUpperCase() : '?')}
         </div>
         <div class="conversation-user-info">
-          <h3>${userData.username || 'user'}</h3>
+          <h3>${userData.username || 'user'} ${isOwner ? '<span class="owner-badge">👑</span>' : ''}</h3>
           <p>last seen ${timeAgo(userData.lastSeen || Date.now())}</p>
         </div>
       `;
@@ -3590,7 +3539,6 @@ window.openConversation = function(conversationId, otherUserId) {
     
     loadMessages(conversationId);
     
-    // Store current conversation
     window.currentConversationId = conversationId;
     window.currentOtherUserId = otherUserId;
   });
@@ -3665,9 +3613,6 @@ window.sendConversationMessage = function() {
   });
 };
 
- 
-// FILTERS & UTILITIES
- 
 window.filterPosts = function(filter) {
   document.querySelectorAll('.filter-tab').forEach(tab => tab.classList.remove('active'));
   if (event && event.target) event.target.classList.add('active');
@@ -3735,7 +3680,6 @@ function updateStats() {
   }
   
   if (onlineNowStat) {
-    // Simple online count - users active in last 5 minutes
     const fiveMinAgo = Date.now() - 300000;
     db.collection('users').where('lastSeen', '>', fiveMinAgo).get().then((snapshot) => {
       onlineNowStat.textContent = snapshot.size;
@@ -3794,7 +3738,7 @@ function showToast(message) {
 }
 
 document.getElementById('settingsBtn')?.addEventListener('click', () => {
-  showToast('💬 messages - click a conversation');
+  showToast('💬 messages panel');
 });
 
 const urlParams = new URLSearchParams(window.location.search);

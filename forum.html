@@ -4,19 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1246719291517308929/1478561249032798268/New_Project_3.png?ex=69a8d8f8&is=69a78778&hm=abee371c7fede1116bf9773b6dcdd858b1c7c7ddb4b2425b7774a0381481756a&=&format=webp&quality=lossless&width=40&height=40">
-<link rel="apple-touch-icon" href="https://media.discordapp.net/attachments/1246719291517308929/1478561249032798268/New_Project_3.png?ex=69a8d8f8&is=69a78778&hm=abee371c7fede1116bf9773b6dcdd858b1c7c7ddb4b2425b7774a0381481756a&=&format=webp&quality=lossless&width=40&height=40">
+<link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1246719291517308929/1478561249032798268/New_Project_3.png">
+<link rel="apple-touch-icon" href="https://media.discordapp.net/attachments/1246719291517308929/1478561249032798268/New_Project_3.png">
 
-<title>PH Social - Communities & Chat</title>
-<meta name="title" content="PH Social | Connect with Others">
-<meta name="description" content="Join communities, share thoughts, and message friends.">
+<title>PH - Science</title>
+
+<script async src="https://tenor.com/embed.js"></script>
 
 <script>
 window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = window.__REACT_DEVTOOLS_GLOBAL_HOOK__ || {};
 </script>
 
 <script async src="https://fundingchoicesmessages.google.com/i/pub-5521219086088837?ers=1"></script>
-<script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
@@ -182,7 +181,7 @@ header {
   box-shadow: 0 10px 30px rgba(255,107,0,0.5);
 }
 
-.settings-icon {
+.notification-icon {
   background: rgba(255,107,0,0.15);
   border: 1px solid var(--border-color);
   color: var(--orange);
@@ -198,13 +197,12 @@ header {
   position: relative;
 }
 
-.settings-icon:hover {
+.notification-icon:hover {
   background: var(--orange);
   color: black;
-  transform: rotate(180deg) scale(1.1);
 }
 
-.message-badge {
+.notification-badge {
   position: absolute;
   top: -5px;
   right: -5px;
@@ -218,106 +216,190 @@ header {
   text-align: center;
 }
 
-.ricky-badge {
-  background: gold;
-  color: black;
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 0.2rem 0.5rem;
-  border-radius: var(--radius-full);
-  margin-left: 0.5rem;
-  display: inline-block;
-}
-
-.main-content {
-  max-width: 1400px;
-  margin: 2rem auto;
-  padding: 0 2rem;
-}
-
-.communities-sidebar {
+/* Notifications Panel */
+.notifications-panel {
   position: fixed;
-  left: 20px;
-  top: 120px;
-  width: 250px;
+  bottom: 20px;
+  right: 20px;
+  width: 350px;
+  max-height: 500px;
   background: var(--bg-panel);
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--border-glow);
   border-radius: var(--radius-xl);
-  padding: 1.5rem;
-  z-index: 90;
+  box-shadow: var(--hover-shadow);
+  z-index: 1000;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
 }
 
-.communities-sidebar h3 {
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.notifications-panel.active {
+  display: flex;
+}
+
+.notifications-header {
+  padding: 1rem 1.5rem;
+  background: rgba(0,0,0,0.3);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notifications-header h3 {
   font-family: 'JetBrains Mono', monospace;
   color: var(--orange);
-  margin-bottom: 1rem;
   font-size: 1.2rem;
 }
 
-.community-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
+.notifications-header button {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-full);
+  transition: var(--transition);
 }
 
-.community-item {
-  padding: 0.8rem 1rem;
-  border-radius: var(--radius-full);
+.notifications-header button:hover {
+  background: rgba(255,107,0,0.2);
+  color: var(--orange);
+}
+
+.notifications-list {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 400px;
+  padding: 0.5rem;
+}
+
+.notification-item {
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  background: rgba(0,0,0,0.2);
+  margin-bottom: 0.5rem;
   cursor: pointer;
   transition: var(--transition);
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  color: var(--text-secondary);
+  border-left: 3px solid transparent;
 }
 
-.community-item:hover {
+.notification-item:hover {
   background: rgba(255,107,0,0.1);
-  color: var(--orange);
   transform: translateX(5px);
 }
 
-.community-item.active {
-  background: var(--orange);
-  color: black;
+.notification-item.unread {
+  border-left-color: var(--orange);
+  background: rgba(255,107,0,0.05);
+}
+
+.notification-item .notification-title {
   font-weight: 700;
+  color: var(--orange);
+  margin-bottom: 0.3rem;
 }
 
-.community-icon {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: var(--orange);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  color: black;
-}
-
-.create-community-btn {
-  background: rgba(255,107,0,0.1);
-  border: 1px dashed var(--border-color);
-  color: var(--text-primary);
-  padding: 0.8rem;
-  border-radius: var(--radius-full);
-  width: 100%;
-  cursor: pointer;
-  font-family: 'JetBrains Mono', monospace;
+.notification-item .notification-sender {
   font-size: 0.9rem;
-  transition: var(--transition);
+  color: var(--text-secondary);
+  margin-bottom: 0.2rem;
+}
+
+.notification-item .notification-preview {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notification-item .notification-time {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+  text-align: right;
+}
+
+/* Toast Notifications (Bottom Right) */
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10001;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 0.75rem;
+  pointer-events: none;
+  max-width: 350px;
+  width: 100%;
 }
 
-.create-community-btn:hover {
-  background: rgba(255,107,0,0.2);
-  border-color: var(--orange);
+.toast {
+  background: var(--bg-panel);
+  border: 2px solid var(--border-glow);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  color: var(--text-primary);
+  box-shadow: var(--hover-shadow);
+  font-family: 'JetBrains Mono', monospace;
+  animation: toastSlideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: auto;
+  cursor: pointer;
+  border-left: 4px solid var(--orange);
 }
 
+.toast:hover {
+  transform: translateX(-5px);
+}
+
+.toast .toast-title {
+  font-weight: 800;
+  color: var(--orange);
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.toast .toast-sender {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.2rem;
+}
+
+.toast .toast-message {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@keyframes toastSlideIn {
+  from {
+    transform: translateX(100%) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Messages Panel - Always Visible */
 .messages-panel {
   position: fixed;
   right: 20px;
@@ -330,6 +412,7 @@ header {
   z-index: 90;
   max-height: calc(100vh - 150px);
   overflow-y: auto;
+  display: block !important;
 }
 
 .messages-panel h3 {
@@ -429,12 +512,98 @@ header {
   text-align: center;
 }
 
+/* Main Feed */
 .main-feed {
   margin-left: 280px;
   margin-right: 330px;
   transition: margin 0.3s;
 }
 
+/* Communities Sidebar */
+.communities-sidebar {
+  position: fixed;
+  left: 20px;
+  top: 120px;
+  width: 250px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  z-index: 90;
+}
+
+.communities-sidebar h3 {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--orange);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.community-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.community-item {
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.community-item:hover {
+  background: rgba(255,107,0,0.1);
+  color: var(--orange);
+  transform: translateX(5px);
+}
+
+.community-item.active {
+  background: var(--orange);
+  color: black;
+  font-weight: 700;
+}
+
+.community-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: black;
+}
+
+.create-community-btn {
+  background: rgba(255,107,0,0.1);
+  border: 1px dashed var(--border-color);
+  color: var(--text-primary);
+  padding: 0.8rem;
+  border-radius: var(--radius-full);
+  width: 100%;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.create-community-btn:hover {
+  background: rgba(255,107,0,0.2);
+  border-color: var(--orange);
+}
+
+/* Forum Header */
 .forum-header {
   background: var(--bg-panel);
   border: 1px solid var(--border-color);
@@ -484,6 +653,7 @@ header {
   box-shadow: 0 10px 30px rgba(255,107,0,0.5);
 }
 
+/* Posts Container */
 .posts-container {
   background: var(--bg-panel);
   border: 1px solid var(--border-color);
@@ -531,6 +701,7 @@ header {
   color: black;
 }
 
+/* Empty State */
 .empty-state {
   padding: 5rem 2rem;
   text-align: center;
@@ -584,6 +755,7 @@ header {
   box-shadow: 0 10px 30px rgba(255,107,0,0.5);
 }
 
+/* Post Card */
 .post-card {
   padding: 2rem;
   border-bottom: 1px solid var(--border-color);
@@ -724,158 +896,7 @@ header {
   color: var(--orange);
 }
 
-.post-detail {
-  background: var(--bg-panel);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-xl);
-  padding: 2rem;
-}
-
-.post-detail-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.back-btn {
-  background: rgba(255,107,0,0.1);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  padding: 0.8rem 2rem;
-  border-radius: var(--radius-full);
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 700;
-  cursor: pointer;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.back-btn:hover {
-  background: rgba(255,107,0,0.2);
-  transform: translateX(-5px);
-}
-
-.post-detail-author {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-  background: rgba(0,0,0,0.2);
-  border-radius: var(--radius-lg);
-}
-
-.detail-avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--orange), var(--orange-bright));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: black;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.detail-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.detail-author-info h3 {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 2rem;
-  color: var(--orange);
-  margin-bottom: 0.25rem;
-  cursor: pointer;
-  display: inline-block;
-}
-
-.detail-author-info h3:hover {
-  text-decoration: underline;
-}
-
-.detail-author-info p {
-  color: var(--text-muted);
-}
-
-.post-detail-title {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin-bottom: 1.5rem;
-  line-height: 1.2;
-}
-
-.post-detail-body {
-  font-size: 1.2rem;
-  line-height: 1.8;
-  color: var(--text-secondary);
-  margin-bottom: 2rem;
-}
-
-.post-detail-media {
-  max-width: 100%;
-  max-height: 600px;
-  overflow: hidden;
-  border-radius: var(--radius-lg);
-  margin-bottom: 2rem;
-  background: var(--bg-elevated);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.post-detail-media img {
-  max-width: 100%;
-  max-height: 600px;
-  object-fit: contain;
-}
-
-.post-detail-actions {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  padding: 1rem 0;
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-  flex-wrap: wrap;
-}
-
-.action-btn {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  font-size: 1rem;
-  padding: 0.5rem 1.5rem;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: 'JetBrains Mono', monospace;
-}
-
-.action-btn:hover {
-  background: rgba(255,107,0,0.1);
-  color: var(--orange);
-}
-
-.action-btn.active {
-  background: var(--orange);
-  color: black;
-}
-
+/* Reactions */
 .reactions-detail {
   margin: 2rem 0;
   padding: 1rem;
@@ -930,6 +951,7 @@ header {
   color: black;
 }
 
+/* Comment Section */
 .comment-section {
   margin-top: 2rem;
 }
@@ -1082,6 +1104,160 @@ header {
   font-weight: 700;
 }
 
+/* Post Detail View */
+.post-detail {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+}
+
+.post-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.back-btn {
+  background: rgba(255,107,0,0.1);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.8rem 2rem;
+  border-radius: var(--radius-full);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.back-btn:hover {
+  background: rgba(255,107,0,0.2);
+  transform: translateX(-5px);
+}
+
+.post-detail-author {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: rgba(0,0,0,0.2);
+  border-radius: var(--radius-lg);
+}
+
+.detail-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--orange), var(--orange-bright));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: black;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.detail-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail-author-info h3 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2rem;
+  color: var(--orange);
+  margin-bottom: 0.25rem;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.detail-author-info h3:hover {
+  text-decoration: underline;
+}
+
+.detail-author-info p {
+  color: var(--text-muted);
+}
+
+.post-detail-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.post-detail-body {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.post-detail-media {
+  max-width: 100%;
+  max-height: 600px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  margin-bottom: 2rem;
+  background: var(--bg-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-detail-media img {
+  max-width: 100%;
+  max-height: 600px;
+  object-fit: contain;
+}
+
+.post-detail-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.action-btn:hover {
+  background: rgba(255,107,0,0.1);
+  color: var(--orange);
+}
+
+.action-btn.active {
+  background: var(--orange);
+  color: black;
+}
+
+/* Profile View */
 .profile-section {
   background: var(--bg-panel);
   border: 1px solid var(--border-color);
@@ -1148,6 +1324,18 @@ header {
   display: inline-block;
 }
 
+.owner-badge {
+  background: gold;
+  color: black;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.2rem 0.8rem;
+  border-radius: var(--radius-full);
+  margin-left: 0.5rem;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .profile-stats {
   display: flex;
   gap: 3rem;
@@ -1197,6 +1385,7 @@ header {
   color: black;
 }
 
+/* New Post Form */
 .new-post-section {
   background: var(--bg-panel);
   border: 1px solid var(--border-color);
@@ -1345,6 +1534,7 @@ header {
   cursor: not-allowed;
 }
 
+/* Message Modal */
 .message-modal {
   position: fixed;
   inset: 0;
@@ -1485,9 +1675,43 @@ header {
   outline: none;
 }
 
+.gif-picker-btn {
+  background: rgba(255,107,0,0.1);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-full);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.gif-picker-btn:hover {
+  background: rgba(255,107,0,0.2);
+}
+
+.tenor-embed {
+  margin-bottom: 1rem;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  max-height: 200px;
+}
+
+.tenor-embed iframe {
+  width: 100%;
+  height: 200px;
+  border: none;
+}
+
 .modal-actions {
   display: flex;
   gap: 1rem;
+  margin-top: 1rem;
 }
 
 .modal-btn {
@@ -1521,6 +1745,7 @@ header {
   background: rgba(255,107,0,0.2);
 }
 
+/* Conversation View */
 .conversation-view {
   position: fixed;
   inset: 0;
@@ -1627,6 +1852,13 @@ header {
   border-bottom-left-radius: 4px;
 }
 
+.message-bubble img {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
 .message-time {
   font-size: 0.7rem;
   margin-top: 0.3rem;
@@ -1639,6 +1871,8 @@ header {
   border-top: 1px solid var(--border-color);
   display: flex;
   gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .message-input {
@@ -1649,11 +1883,33 @@ header {
   border-radius: var(--radius-full);
   color: var(--text-primary);
   font-family: 'Inter', sans-serif;
+  min-width: 200px;
 }
 
 .message-input:focus {
   border-color: var(--orange);
   outline: none;
+}
+
+.gif-btn {
+  background: rgba(255,107,0,0.1);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.gif-btn:hover {
+  background: rgba(255,107,0,0.2);
+  color: var(--orange);
+  transform: scale(1.1);
 }
 
 .message-send-btn {
@@ -1666,6 +1922,7 @@ header {
   cursor: pointer;
   font-family: 'JetBrains Mono', monospace;
   transition: var(--transition);
+  height: 48px;
 }
 
 .message-send-btn:hover {
@@ -1673,6 +1930,56 @@ header {
   box-shadow: 0 0 20px rgba(255,107,0,0.5);
 }
 
+.tenor-picker {
+  position: absolute;
+  bottom: 80px;
+  right: 20px;
+  width: 300px;
+  background: var(--bg-panel);
+  border: 2px solid var(--border-glow);
+  border-radius: var(--radius-xl);
+  padding: 1rem;
+  z-index: 10003;
+  display: none;
+}
+
+.tenor-picker.active {
+  display: block;
+}
+
+.tenor-picker input {
+  width: 100%;
+  padding: 0.8rem;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.tenor-results {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.tenor-gif {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.tenor-gif:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px var(--orange);
+}
+
+/* Account Modal */
 .account-modal {
   position: fixed;
   inset: 0;
@@ -1826,41 +2133,7 @@ header {
   font-weight: 700;
 }
 
-.toast-container {
-  position: fixed;
-  top: 2rem;
-  right: 2rem;
-  z-index: 99999;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  pointer-events: none;
-  max-width: 400px;
-}
-
-.toast {
-  background: var(--orange);
-  padding: 1rem 1.5rem;
-  border-radius: var(--radius-full);
-  color: black;
-  font-weight: 700;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 20px rgba(255,107,0,0.5);
-  font-family: 'JetBrains Mono', monospace;
-  animation: toastSlideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  pointer-events: auto;
-}
-
-@keyframes toastSlideIn {
-  from {
-    transform: translateX(100%) scale(0.8);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0) scale(1);
-    opacity: 1;
-  }
-}
-
+/* Loading */
 .loading-spinner {
   width: 50px;
   height: 50px;
@@ -1875,6 +2148,7 @@ header {
   to { transform: rotate(360deg); }
 }
 
+/* Responsive */
 @media (max-width: 1200px) {
   .main-feed {
     margin-left: 0;
@@ -1912,6 +2186,12 @@ header {
   .forum-header {
     flex-direction: column;
     text-align: center;
+  }
+  
+  .toast-container {
+    left: 20px;
+    right: 20px;
+    max-width: none;
   }
 }
 </style>
@@ -1964,6 +2244,7 @@ header {
   </div>
 </div>
 
+<!-- Message Modal -->
 <div class="message-modal" id="messageModal">
   <div class="message-modal-content">
     <button class="modal-close" onclick="closeMessageModal()">✕</button>
@@ -1975,7 +2256,17 @@ header {
     
     <div id="userResults" class="user-results"></div>
     
+    <button class="gif-picker-btn" onclick="toggleGifPicker()">
+      <span>🎬</span> add GIF
+    </button>
+    
+    <div id="gifPicker" class="tenor-picker">
+      <input type="text" id="gifSearch" placeholder="search GIFs..." oninput="searchGifs()">
+      <div id="gifResults" class="tenor-results"></div>
+    </div>
+    
     <textarea id="messageText" class="message-textarea" placeholder="write your message..."></textarea>
+    <div id="selectedGif" class="tenor-embed" style="display: none;"></div>
     
     <div class="modal-actions">
       <button class="modal-btn secondary" onclick="closeMessageModal()">cancel</button>
@@ -1984,6 +2275,7 @@ header {
   </div>
 </div>
 
+<!-- Conversation View -->
 <div class="conversation-view" id="conversationView">
   <div class="conversation-header">
     <button class="conversation-back" onclick="closeConversation()">←</button>
@@ -1993,15 +2285,32 @@ header {
   <div class="messages-container" id="messagesContainer"></div>
   
   <div class="message-input-area">
-    <input type="text" id="conversationInput" class="message-input" placeholder="type a message..." onkeypress="if(event.key==='Enter') sendConversationMessage()">
+    <input type="text" id="conversationInput" class="message-input" placeholder="type a message...">
+    <button class="gif-btn" onclick="toggleConversationGifPicker()">🎬</button>
     <button class="message-send-btn" onclick="sendConversationMessage()">send</button>
+  </div>
+  
+  <div id="conversationGifPicker" class="tenor-picker">
+    <input type="text" id="conversationGifSearch" placeholder="search GIFs..." oninput="searchConversationGifs()">
+    <div id="conversationGifResults" class="tenor-results"></div>
+  </div>
+</div>
+
+<!-- Notifications Panel -->
+<div class="notifications-panel" id="notificationsPanel">
+  <div class="notifications-header">
+    <h3>notifications</h3>
+    <button onclick="closeNotifications()">✕</button>
+  </div>
+  <div class="notifications-list" id="notificationsList">
+    <div style="color: var(--text-muted); padding: 1rem; text-align: center;">no notifications</div>
   </div>
 </div>
 
 <header>
   <div class="header-content">
     <div style="display:flex; align-items:center; gap:1.2rem;">
-      <span class="logo" onclick="showView('forum')">PH Social</span>
+      <span class="logo" onclick="showView('forum')">PH - Science | Social</span>
     </div>
     
     <div class="nav-links">
@@ -2012,14 +2321,15 @@ header {
     
     <div style="display:flex; gap:1rem;">
       <button class="account-btn" id="accountBtn" onclick="showSmartAccountModal()">✨ sign in</button>
-      <div class="settings-icon" id="settingsBtn">
-        💬
-        <span class="message-badge" id="messageBadge" style="display: none;">0</span>
+      <div class="notification-icon" id="notificationIcon" onclick="toggleNotifications()">
+        🔔
+        <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
       </div>
     </div>
   </div>
 </header>
 
+<!-- Communities Sidebar -->
 <div class="communities-sidebar">
   <h3>communities</h3>
   <div class="community-list" id="communityList">
@@ -2049,6 +2359,7 @@ header {
   </button>
 </div>
 
+<!-- Messages Panel - Always Visible -->
 <div class="messages-panel">
   <h3>
     messages
@@ -2058,6 +2369,9 @@ header {
     <div style="color: var(--text-muted); padding: 1rem; text-align: center;">sign in to message</div>
   </div>
 </div>
+
+<!-- Toast Container (Bottom Right) -->
+<div class="toast-container" id="toastContainer"></div>
 
 <div class="main-content">
   <div class="main-feed" id="mainFeed">
@@ -2179,8 +2493,6 @@ header {
   </div>
 </div>
 
-<div class="toast-container" id="toastContainer"></div>
-
 <script>
 const firebaseConfig = {
   apiKey: "AIzaSyA-68XKNt_PD0I1TJbNcyotT4qMbgHh-tI",
@@ -2196,6 +2508,9 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 const storage = firebase.storage();
 
+// Fix CORS issue by setting correct storage bucket
+const storageRef = storage.ref();
+
 db.enablePersistence().catch(() => {});
 
 let currentUser = null;
@@ -2204,10 +2519,13 @@ let currentView = 'forum';
 let posts = [];
 let postsUnsubscribe = null;
 let conversationsUnsubscribe = null;
+let notificationsUnsubscribe = null;
 let currentCommunity = 'all';
 let selectedRecipient = null;
+let notifications = [];
+let unreadNotifications = 0;
 
-const ricky_USERNAME = 'ricky';
+const OWNER_USERNAME = 'ricky';
 
 const REACTIONS = [
   { emoji: '👍', name: 'like' },
@@ -2217,6 +2535,9 @@ const REACTIONS = [
   { emoji: '😢', name: 'sad' },
   { emoji: '🔥', name: 'fire' }
 ];
+
+// Tenor API key - you'll need to get one from Tenor
+const TENOR_API_KEY = 'AIzaSyDxVnJZ7_l0Zn8X2aXQMQfZNX5l2U5y5oM'; // Replace with your key
 
 window.showView = function(view) {
   currentView = view;
@@ -2325,11 +2646,11 @@ window.showSmartAccountModal = function() {
   const user = auth.currentUser;
   
   if (user && !user.isAnonymous) {
-    const isricky = user.displayName === ricky_USERNAME;
+    const isOwner = user.displayName === OWNER_USERNAME;
     content.innerHTML = `
       <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
-      <h2>PH Social</h2>
-      <div style="color: var(--orange); margin-bottom: 2rem;">👋 ${user.displayName || 'user'} ${isricky ? '<span class="ricky-badge">👑 ricky</span>' : ''}</div>
+      <h2>PH - Science | Social</h2>
+      <div style="color: var(--orange); margin-bottom: 2rem;">👋 ${user.displayName || 'user'} ${isOwner ? '<span class="owner-badge">👑 OWNER</span>' : ''}</div>
       <div class="modal-buttons">
         <button class="modal-btn warning" onclick="logout()">🚪 log out</button>
         <button class="modal-btn secondary" onclick="switchAccounts()">🔄 switch</button>
@@ -2338,7 +2659,7 @@ window.showSmartAccountModal = function() {
   } else if (user && user.isAnonymous) {
     content.innerHTML = `
       <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
-      <h2>PH Social</h2>
+      <h2>PH - Science | Social</h2>
       <div style="color: var(--orange); margin-bottom: 2rem;">👤 guest mode (view only)</div>
       <div class="modal-buttons">
         <button class="modal-btn primary" onclick="showSignup()">✨ create account</button>
@@ -2348,7 +2669,7 @@ window.showSmartAccountModal = function() {
   } else {
     content.innerHTML = `
       <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
-      <h2>PH Social</h2>
+      <h2>PH - Science | Social</h2>
       <p>join the community</p>
       <div class="modal-buttons">
         <button class="modal-btn primary" onclick="showSignup()">create account</button>
@@ -2369,6 +2690,8 @@ window.closeAllModals = function() {
       modal.style.display = 'none';
     }, 300);
   });
+  document.getElementById('gifPicker')?.classList.remove('active');
+  document.getElementById('conversationGifPicker')?.classList.remove('active');
 };
 
 window.showLogin = function() {
@@ -2476,6 +2799,7 @@ window.continueAsGuest = function() {
 window.logout = function() {
   if (postsUnsubscribe) postsUnsubscribe();
   if (conversationsUnsubscribe) conversationsUnsubscribe();
+  if (notificationsUnsubscribe) notificationsUnsubscribe();
   
   auth.signOut().then(() => {
     showToast('👋 logged out');
@@ -2489,14 +2813,16 @@ window.logout = function() {
       conversationList.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; text-align: center;">sign in to message</div>';
     }
     
-    const messageBadge = document.getElementById('messageBadge');
-    if (messageBadge) messageBadge.style.display = 'none';
+    document.getElementById('notificationBadge').style.display = 'none';
+    notifications = [];
+    unreadNotifications = 0;
   });
 };
 
 window.switchAccounts = function() {
   if (postsUnsubscribe) postsUnsubscribe();
   if (conversationsUnsubscribe) conversationsUnsubscribe();
+  if (notificationsUnsubscribe) notificationsUnsubscribe();
   
   auth.signOut().then(() => {
     closeAllModals();
@@ -2506,22 +2832,22 @@ window.switchAccounts = function() {
 
 auth.onAuthStateChanged((user) => {
   currentUser = user;
+  const accountBtn = document.getElementById('accountBtn');
+  
   console.log("User signed in:", user);
   if (user) {
     console.log("User email:", user.email);
     console.log("User UID:", user.uid);
     console.log("Is anonymous:", user.isAnonymous);
     console.log("Display name:", user.displayName);
-  }
-  const accountBtn = document.getElementById('accountBtn');
-  
-  if (user) {
+    
     if (!user.isAnonymous) {
       if (accountBtn) accountBtn.innerHTML = `👤 ${user.displayName || 'user'}`;
       db.collection('users').doc(user.uid).update({
         lastSeen: Date.now()
       }).catch(() => {});
       loadConversations();
+      loadNotifications();
     } else {
       if (accountBtn) accountBtn.innerHTML = '👤 guest';
       const conversationList = document.getElementById('conversationList');
@@ -2535,8 +2861,9 @@ auth.onAuthStateChanged((user) => {
     if (conversationList) {
       conversationList.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; text-align: center;">sign in to message</div>';
     }
-    const messageBadge = document.getElementById('messageBadge');
-    if (messageBadge) messageBadge.style.display = 'none';
+    document.getElementById('notificationBadge').style.display = 'none';
+    notifications = [];
+    unreadNotifications = 0;
   }
   
   if (currentView === 'forum') loadPosts();
@@ -2549,10 +2876,6 @@ function loadPosts() {
   
   let query = db.collection('posts').orderBy('createdAt', 'desc');
   
-  if (currentCommunity !== 'all') {
-    query = query.where('community', '==', currentCommunity);
-  }
-  
   postsUnsubscribe = query.onSnapshot((snapshot) => {
     posts = [];
     snapshot.forEach(doc => {
@@ -2562,7 +2885,14 @@ function loadPosts() {
       });
     });
     
-    displayPosts(posts);
+    // Filter in JavaScript
+    if (currentCommunity !== 'all') {
+      const filteredPosts = posts.filter(post => post.community === currentCommunity);
+      displayPosts(filteredPosts);
+    } else {
+      displayPosts(posts);
+    }
+    
     updateStats();
     loadTrending();
   }, (error) => {
@@ -2610,7 +2940,7 @@ function createPostCard(post) {
   div.onclick = () => openPost(post.id);
   
   const authorInitial = post.authorName ? post.authorName[0].toUpperCase() : '?';
-  const isricky = post.authorName === ricky_USERNAME;
+  const isOwner = post.authorName === OWNER_USERNAME;
   
   let totalReactions = 0;
   if (post.reactions) {
@@ -2625,7 +2955,7 @@ function createPostCard(post) {
       <div class="post-author-info">
         <div class="post-author-name" onclick="event.stopPropagation(); viewUserProfile('${post.author}')">
           ${escapeHtml(post.authorName || 'unknown')}
-          ${isricky ? '<span class="ricky-badge">👑</span>' : ''}
+          ${isOwner ? '<span class="owner-badge">👑</span>' : ''}
         </div>
         <div class="post-meta">
           <span>🕒 ${timeAgo(post.createdAt)}</span>
@@ -2687,7 +3017,7 @@ function loadPostDetails(postId) {
           const userData = userDoc.data() || {};
           const avatarUrl = userData?.avatar || null;
           const authorInitial = post.authorName ? post.authorName[0].toUpperCase() : '?';
-          const isricky = post.authorName === ricky_USERNAME;
+          const isOwner = post.authorName === OWNER_USERNAME;
           
           const detailTitle = document.getElementById('detailTitle');
           const detailBody = document.getElementById('detailBody');
@@ -2708,7 +3038,7 @@ function loadPostDetails(postId) {
               <div class="detail-author-info">
                 <h3 onclick="viewUserProfile('${post.author}')">
                   ${escapeHtml(post.authorName || 'unknown')}
-                  ${isricky ? '<span class="ricky-badge">👑 ricky</span>' : ''}
+                  ${isOwner ? '<span class="owner-badge">👑 OWNER</span>' : ''}
                 </h3>
                 <p>joined ${userData.joined ? new Date(userData.joined).toLocaleDateString() : 'recently'}</p>
                 ${post.community ? `<p>community: ${post.community}</p>` : ''}
@@ -2729,7 +3059,7 @@ function loadPostDetails(postId) {
           if (detailComments) detailComments.innerHTML = `💬 ${post.comments || 0}`;
           
           if (deleteBtn) {
-            const canDelete = (currentUser && (currentUser.uid === post.author || currentUser.displayName === ricky_USERNAME));
+            const canDelete = (currentUser && (currentUser.uid === post.author || currentUser.displayName === OWNER_USERNAME));
             deleteBtn.style.display = canDelete ? 'inline-flex' : 'none';
           }
           
@@ -2855,7 +3185,7 @@ function loadComments(postId) {
           const userData = userDoc.data() || {};
           const avatarUrl = userData?.avatar || null;
           const authorInitial = comment.authorName ? comment.authorName[0].toUpperCase() : '?';
-          const isricky = comment.authorName === ricky_USERNAME;
+          const isOwner = comment.authorName === OWNER_USERNAME;
           
           const userCommentReactions = (comment.userReactions && currentUser && !currentUser.isAnonymous) ? comment.userReactions[currentUser.uid] : {};
           
@@ -2878,7 +3208,7 @@ function loadComments(postId) {
               </div>
               <span class="comment-author" onclick="viewUserProfile('${comment.author}')">
                 ${escapeHtml(comment.authorName || 'unknown')}
-                ${isricky ? '<span class="ricky-badge">👑</span>' : ''}
+                ${isOwner ? '<span class="owner-badge">👑</span>' : ''}
               </span>
               <span class="comment-date">${timeAgo(comment.createdAt)}</span>
             </div>
@@ -3154,7 +3484,7 @@ function loadProfile(userId = null) {
       const avatarUrl = userData.avatar || null;
       const displayName = userId ? userData.username : (currentUser.displayName || 'user');
       const authorInitial = displayName ? displayName[0].toUpperCase() : '?';
-      const isricky = displayName === ricky_USERNAME;
+      const isOwner = displayName === OWNER_USERNAME;
       const isOwnProfile = !userId || userId === currentUser?.uid;
       
       profileSection.innerHTML = `
@@ -3164,7 +3494,7 @@ function loadProfile(userId = null) {
             ${isOwnProfile && !currentUser?.isAnonymous ? '<div class="avatar-overlay">📷 change</div>' : ''}
           </div>
           <div class="profile-info">
-            <h2>${escapeHtml(displayName)} ${isricky ? '<span class="ricky-badge">👑 ricky</span>' : ''}</h2>
+            <h2>${escapeHtml(displayName)} ${isOwner ? '<span class="owner-badge">👑 OWNER</span>' : ''}</h2>
             <p>joined ${userData.joined ? new Date(userData.joined).toLocaleDateString() : 'recently'}</p>
             <div class="profile-stats">
               <div class="profile-stat">
@@ -3258,24 +3588,56 @@ window.changeAvatar = function() {
     const file = e.target.files[0];
     if (!file) return;
     
-    const storageRef = storage.ref('avatars/' + currentUser.uid + '_' + Date.now());
-    storageRef.put(file).then(snapshot => {
-      return snapshot.ref.getDownloadURL();
-    }).then(url => {
-      return db.collection('users').doc(currentUser.uid).update({
-        avatar: url
+    // Create a unique filename
+    const fileName = `avatars/${currentUser.uid}_${Date.now()}.${file.name.split('.').pop()}`;
+    const storageRef = storage.ref(fileName);
+    
+    // Upload with metadata
+    const metadata = {
+      contentType: file.type,
+      customMetadata: {
+        'uploadedBy': currentUser.uid,
+        'uploadedAt': new Date().toISOString()
+      }
+    };
+    
+    showToast('📤 uploading...');
+    
+    storageRef.put(file, metadata)
+      .then(snapshot => {
+        console.log('Upload successful:', snapshot);
+        return snapshot.ref.getDownloadURL();
+      })
+      .then(url => {
+        console.log('Download URL:', url);
+        return db.collection('users').doc(currentUser.uid).update({
+          avatar: url
+        });
+      })
+      .then(() => {
+        showToast('✅ avatar updated!');
+        loadProfile();
+      })
+      .catch(error => {
+        console.error('Upload error:', error);
+        console.error('Error code:', error.code);
+        console.error('Error message:', error.message);
+        
+        if (error.code === 'storage/unauthorized') {
+          showToast('❌ permission denied - check storage rules');
+        } else if (error.code === 'storage/canceled') {
+          showToast('❌ upload canceled');
+        } else if (error.code === 'storage/unknown') {
+          showToast('❌ unknown error - check CORS settings');
+        } else {
+          showToast('❌ failed to upload: ' + error.message);
+        }
       });
-    }).then(() => {
-      showToast('✅ avatar updated!');
-      loadProfile();
-    }).catch(error => {
-      console.error(error);
-      showToast('❌ failed to upload');
-    });
   };
   input.click();
 };
 
+// Load conversations
 function loadConversations() {
   console.log("Loading conversations for user:", currentUser);
   
@@ -3290,19 +3652,17 @@ function loadConversations() {
   if (currentUser.isAnonymous) {
     const conversationList = document.getElementById('conversationList');
     if (conversationList) {
-      conversationList.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; text-align: center;">guests cannot message - create an account!</div>';
+      conversationList.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; text-align: center;">guests cannot message</div>';
     }
     return;
   }
   
-  // User is signed in and not anonymous - load conversations
   console.log("User is authenticated, loading conversations...");
   
   if (conversationsUnsubscribe) conversationsUnsubscribe();
   
   conversationsUnsubscribe = db.collection('conversations')
     .where('participants', 'array-contains', currentUser.uid)
-    .orderBy('lastMessageAt', 'desc')
     .onSnapshot((snapshot) => {
       const container = document.getElementById('conversationList');
       if (!container) return;
@@ -3313,20 +3673,29 @@ function loadConversations() {
       
       if (snapshot.empty) {
         container.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; text-align: center;">no messages yet</div>';
-        const messageBadge = document.getElementById('messageBadge');
-        if (messageBadge) messageBadge.style.display = 'none';
         return;
       }
       
-      let html = '';
+      // Convert to array and sort in JavaScript
+      let conversations = [];
       snapshot.forEach(doc => {
-        const conv = doc.data();
+        conversations.push({
+          id: doc.id,
+          ...doc.data()
+        });
+      });
+      
+      // Sort by lastMessageAt descending
+      conversations.sort((a, b) => (b.lastMessageAt || 0) - (a.lastMessageAt || 0));
+      
+      let html = '';
+      conversations.forEach(conv => {
         const otherUserId = conv.participants.find(id => id !== currentUser.uid);
         const isUnread = conv.lastMessage && conv.lastMessage.sender !== currentUser.uid && !conv.readBy?.[currentUser.uid];
         if (isUnread) unreadCount++;
         
         html += `
-          <div class="conversation-item ${isUnread ? 'unread' : ''}" onclick="openConversation('${doc.id}', '${otherUserId}')">
+          <div class="conversation-item ${isUnread ? 'unread' : ''}" onclick="openConversation('${conv.id}', '${otherUserId}')">
             <div class="conversation-header">
               <div class="conversation-avatar">${conv.otherUserInitial || '?'}</div>
               <span class="conversation-name">${conv.otherUserName || 'user'}</span>
@@ -3338,19 +3707,8 @@ function loadConversations() {
       });
       
       container.innerHTML = html;
-      
-      const messageBadge = document.getElementById('messageBadge');
-      if (messageBadge) {
-        if (unreadCount > 0) {
-          messageBadge.style.display = 'block';
-          messageBadge.textContent = unreadCount;
-        } else {
-          messageBadge.style.display = 'none';
-        }
-      }
     }, (error) => {
       console.error("Error loading conversations:", error);
-      // Show more detailed error
       const container = document.getElementById('conversationList');
       if (container) {
         container.innerHTML = `<div style="color: var(--text-muted); padding: 1rem; text-align: center;">Error: ${error.message}</div>`;
@@ -3358,6 +3716,145 @@ function loadConversations() {
     });
 }
 
+// Load notifications
+function loadNotifications() {
+  if (!currentUser || currentUser.isAnonymous) return;
+  
+  if (notificationsUnsubscribe) notificationsUnsubscribe();
+  
+  notificationsUnsubscribe = db.collection('notifications')
+    .where('userId', '==', currentUser.uid)
+    .orderBy('timestamp', 'desc')
+    .onSnapshot((snapshot) => {
+      notifications = [];
+      let unread = 0;
+      
+      snapshot.forEach(doc => {
+        const notif = { id: doc.id, ...doc.data() };
+        notifications.push(notif);
+        if (!notif.read) unread++;
+      });
+      
+      unreadNotifications = unread;
+      updateNotificationBadge();
+      updateNotificationsList();
+    }, (error) => {
+      console.error("Error loading notifications:", error);
+    });
+}
+
+function updateNotificationBadge() {
+  const badge = document.getElementById('notificationBadge');
+  if (!badge) return;
+  
+  if (unreadNotifications > 0) {
+    badge.style.display = 'block';
+    badge.textContent = unreadNotifications;
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+function updateNotificationsList() {
+  const container = document.getElementById('notificationsList');
+  if (!container) return;
+  
+  if (notifications.length === 0) {
+    container.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; text-align: center;">no notifications</div>';
+    return;
+  }
+  
+  let html = '';
+  notifications.forEach(notif => {
+    html += `
+      <div class="notification-item ${notif.read ? '' : 'unread'}" onclick="markNotificationRead('${notif.id}')">
+        <div class="notification-title">${escapeHtml(notif.title)}</div>
+        <div class="notification-sender">${escapeHtml(notif.sender)}</div>
+        <div class="notification-preview">${escapeHtml(notif.preview)}</div>
+        <div class="notification-time">${timeAgo(notif.timestamp)}</div>
+      </div>
+    `;
+  });
+  
+  container.innerHTML = html;
+}
+
+function markNotificationRead(notificationId) {
+  db.collection('notifications').doc(notificationId).update({
+    read: true
+  }).catch(() => {});
+}
+
+window.toggleNotifications = function() {
+  const panel = document.getElementById('notificationsPanel');
+  if (panel) {
+    if (panel.classList.contains('active')) {
+      panel.classList.remove('active');
+    } else {
+      panel.classList.add('active');
+      // Mark all as read when opening
+      notifications.forEach(notif => {
+        if (!notif.read) {
+          db.collection('notifications').doc(notif.id).update({
+            read: true
+          }).catch(() => {});
+        }
+      });
+    }
+  }
+};
+
+window.closeNotifications = function() {
+  document.getElementById('notificationsPanel').classList.remove('active');
+};
+
+function showMessageNotification(senderName, messagePreview, conversationId) {
+  // Add to notifications panel
+  const notification = {
+    userId: currentUser.uid,
+    title: 'New Message!',
+    sender: senderName,
+    preview: messagePreview,
+    timestamp: Date.now(),
+    read: false,
+    conversationId: conversationId
+  };
+  
+  db.collection('notifications').add(notification).catch(() => {});
+  
+  // Show toast
+  showMessageToast(senderName, messagePreview, conversationId);
+}
+
+function showMessageToast(senderName, messagePreview, conversationId) {
+  const container = document.getElementById('toastContainer');
+  if (!container) return;
+  
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.onclick = () => {
+    // Open the conversation
+    const otherUserId = window.currentOtherUserId; // You'll need to store this
+    if (conversationId && otherUserId) {
+      openConversation(conversationId, otherUserId);
+    }
+    toast.remove();
+  };
+  
+  toast.innerHTML = `
+    <div class="toast-title">📬 New Message!</div>
+    <div class="toast-sender">${escapeHtml(senderName)}</div>
+    <div class="toast-message">${escapeHtml(messagePreview)}</div>
+  `;
+  
+  container.appendChild(toast);
+  
+  setTimeout(() => {
+    toast.remove();
+  }, 5000);
+}
+
+// Message functions
 window.openMessageModal = function() {
   console.log("Opening message modal, current user:", currentUser);
   
@@ -3373,7 +3870,6 @@ window.openMessageModal = function() {
     return;
   }
   
-  // User is authenticated - open modal
   const modal = document.getElementById('messageModal');
   if (modal) {
     modal.classList.add('active');
@@ -3381,10 +3877,12 @@ window.openMessageModal = function() {
     const userSearch = document.getElementById('userSearch');
     const userResults = document.getElementById('userResults');
     const messageText = document.getElementById('messageText');
+    const gifPicker = document.getElementById('gifPicker');
     
     if (userSearch) userSearch.value = '';
     if (userResults) userResults.innerHTML = '';
     if (messageText) messageText.value = '';
+    if (gifPicker) gifPicker.classList.remove('active');
     
     selectedRecipient = null;
   }
@@ -3433,6 +3931,9 @@ window.openMessageModalWithUser = function(userId) {
         
         const userResults = document.getElementById('userResults');
         if (userResults) userResults.innerHTML = '';
+        
+        const gifPicker = document.getElementById('gifPicker');
+        if (gifPicker) gifPicker.classList.remove('active');
       }
     }
   });
@@ -3441,6 +3942,8 @@ window.openMessageModalWithUser = function(userId) {
 window.closeMessageModal = function() {
   const modal = document.getElementById('messageModal');
   if (modal) modal.classList.remove('active');
+  document.getElementById('gifPicker')?.classList.remove('active');
+  document.getElementById('selectedGif').style.display = 'none';
 };
 
 window.searchUsers = function() {
@@ -3497,10 +4000,130 @@ window.selectUser = function(userId, username) {
   if (userResults) userResults.innerHTML = '';
 };
 
+window.toggleGifPicker = function() {
+  const picker = document.getElementById('gifPicker');
+  if (picker) {
+    if (picker.classList.contains('active')) {
+      picker.classList.remove('active');
+    } else {
+      picker.classList.add('active');
+      searchGifs(); // Load trending GIFs
+    }
+  }
+};
+
+window.toggleConversationGifPicker = function() {
+  const picker = document.getElementById('conversationGifPicker');
+  if (picker) {
+    if (picker.classList.contains('active')) {
+      picker.classList.remove('active');
+    } else {
+      picker.classList.add('active');
+      searchConversationGifs(); // Load trending GIFs
+    }
+  }
+};
+
+window.searchGifs = function() {
+  const searchInput = document.getElementById('gifSearch');
+  const query = searchInput ? searchInput.value : '';
+  searchTenor(query, 'gifResults');
+};
+
+window.searchConversationGifs = function() {
+  const searchInput = document.getElementById('conversationGifSearch');
+  const query = searchInput ? searchInput.value : '';
+  searchTenor(query, 'conversationGifResults');
+};
+
+function searchTenor(query, resultDivId) {
+  const resultsDiv = document.getElementById(resultDivId);
+  if (!resultsDiv) return;
+  
+  let url;
+  if (query.trim() === '') {
+    // Get trending GIFs
+    url = `https://tenor.googleapis.com/v2/featured?key=${TENOR_API_KEY}&limit=10`;
+  } else {
+    // Search GIFs
+    url = `https://tenor.googleapis.com/v2/search?q=${encodeURIComponent(query)}&key=${TENOR_API_KEY}&limit=10`;
+  }
+  
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      if (!data.results) {
+        resultsDiv.innerHTML = '<div style="color: var(--text-muted);">no GIFs found</div>';
+        return;
+      }
+      
+      let html = '';
+      data.results.forEach(gif => {
+        const gifUrl = gif.media_formats?.tinygif?.url || gif.media_formats?.gif?.url;
+        if (gifUrl) {
+          html += `<img src="${gifUrl}" class="tenor-gif" onclick="selectGif('${gifUrl}', '${resultDivId}')">`;
+        }
+      });
+      
+      resultsDiv.innerHTML = html || '<div style="color: var(--text-muted);">no GIFs found</div>';
+    })
+    .catch(error => {
+      console.error("Error fetching GIFs:", error);
+      resultsDiv.innerHTML = '<div style="color: var(--text-muted);">error loading GIFs</div>';
+    });
+}
+
+window.selectGif = function(gifUrl, source) {
+  if (source === 'gifResults') {
+    // For new message modal
+    const selectedGif = document.getElementById('selectedGif');
+    selectedGif.innerHTML = `<iframe src="${gifUrl}" frameborder="0"></iframe>`;
+    selectedGif.style.display = 'block';
+    document.getElementById('gifPicker').classList.remove('active');
+    
+    // Store GIF URL to send with message
+    window.selectedGifUrl = gifUrl;
+  } else {
+    // For conversation view
+    sendGifMessage(gifUrl);
+    document.getElementById('conversationGifPicker').classList.remove('active');
+  }
+};
+
+function sendGifMessage(gifUrl) {
+  if (!window.currentConversationId || !currentUser) return;
+  
+  const message = {
+    text: '',
+    gifUrl: gifUrl,
+    sender: currentUser.uid,
+    senderName: currentUser.displayName,
+    timestamp: Date.now(),
+    read: false
+  };
+  
+  const batch = db.batch();
+  
+  batch.set(db.collection('conversations').doc(window.currentConversationId).collection('messages').doc(), message);
+  batch.update(db.collection('conversations').doc(window.currentConversationId), {
+    lastMessage: { ...message, text: 'sent a GIF' },
+    lastMessageAt: Date.now(),
+    [`readBy.${currentUser.uid}`]: true
+  });
+  
+  batch.commit().then(() => {
+    // Show notification to other user
+    if (window.currentOtherUserId) {
+      showMessageNotification(currentUser.displayName, 'sent a GIF', window.currentConversationId);
+    }
+  }).catch(error => {
+    console.error(error);
+    showToast('❌ failed to send GIF');
+  });
+}
+
 window.sendMessage = function() {
-  console.log("=== SEND MESSAGE DEBUG ===");
-  console.log("Current user:", currentUser);
-  console.log("Selected recipient:", selectedRecipient);
+  console.log("Sending message...");
   
   if (!selectedRecipient) {
     showToast('❌ select a user');
@@ -3508,11 +4131,13 @@ window.sendMessage = function() {
   }
   
   const messageText = document.getElementById('messageText');
-  if (!messageText) return;
+  const selectedGif = document.getElementById('selectedGif');
+  const gifUrl = window.selectedGifUrl;
   
-  const text = messageText.value.trim();
-  if (!text) {
-    showToast('❌ enter a message');
+  const text = messageText ? messageText.value.trim() : '';
+  
+  if (!text && !gifUrl) {
+    showToast('❌ enter a message or add a GIF');
     return;
   }
   
@@ -3521,23 +4146,21 @@ window.sendMessage = function() {
   
   const message = {
     text: text,
+    gifUrl: gifUrl,
     sender: currentUser.uid,
     senderName: currentUser.displayName,
     timestamp: Date.now(),
     read: false
   };
-  console.log("Message object:", message);
   
   const batch = db.batch();
   
-  // Create conversation document reference
   const conversationRef = db.collection('conversations').doc(conversationId);
   console.log("Conversation ref:", conversationRef.path);
   
-  // Set conversation data
   const conversationData = {
     participants: [currentUser.uid, selectedRecipient.id],
-    lastMessage: message,
+    lastMessage: { ...message, text: text || 'sent a GIF' },
     lastMessageAt: Date.now(),
     otherUserName: selectedRecipient.name,
     otherUserInitial: selectedRecipient.name[0].toUpperCase(),
@@ -3545,26 +4168,26 @@ window.sendMessage = function() {
       [currentUser.uid]: true
     }
   };
-  console.log("Conversation data:", conversationData);
   
   batch.set(conversationRef, conversationData, { merge: true });
   
-  // Create message document
   const messageRef = conversationRef.collection('messages').doc();
-  console.log("Message ref:", messageRef.path);
-  
   batch.set(messageRef, message);
   
   console.log("Committing batch...");
   batch.commit().then(() => {
     console.log("✅ Batch commit successful!");
     showToast('✅ message sent');
+    
+    // Show notification to other user
+    showMessageNotification(currentUser.displayName, text || 'sent a GIF', conversationId);
+    
     closeMessageModal();
+    window.selectedGifUrl = null;
   }).catch(error => {
     console.error("❌ Batch commit failed:", error);
     console.error("Error code:", error.code);
     console.error("Error message:", error.message);
-    if (error.details) console.error("Error details:", error.details);
     showToast('❌ failed to send: ' + error.message);
   });
 };
@@ -3578,7 +4201,7 @@ window.openConversation = function(conversationId, otherUserId) {
   
   db.collection('users').doc(otherUserId).get().then((doc) => {
     const userData = doc.data() || {};
-    const isricky = userData.username === ricky_USERNAME;
+    const isOwner = userData.username === OWNER_USERNAME;
     
     const conversationUser = document.getElementById('conversationUser');
     if (conversationUser) {
@@ -3587,7 +4210,7 @@ window.openConversation = function(conversationId, otherUserId) {
           ${userData.avatar ? `<img src="${userData.avatar}" alt="avatar">` : (userData.username ? userData.username[0].toUpperCase() : '?')}
         </div>
         <div class="conversation-user-info">
-          <h3>${userData.username || 'user'} ${isricky ? '<span class="ricky-badge">👑</span>' : ''}</h3>
+          <h3>${userData.username || 'user'} ${isOwner ? '<span class="owner-badge">👑</span>' : ''}</h3>
           <p>last seen ${timeAgo(userData.lastSeen || Date.now())}</p>
         </div>
       `;
@@ -3609,6 +4232,7 @@ window.closeConversation = function() {
   
   window.currentConversationId = null;
   window.currentOtherUserId = null;
+  document.getElementById('conversationGifPicker')?.classList.remove('active');
 };
 
 function loadMessages(conversationId) {
@@ -3626,7 +4250,8 @@ function loadMessages(conversationId) {
         
         html += `
           <div class="message-bubble ${isSent ? 'sent' : 'received'}">
-            <div>${escapeHtml(msg.text)}</div>
+            ${msg.gifUrl ? `<img src="${msg.gifUrl}" alt="GIF" onclick="window.open('${msg.gifUrl}')">` : ''}
+            ${msg.text ? `<div>${escapeHtml(msg.text)}</div>` : ''}
             <div class="message-time">${timeAgo(msg.timestamp)}</div>
           </div>
         `;
@@ -3666,6 +4291,11 @@ window.sendConversationMessage = function() {
   
   batch.commit().then(() => {
     input.value = '';
+    
+    // Show notification to other user
+    if (window.currentOtherUserId) {
+      showMessageNotification(currentUser.displayName, messageText, window.currentConversationId);
+    }
   }).catch(error => {
     console.error(error);
     showToast('❌ failed to send');
@@ -3796,8 +4426,8 @@ function showToast(message) {
   }, 3000);
 }
 
-document.getElementById('settingsBtn')?.addEventListener('click', () => {
-  showToast('💬 messages panel');
+document.getElementById('notificationIcon')?.addEventListener('click', (e) => {
+  e.stopPropagation();
 });
 
 const urlParams = new URLSearchParams(window.location.search);

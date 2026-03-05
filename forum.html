@@ -2506,6 +2506,13 @@ window.switchAccounts = function() {
 
 auth.onAuthStateChanged((user) => {
   currentUser = user;
+  console.log("User signed in:", user);
+  if (user) {
+    console.log("User email:", user.email);
+    console.log("User UID:", user.uid);
+    console.log("Is anonymous:", user.isAnonymous);
+    console.log("Display name:", user.displayName);
+  }
   const accountBtn = document.getElementById('accountBtn');
   
   if (user) {
@@ -3270,13 +3277,26 @@ window.changeAvatar = function() {
 };
 
 function loadConversations() {
-  if (!currentUser || currentUser.isAnonymous) {
+  console.log("Loading conversations for user:", currentUser);
+  
+  if (!currentUser) {
     const conversationList = document.getElementById('conversationList');
     if (conversationList) {
-      conversationList.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; text-align: center;">guests cannot message</div>';
+      conversationList.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; text-align: center;">sign in to message</div>';
     }
     return;
   }
+  
+  if (currentUser.isAnonymous) {
+    const conversationList = document.getElementById('conversationList');
+    if (conversationList) {
+      conversationList.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; text-align: center;">guests cannot message - create an account!</div>';
+    }
+    return;
+  }
+  
+  // User is signed in and not anonymous - load conversations
+  console.log("User is authenticated, loading conversations...");
   
   if (conversationsUnsubscribe) conversationsUnsubscribe();
   
@@ -3286,6 +3306,8 @@ function loadConversations() {
     .onSnapshot((snapshot) => {
       const container = document.getElementById('conversationList');
       if (!container) return;
+      
+      console.log("Conversations found:", snapshot.size);
       
       let unreadCount = 0;
       
@@ -3328,16 +3350,30 @@ function loadConversations() {
       }
     }, (error) => {
       console.error("Error loading conversations:", error);
+      // Show more detailed error
+      const container = document.getElementById('conversationList');
+      if (container) {
+        container.innerHTML = `<div style="color: var(--text-muted); padding: 1rem; text-align: center;">Error: ${error.message}</div>`;
+      }
     });
 }
 
 window.openMessageModal = function() {
-  if (!currentUser || currentUser.isAnonymous) {
-    showToast('🔒 guests cannot message - create an account!');
+  console.log("Opening message modal, current user:", currentUser);
+  
+  if (!currentUser) {
+    showToast('🔒 please sign in first');
     showSmartAccountModal();
     return;
   }
   
+  if (currentUser.isAnonymous) {
+    showToast('👤 guests cannot message - create an account!');
+    showSmartAccountModal();
+    return;
+  }
+  
+  // User is authenticated - open modal
   const modal = document.getElementById('messageModal');
   if (modal) {
     modal.classList.add('active');

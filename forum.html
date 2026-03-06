@@ -4,7 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1246719291517308929/1478561249032798268/New_Project_3.png?ex=69a981b8&is=69a83038&hm=9182bcc523c9ec712b7b0459036c3291fc447a3ab5ba922be015e08c7f12c7c1&=&format=webp&quality=lossless&width=40&height=40">
-<title>Ph - Science | Forums</title>
+<link rel="apple-touch-icon" href="https://media.discordapp.net/attachments/1246719291517308929/1478561249032798268/New_Project_3.png?ex=69a981b8&is=69a83038&hm=9182bcc523c9ec712b7b0459036c3291fc447a3ab5ba922be015e08c7f12c7c1&=&format=webp&quality=lossless&width=40&height=40">
+<title>PH - Science | Forum</title>
+
+<script async src="https://tenor.com/embed.js"></script>
+
+<script>
+window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = window.__REACT_DEVTOOLS_GLOBAL_HOOK__ || {};
+</script>
 
 <script async src="https://fundingchoicesmessages.google.com/i/pub-5521219086088837?ers=1"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -3057,7 +3064,7 @@ header {
   <div class="modal-content">
     <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
     <h2>welcome back</h2>
-    <p style="color: var(--text-tertiary); margin-bottom: 2rem;">sign in to your account</p>
+    <p>sign in to your account</p>
     
     <input type="text" id="loginUsername" class="auth-input" placeholder="username">
     
@@ -3077,7 +3084,7 @@ header {
   <div class="modal-content">
     <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
     <h2>create account</h2>
-    <p style="color: var(--text-tertiary); margin-bottom: 2rem;">join the community</p>
+    <p>join the community</p>
     
     <input type="text" id="signupUsername" class="auth-input" placeholder="username">
     
@@ -3109,7 +3116,7 @@ header {
       <span>🎬</span> add GIF
     </button>
     
-    <div id="gifPicker" class="tenor-picker" style="display: none;">
+    <div id="gifPicker" class="tenor-picker">
       <input type="text" id="gifSearch" placeholder="search GIFs..." oninput="searchGifs()">
       <div id="gifResults" class="tenor-results"></div>
     </div>
@@ -3139,7 +3146,7 @@ header {
     <button class="message-send-btn" onclick="sendConversationMessage()">send</button>
   </div>
   
-  <div id="conversationGifPicker" class="tenor-picker" style="display: none;">
+  <div id="conversationGifPicker" class="tenor-picker">
     <input type="text" id="conversationGifSearch" placeholder="search GIFs..." oninput="searchConversationGifs()">
     <div id="conversationGifResults" class="tenor-results"></div>
   </div>
@@ -3151,17 +3158,17 @@ header {
     <button class="modal-close" onclick="closeCommunityManageModal()">✕</button>
     <h2>manage community</h2>
     
-    <h3 style="color: var(--orange-500); margin: 1.5rem 0 1rem;">community rules</h3>
+    <h3>community rules</h3>
     <div id="rulesList"></div>
     <button class="add-rule-btn" onclick="addRule()">➕ add rule</button>
     
-    <h3 style="color: var(--orange-500); margin: 1.5rem 0 1rem;">moderators</h3>
+    <h3>moderators</h3>
     <div class="mod-search">
       <input type="text" id="modSearch" placeholder="search users to add as mod..." oninput="searchMods()">
     </div>
     <div id="modSearchResults" class="user-results" style="margin-bottom: 1rem;"></div>
     
-    <h4 style="color: var(--text-secondary); margin-bottom: 0.5rem;">current moderators</h4>
+    <h4>current moderators</h4>
     <div id="currentMods" class="current-mods"></div>
     
     <div class="modal-actions">
@@ -3186,8 +3193,8 @@ header {
   <div class="header-content">
     <div style="display:flex; align-items:center; gap:1.2rem; flex-wrap:wrap;">
       <!-- Return link -->
-      <a href="https://ph-science.github.io" class="return-link">← Return to PH·SCIENCE</a>
-      <span class="logo" onclick="showView('forum')">PH·FORUMS</span>
+      <a href="https://ph-science.github.io" class="return-link">← Return to PH - Science</a>
+      <span class="logo" onclick="showView('forum')">PH Forums</span>
     </div>
     
     <div class="nav-links">
@@ -3230,13 +3237,13 @@ header {
 <div class="messages-panel">
   <h3>
     messages
-    <button class="new-message-btn" style="background: none; border: none; color: var(--orange-500); font-size: 1.5rem; cursor: pointer; transition: all var(--transition-bounce);" onclick="openMessageModal()">✏️</button>
+    <button class="new-message-btn" onclick="openMessageModal()">✏️</button>
   </h3>
   <div class="conversation-list" id="conversationList">
     <div style="color: var(--text-muted); padding: 1rem; text-align: center;">sign in to message</div>
   </div>
   
-  <div id="communityInfoPanel" style="display: none; margin-top: 1.5rem; border-top: 1.5px solid var(--border-thin); padding-top: 1.5rem;">
+  <div id="communityInfoPanel" style="display: none; margin-top: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
     <h3 style="font-size: 1rem; margin-bottom: 1rem;">
       <span id="communityInfoName">community</span>
       <span id="communityOwnerBadge" style="display: none; font-size: 0.7rem; background: gold; color: black; padding: 0.2rem 0.4rem; border-radius: var(--radius-full); margin-left: 0.5rem;">OWNED</span>
@@ -3253,7 +3260,7 @@ header {
       </div>
     </div>
     
-    <h4 style="font-size: 0.9rem; color: var(--orange-500); margin-bottom: 0.5rem;">moderators</h4>
+    <h4 style="font-size: 0.9rem; color: var(--orange); margin-bottom: 0.5rem;">moderators</h4>
     <div id="modList" class="mod-list" style="max-height: 150px; overflow-y: auto;"></div>
     
     <button class="join-community-btn" id="joinCommunityBtn" onclick="toggleJoinCommunity()" style="display: none;">join</button>
@@ -3444,7 +3451,6 @@ function escapeHtml(unsafe) {
 }
 
 function timeAgo(timestamp) {
-  if (!timestamp) return 'unknown';
   const seconds = Math.floor((Date.now() - timestamp) / 1000);
   
   if (seconds < 60) return 'just now';
@@ -3464,8 +3470,7 @@ function showToast(message) {
   container.appendChild(toast);
   
   setTimeout(() => {
-    toast.classList.add('exit');
-    setTimeout(() => toast.remove(), 300);
+    toast.remove();
   }, 3000);
 }
 
@@ -3476,8 +3481,8 @@ function closeAllModals() {
       modal.style.display = 'none';
     }, 300);
   });
-  document.getElementById('gifPicker')?.style.display = 'none';
-  document.getElementById('conversationGifPicker')?.style.display = 'none';
+  document.getElementById('gifPicker')?.classList.remove('active');
+  document.getElementById('conversationGifPicker')?.classList.remove('active');
 }
 
 // ==================== AUTHENTICATION ====================
@@ -3536,8 +3541,8 @@ window.showSmartAccountModal = function() {
     const isOwner = user.displayName === OWNER_USERNAME;
     content.innerHTML = `
       <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
-      <h2>PH·FORUMS</h2>
-      <div style="color: var(--orange-500); font-size: 1.8rem; font-weight: 800; margin: 1.5rem 0;">👋 ${escapeHtml(user.displayName || 'user')} ${isOwner ? '<span class="owner-badge">👑 OWNER</span>' : ''}</div>
+      <h2>PH Forums</h2>
+      <div style="color: var(--orange); margin-bottom: 2rem;">👋 ${escapeHtml(user.displayName || 'user')} ${isOwner ? '<span class="owner-badge">👑 OWNER</span>' : ''}</div>
       <div class="modal-buttons">
         <button class="modal-btn warning" onclick="logout()">🚪 log out</button>
         <button class="modal-btn secondary" onclick="switchAccounts()">🔄 switch</button>
@@ -3546,8 +3551,8 @@ window.showSmartAccountModal = function() {
   } else if (user && user.isAnonymous) {
     content.innerHTML = `
       <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
-      <h2>PH·FORUMS</h2>
-      <div style="color: var(--orange-500); font-size: 1.8rem; font-weight: 800; margin: 1.5rem 0;">👤 guest mode (view only)</div>
+      <h2>PH Forums</h2>
+      <div style="color: var(--orange); margin-bottom: 2rem;">👤 guest mode (view only)</div>
       <div class="modal-buttons">
         <button class="modal-btn primary" onclick="showSignup()">✨ create account</button>
         <button class="modal-btn warning" onclick="logout()">🚪 log out</button>
@@ -3556,8 +3561,8 @@ window.showSmartAccountModal = function() {
   } else {
     content.innerHTML = `
       <button class="modal-close-btn" onclick="closeAllModals()">✕</button>
-      <h2>PH·FORUMS</h2>
-      <p style="color: var(--text-tertiary); margin: 1.5rem 0; font-size: 1.2rem;">join the community</p>
+      <h2>PH Forums</h2>
+      <p>join the community</p>
       <div class="modal-buttons">
         <button class="modal-btn primary" onclick="showSignup()">create account</button>
         <button class="modal-btn secondary" onclick="continueAsGuest()">continue as guest</button>
@@ -5238,7 +5243,7 @@ window.openMessageModal = function() {
     document.getElementById('userSearch').value = '';
     document.getElementById('userResults').innerHTML = '';
     document.getElementById('messageText').value = '';
-    document.getElementById('gifPicker').style.display = 'none';
+    document.getElementById('gifPicker').classList.remove('active');
     document.getElementById('selectedGif').style.display = 'none';
     selectedRecipient = null;
     window.selectedGifUrl = null;
@@ -5281,7 +5286,7 @@ window.openMessageModalWithUser = function(userId) {
         document.getElementById('userSearch').value = doc.data().username;
         document.getElementById('messageText').value = '';
         document.getElementById('userResults').innerHTML = '';
-        document.getElementById('gifPicker').style.display = 'none';
+        document.getElementById('gifPicker').classList.remove('active');
         document.getElementById('selectedGif').style.display = 'none';
         window.selectedGifUrl = null;
       }
@@ -5291,7 +5296,7 @@ window.openMessageModalWithUser = function(userId) {
 
 window.closeMessageModal = function() {
   document.getElementById('messageModal').classList.remove('active');
-  document.getElementById('gifPicker').style.display = 'none';
+  document.getElementById('gifPicker')?.classList.remove('active');
   document.getElementById('selectedGif').style.display = 'none';
   window.selectedGifUrl = null;
 };
@@ -5347,10 +5352,10 @@ window.selectUser = function(userId, username) {
 window.toggleGifPicker = function() {
   const picker = document.getElementById('gifPicker');
   if (picker) {
-    if (picker.style.display === 'block') {
-      picker.style.display = 'none';
+    if (picker.classList.contains('active')) {
+      picker.classList.remove('active');
     } else {
-      picker.style.display = 'block';
+      picker.classList.add('active');
       searchGifs();
     }
   }
@@ -5359,10 +5364,10 @@ window.toggleGifPicker = function() {
 window.toggleConversationGifPicker = function() {
   const picker = document.getElementById('conversationGifPicker');
   if (picker) {
-    if (picker.style.display === 'block') {
-      picker.style.display = 'none';
+    if (picker.classList.contains('active')) {
+      picker.classList.remove('active');
     } else {
-      picker.style.display = 'block';
+      picker.classList.add('active');
       searchConversationGifs();
     }
   }
@@ -5422,11 +5427,11 @@ window.selectGif = function(gifUrl, source) {
     const selectedGif = document.getElementById('selectedGif');
     selectedGif.innerHTML = `<img src="${gifUrl}" style="max-width: 100%; max-height: 200px;">`;
     selectedGif.style.display = 'block';
-    document.getElementById('gifPicker').style.display = 'none';
+    document.getElementById('gifPicker').classList.remove('active');
     window.selectedGifUrl = gifUrl;
   } else {
     sendGifMessage(gifUrl);
-    document.getElementById('conversationGifPicker').style.display = 'none';
+    document.getElementById('conversationGifPicker').classList.remove('active');
   }
 };
 
@@ -5570,7 +5575,7 @@ window.closeConversation = function() {
   document.getElementById('conversationView').classList.remove('active');
   window.currentConversationId = null;
   window.currentOtherUserId = null;
-  document.getElementById('conversationGifPicker').style.display = 'none';
+  document.getElementById('conversationGifPicker')?.classList.remove('active');
 };
 
 function loadMessages(conversationId) {

@@ -2335,6 +2335,13 @@ footer {
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
 <script>
+// Prevent form submission redirects
+document.addEventListener('click', function(e) {
+  if (e.target.closest('button[type="submit"]')) {
+    e.preventDefault();
+  }
+});
+
 const firebaseConfig = {
   apiKey: "AIzaSyA-68XKNt_PD0I1TJbNcyotT4qMbgHh-tI",
   authDomain: "ph-science.firebaseapp.com",
@@ -2394,10 +2401,11 @@ function loadVotes() {
 }
 
 window.vote = function(gameId, voteType, event) {
+  event.preventDefault();
   event.stopPropagation();
   
   if (!auth.currentUser || auth.currentUser.isAnonymous) {
-    showToast('🔒 Sign in to vote');
+    showToast('🔒 Create an account to vote');
     showSmartAccountModal();
     return;
   }
@@ -2491,7 +2499,7 @@ window.showSmartAccountModal = function() {
       <button class="modal-close" onclick="closeAllModals()">✕</button>
       <h2>PH·SCIENCE</h2>
       <div style="color: var(--orange-500); font-size: 1.8rem; font-weight: 800; margin: 1.5rem 0;">👋 ${user.displayName}</div>
-      <button class="modal-btn" onclick="logout()" style="background: linear-gradient(145deg, rgba(184,77,0,0.2), rgba(0,0,0,0.4)); color: #b84d00; border: 2px solid #b84d00; font-weight: 800;">🚪 log out</button>
+      <button class="modal-btn primary" onclick="logout()" style="background: linear-gradient(145deg, rgba(184,77,0,0.2), rgba(0,0,0,0.4)); color: #b84d00; border: 2px solid #b84d00; font-weight: 800;">🚪 log out</button>
       <button class="modal-btn secondary" onclick="switchAccounts()">🔄 switch</button>
     `;
   } else if (user && user.isAnonymous) {
@@ -2499,16 +2507,18 @@ window.showSmartAccountModal = function() {
       <button class="modal-close" onclick="closeAllModals()">✕</button>
       <h2>PH·SCIENCE</h2>
       <div style="color: var(--orange-500); font-size: 1.8rem; font-weight: 800; margin: 1.5rem 0;">👤 guest mode</div>
-      <button class="modal-btn" onclick="logout()" style="background: linear-gradient(145deg, rgba(184,77,0,0.2), rgba(0,0,0,0.4)); color: #b84d00; border: 2px solid #b84d00; font-weight: 800;">🚪 log out</button>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">50% of games unlocked</p>
+      <button class="modal-btn primary" onclick="showSignup()" style="margin-bottom: 1rem;">✨ create account for full access</button>
+      <button class="modal-btn secondary" onclick="logout()">🚪 log out</button>
     `;
   } else {
     content.innerHTML = `
       <button class="modal-close" onclick="closeAllModals()">✕</button>
       <h2>PH·SCIENCE</h2>
       <p style="color: var(--text-secondary); margin: 1.5rem 0; font-size: 1.2rem;">700+ games · vote & save</p>
-      <button class="modal-btn primary" onclick="showSignup()">create account</button>
-      <button class="modal-btn secondary" onclick="continueAsGuest()">continue as guest</button>
-      <a href="#" onclick="showLogin()" style="color: var(--orange-500); text-decoration: none; display: block; margin-top: 1.5rem; font-weight: 700;">sign in →</a>
+      <button class="modal-btn primary" onclick="showSignup()">create account (full access)</button>
+      <button class="modal-btn secondary" onclick="continueAsGuest()">continue as guest (50% access)</button>
+      <a href="#" onclick="showLogin(event)" style="color: var(--orange-500); text-decoration: none; display: block; margin-top: 1.5rem; font-weight: 700;">sign in →</a>
     `;
   }
   
@@ -2516,7 +2526,8 @@ window.showSmartAccountModal = function() {
   setTimeout(() => modal.classList.add('active'), 10);
 };
 
-window.showLogin = function() {
+window.showLogin = function(e) {
+  if (e) e.preventDefault();
   closeAllModals();
   setTimeout(() => {
     document.getElementById('loginModal').style.display = 'flex';
@@ -2542,7 +2553,8 @@ document.getElementById('signupUsername')?.addEventListener('input', function(e)
   document.getElementById('usernameCounter').textContent = e.target.value.length + '/20';
 });
 
-window.register = function() {
+window.register = function(e) {
+  if (e) e.preventDefault();
   const username = document.getElementById('signupUsername').value.trim();
   const password = document.getElementById('signupPassword').value.trim();
   
@@ -2561,11 +2573,16 @@ window.register = function() {
       closeAllModals();
     })
     .catch((error) => {
-      showToast(error.code === 'auth/email-already-in-use' ? '❌ username taken' : '❌ signup failed');
+      if (error.code === 'auth/email-already-in-use') {
+        showToast('❌ username taken');
+      } else {
+        showToast('❌ signup failed');
+      }
     });
 };
 
-window.login = function() {
+window.login = function(e) {
+  if (e) e.preventDefault();
   const username = document.getElementById('loginUsername').value.trim();
   const password = document.getElementById('loginPassword').value.trim();
   
@@ -2631,6 +2648,7 @@ async function listZones() {
     
     zones.unshift(forumZone);
     
+    // Randomly select 50% of games for guests
     const shuffled = [...zones].sort(() => 0.5 - Math.random());
     unlockedGames = shuffled.slice(0, Math.floor(zones.length / 2)).map(g => g.id);
     
@@ -2664,8 +2682,10 @@ function displayZones(list) {
   const user = auth.currentUser;
   
   if (!user) {
-    displayList = list.map(game => ({ ...game, forcedLock: true }));
+    // Not logged in - all games locked
+    displayList = list.map(game => ({ ...game, forcedLock: game.id !== 'forum' }));
   } else if (user.isAnonymous) {
+    // Guest - filter based on unlocked/locked selection
     displayList = list.filter(game => {
       if (game.id === 'forum') return true;
       const isUnlocked = unlockedGames.includes(game.id);
@@ -2675,6 +2695,7 @@ function displayZones(list) {
       forcedLock: game.id === 'forum' ? false : (lockFilter === 'locked' ? true : !unlockedGames.includes(game.id))
     }));
   } else {
+    // Signed in - all games unlocked
     displayList = list.map(game => ({ ...game, forcedLock: false }));
   }
   
@@ -2689,12 +2710,13 @@ function createGameCard(file, isRecent = false) {
   
   const user = auth.currentUser;
   const isSignedIn = user && !user.isAnonymous;
+  const isGuest = user && user.isAnonymous;
   
   let isLocked = (() => {
     if (file.id === 'forum') return false;
-    if (!user) return true;
-    if (user.isAnonymous) return file.forcedLock !== undefined ? file.forcedLock : !unlockedGames.includes(file.id);
-    return false;
+    if (!user) return true; // Not logged in = locked
+    if (isGuest) return !unlockedGames.includes(file.id); // Guest = only unlocked games
+    return false; // Signed in = all unlocked
   })();
   
   if (isLocked) div.classList.add('locked');
@@ -2706,7 +2728,11 @@ function createGameCard(file, isRecent = false) {
         e.target.classList.contains('remove-recent')) return;
     
     if (isLocked) {
-      showToast('🔒 Sign up to play');
+      if (!user) {
+        showToast('🔒 Sign in or continue as guest to play');
+      } else if (isGuest) {
+        showToast('🔒 Create an account to unlock all games');
+      }
       showSmartAccountModal();
     } else {
       openGame(file);
@@ -2729,7 +2755,7 @@ function createGameCard(file, isRecent = false) {
     lockedOverlay.innerHTML = `
       <div class="lock-icon">🔒</div>
       <div class="locked-message">
-        <p>sign up to unlock</p>
+        <p>${!user ? 'sign in to play' : 'create account to unlock'}</p>
         <button class="signup-prompt" onclick="event.stopPropagation(); showSignup();">✨ Sign Up</button>
       </div>
     `;
@@ -2757,7 +2783,7 @@ function createGameCard(file, isRecent = false) {
     star.onclick = (e) => {
       e.stopPropagation();
       if (!canFavorite) {
-        showToast('🔒 Sign in to favorite');
+        showToast('🔒 Create an account to favorite');
         showSmartAccountModal();
       } else {
         toggleFavorite(file.id, e);
@@ -2836,11 +2862,15 @@ function createGameCard(file, isRecent = false) {
   
   const launchBtn = document.createElement('button');
   launchBtn.className = 'launch-btn';
-  launchBtn.innerText = file.id === 'forum' ? 'join discussion' : (isLocked ? 'sign up to play' : 'launch game');
+  launchBtn.innerText = file.id === 'forum' ? 'join discussion' : (isLocked ? 'locked' : 'launch game');
   launchBtn.onclick = (e) => { 
     e.stopPropagation(); 
     if (isLocked) {
-      showToast('🔒 Sign up to play');
+      if (!user) {
+        showToast('🔒 Sign in or continue as guest');
+      } else if (isGuest) {
+        showToast('🔒 Create account for full access');
+      }
       showSmartAccountModal();
     } else {
       openGame(file);
@@ -2871,13 +2901,13 @@ function debounce(func, wait) {
     timeout = setTimeout(() => func(...args), wait);
   };
 }
+
 window.openGame = function(file) {
   if (file.id === 'forum') {
     window.open(file.url, '_blank');
     return;
   }
   
-  // Check if the game is locked for this user
   const user = auth.currentUser;
   const isSignedIn = user && !user.isAnonymous;
   const isGuest = user && user.isAnonymous;
@@ -2885,17 +2915,17 @@ window.openGame = function(file) {
   // Determine if game is locked
   let isLocked = false;
   if (!user) {
-    isLocked = true; // Not logged in at all = locked
-  } else if (isGuest) {
-    isLocked = !unlockedGames.includes(file.id); // Guests can only play unlocked games
-  } else {
-    isLocked = false; // Signed-in users can play everything
-  }
-  
-  if (isLocked) {
-    showToast('🔒 Sign up to play this game');
+    isLocked = true;
+    showToast('🔒 Sign in or continue as guest to play');
     showSmartAccountModal();
     return;
+  } else if (isGuest) {
+    isLocked = !unlockedGames.includes(file.id);
+    if (isLocked) {
+      showToast('🔒 Create an account to unlock all games');
+      showSmartAccountModal();
+      return;
+    }
   }
   
   // Add to recently played for signed-in users only
@@ -2962,7 +2992,7 @@ function removeFromRecent(gameId) {
 
 window.toggleFavorite = function(gameId, event) {
   if (!auth.currentUser || auth.currentUser.isAnonymous) {
-    showToast('🔒 Sign in to favorite');
+    showToast('🔒 Create an account to favorite');
     showSmartAccountModal();
     return;
   }
@@ -3040,7 +3070,7 @@ window.filterFavorites = function() {
 };
 
 auth.onAuthStateChanged((user) => {
-  document.getElementById('accountBtn').innerHTML = user ? `👤 ${user.displayName || 'guest'}` : '✨ sign in';
+  document.getElementById('accountBtn').innerHTML = user ? (user.isAnonymous ? '👤 guest' : `👤 ${user.displayName}`) : '✨ sign in';
   
   if (user && !user.isAnonymous) {
     const userId = user.uid;
@@ -3152,6 +3182,12 @@ window.toggleVault = function(vaultId) {
   icon.style.transform = content.classList.contains('expanded') ? 'rotate(180deg)' : 'rotate(0)';
   header.classList.toggle('active');
 };
+
+// Prevent any default form submissions
+document.addEventListener('submit', function(e) {
+  e.preventDefault();
+  return false;
+});
 
 listZones();
 checkWelcomeCard();

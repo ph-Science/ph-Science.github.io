@@ -4,30 +4,23 @@
 <base href="https://cdn.jsdelivr.net/gh/gn-math/gn-math.github.io@main/">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-
 <link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1246719291517308929/1478561249032798268/New_Project_3.png?ex=69a981b8&is=69a83038&hm=9182bcc523c9ec712b7b0459036c3291fc447a3ab5ba922be015e08c7f12c7c1&=&format=webp&quality=lossless&width=40&height=40">
-
 <title>PH - Science</title>
 <meta name="title" content="PH Science | █████████ Games">
 <meta name="description" content="Play 700+ █████████ Games during school hours, or work hours!">
-
 <script>
 const SITE_CONFIG = {
   hasProblem: true,
-  
   problemMessage: "⚠️ We're currently having an issue with signing up.",
-  
   bannerColors: {
     stripe1: "#ff6b00", 
     stripe2: "#b84d00" 
   }
 };
 </script>
-
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&display=swap');
-
 .problem-banner {
   width: 100%;
   background: linear-gradient(135deg, #ff3b3b, #ff0000);
@@ -39,7 +32,6 @@ const SITE_CONFIG = {
   border-bottom: 2px solid rgba(255, 255, 255, 0.3);
   overflow: hidden;
 }
-
 .problem-banner::before {
   content: '';
   position: absolute;
@@ -47,16 +39,9 @@ const SITE_CONFIG = {
   left: 0;
   right: 0;
   bottom: 0;
-  background: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 20px,
-    rgba(255, 255, 255, 0.1) 20px,
-    rgba(255, 255, 255, 0.1) 40px
-  );
+  background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255, 255, 255, 0.1) 20px, rgba(255, 255, 255, 0.1) 40px);
   pointer-events: none;
 }
-
 .problem-banner::after {
   content: '';
   position: absolute;
@@ -67,13 +52,11 @@ const SITE_CONFIG = {
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   animation: bannerShine 3s infinite;
 }
-
 @keyframes bannerShine {
   to {
     left: 100%;
   }
 }
-
 .banner-content {
   max-width: 1400px;
   margin: 0 auto;
@@ -85,20 +68,17 @@ const SITE_CONFIG = {
   flex-wrap: wrap;
   position: relative;
 }
-
 .banner-icon {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .pulse-icon {
   font-size: 28px;
   display: inline-block;
   animation: iconPulse 2s infinite ease-in-out;
   filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
 }
-
 @keyframes iconPulse {
   0%, 100% {
     transform: scale(1);
@@ -109,14 +89,12 @@ const SITE_CONFIG = {
     filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.9));
   }
 }
-
 .banner-message {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
-
 .message-text {
   font-weight: 800;
   font-size: 1.2rem;
@@ -124,7 +102,6 @@ const SITE_CONFIG = {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   line-height: 1.3;
 }
-
 .message-subtext {
   font-size: 0.9rem;
   opacity: 0.9;
@@ -133,19 +110,16 @@ const SITE_CONFIG = {
   align-items: center;
   gap: 6px;
 }
-
 .message-subtext::before {
   content: '🛠️';
   font-size: 1rem;
 }
-
 .banner-actions {
   display: flex;
   align-items: center;
   gap: 16px;
   position: relative;
 }
-
 .banner-btn {
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(8px);
@@ -165,7 +139,6 @@ const SITE_CONFIG = {
   overflow: hidden;
   z-index: 2;
 }
-
 .banner-btn::before {
   content: '';
   position: absolute;
@@ -179,23 +152,19 @@ const SITE_CONFIG = {
   transition: width 0.6s, height 0.6s;
   z-index: -1;
 }
-
 .banner-btn:hover::before {
   width: 300px;
   height: 300px;
 }
-
 .banner-btn:hover {
   background: rgba(255, 255, 255, 0.3);
   border-color: white;
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
-
 .banner-btn:active {
   transform: translateY(0) scale(0.98);
 }
-
 .banner-pulse {
   position: absolute;
   right: -8px;
@@ -205,7 +174,6 @@ const SITE_CONFIG = {
   border-radius: 50%;
   animation: pulseRing 2s infinite;
 }
-
 @keyframes pulseRing {
   0% {
     box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
@@ -217,7 +185,6 @@ const SITE_CONFIG = {
     box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
   }
 }
-
 @keyframes bannerSlideDown {
   0% {
     transform: translateY(-100%);
@@ -234,90 +201,67 @@ const SITE_CONFIG = {
     opacity: 1;
   }
 }
-
-/* Responsive styles for banner */
 @media (max-width: 768px) {
   .banner-content {
     flex-direction: column;
     text-align: center;
     padding: 12px 16px;
   }
-  
   .message-text {
     font-size: 1rem;
   }
-  
   .message-subtext {
     justify-content: center;
   }
-  
   .banner-actions {
     width: 100%;
     justify-content: center;
   }
-  
   .banner-btn {
     width: 100%;
     max-width: 200px;
   }
-  
   .banner-pulse {
     right: 25%;
   }
 }
-
 @media (max-width: 480px) {
   .message-text {
     font-size: 0.95rem;
   }
-  
   .message-subtext {
     font-size: 0.8rem;
   }
-  
   .pulse-icon {
     font-size: 24px;
   }
 }
-
-/* Different banner color variants based on config */
 .problem-banner.info {
   background: linear-gradient(135deg, #3b7fff, #0055ff);
 }
-
 .problem-banner.warning {
   background: linear-gradient(135deg, #ffaa3b, #ff8800);
 }
-
 .problem-banner.success {
   background: linear-gradient(135deg, #3bff7f, #00cc44);
 }
-
-/* Adjust header position when banner is present */
 body.has-problem header {
   top: 92px !important;
 }
-
 @media (max-width: 768px) {
   body.has-problem header {
     top: 132px !important;
   }
 }
-
-/* Smooth transition for header */
 header {
   transition: top 0.3s ease;
 }
-/* Adjust header position when banner is present */
 body.has-problem header {
   top: 80px !important;
 }
-
-/* Make sure header transition is smooth */
 header {
   transition: top 0.3s ease;
 }
-
 :root {
   --orange-100: #fff3e0;
   --orange-200: #ffdbb3;
@@ -328,12 +272,10 @@ header {
   --orange-700: #b84d00;
   --orange-800: #8f3c00;
   --orange-900: #662b00;
-  
   --upvote: #ff6b00;
   --upvote-glow: 0 0 30px rgba(255,107,0,0.4);
   --downvote: #b84d00;
   --downvote-glow: 0 0 30px rgba(184,77,0,0.4);
-  
   --bg-black: #000000;
   --bg-void: #030303;
   --bg-deep: #080808;
@@ -342,19 +284,16 @@ header {
   --bg-elevated: #1a1a1a;
   --bg-hover: #222222;
   --bg-active: #2a2a2a;
-  
   --text-primary: #ffffff;
   --text-secondary: #f0f0f0;
   --text-tertiary: #c0c0c0;
   --text-muted: #909090;
   --text-accent: var(--orange-500);
-  
   --border-thin: rgba(255,107,0,0.15);
   --border-subtle: rgba(255,107,0,0.25);
   --border-medium: rgba(255,107,0,0.35);
   --border-strong: rgba(255,107,0,0.5);
   --border-orange: #ff6b00;
-  
   --shadow-xs: 0 2px 4px rgba(0,0,0,0.8);
   --shadow-sm: 0 4px 8px rgba(0,0,0,0.8);
   --shadow-md: 0 8px 16px rgba(0,0,0,0.8);
@@ -365,7 +304,6 @@ header {
   --shadow-orange-md: 0 8px 24px rgba(255,107,0,0.3);
   --shadow-orange-lg: 0 16px 32px rgba(255,107,0,0.35);
   --shadow-orange-xl: 0 24px 48px rgba(255,107,0,0.4);
-  
   --radius-xs: 0.25rem;
   --radius-sm: 0.5rem;
   --radius-md: 0.75rem;
@@ -375,60 +313,49 @@ header {
   --radius-3xl: 2rem;
   --radius-4xl: 2.5rem;
   --radius-full: 9999px;
-  
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-bounce: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
   --transition-elastic: 500ms cubic-bezier(0.68, -0.6, 0.32, 1.6);
 }
-
 ::-webkit-scrollbar {
   width: 14px;
   height: 14px;
 }
-
 ::-webkit-scrollbar-track {
   background: var(--bg-black);
   border-left: 1px solid var(--border-thin);
 }
-
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(135deg, var(--orange-500), var(--orange-600));
   border-radius: var(--radius-full);
   border: 3px solid var(--bg-black);
   transition: all var(--transition-fast);
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(135deg, var(--orange-400), var(--orange-500));
   transform: scale(1.1);
 }
-
 ::-webkit-scrollbar-thumb:active {
   background: var(--orange-700);
 }
-
 ::-webkit-scrollbar-corner {
   background: var(--bg-black);
 }
-
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--orange-500) var(--bg-black);
 }
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 html {
   font-size: 16px;
   scroll-behavior: smooth;
 }
-
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   background: var(--bg-black);
@@ -438,41 +365,22 @@ body {
   position: relative;
   overflow-x: hidden;
 }
-
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: 
-    radial-gradient(circle at 20% 30%, rgba(255,107,0,0.08) 0%, transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(255,107,0,0.05) 0%, transparent 40%),
-    radial-gradient(circle at 40% 80%, rgba(255,107,0,0.03) 0%, transparent 50%),
-    linear-gradient(135deg, var(--bg-black) 0%, var(--bg-void) 100%);
+  background: radial-gradient(circle at 20% 30%, rgba(255,107,0,0.08) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(255,107,0,0.05) 0%, transparent 40%), radial-gradient(circle at 40% 80%, rgba(255,107,0,0.03) 0%, transparent 50%), linear-gradient(135deg, var(--bg-black) 0%, var(--bg-void) 100%);
   pointer-events: none;
   z-index: -2;
 }
-
 body::after {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: 
-    repeating-linear-gradient(45deg, 
-      rgba(255,107,0,0.02) 0px, 
-      rgba(255,107,0,0.02) 2px, 
-      transparent 2px, 
-      transparent 24px
-    ),
-    repeating-linear-gradient(135deg,
-      rgba(255,107,0,0.01) 0px,
-      rgba(255,107,0,0.01) 4px,
-      transparent 4px,
-      transparent 32px
-    );
+  background-image: repeating-linear-gradient(45deg, rgba(255,107,0,0.02) 0px, rgba(255,107,0,0.02) 2px, transparent 2px, transparent 24px), repeating-linear-gradient(135deg, rgba(255,107,0,0.01) 0px, rgba(255,107,0,0.01) 4px, transparent 4px, transparent 32px);
   pointer-events: none;
   z-index: -1;
 }
-
 .glass {
   background: rgba(10, 10, 10, 0.7);
   backdrop-filter: blur(20px) saturate(180%);
@@ -481,12 +389,10 @@ body::after {
   border-radius: var(--radius-2xl);
   box-shadow: var(--shadow-lg);
 }
-
 .dropdown {
   position: relative;
   display: inline-block;
 }
-
 .dropdown-trigger {
   background: var(--bg-elevated);
   border: 1.5px solid var(--border-subtle);
@@ -506,25 +412,21 @@ body::after {
   position: relative;
   box-shadow: var(--shadow-sm);
 }
-
 .dropdown-trigger:hover {
   border-color: var(--orange-500);
   background: var(--bg-hover);
   transform: translateY(-2px);
   box-shadow: var(--shadow-orange-sm);
 }
-
 .dropdown-trigger i {
   color: var(--orange-500);
   font-size: 1.2rem;
   transition: transform var(--transition-elastic);
   font-style: normal;
 }
-
 .dropdown-trigger.active i {
   transform: rotate(180deg);
 }
-
 .dropdown-menu {
   position: absolute;
   top: calc(100% + 8px);
@@ -541,13 +443,11 @@ body::after {
   z-index: 100;
   box-shadow: var(--shadow-xl), 0 0 40px rgba(255,107,0,0.2);
 }
-
 .dropdown-menu.active {
   opacity: 1;
   visibility: visible;
   transform: translateY(0) scale(1);
 }
-
 .dropdown-item {
   padding: 1rem 1.5rem;
   color: var(--text-secondary);
@@ -561,11 +461,9 @@ body::after {
   position: relative;
   overflow: hidden;
 }
-
 .dropdown-item:last-child {
   border-bottom: none;
 }
-
 .dropdown-item::before {
   content: '';
   position: absolute;
@@ -577,22 +475,18 @@ body::after {
   transition: width var(--transition-base);
   opacity: 0.2;
 }
-
 .dropdown-item:hover::before {
   width: 100%;
 }
-
 .dropdown-item:hover {
   color: var(--text-primary);
   padding-left: 2rem;
 }
-
 .dropdown-item.active {
   background: linear-gradient(90deg, rgba(255,107,0,0.15), transparent);
   color: var(--orange-500);
   border-left: 4px solid var(--orange-500);
 }
-
 header {
   position: sticky;
   top: 20px;
@@ -602,7 +496,6 @@ header {
   width: calc(100% - 40px);
   animation: slideDown 0.6s var(--transition-elastic);
 }
-
 @keyframes slideDown {
   from {
     transform: translateY(-100%);
@@ -613,7 +506,6 @@ header {
     opacity: 1;
   }
 }
-
 .header-content {
   background: rgba(5, 5, 5, 0.85);
   backdrop-filter: blur(20px) saturate(180%);
@@ -628,18 +520,15 @@ header {
   box-shadow: var(--shadow-lg), 0 0 30px rgba(255,107,0,0.1);
   transition: all var(--transition-base);
 }
-
 .header-content:hover {
   border-color: var(--border-medium);
   box-shadow: var(--shadow-xl), 0 0 40px rgba(255,107,0,0.15);
 }
-
 .logo-wrapper {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
-
 .logo {
   font-family: 'Clash Display', sans-serif;
   font-size: 2.2rem;
@@ -652,12 +541,10 @@ header {
   position: relative;
   animation: logoPulse 3s infinite alternate;
 }
-
 @keyframes logoPulse {
   0% { text-shadow: 0 0 20px rgba(255,107,0,0.3); }
   100% { text-shadow: 0 0 40px rgba(255,107,0,0.7); }
 }
-
 .game-badge {
   background: rgba(255,107,0,0.1);
   border: 1.5px solid var(--border-subtle);
@@ -670,7 +557,6 @@ header {
   position: relative;
   overflow: hidden;
 }
-
 .game-badge::before {
   content: '';
   position: absolute;
@@ -681,17 +567,14 @@ header {
   background: linear-gradient(90deg, transparent, rgba(255,107,0,0.2), transparent);
   transition: left 0.8s ease;
 }
-
 .game-badge:hover::before {
   left: 100%;
 }
-
 .search-section {
   flex: 1;
   max-width: 500px;
   position: relative;
 }
-
 .search-section input {
   width: 100%;
   background: var(--bg-elevated);
@@ -706,7 +589,6 @@ header {
   transition: all var(--transition-bounce);
   box-shadow: var(--shadow-sm);
 }
-
 .search-section input:focus {
   outline: none;
   border-color: var(--orange-500);
@@ -714,18 +596,15 @@ header {
   background: var(--bg-hover);
   transform: scale(1.02);
 }
-
 .search-section input::placeholder {
   color: var(--text-tertiary);
   font-weight: 400;
   transition: opacity var(--transition-fast);
 }
-
 .search-section input:focus::placeholder {
   opacity: 0.5;
   transform: translateX(10px);
 }
-
 .search-section i {
   position: absolute;
   left: 1.3rem;
@@ -737,12 +616,10 @@ header {
   filter: drop-shadow(0 0 10px rgba(255,107,0,0.5));
   transition: all var(--transition-fast);
 }
-
 .search-section input:focus + i {
   transform: translateY(-50%) scale(1.1);
   color: var(--orange-400);
 }
-
 .btn {
   padding: 0.85rem 2rem;
   border-radius: var(--radius-full);
@@ -760,7 +637,6 @@ header {
   overflow: hidden;
   letter-spacing: 0.3px;
 }
-
 .btn::before {
   content: '';
   position: absolute;
@@ -771,28 +647,23 @@ header {
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
   transition: left 0.6s ease;
 }
-
 .btn:hover::before {
   left: 100%;
 }
-
 .btn-primary {
   background: linear-gradient(135deg, var(--orange-500), var(--orange-600));
   color: var(--bg-black);
   border: 1.5px solid transparent;
   box-shadow: var(--shadow-orange-sm);
 }
-
 .btn-primary:hover {
   transform: translateY(-3px) scale(1.02);
   box-shadow: var(--shadow-orange-lg), 0 0 30px rgba(255,107,0,0.4);
   border-color: white;
 }
-
 .btn-primary:active {
   transform: translateY(-1px) scale(0.98);
 }
-
 .btn-icon {
   width: 48px;
   height: 48px;
@@ -808,7 +679,6 @@ header {
   transition: all var(--transition-elastic);
   box-shadow: var(--shadow-sm);
 }
-
 .btn-icon:hover {
   background: linear-gradient(135deg, var(--orange-500), var(--orange-600));
   color: var(--bg-black);
@@ -816,14 +686,12 @@ header {
   border-color: white;
   box-shadow: var(--shadow-orange-lg);
 }
-
 .btn-icon.forum {
   background: rgba(255,107,0,0.1);
   color: var(--orange-500);
   font-size: 1.3rem;
   text-decoration: none;
 }
-
 .btn-icon.forum:hover {
   background: linear-gradient(135deg, var(--orange-500), var(--orange-600));
   color: var(--bg-black);
@@ -831,14 +699,12 @@ header {
   rotate: 0deg;
   box-shadow: var(--shadow-orange-lg);
 }
-
 .hero {
   max-width: 1400px;
   margin: 2rem auto 3rem;
   padding: 0 2rem;
   animation: fadeInUp 0.7s var(--transition-elastic);
 }
-
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -849,7 +715,6 @@ header {
     transform: translateY(0);
   }
 }
-
 .hero-card {
   background: linear-gradient(135deg, rgba(255,107,0,0.1) 0%, transparent 100%);
   border: 2px solid var(--border-medium);
@@ -866,7 +731,6 @@ header {
   box-shadow: var(--shadow-xl), 0 0 80px rgba(255,107,0,0.2);
   transition: all var(--transition-slow);
 }
-
 .hero-card::before {
   content: '';
   position: absolute;
@@ -876,11 +740,9 @@ header {
   pointer-events: none;
   transition: opacity var(--transition-base);
 }
-
 .hero-card:hover::before {
   opacity: 0.6;
 }
-
 .hero-card::after {
   content: '';
   position: absolute;
@@ -888,7 +750,6 @@ header {
   background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,107,0,0.03) 20px, rgba(255,107,0,0.03) 40px);
   pointer-events: none;
 }
-
 .hero-text h1 {
   font-family: 'Clash Display', sans-serif;
   font-size: 6rem;
@@ -902,12 +763,10 @@ header {
   background-size: 300% auto;
   animation: gradientFlow 6s infinite alternate;
 }
-
 @keyframes gradientFlow {
   0% { background-position: 0% 50%; }
   100% { background-position: 100% 50%; }
 }
-
 .hero-text p {
   color: var(--text-secondary);
   font-size: 1.8rem;
@@ -918,7 +777,6 @@ header {
   text-shadow: 0 2px 10px rgba(0,0,0,0.8);
   animation: slideIn 0.7s var(--transition-elastic) 0.2s both;
 }
-
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -929,12 +787,10 @@ header {
     transform: translateX(0);
   }
 }
-
 .hero-card:hover .hero-text p {
   border-left-color: var(--orange-400);
   transform: translateX(5px);
 }
-
 .hero-stats {
   display: flex;
   background: rgba(0,0,0,0.6);
@@ -945,7 +801,6 @@ header {
   box-shadow: var(--shadow-lg);
   animation: scaleIn 0.7s var(--transition-elastic) 0.3s both;
 }
-
 @keyframes scaleIn {
   from {
     opacity: 0;
@@ -956,13 +811,11 @@ header {
     transform: scale(1);
   }
 }
-
 .stat-item {
   text-align: center;
   min-width: 160px;
   position: relative;
 }
-
 .stat-value {
   font-size: 5rem;
   font-weight: 800;
@@ -973,12 +826,10 @@ header {
   margin-bottom: 0.25rem;
   animation: statPulse 2s infinite alternate;
 }
-
 @keyframes statPulse {
   0% { text-shadow: 0 0 30px rgba(255,107,0,0.5); }
   100% { text-shadow: 0 0 60px rgba(255,107,0,0.9); }
 }
-
 .stat-label {
   color: var(--text-tertiary);
   font-size: 1rem;
@@ -986,7 +837,6 @@ header {
   letter-spacing: 3px;
   font-weight: 600;
 }
-
 .filter-bar {
   max-width: 1400px;
   margin: 0 auto 2rem;
@@ -997,12 +847,10 @@ header {
   flex-wrap: wrap;
   animation: fadeIn 0.7s var(--transition-elastic) 0.4s both;
 }
-
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-
 .filter-btn {
   background: var(--bg-card);
   border: 1.5px solid var(--border-subtle);
@@ -1021,7 +869,6 @@ header {
   overflow: hidden;
   box-shadow: var(--shadow-sm);
 }
-
 .filter-btn::before {
   content: '';
   position: absolute;
@@ -1032,18 +879,15 @@ header {
   background: linear-gradient(90deg, transparent, rgba(255,107,0,0.2), transparent);
   transition: left 0.6s ease;
 }
-
 .filter-btn:hover::before {
   left: 100%;
 }
-
 .filter-btn:hover {
   border-color: var(--orange-500);
   color: var(--orange-500);
   transform: translateY(-4px);
   box-shadow: var(--shadow-orange-md);
 }
-
 .filter-btn.active {
   background: linear-gradient(135deg, var(--orange-500), var(--orange-600));
   color: var(--bg-black);
@@ -1051,13 +895,11 @@ header {
   box-shadow: var(--shadow-orange-lg), 0 0 30px rgba(255,107,0,0.5);
   font-weight: 800;
 }
-
 .vaults {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
 }
-
 .vault {
   background: rgba(5, 5, 5, 0.7);
   backdrop-filter: blur(20px);
@@ -1070,7 +912,6 @@ header {
   box-shadow: var(--shadow-lg);
   animation: vaultSlide 0.6s var(--transition-elastic) calc(var(--index) * 0.1s) both;
 }
-
 @keyframes vaultSlide {
   from {
     opacity: 0;
@@ -1081,13 +922,11 @@ header {
     transform: translateY(0);
   }
 }
-
 .vault:hover {
   border-color: var(--border-strong);
   box-shadow: var(--shadow-orange-lg), 0 0 50px rgba(255,107,0,0.15);
   transform: translateY(-2px);
 }
-
 .vault-header {
   padding: 1.5rem 2.5rem;
   background: linear-gradient(145deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2));
@@ -1098,17 +937,14 @@ header {
   transition: all var(--transition-base);
   border-bottom: 1.5px solid transparent;
 }
-
 .vault-header:hover {
   background: rgba(255,107,0,0.1);
   padding-left: 3rem;
 }
-
 .vault-header.active {
   border-bottom-color: var(--orange-500);
   background: rgba(255,107,0,0.05);
 }
-
 .vault-title {
   display: flex;
   align-items: center;
@@ -1118,7 +954,6 @@ header {
   font-weight: 700;
   letter-spacing: -0.02em;
 }
-
 .vault-count {
   background: rgba(255,107,0,0.15);
   border: 1.5px solid var(--border-medium);
@@ -1130,7 +965,6 @@ header {
   font-weight: 700;
   box-shadow: var(--shadow-xs);
 }
-
 .vault-toggle {
   color: var(--orange-500);
   font-size: 2.2rem;
@@ -1138,28 +972,23 @@ header {
   font-weight: 300;
   filter: drop-shadow(0 0 8px rgba(255,107,0,0.3));
 }
-
 .vault-header.active .vault-toggle {
   transform: rotate(180deg);
 }
-
 .vault-content {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .vault-content.expanded {
   max-height: 1000000px;
 }
-
 .game-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 2rem;
   padding: 2.5rem;
 }
-
 .empty-state {
   grid-column: 1 / -1;
   text-align: center;
@@ -1173,12 +1002,10 @@ header {
   font-weight: 500;
   transition: all var(--transition-base);
 }
-
 .empty-state:hover {
   border-color: var(--border-strong);
   color: var(--text-secondary);
 }
-
 .game-card {
   background: linear-gradient(145deg, var(--bg-card), var(--bg-dark));
   border: 1.5px solid var(--border-subtle);
@@ -1190,7 +1017,6 @@ header {
   animation: cardFloat 0.6s var(--transition-elastic) both;
   box-shadow: var(--shadow-md);
 }
-
 @keyframes cardFloat {
   from {
     opacity: 0;
@@ -1201,30 +1027,25 @@ header {
     transform: translateY(0) scale(1);
   }
 }
-
 .game-card:hover {
   transform: translateY(-12px) scale(1.02);
   border-color: var(--orange-500);
   box-shadow: var(--shadow-orange-lg), 0 30px 50px -20px black;
 }
-
 .game-media {
   position: relative;
   aspect-ratio: 1;
   overflow: hidden;
 }
-
 .game-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-
 .game-card:hover .game-media img {
   transform: scale(1.15);
 }
-
 .game-overlay {
   position: absolute;
   top: 1rem;
@@ -1244,12 +1065,10 @@ header {
   z-index: 10;
   letter-spacing: 0.5px;
 }
-
 .game-card:hover .game-overlay {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
-
 .locked-overlay {
   position: absolute;
   inset: 0;
@@ -1266,29 +1085,24 @@ header {
   border-radius: var(--radius-2xl);
   z-index: 20;
 }
-
 .game-card.locked .locked-overlay {
   opacity: 1;
   pointer-events: all;
 }
-
 .lock-icon {
   font-size: 5rem;
   filter: drop-shadow(0 0 40px var(--orange-500));
   animation: lockPulse 2.5s infinite ease-in-out;
   margin-bottom: 1.5rem;
 }
-
 @keyframes lockPulse {
   0%, 100% { transform: scale(1); filter: drop-shadow(0 0 30px var(--orange-500)); }
   50% { transform: scale(1.15); filter: drop-shadow(0 0 60px var(--orange-500)); }
 }
-
 .locked-message {
   text-align: center;
   padding: 0 2rem;
 }
-
 .locked-message p {
   color: var(--text-primary);
   font-size: 1.2rem;
@@ -1296,7 +1110,6 @@ header {
   margin-bottom: 1.5rem;
   text-shadow: 0 2px 15px black;
 }
-
 .signup-prompt {
   background: linear-gradient(135deg, var(--orange-500), var(--orange-600));
   border: none;
@@ -1313,7 +1126,6 @@ header {
   position: relative;
   overflow: hidden;
 }
-
 .signup-prompt::before {
   content: '';
   position: absolute;
@@ -1324,30 +1136,25 @@ header {
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
   transition: left 0.6s ease;
 }
-
 .signup-prompt:hover::before {
   left: 100%;
 }
-
 .signup-prompt:hover {
   transform: scale(1.08);
   border-color: white;
   box-shadow: var(--shadow-orange-xl);
 }
-
 .game-content {
   padding: 1.5rem;
   background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.2));
   border-top: 1.5px solid var(--border-subtle);
 }
-
 .game-title-row {
   display: flex;
   align-items: center;
   gap: 0.8rem;
   margin-bottom: 1rem;
 }
-
 .favorite-star {
   font-size: 2.2rem;
   color: rgba(255,107,0,0.2);
@@ -1356,25 +1163,21 @@ header {
   line-height: 1;
   filter: drop-shadow(0 0 10px transparent);
 }
-
 .favorite-star:hover {
   transform: scale(1.25) rotate(8deg);
   color: rgba(255,107,0,0.8);
   filter: drop-shadow(0 0 20px rgba(255,107,0,0.5));
 }
-
 .favorite-star.active {
   color: var(--orange-500);
   text-shadow: 0 0 30px var(--orange-500);
   filter: drop-shadow(0 0 20px var(--orange-500));
   animation: starGlow 2s infinite alternate;
 }
-
 @keyframes starGlow {
   0% { filter: drop-shadow(0 0 15px var(--orange-500)); }
   100% { filter: drop-shadow(0 0 30px var(--orange-500)); }
 }
-
 .game-name {
   font-weight: 800;
   font-size: 1.3rem;
@@ -1386,7 +1189,6 @@ header {
   font-family: 'Clash Display', sans-serif;
   letter-spacing: -0.02em;
 }
-
 .vote-section {
   display: flex;
   align-items: center;
@@ -1396,7 +1198,6 @@ header {
   border-top: 1.5px solid var(--border-thin);
   border-bottom: 1.5px solid var(--border-thin);
 }
-
 .vote-btn {
   display: flex;
   align-items: center;
@@ -1414,7 +1215,6 @@ header {
   position: relative;
   overflow: hidden;
 }
-
 .vote-btn::before {
   content: '';
   position: absolute;
@@ -1425,65 +1225,54 @@ header {
   background: linear-gradient(90deg, transparent, rgba(255,107,0,0.15), transparent);
   transition: left 0.6s ease;
 }
-
 .vote-btn:hover::before {
   left: 100%;
 }
-
 .vote-btn.upvote {
   color: var(--upvote);
 }
-
 .vote-btn.upvote:hover:not(.disabled) {
   background: linear-gradient(145deg, rgba(255,107,0,0.15), rgba(0,0,0,0.5));
   border-color: var(--upvote);
   transform: translateY(-3px);
   box-shadow: var(--upvote-glow);
 }
-
 .vote-btn.upvote.active {
   background: linear-gradient(145deg, rgba(255,107,0,0.25), rgba(0,0,0,0.5));
   border-color: var(--upvote);
   color: var(--upvote);
   box-shadow: 0 0 25px rgba(255,107,0,0.3);
 }
-
 .vote-btn.downvote {
   color: var(--downvote);
 }
-
 .vote-btn.downvote:hover:not(.disabled) {
   background: linear-gradient(145deg, rgba(184,77,0,0.15), rgba(0,0,0,0.5));
   border-color: var(--downvote);
   transform: translateY(3px);
   box-shadow: var(--downvote-glow);
 }
-
 .vote-btn.downvote.active {
   background: linear-gradient(145deg, rgba(184,77,0,0.25), rgba(0,0,0,0.5));
   border-color: var(--downvote);
   color: var(--downvote);
   box-shadow: 0 0 25px rgba(184,77,0,0.3);
 }
-
 .vote-btn.disabled {
   opacity: 0.4;
   cursor: not-allowed;
   filter: grayscale(1);
   pointer-events: none;
 }
-
 .vote-count {
   font-weight: 800;
   font-size: 1.2rem;
 }
-
 .vote-separator {
   color: var(--border-subtle);
   font-size: 1.5rem;
   font-weight: 300;
 }
-
 .game-meta {
   display: flex;
   justify-content: space-between;
@@ -1492,7 +1281,6 @@ header {
   font-size: 0.9rem;
   margin-top: 1rem;
 }
-
 .game-author {
   color: var(--orange-500);
   font-weight: 700;
@@ -1504,7 +1292,6 @@ header {
   border: 1.5px solid var(--border-thin);
   font-size: 0.9rem;
 }
-
 .game-author:hover {
   background: linear-gradient(145deg, var(--orange-500), var(--orange-600));
   color: var(--bg-black);
@@ -1512,13 +1299,11 @@ header {
   border-color: white;
   box-shadow: var(--shadow-orange-sm);
 }
-
 .game-actions {
   display: flex;
   align-items: center;
   gap: 0.8rem;
 }
-
 .played-time {
   background: linear-gradient(145deg, rgba(255,107,0,0.1), rgba(0,0,0,0.3));
   border: 1.5px solid var(--border-thin);
@@ -1529,7 +1314,6 @@ header {
   color: var(--orange-400);
   white-space: nowrap;
 }
-
 .remove-recent {
   background: linear-gradient(145deg, rgba(184,77,0,0.15), rgba(0,0,0,0.3));
   border: 1.5px solid rgba(184,77,0,0.3);
@@ -1545,14 +1329,12 @@ header {
   font-size: 1.2rem;
   font-weight: 700;
 }
-
 .remove-recent:hover {
   background: linear-gradient(145deg, rgba(184,77,0,0.3), rgba(0,0,0,0.4));
   transform: scale(1.2) rotate(90deg);
   border-color: var(--downvote);
   box-shadow: var(--downvote-glow);
 }
-
 .launch-btn {
   width: calc(100% - 2rem);
   margin: 0 1rem 1.5rem;
@@ -1571,7 +1353,6 @@ header {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-
 .launch-btn::before {
   content: '';
   position: absolute;
@@ -1582,11 +1363,9 @@ header {
   background: linear-gradient(90deg, transparent, rgba(255,107,0,0.3), transparent);
   transition: left 0.6s ease;
 }
-
 .launch-btn:hover::before {
   left: 100%;
 }
-
 .launch-btn:hover {
   background: linear-gradient(135deg, var(--orange-500), var(--orange-600));
   border-color: white;
@@ -1594,13 +1373,11 @@ header {
   transform: scale(1.05);
   box-shadow: var(--shadow-orange-lg), 0 0 30px rgba(255,107,0,0.5);
 }
-
 .game-card.locked .launch-btn {
   opacity: 0.4;
   pointer-events: none;
   filter: grayscale(1);
 }
-
 .game-viewer {
   position: fixed;
   inset: 0;
@@ -1610,7 +1387,6 @@ header {
   flex-direction: column;
   animation: viewerReveal 0.4s var(--transition-elastic);
 }
-
 @keyframes viewerReveal {
   from {
     opacity: 0;
@@ -1621,7 +1397,6 @@ header {
     transform: scale(1);
   }
 }
-
 .viewer-header {
   background: linear-gradient(145deg, rgba(0,0,0,0.98), rgba(0,0,0,0.95));
   backdrop-filter: blur(30px);
@@ -1635,14 +1410,12 @@ header {
   gap: 1.5rem;
   box-shadow: var(--shadow-lg);
 }
-
 .viewer-title {
   display: flex;
   align-items: center;
   gap: 2rem;
   flex-wrap: wrap;
 }
-
 #viewerGameName {
   font-family: 'Clash Display', sans-serif;
   font-size: 2.8rem;
@@ -1654,7 +1427,6 @@ header {
   line-height: 1;
   filter: drop-shadow(0 0 20px rgba(255,107,0,0.3));
 }
-
 #viewerGameAuthor {
   color: var(--text-secondary);
   font-size: 1.3rem;
@@ -1664,18 +1436,15 @@ header {
   transition: all var(--transition-fast);
   font-weight: 500;
 }
-
 #viewerGameAuthor:hover {
   color: var(--orange-500);
   transform: translateX(5px);
 }
-
 .viewer-controls {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
 }
-
 .viewer-btn {
   background: linear-gradient(145deg, rgba(255,107,0,0.15), rgba(0,0,0,0.5));
   border: 1.5px solid var(--border-medium);
@@ -1690,7 +1459,6 @@ header {
   position: relative;
   overflow: hidden;
 }
-
 .viewer-btn::before {
   content: '';
   position: absolute;
@@ -1701,11 +1469,9 @@ header {
   background: linear-gradient(90deg, transparent, rgba(255,107,0,0.2), transparent);
   transition: left 0.6s ease;
 }
-
 .viewer-btn:hover::before {
   left: 100%;
 }
-
 .viewer-btn:hover {
   background: linear-gradient(135deg, var(--orange-500), var(--orange-600));
   border-color: white;
@@ -1713,14 +1479,12 @@ header {
   transform: translateY(-3px) scale(1.02);
   box-shadow: var(--shadow-orange-lg);
 }
-
 #viewerFrame {
   flex: 1;
   width: 100%;
   border: 0;
   background: white;
 }
-
 .modal {
   position: fixed;
   inset: 0;
@@ -1735,78 +1499,70 @@ header {
   transition: opacity var(--transition-base);
   padding: 1rem;
 }
-
 .modal.active {
   display: flex;
   opacity: 1;
 }
-
 .modal-content {
-  max-width: 500px;
+  max-width: 420px;
   width: 100%;
   background: linear-gradient(145deg, var(--bg-card), var(--bg-dark));
   border: 2px solid var(--border-strong);
-  border-radius: var(--radius-3xl);
-  padding: 2.5rem;
+  border-radius: var(--radius-2xl);
+  padding: 1.8rem;
   box-shadow: var(--shadow-xl), 0 0 100px rgba(255,107,0,0.2);
   transform: scale(0.9);
   transition: transform var(--transition-elastic);
   text-align: center;
   position: relative;
 }
-
 .modal.active .modal-content {
   transform: scale(1);
 }
-
 .modal-close {
   position: absolute;
-  top: 1.2rem;
-  right: 1.2rem;
+  top: 1rem;
+  right: 1rem;
   background: none;
   border: none;
   color: var(--text-tertiary);
-  font-size: 2rem;
+  font-size: 1.8rem;
   cursor: pointer;
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   transition: all var(--transition-elastic);
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .modal-close:hover {
   background: rgba(255,107,0,0.15);
   color: var(--orange-500);
   transform: rotate(180deg) scale(1.1);
 }
-
 .modal h2 {
   font-family: 'Clash Display', sans-serif;
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: 2.4rem;
+  margin-bottom: 0.8rem;
   background: linear-gradient(135deg, var(--orange-500), var(--orange-400));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.02em;
 }
-
 .modal-input {
   width: 100%;
-  padding: 1.2rem 1.8rem;
-  margin-bottom: 1rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 0.8rem;
   background: linear-gradient(145deg, rgba(0,0,0,0.5), rgba(0,0,0,0.4));
   border: 1.5px solid var(--border-subtle);
   border-radius: var(--radius-full);
   color: var(--text-primary);
   font-family: 'Plus Jakarta Sans', sans-serif;
   transition: all var(--transition-bounce);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 500;
 }
-
 .modal-input:focus {
   outline: none;
   border-color: var(--orange-500);
@@ -1814,49 +1570,43 @@ header {
   background: linear-gradient(145deg, rgba(0,0,0,0.6), rgba(0,0,0,0.5));
   transform: scale(1.02);
 }
-
 .modal-btn {
   width: 100%;
-  padding: 1.2rem;
+  padding: 1rem;
   border-radius: var(--radius-full);
   font-weight: 800;
   cursor: pointer;
   transition: all var(--transition-elastic);
   border: none;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 1.1rem;
+  font-size: 1rem;
   position: relative;
   overflow: hidden;
   letter-spacing: 0.5px;
 }
-
 .modal-btn.primary {
   background: linear-gradient(135deg, var(--orange-500), var(--orange-600));
   color: var(--bg-black);
   border: 1.5px solid transparent;
   box-shadow: var(--shadow-orange-md);
 }
-
 .modal-btn.primary:hover {
   transform: translateY(-3px) scale(1.02);
   box-shadow: var(--shadow-orange-xl), 0 0 40px rgba(255,107,0,0.4);
   border-color: white;
 }
-
 .modal-btn.secondary {
   background: linear-gradient(145deg, rgba(255,107,0,0.1), rgba(0,0,0,0.4));
   border: 1.5px solid var(--border-subtle);
   color: var(--text-primary);
 }
-
 .modal-btn.secondary:hover {
   background: linear-gradient(145deg, rgba(255,107,0,0.2), rgba(0,0,0,0.5));
   border-color: var(--orange-500);
   transform: translateY(-2px);
   box-shadow: var(--shadow-orange-sm);
 }
-
 .toast-container {
   position: fixed;
   bottom: 2rem;
@@ -1868,7 +1618,6 @@ header {
   max-width: 400px;
   pointer-events: none;
 }
-
 .toast {
   background: linear-gradient(135deg, var(--orange-500), var(--orange-600));
   padding: 1.2rem 2rem;
@@ -1882,7 +1631,6 @@ header {
   font-size: 1rem;
   transform-origin: right;
 }
-
 @keyframes toastReveal {
   from {
     transform: translateX(100%) scale(0.8);
@@ -1893,18 +1641,15 @@ header {
     opacity: 1;
   }
 }
-
 .toast.exit {
   animation: toastExit 0.3s ease-in forwards;
 }
-
 @keyframes toastExit {
   to {
     transform: translateX(100%) scale(0.8);
     opacity: 0;
   }
 }
-
 .settings-panel {
   position: fixed;
   top: 0;
@@ -1920,11 +1665,9 @@ header {
   transition: right var(--transition-elastic);
   overflow-y: auto;
 }
-
 .settings-panel.active {
   right: 0;
 }
-
 .settings-header {
   padding: 2rem;
   border-bottom: 1.5px solid var(--border-subtle);
@@ -1937,7 +1680,6 @@ header {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
-
 .settings-header h2 {
   font-family: 'Clash Display', sans-serif;
   font-size: 2.5rem;
@@ -1946,7 +1688,6 @@ header {
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.02em;
 }
-
 .close-settings {
   background: none;
   border: none;
@@ -1961,17 +1702,14 @@ header {
   border-radius: 50%;
   transition: all var(--transition-elastic);
 }
-
 .close-settings:hover {
   background: rgba(255,107,0,0.15);
   color: var(--orange-500);
   transform: rotate(180deg) scale(1.1);
 }
-
 .settings-content {
   padding: 2rem;
 }
-
 .settings-section {
   background: linear-gradient(145deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2));
   border: 1.5px solid var(--border-subtle);
@@ -1982,13 +1720,11 @@ header {
   -webkit-backdrop-filter: blur(10px);
   transition: all var(--transition-base);
 }
-
 .settings-section:hover {
   border-color: var(--border-medium);
   box-shadow: var(--shadow-orange-sm);
   transform: translateY(-2px);
 }
-
 .settings-section h3 {
   font-family: 'Clash Display', sans-serif;
   color: var(--orange-500);
@@ -1998,7 +1734,6 @@ header {
   align-items: center;
   gap: 0.8rem;
 }
-
 .setting-item {
   display: flex;
   justify-content: space-between;
@@ -2011,12 +1746,10 @@ header {
   font-weight: 600;
   transition: all var(--transition-fast);
 }
-
 .setting-item:hover {
   border-color: var(--border-medium);
   background: linear-gradient(145deg, rgba(255,107,0,0.1), rgba(0,0,0,0.4));
 }
-
 .toggle-switch {
   width: 64px;
   height: 32px;
@@ -2027,7 +1760,6 @@ header {
   cursor: pointer;
   transition: all var(--transition-elastic);
 }
-
 .toggle-switch::after {
   content: '';
   position: absolute;
@@ -2040,25 +1772,21 @@ header {
   transition: all var(--transition-elastic);
   box-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
-
 .toggle-switch.active {
   background: linear-gradient(145deg, var(--orange-500), var(--orange-600));
   border-color: white;
 }
-
 .toggle-switch.active::after {
   left: 32px;
   background: linear-gradient(145deg, var(--bg-black), #222);
   box-shadow: 0 2px 10px rgba(255,107,0,0.5);
 }
-
 .cloak-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.8rem;
   margin-bottom: 1.2rem;
 }
-
 .cloak-btn {
   background: linear-gradient(145deg, rgba(255,107,0,0.1), rgba(0,0,0,0.4));
   border: 1.5px solid var(--border-thin);
@@ -2073,7 +1801,6 @@ header {
   position: relative;
   overflow: hidden;
 }
-
 .cloak-btn::before {
   content: '';
   position: absolute;
@@ -2084,11 +1811,9 @@ header {
   background: linear-gradient(90deg, transparent, rgba(255,107,0,0.2), transparent);
   transition: left 0.6s ease;
 }
-
 .cloak-btn:hover::before {
   left: 100%;
 }
-
 .cloak-btn:hover {
   background: linear-gradient(145deg, var(--orange-500), var(--orange-600));
   color: var(--bg-black);
@@ -2096,13 +1821,11 @@ header {
   border-color: white;
   box-shadow: var(--shadow-orange-md);
 }
-
 .cloak-custom {
   display: flex;
   gap: 0.8rem;
   flex-wrap: wrap;
 }
-
 .cloak-custom input {
   flex: 1;
   min-width: 150px;
@@ -2114,14 +1837,12 @@ header {
   font-family: 'Plus Jakarta Sans', sans-serif;
   transition: all var(--transition-fast);
 }
-
 .cloak-custom input:focus {
   outline: none;
   border-color: var(--orange-500);
   box-shadow: 0 0 0 4px rgba(255,107,0,0.15);
   background: linear-gradient(145deg, rgba(0,0,0,0.6), rgba(0,0,0,0.5));
 }
-
 footer {
   margin-top: 5rem;
   padding: 3rem 2rem;
@@ -2130,7 +1851,6 @@ footer {
   -webkit-backdrop-filter: blur(20px);
   border-top: 1.5px solid var(--border-subtle);
 }
-
 .footer-content {
   max-width: 1400px;
   margin: 0 auto;
@@ -2140,13 +1860,11 @@ footer {
   flex-wrap: wrap;
   gap: 2rem;
 }
-
 .footer-links {
   display: flex;
   gap: 2.5rem;
   flex-wrap: wrap;
 }
-
 .footer-links a {
   color: var(--text-tertiary);
   text-decoration: none;
@@ -2157,7 +1875,6 @@ footer {
   border: 1.5px solid transparent;
   font-size: 0.95rem;
 }
-
 .footer-links a:hover {
   color: var(--text-primary);
   background: rgba(255,107,0,0.1);
@@ -2165,148 +1882,117 @@ footer {
   transform: translateY(-3px);
   box-shadow: var(--shadow-orange-xs);
 }
-
 @media (max-width: 1024px) {
   .hero-text h1 {
     font-size: 4.5rem;
   }
-  
   .hero-text p {
     font-size: 1.5rem;
   }
-  
   .hero-stats {
     padding: 1.5rem 3rem;
   }
-  
   .stat-value {
     font-size: 4rem;
   }
-  
   .game-grid {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   }
 }
-
 @media (max-width: 768px) {
   .header-content {
     flex-direction: column;
     padding: 1rem;
   }
-  
   .logo-wrapper {
     width: 100%;
     justify-content: space-between;
   }
-  
   .logo {
     font-size: 1.8rem;
   }
-  
   .search-section {
     width: 100%;
     max-width: none;
   }
-  
   .hero {
     padding: 0 1rem;
   }
-  
   .hero-card {
     padding: 3rem 2rem;
     flex-direction: column;
     text-align: center;
   }
-  
   .hero-text h1 {
     font-size: 3.5rem;
   }
-  
   .hero-text p {
     font-size: 1.3rem;
     border-left: none;
     padding-left: 0;
   }
-  
   .hero-stats {
     width: 100%;
     justify-content: center;
     padding: 1.5rem;
   }
-  
   .stat-value {
     font-size: 3rem;
   }
-  
   .game-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
     padding: 1.5rem;
   }
-  
   .viewer-header {
     flex-direction: column;
     text-align: center;
     padding: 1.5rem;
   }
-  
   .viewer-title {
     flex-direction: column;
     gap: 0.5rem;
   }
-  
   #viewerGameAuthor {
     border-left: none;
     padding-left: 0;
   }
-  
   #viewerGameName {
     font-size: 2rem;
   }
-  
   .footer-content {
     flex-direction: column;
     text-align: center;
   }
-  
   .footer-links {
     justify-content: center;
   }
 }
-
 @media (max-width: 480px) {
   .hero-text h1 {
     font-size: 2.5rem;
   }
-  
   .hero-stats {
     padding: 1rem;
   }
-  
   .stat-value {
     font-size: 2.5rem;
   }
-  
   .vote-section {
     flex-direction: column;
   }
-  
   .vote-btn {
     width: 100%;
   }
-  
   .vote-separator {
     display: none;
   }
-  
   .modal-content {
-    padding: 2rem 1.5rem;
+    padding: 1.5rem;
   }
-  
   .modal h2 {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
-  
   .cloak-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2314,8 +2000,6 @@ footer {
 </style>
 </head>
 <body>
-
-<!-- PROBLEM BANNER - IMPROVED UI -->
 <div id="problemBanner" style="display: none;" class="problem-banner">
   <div class="banner-content">
     <div class="banner-icon">
@@ -2331,148 +2015,83 @@ footer {
     </div>
   </div>
 </div>
-<!-- WELCOME MODAL - CLEAN VERSION 2.1.0 -->
 <div class="modal" id="welcomeModal">
   <div class="modal-content">
     <button class="modal-close" onclick="dismissWelcome()">✕</button>
-    
-    <!-- Version Badge -->
-    <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--orange-500), var(--orange-600)); color: black; padding: 0.5rem 2rem; border-radius: var(--radius-full); font-family: 'Clash Display', sans-serif; font-weight: 800; font-size: 1.2rem; border: 2px solid white; box-shadow: var(--shadow-orange-lg); z-index: 10; white-space: nowrap;">
-      VERSION 2.1.0
+    <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--orange-500), var(--orange-600)); color: black; padding: 0.3rem 1.5rem; border-radius: var(--radius-full); font-family: 'Clash Display', sans-serif; font-weight: 800; font-size: 1rem; border: 2px solid white; box-shadow: var(--shadow-orange-lg); z-index: 10; white-space: nowrap;">
+      V2.1.0
     </div>
-    
-    <h2 style="margin-top: 1.5rem;">PH - Science</h2>
-    <p style="color: var(--text-secondary); font-size: 1.3rem; margin: 1rem 0;">700+ unblocked games, more to come!</p>
-    
-    <!-- What's New Section -->
-    <div style="background: linear-gradient(145deg, rgba(255,107,0,0.15), rgba(0,0,0,0.5)); border: 2px solid var(--border-medium); border-radius: var(--radius-2xl); padding: 1.5rem; margin: 2rem 0; text-align: left;">
-      <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-        <span style="font-size: 1.5rem;">→</span>
-        <h3 style="font-family: 'Clash Display', sans-serif; color: var(--orange-500); font-size: 1.2rem;">what's new in 2.1.0</h3>
-      </div>
-      <ul style="list-style: none; color: var(--text-secondary);">
-        <li style="margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.8rem;">
-          <span style="color: var(--orange-500);">→</span>
-          <span>enhanced black & orange ui</span>
-        </li>
-        <li style="margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.8rem;">
-          <span style="color: var(--orange-500);">→</span>
-          <span>vote system for games</span>
-        </li>
-        <li style="margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.8rem;">
-          <span style="color: var(--orange-500);">→</span>
-          <span>optimized mode for low-end devices</span>
-        </li>
-        <li style="margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.8rem;">
-          <span style="color: var(--orange-500);">→</span>
-          <span>tab cloak & customization</span>
-        </li>
-      </ul>
-    </div>
-    
-    <!-- Feature Grid -->
-    <div style="background: linear-gradient(145deg, rgba(255,107,0,0.1), rgba(0,0,0,0.4)); border: 2px solid var(--border-medium); border-radius: var(--radius-2xl); padding: 2rem; margin: 2rem 0;">
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+    <h2 style="margin-top: 1rem;">PH·SCIENCE</h2>
+    <p style="color: var(--text-secondary); font-size: 1rem; margin: 0.5rem 0;">700+ unblocked games</p>
+    <div style="background: linear-gradient(145deg, rgba(255,107,0,0.1), rgba(0,0,0,0.4)); border: 1px solid var(--border-medium); border-radius: var(--radius-xl); padding: 1rem; margin: 1rem 0;">
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
         <div style="text-align: center;">
-          <div style="font-size: 3rem; color: var(--orange-500); margin-bottom: 0.5rem;">🎮</div>
-          <div style="font-weight: 700; color: var(--text-primary);">700+ Games</div>
-          <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-top: 0.3rem;">constantly growing</div>
+          <div style="font-size: 2rem; color: var(--orange-500);">🎮</div>
+          <div style="font-weight: 600; font-size: 0.8rem;">700+</div>
         </div>
         <div style="text-align: center;">
-          <div style="font-size: 3rem; color: var(--orange-500); margin-bottom: 0.5rem;">👍</div>
-          <div style="font-weight: 700; color: var(--text-primary);">Vote System</div>
-          <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-top: 0.3rem;">signed-in users only</div>
+          <div style="font-size: 2rem; color: var(--orange-500);">👍</div>
+          <div style="font-weight: 600; font-size: 0.8rem;">Vote</div>
         </div>
         <div style="text-align: center;">
-          <div style="font-size: 3rem; color: var(--orange-500); margin-bottom: 0.5rem;">⚡</div>
-          <div style="font-weight: 700; color: var(--text-primary);">No Lag</div>
-          <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-top: 0.3rem;">optimized gameplay</div>
+          <div style="font-size: 2rem; color: var(--orange-500);">⚡</div>
+          <div style="font-weight: 600; font-size: 0.8rem;">Optimized</div>
         </div>
       </div>
     </div>
-    
-    <!-- Version Footer -->
-    <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; color: var(--text-tertiary); font-size: 0.9rem;">
-      <span>black & orange</span>
-      <span>•</span>
-      <span>v2.1.0</span>
-      <span>•</span>
-      <span>700+ games</span>
-    </div>
-    
-    <button class="modal-btn primary" onclick="dismissWelcome()">
-      START PLAYING
-    </button>
-    
-    <div style="margin-top: 1rem; text-align: center;">
-      <label style="display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; color: var(--text-tertiary); font-size: 0.9rem;" onclick="event.stopPropagation()">
-        <input type="checkbox" id="dontShowWelcome" style="accent-color: var(--orange-500); width: 16px; height: 16px;">
+    <button class="modal-btn primary" onclick="dismissWelcome()" style="padding: 0.8rem;">START</button>
+    <div style="margin-top: 0.8rem;">
+      <label style="display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; color: var(--text-tertiary); font-size: 0.8rem;">
+        <input type="checkbox" id="dontShowWelcome" style="accent-color: var(--orange-500); width: 14px; height: 14px;">
         <span>don't show again</span>
       </label>
     </div>
   </div>
 </div>
-
-<!-- ACCOUNT MODAL -->
 <div class="modal" id="accountModal">
   <div class="modal-content" id="accountModalContent"></div>
 </div>
-
-<!-- LOGIN MODAL -->
 <div class="modal" id="loginModal">
   <div class="modal-content">
     <button class="modal-close" onclick="closeAllModals()">✕</button>
     <h2>welcome back</h2>
-    <p style="color: var(--text-secondary); margin-bottom: 2rem;">sign in to vote & favorite</p>
-    
+    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">sign in to vote & favorite</p>
     <input type="text" id="loginUsername" class="modal-input" placeholder="username" maxlength="20">
-    <div style="text-align: right; color: var(--text-tertiary); font-size: 0.8rem; margin-top: -0.5rem; margin-bottom: 1rem;">max 20</div>
-    
+    <div style="text-align: right; color: var(--text-tertiary); font-size: 0.75rem; margin-top: -0.5rem; margin-bottom: 0.8rem;">max 20</div>
     <input type="password" id="loginPassword" class="modal-input" placeholder="password">
-    
     <button class="modal-btn primary" onclick="login()">sign in</button>
     <button class="modal-btn secondary" onclick="backToMain()">back</button>
   </div>
 </div>
-
-<!-- SIGNUP MODAL -->
 <div class="modal" id="signupModal">
   <div class="modal-content">
     <button class="modal-close" onclick="closeAllModals()">✕</button>
     <h2>create account</h2>
-    <p style="color: var(--text-secondary); margin-bottom: 1rem;">join 700+ games · vote & save favorites</p>
-    
-    <div style="background: linear-gradient(145deg, rgba(255,107,0,0.1), rgba(0,0,0,0.4)); border: 2px solid var(--border-medium); border-radius: var(--radius-xl); padding: 1rem; margin-bottom: 1.5rem;">
-      <div style="display: flex; align-items: center; gap: 1rem;">
-        <span style="font-size: 2rem;">⚠️</span>
-        <div style="text-align: left;">
-          <div style="color: var(--orange-500); font-weight: 800;">NO PASSWORD RECOVERY!</div>
-          <div style="color: var(--text-tertiary); font-size: 0.9rem;">contact @ricky in discord</div>
+    <p style="color: var(--text-secondary); margin-bottom: 0.8rem;">join 700+ games · vote & save</p>
+    <div style="background: linear-gradient(145deg, rgba(255,107,0,0.1), rgba(0,0,0,0.4)); border: 1px solid var(--border-medium); border-radius: var(--radius-lg); padding: 0.8rem; margin-bottom: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.8rem;">
+        <span style="font-size: 1.5rem;">⚠️</span>
+        <div style="text-align: left; font-size: 0.8rem;">
+          <div style="color: var(--orange-500); font-weight: 800;">NO PASSWORD RECOVERY</div>
+          <div style="color: var(--text-tertiary);">contact @ricky</div>
         </div>
       </div>
     </div>
-    
     <input type="text" id="signupUsername" class="modal-input" placeholder="username" maxlength="20">
-    <div style="text-align: right; color: var(--text-tertiary); font-size: 0.8rem; margin-top: -0.5rem; margin-bottom: 1rem;" id="usernameCounter">0/20</div>
-    
+    <div style="text-align: right; color: var(--text-tertiary); font-size: 0.75rem; margin-top: -0.5rem; margin-bottom: 0.8rem;" id="usernameCounter">0/20</div>
     <input type="password" id="signupPassword" class="modal-input" placeholder="password (min 6 chars)">
-    
     <button class="modal-btn primary" onclick="register()">create account</button>
     <button class="modal-btn secondary" onclick="backToMain()">back</button>
-    
-    <div style="margin-top: 1rem;">
-      <a href="#" onclick="showLogin()" style="color: var(--orange-500); text-decoration: none; font-weight: 700;">already have an account?</a>
+    <div style="margin-top: 0.8rem;">
+      <a href="#" onclick="showLogin(event)" style="color: var(--orange-500); text-decoration: none; font-weight: 700; font-size: 0.9rem;">already have an account?</a>
     </div>
   </div>
 </div>
-
-<!-- SETTINGS PANEL -->
 <div class="settings-panel" id="settingsPanel">
   <div class="settings-header">
     <h2>settings</h2>
     <button class="close-settings" id="closeSettings">✕</button>
   </div>
-  
   <div class="settings-content">
     <div class="settings-section">
       <h3><span>🎨</span> appearance</h3>
@@ -2481,7 +2100,6 @@ footer {
         <div class="toggle-switch active"></div>
       </div>
     </div>
-
     <div class="settings-section">
       <h3><span>⭐</span> favorites</h3>
       <div class="setting-item">
@@ -2493,7 +2111,6 @@ footer {
         <span style="color: var(--orange-500); font-weight: 800;" id="favoritesCountSetting">0</span>
       </div>
     </div>
-
     <div class="settings-section">
       <h3><span>🕒</span> recently played</h3>
       <div class="setting-item">
@@ -2510,7 +2127,6 @@ footer {
         </select>
       </div>
     </div>
-
     <div class="settings-section">
       <h3><span>⚡</span> performance</h3>
       <div class="setting-item">
@@ -2518,7 +2134,6 @@ footer {
         <div class="toggle-switch" id="optimizedToggle" onclick="toggleOptimized()"></div>
       </div>
     </div>
-
     <div class="settings-section">
       <h3><span>🕵️</span> tab cloak</h3>
       <div class="cloak-grid">
@@ -2537,8 +2152,6 @@ footer {
     </div>
   </div>
 </div>
-
-<!-- HEADER -->
 <header>
   <div class="header-content">
     <div class="logo-wrapper">
@@ -2546,20 +2159,16 @@ footer {
       <span class="game-badge">700+</span>
       <a href="https://ph-science.github.io/forum.html" class="btn-icon forum">💬</a>
     </div>
-    
     <div class="search-section">
       <i>🔍</i>
       <input type="text" id="searchBar" placeholder="Search 700+ games..." oninput="filterZones()">
     </div>
-    
     <div class="header-actions">
       <button class="btn btn-primary" id="accountBtn" onclick="showSmartAccountModal()">✨ sign in</button>
       <div class="btn-icon" id="settingsBtn">⚙️</div>
     </div>
   </div>
 </header>
-
-<!-- HERO -->
 <div class="hero">
   <div class="hero-card" id="heroCard">
     <div class="hero-text">
@@ -2574,16 +2183,11 @@ footer {
     </div>
   </div>
 </div>
-
-<!-- FILTER BAR -->
 <div class="filter-bar" id="lockFilterContainer" style="display: none;">
   <button id="showUnlockedBtn" class="filter-btn active" onclick="setLockFilter('unlocked')">🔓 unlocked (50%)</button>
   <button id="showLockedBtn" class="filter-btn" onclick="setLockFilter('locked')">🔒 locked (50%)</button>
 </div>
-
-<!-- MAIN CONTENT -->
 <div class="vaults">
-  <!-- FAVORITES -->
   <div class="vault" id="favoritesVault" style="--index: 1;">
     <div class="vault-header" onclick="toggleVault('favoritesVault')">
       <div class="vault-title">
@@ -2598,8 +2202,6 @@ footer {
       </div>
     </div>
   </div>
-  
-  <!-- RECENTLY PLAYED -->
   <div class="vault" id="recentVault" style="--index: 2;">
     <div class="vault-header" onclick="toggleVault('recentVault')">
       <div class="vault-title">
@@ -2614,8 +2216,6 @@ footer {
       </div>
     </div>
   </div>
-  
-  <!-- ALL GAMES -->
   <div class="vault" id="allZonesVault" style="--index: 3;">
     <div class="vault-header" onclick="toggleVault('allZonesVault')">
       <div class="vault-title">
@@ -2629,8 +2229,6 @@ footer {
     </div>
   </div>
 </div>
-
-<!-- GAME VIEWER -->
 <div class="game-viewer" id="gameViewer">
   <div class="viewer-header">
     <div class="viewer-title">
@@ -2644,23 +2242,17 @@ footer {
   </div>
   <iframe id="viewerFrame"></iframe>
 </div>
-
-<!-- TOAST -->
 <div class="toast-container" id="toastContainer"></div>
-
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
-
 <script>
-// Prevent form submission redirects
 document.addEventListener('click', function(e) {
   if (e.target.closest('button[type="submit"]')) {
     e.preventDefault();
   }
 });
-
 const firebaseConfig = {
   apiKey: "AIzaSyA-68XKNt_PD0I1TJbNcyotT4qMbgHh-tI",
   authDomain: "ph-science.firebaseapp.com",
@@ -2669,15 +2261,10 @@ const firebaseConfig = {
   messagingSenderId: "883067098385",
   appId: "1:883067098385:web:036ccc248ffa4f44cf28b0"
 };
-
-// CONFIGURATION IS NOW AT THE TOP OF THE PAGE
-// The SITE_CONFIG object is already defined in the head section
-  
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 const database = firebase.database();
-
 let zones = [];
 let favorites = [];
 let recentlyPlayed = [];
@@ -2689,11 +2276,9 @@ let unlockedGames = [];
 let lockFilter = 'unlocked';
 let gameVotes = {};
 let userVotes = {};
-
 const bannedIds = [-1, 596];
 const coverURL = "https://cdn.jsdelivr.net/gh/gn-math/covers@main";
 const htmlURL = "https://cdn.jsdelivr.net/gh/gn-math/html@main";
-
 const forumZone = {
   id: "forum",
   name: "Forums",
@@ -2701,11 +2286,9 @@ const forumZone = {
   cover: "https://media.discordapp.net/attachments/1246719291517308929/1479061650022727680/image_1.png?ex=69aaab01&is=69a95981&hm=0deadaed3877b789438454fd562b17f78e5cfb151a46b53b322dbb90163601c5&=&format=webp&quality=lossless&width=858&height=858",
   url: "https://ph-science.github.io/forum.html"
 };
-
 function loadVotes() {
   database.ref('votes').on('value', (snapshot) => {
     gameVotes = snapshot.val() || {};
-    
     if (auth.currentUser && !auth.currentUser.isAnonymous) {
       database.ref('userVotes/' + auth.currentUser.uid).on('value', (voteSnapshot) => {
         userVotes = voteSnapshot.val() || {};
@@ -2721,50 +2304,39 @@ function loadVotes() {
     }
   });
 }
-
 window.vote = function(gameId, voteType, event) {
   event.preventDefault();
   event.stopPropagation();
-  
   if (!auth.currentUser || auth.currentUser.isAnonymous) {
     showToast('🔒 Create an account to vote');
     showSmartAccountModal();
     return;
   }
-  
   const userId = auth.currentUser.uid;
   const currentVote = userVotes[gameId];
   const gameVoteData = gameVotes[gameId] || { up: 0, down: 0 };
-  
   let newUp = gameVoteData.up || 0;
   let newDown = gameVoteData.down || 0;
   let newUserVote = voteType;
-  
   if (currentVote === voteType) {
     if (voteType === 'up') newUp--;
     if (voteType === 'down') newDown--;
     newUserVote = null;
-  } 
-  else if (currentVote && currentVote !== voteType) {
+  } else if (currentVote && currentVote !== voteType) {
     if (currentVote === 'up') newUp--;
     if (currentVote === 'down') newDown--;
     if (voteType === 'up') newUp++;
     if (voteType === 'down') newDown++;
-  }
-  else {
+  } else {
     if (voteType === 'up') newUp++;
     if (voteType === 'down') newDown++;
   }
-  
   const voteRef = database.ref('votes/' + gameId);
   const userVoteRef = database.ref('userVotes/' + userId + '/' + gameId);
-  
   voteRef.set({ up: newUp, down: newDown });
   userVoteRef.set(newUserVote);
-  
   showToast(newUserVote === null ? '🗳️ vote removed' : voteType === 'up' ? '👍 upvoted!' : '👎 downvoted');
 };
-
 function formatTimeAgo(timestamp) {
   if (!timestamp) return '';
   const diff = Math.floor((Date.now() - timestamp) / 1000);
@@ -2773,7 +2345,6 @@ function formatTimeAgo(timestamp) {
   if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
   return Math.floor(diff / 86400) + 'd ago';
 }
-
 function showToast(message) {
   const container = document.getElementById('toastContainer');
   const toast = document.createElement('div');
@@ -2785,14 +2356,12 @@ function showToast(message) {
     setTimeout(() => toast.remove(), 300);
   }, 3000);
 }
-
 function closeAllModals() {
   document.querySelectorAll('.modal').forEach(modal => {
     modal.classList.remove('active');
     setTimeout(() => modal.style.display = 'none', 300);
   });
 }
-
 function checkWelcomeCard() {
   if (!localStorage.getItem('ph_welcome_seen_v2.1.0')) {
     setTimeout(() => {
@@ -2801,7 +2370,6 @@ function checkWelcomeCard() {
     }, 500);
   }
 }
-
 window.dismissWelcome = function() {
   const dontShow = document.getElementById('dontShowWelcome')?.checked;
   if (dontShow) {
@@ -2810,12 +2378,10 @@ window.dismissWelcome = function() {
   document.getElementById('welcomeModal').classList.remove('active');
   setTimeout(() => document.getElementById('welcomeModal').style.display = 'none', 300);
 };
-
 window.showSmartAccountModal = function() {
   const modal = document.getElementById('accountModal');
   const content = document.getElementById('accountModalContent');
   const user = auth.currentUser;
-  
   if (user && !user.isAnonymous) {
     content.innerHTML = `
       <button class="modal-close" onclick="closeAllModals()">✕</button>
@@ -2843,11 +2409,9 @@ window.showSmartAccountModal = function() {
       <a href="#" onclick="showLogin(event)" style="color: var(--orange-500); text-decoration: none; display: block; margin-top: 1.5rem; font-weight: 700;">sign in →</a>
     `;
   }
-  
   modal.style.display = 'flex';
   setTimeout(() => modal.classList.add('active'), 10);
 };
-
 window.showLogin = function(e) {
   if (e) e.preventDefault();
   closeAllModals();
@@ -2856,7 +2420,6 @@ window.showLogin = function(e) {
     setTimeout(() => document.getElementById('loginModal').classList.add('active'), 10);
   }, 300);
 };
-
 window.showSignup = function() {
   closeAllModals();
   setTimeout(() => {
@@ -2865,27 +2428,27 @@ window.showSignup = function() {
     document.getElementById('usernameCounter').textContent = '0/20';
   }, 300);
 };
-
 window.backToMain = function() {
   closeAllModals();
   setTimeout(() => showSmartAccountModal(), 300);
 };
-
 document.getElementById('signupUsername')?.addEventListener('input', function(e) {
   document.getElementById('usernameCounter').textContent = e.target.value.length + '/20';
 });
-
 window.register = function(e) {
   if (e) e.preventDefault();
   const username = document.getElementById('signupUsername').value.trim();
   const password = document.getElementById('signupPassword').value.trim();
-  
   if (!username || !password) { showToast('❌ enter username and password'); return; }
   if (username.length > 20) { showToast('❌ max 20 characters'); return; }
   if (password.length < 6) { showToast('❌ password too short'); return; }
-  
-  const email = username.toLowerCase().replace(/[^a-z0-9]/g, '') + '@ph.user';
-  
+  const sanitizedUsername = username.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const email = sanitizedUsername + '@ph.user';
+  const registerBtn = e?.target?.closest?.('.modal-btn.primary') || document.querySelector('#signupModal .modal-btn.primary');
+  if (registerBtn) {
+    registerBtn.textContent = 'Creating...';
+    registerBtn.disabled = true;
+  }
   auth.createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       return userCredential.user.updateProfile({ displayName: username });
@@ -2893,61 +2456,98 @@ window.register = function(e) {
     .then(() => {
       showToast(`✅ welcome, ${username}!`);
       closeAllModals();
+      if (registerBtn) {
+        registerBtn.textContent = 'create account';
+        registerBtn.disabled = false;
+      }
     })
     .catch((error) => {
+      console.error('Signup error:', error);
+      if (registerBtn) {
+        registerBtn.textContent = 'create account';
+        registerBtn.disabled = false;
+      }
       if (error.code === 'auth/email-already-in-use') {
-        showToast('❌ username taken');
+        showToast('❌ username taken - try another');
+      } else if (error.code === 'auth/weak-password') {
+        showToast('❌ password too weak');
+      } else if (error.code === 'auth/invalid-email') {
+        showToast('❌ invalid username format');
       } else {
-        showToast('❌ signup failed');
+        showToast('❌ signup failed: ' + (error.message || 'unknown error'));
       }
     });
 };
-
 window.login = function(e) {
   if (e) e.preventDefault();
   const username = document.getElementById('loginUsername').value.trim();
   const password = document.getElementById('loginPassword').value.trim();
-  
   if (!username || !password) { showToast('❌ enter username and password'); return; }
-  
-  const email = username.toLowerCase().replace(/[^a-z0-9]/g, '') + '@ph.user';
-  
+  const sanitizedUsername = username.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const email = sanitizedUsername + '@ph.user';
+  const loginBtn = e?.target?.closest?.('.modal-btn.primary') || document.querySelector('#loginModal .modal-btn.primary');
+  if (loginBtn) {
+    loginBtn.textContent = 'Signing in...';
+    loginBtn.disabled = true;
+  }
   auth.signInWithEmailAndPassword(email, password)
-    .then(() => {
+    .then((userCredential) => {
       showToast(`👋 welcome back, ${username}`);
       closeAllModals();
+      if (loginBtn) {
+        loginBtn.textContent = 'sign in';
+        loginBtn.disabled = false;
+      }
     })
-    .catch(() => showToast('❌ invalid login'));
+    .catch((error) => {
+      console.error('Login error:', error);
+      if (loginBtn) {
+        loginBtn.textContent = 'sign in';
+        loginBtn.disabled = false;
+      }
+      if (error.code === 'auth/user-not-found') {
+        showToast('❌ user not found');
+      } else if (error.code === 'auth/wrong-password') {
+        showToast('❌ wrong password');
+      } else if (error.code === 'auth/invalid-email') {
+        showToast('❌ invalid username');
+      } else {
+        showToast('❌ login failed: ' + (error.message || 'unknown error'));
+      }
+    });
 };
-
 window.continueAsGuest = function() {
+  const guestBtn = document.querySelector('#accountModal .modal-btn.secondary');
+  if (guestBtn) {
+    guestBtn.textContent = 'Loading...';
+    guestBtn.disabled = true;
+  }
   auth.signInAnonymously()
     .then(() => {
       showToast('👤 guest mode - 50% unlocked');
       closeAllModals();
     })
-    .catch(() => showToast('❌ guest login failed'));
+    .catch((error) => {
+      console.error('Guest login error:', error);
+      showToast('❌ guest login failed - try again');
+      if (guestBtn) {
+        guestBtn.textContent = 'continue as guest (50% access)';
+        guestBtn.disabled = false;
+      }
+    });
 };
-
-// BANNER CONTROL - This runs when the page loads
 document.addEventListener('DOMContentLoaded', function() {
   const banner = document.getElementById('problemBanner');
   const messageSpan = document.getElementById('problemMessage');
-  
-  // Update banner based on config
   if (SITE_CONFIG && SITE_CONFIG.hasProblem) {
     messageSpan.textContent = SITE_CONFIG.problemMessage;
-    
-    // Update stripe colors if custom colors are provided
     if (SITE_CONFIG.bannerColors) {
       banner.style.background = `repeating-linear-gradient(45deg, ${SITE_CONFIG.bannerColors.stripe1} 0px, ${SITE_CONFIG.bannerColors.stripe1} 20px, ${SITE_CONFIG.bannerColors.stripe2} 20px, ${SITE_CONFIG.bannerColors.stripe2} 40px)`;
     }
-    
     banner.style.display = 'block';
     document.body.classList.add('has-problem');
   }
 });
-  
 window.logout = function() {
   auth.signOut().then(() => {
     showToast('👋 logged out');
@@ -2961,51 +2561,42 @@ window.logout = function() {
     displayZones(zones);
   });
 };
-
 window.switchAccounts = function() {
   auth.signOut().then(() => {
     closeAllModals();
     setTimeout(() => showSmartAccountModal(), 300);
   });
 };
-
 function updateLockFilter() {
   const container = document.getElementById('lockFilterContainer');
   container.style.display = (auth.currentUser && auth.currentUser.isAnonymous) ? 'flex' : 'none';
 }
-
 window.setLockFilter = function(filter) {
   lockFilter = filter;
   document.getElementById('showUnlockedBtn').classList.toggle('active', filter === 'unlocked');
   document.getElementById('showLockedBtn').classList.toggle('active', filter === 'locked');
   displayZones(zones);
 };
-
 async function listZones() {
   try {
     const response = await fetch("https://cdn.jsdelivr.net/gh/gn-math/assets/zones.json?t=" + Date.now());
     const json = await response.json();
     zones = json.filter(game => !bannedIds.includes(game.id));
-    
     zones.unshift(forumZone);
-    
-    // Randomly select 50% of games for guests
-    const shuffled = [...zones].sort(() => 0.5 - Math.random());
+    const shuffled = [...zones.filter(z => z.id !== 'forum')].sort(() => 0.5 - Math.random());
     unlockedGames = shuffled.slice(0, Math.floor(zones.length / 2)).map(g => g.id);
-    
     document.getElementById('totalGamesStat').innerText = zones.length;
     loadVotes();
     sortZones();
   } catch (error) {
+    console.error('Error loading zones:', error);
     document.getElementById('container').innerHTML = 'error loading games';
   }
 }
-
 window.sortZones = function() {
   const forum = zones.find(z => z.id === 'forum');
   const otherZones = zones.filter(z => z.id !== 'forum').sort((a, b) => a.name.localeCompare(b.name));
   zones = [forum, ...otherZones];
-  
   if (showFavOnly) {
     displayZones(zones.filter(z => favorites.includes(z.id)));
   } else {
@@ -3014,19 +2605,17 @@ window.sortZones = function() {
   displayFavorites();
   displayRecentlyPlayed();
 };
-
 function displayZones(list) {
   const container = document.getElementById('container');
   if (!container) return;
-  
   let displayList = list;
   const user = auth.currentUser;
-  
   if (!user) {
-    // Not logged in - all games locked
-    displayList = list.map(game => ({ ...game, forcedLock: game.id !== 'forum' }));
+    displayList = list.map(game => ({ 
+      ...game, 
+      forcedLock: game.id !== 'forum' 
+    }));
   } else if (user.isAnonymous) {
-    // Guest - filter based on unlocked/locked selection
     displayList = list.filter(game => {
       if (game.id === 'forum') return true;
       const isUnlocked = unlockedGames.includes(game.id);
@@ -3036,38 +2625,37 @@ function displayZones(list) {
       forcedLock: game.id === 'forum' ? false : (lockFilter === 'locked' ? true : !unlockedGames.includes(game.id))
     }));
   } else {
-    // Signed in - all games unlocked
-    displayList = list.map(game => ({ ...game, forcedLock: false }));
+    displayList = list.map(game => ({ 
+      ...game, 
+      forcedLock: false 
+    }));
   }
-  
   container.innerHTML = '';
   displayList.forEach(file => container.appendChild(createGameCard(file)));
   document.getElementById('allCount').innerText = displayList.length;
 }
-
 function createGameCard(file, isRecent = false) {
   const div = document.createElement('div');
   div.className = 'game-card';
-  
   const user = auth.currentUser;
   const isSignedIn = user && !user.isAnonymous;
   const isGuest = user && user.isAnonymous;
-  
-  let isLocked = (() => {
-    if (file.id === 'forum') return false;
-    if (!user) return true; // Not logged in = locked
-    if (isGuest) return !unlockedGames.includes(file.id); // Guest = only unlocked games
-    return false; // Signed in = all unlocked
-  })();
-  
+  let isLocked = false;
+  if (file.id === 'forum') {
+    isLocked = false;
+  } else if (!user) {
+    isLocked = true;
+  } else if (isGuest) {
+    isLocked = !unlockedGames.includes(file.id);
+  } else {
+    isLocked = false;
+  }
   if (isLocked) div.classList.add('locked');
-  
   div.onclick = (e) => {
     if (e.target.classList.contains('favorite-star') || 
         e.target.classList.contains('vote-btn') ||
         e.target.closest('.vote-btn') ||
         e.target.classList.contains('remove-recent')) return;
-    
     if (isLocked) {
       if (!user) {
         showToast('🔒 Sign in or continue as guest to play');
@@ -3079,46 +2667,38 @@ function createGameCard(file, isRecent = false) {
       openGame(file);
     }
   };
-  
   const mediaDiv = document.createElement('div');
   mediaDiv.className = 'game-media';
-  
   const img = document.createElement('img');
   img.src = file.cover?.replace("{COVER_URL}", coverURL) || coverURL + "/default.png";
   img.alt = file.name;
   img.loading = 'lazy';
   img.onerror = () => { img.src = coverURL + "/default.png"; };
   mediaDiv.appendChild(img);
-  
   if (isLocked) {
     const lockedOverlay = document.createElement('div');
     lockedOverlay.className = 'locked-overlay';
     lockedOverlay.innerHTML = `
       <div class="lock-icon">🔒</div>
       <div class="locked-message">
-        <p>${!user ? 'sign in to play' : 'create account to unlock'}</p>
+        <p>${!user ? 'sign in to play' : (isGuest ? 'create account to unlock' : 'locked')}</p>
         <button class="signup-prompt" onclick="event.stopPropagation(); showSignup();">✨ Sign Up</button>
       </div>
     `;
     mediaDiv.appendChild(lockedOverlay);
   }
-  
   const overlay = document.createElement('div');
   overlay.className = 'game-overlay';
   overlay.innerText = file.id === 'forum' ? 'JOIN' : (isLocked ? 'LOCKED' : 'PLAY');
   mediaDiv.appendChild(overlay);
-  
   const contentDiv = document.createElement('div');
   contentDiv.className = 'game-content';
-  
   const titleRow = document.createElement('div');
   titleRow.className = 'game-title-row';
-  
   if (file.id !== 'forum') {
     const star = document.createElement('span');
     const canFavorite = isSignedIn;
     const isFavorited = favorites.includes(file.id);
-    
     star.className = 'favorite-star' + (isFavorited ? ' active' : '');
     star.innerHTML = '★';
     star.onclick = (e) => {
@@ -3132,60 +2712,47 @@ function createGameCard(file, isRecent = false) {
     };
     titleRow.appendChild(star);
   }
-  
   const nameSpan = document.createElement('span');
   nameSpan.className = 'game-name';
   nameSpan.innerText = file.name;
   titleRow.appendChild(nameSpan);
-  
   contentDiv.appendChild(titleRow);
-  
   if (file.id !== 'forum') {
     const voteContainer = document.createElement('div');
     voteContainer.className = 'vote-section';
-    
     const votes = gameVotes[file.id] || { up: 0, down: 0 };
     const userVote = userVotes[file.id];
-    
     const upBtn = document.createElement('div');
     upBtn.className = 'vote-btn upvote' + (userVote === 'up' ? ' active' : '') + (!isSignedIn ? ' disabled' : '');
     upBtn.innerHTML = `👍 <span class="vote-count">${votes.up || 0}</span>`;
     upBtn.onclick = (e) => vote(file.id, 'up', e);
-    
     const sep = document.createElement('span');
     sep.className = 'vote-separator';
     sep.textContent = '·';
-    
     const downBtn = document.createElement('div');
     downBtn.className = 'vote-btn downvote' + (userVote === 'down' ? ' active' : '') + (!isSignedIn ? ' disabled' : '');
     downBtn.innerHTML = `👎 <span class="vote-count">${votes.down || 0}</span>`;
     downBtn.onclick = (e) => vote(file.id, 'down', e);
-    
     voteContainer.appendChild(upBtn);
     voteContainer.appendChild(sep);
     voteContainer.appendChild(downBtn);
     contentDiv.appendChild(voteContainer);
   }
-  
   const metaDiv = document.createElement('div');
   metaDiv.className = 'game-meta';
-  
   const authorSpan = document.createElement('a');
   authorSpan.className = 'game-author';
   authorSpan.href = file.authorLink || '#';
   authorSpan.target = '_blank';
   authorSpan.innerText = file.author || 'unknown';
   metaDiv.appendChild(authorSpan);
-  
   const actionsDiv = document.createElement('div');
   actionsDiv.className = 'game-actions';
-  
   if (isRecent && recentTimestamps[file.id]) {
     const timeSpan = document.createElement('span');
     timeSpan.className = 'played-time';
     timeSpan.innerText = formatTimeAgo(recentTimestamps[file.id]);
     actionsDiv.appendChild(timeSpan);
-    
     if (isSignedIn) {
       const removeBtn = document.createElement('span');
       removeBtn.className = 'remove-recent';
@@ -3197,10 +2764,8 @@ function createGameCard(file, isRecent = false) {
       actionsDiv.appendChild(removeBtn);
     }
   }
-  
   metaDiv.appendChild(actionsDiv);
   contentDiv.appendChild(metaDiv);
-  
   const launchBtn = document.createElement('button');
   launchBtn.className = 'launch-btn';
   launchBtn.innerText = file.id === 'forum' ? 'join discussion' : (isLocked ? 'locked' : 'launch game');
@@ -3217,25 +2782,20 @@ function createGameCard(file, isRecent = false) {
       openGame(file);
     }
   };
-  
   div.appendChild(mediaDiv);
   div.appendChild(contentDiv);
   div.appendChild(launchBtn);
   return div;
 }
-
 window.filterZones = debounce(function() {
   const q = document.getElementById('searchBar').value.toLowerCase();
   const filtered = zones.filter(z => z.name.toLowerCase().includes(q));
-  
   if (showFavOnly) {
     displayZones(filtered.filter(z => favorites.includes(z.id)));
   } else {
     displayZones(filtered);
   }
 }, 200);
-
-// Add this function to handle banner dismissal
 window.dismissBanner = function() {
   const banner = document.getElementById('problemBanner');
   banner.style.animation = 'bannerSlideUp 0.4s ease-in forwards';
@@ -3244,8 +2804,6 @@ window.dismissBanner = function() {
     document.body.classList.remove('has-problem');
   }, 400);
 };
-
-// Add this keyframe animation for banner dismissal
 const style = document.createElement('style');
 style.textContent = `
   @keyframes bannerSlideUp {
@@ -3260,7 +2818,6 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
-
 function debounce(func, wait) {
   let timeout;
   return function(...args) {
@@ -3268,18 +2825,14 @@ function debounce(func, wait) {
     timeout = setTimeout(() => func(...args), wait);
   };
 }
-
 window.openGame = function(file) {
   if (file.id === 'forum') {
     window.open(file.url, '_blank');
     return;
   }
-  
   const user = auth.currentUser;
   const isSignedIn = user && !user.isAnonymous;
   const isGuest = user && user.isAnonymous;
-  
-  // Determine if game is locked
   let isLocked = false;
   if (!user) {
     isLocked = true;
@@ -3294,32 +2847,31 @@ window.openGame = function(file) {
       return;
     }
   }
-  
-  // Add to recently played for signed-in users only
   if (isSignedIn) {
     addToRecentlyPlayed(file.id);
   }
-  
-  // Open the game
-  if (file.url.startsWith("http") && !file.url.includes("{HTML_URL}")) {
+  if (file.url && file.url.startsWith("http") && !file.url.includes("{HTML_URL}")) {
     window.open(file.url, "_blank");
-  } else {
+  } else if (file.url) {
     const url = file.url.replace("{COVER_URL}", coverURL).replace("{HTML_URL}", htmlURL);
-    fetch(url).then(r => r.text()).then(html => {
-      document.getElementById('viewerFrame').srcdoc = html;
-      document.getElementById('viewerGameName').textContent = file.name;
-      document.getElementById('viewerGameAuthor').textContent = "by " + (file.author || 'unknown');
-      if (file.authorLink) document.getElementById('viewerGameAuthor').href = file.authorLink;
-      document.getElementById('gameViewer').style.display = "flex";
-    }).catch(() => showToast('error loading game'));
+    fetch(url)
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('viewerFrame').srcdoc = html;
+        document.getElementById('viewerGameName').textContent = file.name;
+        document.getElementById('viewerGameAuthor').textContent = "by " + (file.author || 'unknown');
+        if (file.authorLink) document.getElementById('viewerGameAuthor').href = file.authorLink;
+        document.getElementById('gameViewer').style.display = "flex";
+      })
+      .catch(() => showToast('error loading game'));
+  } else {
+    showToast('game URL not available');
   }
 };
-
 window.closeViewer = function() {
   document.getElementById('gameViewer').style.display = "none";
   document.getElementById('viewerFrame').srcdoc = '';
 };
-
 window.openInNewTab = function() {
   const frame = document.getElementById('viewerFrame');
   const win = window.open('about:blank', '_blank');
@@ -3328,49 +2880,37 @@ window.openInNewTab = function() {
     win.document.close();
   }
 };
-
 function addToRecentlyPlayed(gameId) {
   if (!auth.currentUser || auth.currentUser.isAnonymous || gameId === 'forum') return;
-  
   const timestamp = Date.now();
   const updatedRecent = recentlyPlayed.filter(id => id !== gameId);
   updatedRecent.unshift(gameId);
-  
   const maxRecent = parseInt(document.getElementById('maxRecent')?.value || '10');
   if (updatedRecent.length > maxRecent) updatedRecent.pop();
-  
   const updatedTimestamps = { ...recentTimestamps, [gameId]: timestamp };
-  
   database.ref('users/' + auth.currentUser.uid + '/recent').set(updatedRecent);
   database.ref('users/' + auth.currentUser.uid + '/recentTimestamps').set(updatedTimestamps);
 }
-
 function removeFromRecent(gameId) {
   if (!auth.currentUser || auth.currentUser.isAnonymous) return;
-  
   const updatedRecent = recentlyPlayed.filter(id => id !== gameId);
   const updatedTimestamps = { ...recentTimestamps };
   delete updatedTimestamps[gameId];
-  
   database.ref('users/' + auth.currentUser.uid + '/recent').set(updatedRecent);
   database.ref('users/' + auth.currentUser.uid + '/recentTimestamps').set(updatedTimestamps);
   showToast('removed from recent');
 }
-
 window.toggleFavorite = function(gameId, event) {
   if (!auth.currentUser || auth.currentUser.isAnonymous) {
     showToast('🔒 Create an account to favorite');
     showSmartAccountModal();
     return;
   }
-  
   const newFavorites = favorites.includes(gameId)
     ? favorites.filter(id => id !== gameId)
     : [...favorites, gameId];
-  
   database.ref('users/' + auth.currentUser.uid + '/favorites').set(newFavorites);
   showToast(favorites.includes(gameId) ? '☆ removed' : '⭐ added');
-  
   if (event) {
     const star = event.target;
     star.style.animation = 'none';
@@ -3378,14 +2918,11 @@ window.toggleFavorite = function(gameId, event) {
     star.style.animation = 'starGlow 2s infinite alternate';
   }
 };
-
 function displayFavorites() {
   const container = document.getElementById('favoritesZones');
   const favoriteGames = zones.filter(z => favorites.includes(z.id));
-  
   document.getElementById('favoritesCount').innerText = favoriteGames.length;
   document.getElementById('favoritesCountSetting').innerText = favoriteGames.length;
-  
   if (favoriteGames.length === 0) {
     container.innerHTML = '<div class="empty-state">✨ favorite games appear here</div>';
   } else {
@@ -3393,13 +2930,10 @@ function displayFavorites() {
     favoriteGames.forEach(file => container.appendChild(createGameCard(file)));
   }
 }
-
 function displayRecentlyPlayed() {
   const container = document.getElementById('recentZones');
   const recentGames = recentlyPlayed.map(id => zones.find(z => z.id === id)).filter(g => g);
-  
   document.getElementById('recentCount').innerText = recentGames.length;
-  
   if (recentGames.length === 0) {
     container.innerHTML = '<div class="empty-state">🎮 play games to see them here</div>';
   } else {
@@ -3407,17 +2941,14 @@ function displayRecentlyPlayed() {
     recentGames.forEach(file => container.appendChild(createGameCard(file, true)));
   }
 }
-
 window.clearAllRecentHistory = function() {
   if (!auth.currentUser || auth.currentUser.isAnonymous) return;
   database.ref('users/' + auth.currentUser.uid + '/recent').set([]);
   database.ref('users/' + auth.currentUser.uid + '/recentTimestamps').set({});
   showToast('recent history cleared');
 };
-
 window.updateMaxRecent = function() {
   if (!auth.currentUser || auth.currentUser.isAnonymous) return;
-  
   const maxRecent = parseInt(document.getElementById('maxRecent').value);
   if (recentlyPlayed.length > maxRecent) {
     const updatedRecent = recentlyPlayed.slice(0, maxRecent);
@@ -3430,29 +2961,23 @@ window.updateMaxRecent = function() {
   }
   showToast(`showing last ${maxRecent} games`);
 };
-
 window.filterFavorites = function() {
   showFavOnly = document.getElementById('showFavOnly').checked;
   sortZones();
 };
-
 auth.onAuthStateChanged((user) => {
   document.getElementById('accountBtn').innerHTML = user ? (user.isAnonymous ? '👤 guest' : `👤 ${user.displayName}`) : '✨ sign in';
-  
   if (user && !user.isAnonymous) {
     const userId = user.uid;
-    
     database.ref('users/' + userId + '/favorites').on('value', (s) => {
       favorites = s.val() || [];
       displayZones(zones);
       displayFavorites();
     });
-    
     database.ref('users/' + userId + '/recent').on('value', (s) => {
       recentlyPlayed = s.val() || [];
       displayRecentlyPlayed();
     });
-    
     database.ref('users/' + userId + '/recentTimestamps').on('value', (s) => {
       recentTimestamps = s.val() || {};
       displayRecentlyPlayed();
@@ -3466,23 +2991,18 @@ auth.onAuthStateChanged((user) => {
     displayFavorites();
     displayRecentlyPlayed();
   }
-  
   updateLockFilter();
 });
-
 document.getElementById('settingsBtn').addEventListener('click', () => {
   document.getElementById('settingsPanel').classList.add('active');
 });
-
 document.getElementById('closeSettings').addEventListener('click', () => {
   document.getElementById('settingsPanel').classList.remove('active');
 });
-
 window.toggleOptimized = function() {
   document.body.classList.toggle('optimized-mode');
   document.getElementById('optimizedToggle').classList.toggle('active');
   localStorage.setItem('ph_optimized', document.body.classList.contains('optimized-mode') ? 'on' : 'off');
-  
   if (document.body.classList.contains('optimized-mode')) {
     document.documentElement.style.setProperty('--transition-fast', '0ms');
     document.documentElement.style.setProperty('--transition-base', '0ms');
@@ -3499,7 +3019,6 @@ window.toggleOptimized = function() {
     showToast('✨ effects restored');
   }
 };
-
 if (localStorage.getItem('ph_optimized') === 'on') {
   document.body.classList.add('optimized-mode');
   document.getElementById('optimizedToggle').classList.add('active');
@@ -3509,7 +3028,6 @@ if (localStorage.getItem('ph_optimized') === 'on') {
   document.documentElement.style.setProperty('--transition-bounce', '0ms');
   document.documentElement.style.setProperty('--transition-elastic', '0ms');
 }
-
 window.cloakPreset = function(title, iconUrl) {
   document.title = title;
   let link = document.querySelector("link[rel~='icon']") || document.createElement('link');
@@ -3519,7 +3037,6 @@ window.cloakPreset = function(title, iconUrl) {
   showToast(`cloaked as ${title}`);
   document.getElementById('settingsPanel').classList.remove('active');
 };
-
 window.applyCustomCloak = function() {
   const title = document.getElementById('customTitle').value;
   const icon = document.getElementById('customIcon').value;
@@ -3533,36 +3050,28 @@ window.applyCustomCloak = function() {
   showToast('custom cloak applied');
   document.getElementById('settingsPanel').classList.remove('active');
 };
-
 document.getElementById('heroCard').addEventListener('mousemove', (e) => {
   const rect = e.currentTarget.getBoundingClientRect();
   e.currentTarget.style.setProperty('--x', ((e.clientX - rect.left) / rect.width) * 100 + '%');
   e.currentTarget.style.setProperty('--y', ((e.clientY - rect.top) / rect.height) * 100 + '%');
 });
-
 window.toggleVault = function(vaultId) {
   const content = document.getElementById(vaultId + 'Content');
   const icon = document.getElementById(vaultId + 'Icon');
   const header = document.querySelector(`#${vaultId} .vault-header`);
-  
   content.classList.toggle('expanded');
   icon.style.transform = content.classList.contains('expanded') ? 'rotate(180deg)' : 'rotate(0)';
   header.classList.toggle('active');
 };
-
-// Prevent any default form submissions
 document.addEventListener('submit', function(e) {
   e.preventDefault();
   return false;
 });
-
 listZones();
 checkWelcomeCard();
-
 document.addEventListener('click', (e) => {
   const settings = document.getElementById('settingsPanel');
   const settingsBtn = document.getElementById('settingsBtn');
-  
   if (settings.classList.contains('active') && 
       !settings.contains(e.target) && 
       e.target !== settingsBtn && 

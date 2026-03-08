@@ -8,33 +8,10 @@
 <title>PH - Science</title>
 <meta name="title" content="PH Science | █████████ Games">
 <meta name="description" content="Play 700+ █████████ Games during school hours, or work hours!">
-<script>
-// SITE CONFIGURATION MODES
-// Change this to 'bad' or 'REALLY_FUCKING_BAD' to test different banner styles
-const SITE_CONFIG = {
-  mode: 'bad', // Options: 'bad', 'REALLY_FUCKING_BAD'
-  hasProblem: true,
-  problemMessage: "⚠️ Everyone's Data has been Wiped, due to the signing up issue.",
-  bannerColors: {
-    stripe1: "#ff6b00", 
-    stripe2: "#b84d00" 
-  }
-};
-
-// Apply mode-based configuration
-if (SITE_CONFIG.mode === 'REALLY_FUCKING_BAD') {
-  SITE_CONFIG.bannerColors = {
-    stripe1: "#FF0000", 
-    stripe2: "#8B0000" 
-  };
-  SITE_CONFIG.problemMessage = "🚨 CRITICAL: System Failure - All data corrupted! 🚨";
-}
-</script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&display=swap');
 
-/* Base stripe background - always black */
 body::before {
   content: '';
   position: fixed;
@@ -2269,7 +2246,6 @@ footer {
     </div>
     <div class="banner-message">
       <span class="message-text" id="problemMessage">⚠️ We're currently having an issue with signing up.</span>
-      <span class="message-subtext">im tryna fix it man :(</span>
     </div>
     <div class="banner-actions">
       <button class="banner-btn" onclick="dismissBanner()">Dismiss</button>
@@ -2320,7 +2296,9 @@ footer {
     <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">sign in to vote & favorite</p>
     <input type="text" id="loginUsername" class="modal-input" placeholder="username" maxlength="20">
     <div style="text-align: right; color: var(--text-tertiary); font-size: 0.75rem; margin-top: -0.5rem; margin-bottom: 0.8rem;">max 20</div>
-    <input type="password" id="loginPassword" class="modal-input" placeholder="password">
+    <div class="password-field">
+      <input type="password" id="loginPassword" class="modal-input" placeholder="password">
+    </div>
     <button class="modal-btn primary" onclick="login()">sign in</button>
     <button class="modal-btn secondary" onclick="backToMain()">back</button>
   </div>
@@ -2341,7 +2319,9 @@ footer {
     </div>
     <input type="text" id="signupUsername" class="modal-input" placeholder="username" maxlength="20">
     <div style="text-align: right; color: var(--text-tertiary); font-size: 0.75rem; margin-top: -0.5rem; margin-bottom: 0.8rem;" id="usernameCounter">0/20</div>
-    <input type="password" id="signupPassword" class="modal-input" placeholder="password (min 6 chars)">
+    <div class="password-field">
+      <input type="password" id="signupPassword" class="modal-input" placeholder="password (min 6 chars)">
+    </div>
     <button class="modal-btn primary" onclick="register()">create account</button>
     <button class="modal-btn secondary" onclick="backToMain()">back</button>
     <div style="margin-top: 0.8rem;">
@@ -2529,26 +2509,38 @@ footer {
 
   // Fix for touch events on mobile
   document.addEventListener('touchstart', function() {}, {passive: true});
+  
+  // Fix for LastPass/extension conflicts
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.addedNodes) {
+        mutation.addedNodes.forEach(function(node) {
+          if (node.nodeType === 1 && node.hasAttribute && node.hasAttribute('data-lastpass-root')) {
+            node.remove();
+          }
+        });
+      }
+    });
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
 })();
 
-// SITE CONFIGURATION with mode-based styling
-const SITE_CONFIG = {
-  mode: 'bad', // Change to 'REALLY_FUCKING_BAD' for red stripes
+window.SITE_CONFIG = {
+  mode: 'REALLY_FUCKING_BAD', 
   hasProblem: true,
-  problemMessage: "⚠️ Everyone's Data has been Wiped, due to the signing up issue.",
+  problemMessage: "No errors found, please dismiss this message.",
   bannerColors: {
     stripe1: "#ff6b00", 
     stripe2: "#b84d00" 
   }
 };
 
-// Apply mode-based configuration
-if (SITE_CONFIG.mode === 'REALLY_FUCKING_BAD') {
-  SITE_CONFIG.bannerColors = {
+if (window.SITE_CONFIG.mode === 'REALLY_FUCKING_BAD') {
+  window.SITE_CONFIG.bannerColors = {
     stripe1: "#FF0000", 
     stripe2: "#8B0000" 
   };
-  SITE_CONFIG.problemMessage = "🚨 CRITICAL: System Failure - All data corrupted! 🚨";
+  window.SITE_CONFIG.problemMessage = "DATA HAS BEEN WIPED DUE TO A SIGN-UP SYSTEM ERROR.";
 }
 
 // Apply banner colors
@@ -2556,21 +2548,21 @@ document.addEventListener('DOMContentLoaded', function() {
   const banner = document.getElementById('problemBanner');
   const messageSpan = document.getElementById('problemMessage');
   
-  if (SITE_CONFIG && SITE_CONFIG.hasProblem) {
-    messageSpan.textContent = SITE_CONFIG.problemMessage;
+  if (window.SITE_CONFIG && window.SITE_CONFIG.hasProblem) {
+    messageSpan.textContent = window.SITE_CONFIG.problemMessage;
     
     // Apply stripe pattern background
-    if (SITE_CONFIG.bannerColors) {
+    if (window.SITE_CONFIG.bannerColors) {
       banner.style.background = `repeating-linear-gradient(45deg, 
-        ${SITE_CONFIG.bannerColors.stripe1} 0px, 
-        ${SITE_CONFIG.bannerColors.stripe1} 20px, 
-        ${SITE_CONFIG.bannerColors.stripe2} 20px, 
-        ${SITE_CONFIG.bannerColors.stripe2} 40px)`;
+        ${window.SITE_CONFIG.bannerColors.stripe1} 0px, 
+        ${window.SITE_CONFIG.bannerColors.stripe1} 20px, 
+        ${window.SITE_CONFIG.bannerColors.stripe2} 20px, 
+        ${window.SITE_CONFIG.bannerColors.stripe2} 40px)`;
       
       // Update banner pulse color based on mode
       const pulseRing = banner.querySelector('.banner-pulse');
       if (pulseRing) {
-        pulseRing.style.background = SITE_CONFIG.mode === 'REALLY_FUCKING_BAD' ? '#ff0000' : '#ffffff';
+        pulseRing.style.background = window.SITE_CONFIG.mode === 'REALLY_FUCKING_BAD' ? '#ff0000' : '#ffffff';
       }
     }
     

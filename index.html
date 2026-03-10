@@ -436,8 +436,31 @@ main { max-width:1600px; margin:0 auto; padding:0 1.5rem 5rem; }
 .zone-item:hover { transform:translateY(-12px) scale(1.02); box-shadow:0 40px 80px -20px rgba(255,107,0,.3),0 0 0 1px rgba(255,107,0,.5); border-color:rgba(255,107,0,.55); }
 .zone-item:hover::after { opacity:1; }
 
-.zone-media { position:relative; aspect-ratio:16/9; overflow:hidden; }
-.zone-item img { width:100%; height:100%; object-fit:cover; transition:transform .65s var(--sp); will-change:transform; display:block; }
+.zone-media { 
+  position:relative; 
+  aspect-ratio:16/9; 
+  overflow:hidden;
+  background-color: var(--v3);
+}
+
+.zone-image {
+  width: 100%;
+  height: 100%;
+  background-size: contain; /* or 'cover' depending on preference */
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform .65s var(--sp);
+}
+
+.zone-item img { 
+  width:100%; 
+  height:100%; 
+  object-fit: contain;  /* Changed from 'cover' to 'contain' */
+  background: var(--v3); /* Adds background color for empty space */
+  transition:transform .65s var(--sp); 
+  will-change:transform; 
+  display:block; 
+}
 .zone-item:hover img { transform:scale(1.08); }
 
 .zone-play-badge { position:absolute; top:1rem; right:1rem; background:var(--o); color:black; font-weight:700; padding:.4rem 1.4rem; border-radius:var(--rf); opacity:0; transform:translateY(-8px) scale(.9); transition:all .3s var(--sp); box-shadow:0 0 28px rgba(255,107,0,.8); font-family:'JetBrains Mono',monospace; font-size:.8rem; pointer-events:none; letter-spacing:.08em; z-index:5; }
@@ -974,16 +997,16 @@ const forumZone = {
   id:     "forum",
   name:   "Forums",
   author: "Ph - Science",
-cover: "https://cdn-icons-png.flaticon.com/512/7177/7177378.png",
+  cover: "https://cdn-icons-png.flaticon.com/512/7177/7177378.png",
   url:    "https://ph-science.github.io/forum.html",
 };
 
-  const Zone = {
-  id:     "",
-  name:   "ions",
+const suggestZone = {
+  id:     "suggest",
+  name:   "Suggestions",
   author: "Ph - Science",
   cover:  "https://cdn.iconscout.com/icon/free/png-256/free-hubspot-logo-icon-svg-download-png-2944939.png?f=webp",
-  url:    "https://ph-science.github.io/s.html",
+  url:    "https://ph-science.github.io/suggests.html",
 };
   
 function formatTimeAgo(ts) {
@@ -1319,7 +1342,7 @@ if (localStorage.getItem('ph_announcement_dismissed') === 'true') {
 }
 
 function addToRecentlyPlayed(id) {
-  if (!auth.currentUser || id === 'forum' || id === '') return;
+  if (!auth.currentUser || id === 'forum' || id === 'suggest') return;
   const uid = auth.currentUser.uid;
   const ts  = Date.now();
   const max = parseInt(document.getElementById('maxRecent')?.value || '10');
@@ -1405,8 +1428,9 @@ async function listZones() {
     const res  = await fetch("https://cdn.jsdelivr.net/gh/gn-math/assets/zones.json?t=" + Date.now());
     const json = await res.json();
     zones      = json.filter(g => !bannedIds.includes(g.id));
+    // Add both forum and suggest zones at the beginning
     zones.unshift(forumZone);
-        zones.unshift(forumZone);
+    zones.unshift(suggestZone);
     const shuffled = [...zones].sort(() => .5 - Math.random());
     unlockedGames  = shuffled.slice(0, Math.floor(zones.length / 2)).map(g => g.id);
     document.getElementById('totalGamesStat').innerText = zones.length;
@@ -1422,8 +1446,14 @@ window.sortZones = function() {
   const by = document.getElementById('sortOptions').value;
   if (by === 'name') zones.sort((a, b) => a.name.localeCompare(b.name));
   else if (by === 'id') zones.sort((a, b) => a.id - b.id);
-  const fi = zones.findIndex(z => z.id === 'forum');
-  if (fi > 0) { const f = zones.splice(fi, 1)[0]; zones.unshift(f); }
+  
+  // Ensure forum and suggest stay at the top
+  const forumIdx = zones.findIndex(z => z.id === 'forum');
+  if (forumIdx > 0) { const f = zones.splice(forumIdx, 1)[0]; zones.unshift(f); }
+  
+  const suggestIdx = zones.findIndex(z => z.id === 'suggest');
+  if (suggestIdx > 0) { const s = zones.splice(suggestIdx, 1)[0]; zones.unshift(s); }
+  
   displayFavorites(); displayRecentlyPlayed();
   displayZones(showFavOnly ? zones.filter(z => favorites.includes(z.id)) : zones);
 };
@@ -1464,7 +1494,7 @@ function createZoneCard(file, isRecent = false) {
     locked = false; // specialPVG = true gives full access
   } else {
     const ok   = user && !user.isAnonymous;
-    locked = file.id !== 'forum' ? (() => {
+    locked = file.id !== 'forum' && file.id !== 'suggest' ? (() => {
       if (!user)            return true;
       if (user.isAnonymous) return file.forcedLock !== undefined ? file.forcedLock : !unlockedGames.includes(file.id);
       return false;
@@ -1477,6 +1507,7 @@ function createZoneCard(file, isRecent = false) {
   div.onclick = () => {
     if (locked)                   { showToast(lockMsg); showSmartAccountModal(); }
     else if (file.id === 'forum') window.location.href = file.url;
+    else if (file.id === 'suggest') window.location.href = file.url;
     else                          openZone(file);
   };
 
@@ -1498,7 +1529,7 @@ function createZoneCard(file, isRecent = false) {
 
   const badge     = document.createElement('div');
   badge.className = 'zone-play-badge';
-  badge.innerText = file.id === 'forum' ? 'JOIN' : (locked ? 'LOCKED' : 'PLAY');
+  badge.innerText = file.id === 'forum' ? 'JOIN' : (file.id === 'suggest' ? 'SUGGEST' : (locked ? 'LOCKED' : 'PLAY'));
   media.appendChild(badge);
 
   const content     = document.createElement('div');
@@ -1507,9 +1538,9 @@ function createZoneCard(file, isRecent = false) {
   const titleRow     = document.createElement('div');
   titleRow.className = 'zone-title-container';
 
-  if (file.id !== 'forum') {
-    const star     = document.createElement('span');
+  if (file.id !== 'forum' && file.id !== 'suggest') {
     const ok = user && !user.isAnonymous;
+    const star     = document.createElement('span');
     star.className = 'favorite-star' + (favorites.includes(file.id) ? ' active' : '') + (!ok ? ' guest-disabled' : '');
     star.innerHTML = '★';
     star.onclick   = e => {
@@ -1545,11 +1576,12 @@ function createZoneCard(file, isRecent = false) {
   content.appendChild(meta);
 
   const btn     = document.createElement('button');
-  btn.innerText = file.id === 'forum' ? 'join discussion' : (locked ? 'sign up to play' : 'launch →');
+  btn.innerText = file.id === 'forum' ? 'join discussion' : (file.id === 'suggest' ? 'make a suggestion' : (locked ? 'sign up to play' : 'launch →'));
   btn.onclick   = e => {
     e.stopPropagation();
     if (locked)                   { showToast(lockMsg); showSmartAccountModal(); }
     else if (file.id === 'forum') window.location.href = file.url;
+    else if (file.id === 'suggest') window.location.href = file.url;
     else                          openZone(file);
   };
 

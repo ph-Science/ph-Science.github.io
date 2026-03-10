@@ -899,12 +899,6 @@ header {
       <div class="footer-brand">PH·SCIENCE</div>
       <div class="footer-sub">700+ unblocked games · free to play</div>
     </div>
-    <div class="footer-links">
-      <a href="#">home</a>
-      <a href="#">about</a>
-      <a href="#">discord</a>
-      <a href="#">report</a>
-    </div>
   </div>
 </footer>
 
@@ -979,11 +973,19 @@ const htmlURL   = "https://cdn.jsdelivr.net/gh/gn-math/html@main";
 const forumZone = {
   id:     "forum",
   name:   "Forums",
-  author: "Community",
-  cover:  "https://media.discordapp.net/attachments/1246719291517308929/1479061650022727680/image_1.png?ex=69aaab01&is=69a95981&hm=0deadaed3877b789438454fd562b17f78e5cfb151a46b53b322dbb90163601c5&=&format=webp&quality=lossless&width=858&height=858",
+  author: "Ph - Science",
+cover: "https://cdn-icons-png.flaticon.com/512/7177/7177378.png",
   url:    "https://ph-science.github.io/forum.html",
 };
 
+  const Zone = {
+  id:     "",
+  name:   "ions",
+  author: "Ph - Science",
+  cover:  "https://cdn.iconscout.com/icon/free/png-256/free-hubspot-logo-icon-svg-download-png-2944939.png?f=webp",
+  url:    "https://ph-science.github.io/s.html",
+};
+  
 function formatTimeAgo(ts) {
   if (!ts) return '';
   const d = Date.now() - ts;
@@ -1317,7 +1319,7 @@ if (localStorage.getItem('ph_announcement_dismissed') === 'true') {
 }
 
 function addToRecentlyPlayed(id) {
-  if (!auth.currentUser || id === 'forum') return;
+  if (!auth.currentUser || id === 'forum' || id === '') return;
   const uid = auth.currentUser.uid;
   const ts  = Date.now();
   const max = parseInt(document.getElementById('maxRecent')?.value || '10');
@@ -1404,6 +1406,7 @@ async function listZones() {
     const json = await res.json();
     zones      = json.filter(g => !bannedIds.includes(g.id));
     zones.unshift(forumZone);
+        zones.unshift(forumZone);
     const shuffled = [...zones].sort(() => .5 - Math.random());
     unlockedGames  = shuffled.slice(0, Math.floor(zones.length / 2)).map(g => g.id);
     document.getElementById('totalGamesStat').innerText = zones.length;

@@ -212,6 +212,21 @@ body::before {
   text-align:center; position:relative; overflow:hidden;
 }
 
+  .modal-btn.google-btn {
+  background: #fff;
+  color: #3c3c3c;
+  border: 1px solid #dadce0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-btn.google-btn:hover {
+  background: #f8f8f8;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+}
+
 .welcome-card::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(255,107,0,.1) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 50% 100%,rgba(255,60,0,.06) 0%,transparent 60%); pointer-events:none; }
 .welcome-card::after { content:''; position:absolute; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,107,0,.012) 4px); pointer-events:none; }
 .welcome-overlay.active .welcome-card { transform:scale(1) translateY(0); }
@@ -1070,14 +1085,18 @@ window.showSmartAccountModal = function() {
         <button class="modal-btn warning"   onclick="logout()">🚪 log out</button>
       </div>`;
   } else {
-    content.innerHTML = `
-      <h2>PH·SCIENCE</h2>
-      <p>join the vault · 700+ games</p>
-      <div class="modal-buttons">
-        <button class="modal-btn primary"   onclick="showSignup()">✨ create account</button>
-        <button class="modal-btn secondary" onclick="continueAsGuest()">👤 continue as guest</button>
-      </div>
-      <a class="modal-link" onclick="showLogin()">already have an account? sign in →</a>`;
+content.innerHTML = `
+  <h2>PH·SCIENCE</h2>
+  <p>join the vault · 700+ games</p>
+  <div class="modal-buttons">
+    <button class="modal-btn google-btn" onclick="signInWithGoogle()">
+      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" style="width:18px;height:18px;vertical-align:middle;margin-right:8px;">
+      continue with google
+    </button>
+    <button class="modal-btn primary"   onclick="showSignup()">✨ create account</button>
+    <button class="modal-btn secondary" onclick="continueAsGuest()">👤 continue as guest</button>
+  </div>
+  <a class="modal-link" onclick="showLogin()">already have an account? sign in →</a>`;
   }
 
   modal.style.display = 'flex';
@@ -1622,6 +1641,21 @@ window.openZone = function(file) {
   }
 };
 
+  window.signInWithGoogle = function() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider)
+    .then(result => {
+      const name = result.user.displayName || 'player';
+      showToast(`👋 welcome, ${name}!`);
+      closeAllModals();
+    })
+    .catch(err => {
+      if (err.code === 'auth/popup-closed-by-user') return;
+      showToast('❌ Google sign-in failed');
+      console.error(err);
+    });
+};
+  
 window.closeZone = function() {
   document.getElementById('zoneViewer').style.display = "none";
   document.getElementById('zoneFrame').srcdoc = '';

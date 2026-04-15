@@ -4,246 +4,372 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PH-Science | END</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&amp;family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-:root { --accent: #ff3366; }
 
-* { margin:0; padding:0; box-sizing:border-box; }
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --accent: #ff3366;
+  --glass: rgba(255,255,255,0.055);
+  --border: rgba(255,255,255,0.14);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
   font-family: 'DM Sans', sans-serif;
   background: #000;
   color: #fff;
+  overflow-x: hidden;
   min-height: 100vh;
-  overflow-y: scroll;
-  position: relative;
-  line-height: 1.9;
 }
 
-#stars-canvas {
+/* =======================
+   AURORA BACKGROUND
+======================= */
+
+.bg {
   position: fixed;
   inset: 0;
   z-index: 1;
-  pointer-events: none;
+  overflow: hidden;
 }
 
-.container {
-  position: relative;
-  z-index: 10;
-  max-width: 820px;
-  margin: 0 auto;
-  padding: 80px 20px 140px;
-  text-align: center;           /* Centered again */
+/* aurora blobs */
+.blob {
+  position: absolute;
+  width: 750px;
+  height: 750px;
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.6;
+  mix-blend-mode: screen;
+
+  /* IMPORTANT: smoother motion */
+  animation: float 551s ease-in-out infinite alternate;
+  will-change: transform;
 }
 
-.logo {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(2.8rem, 8vw, 5.4rem);
-  font-weight: 900;
-  letter-spacing: -0.06em;
-  margin-bottom: 12px;
-  background: linear-gradient(90deg, #fff, #ff99aa, #fff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: logoGlow 6s ease-in-out infinite;
-  white-space: nowrap;
-}
-.logo-dot { color: #444; }
+/* different colors */
+.blob.one { background: #ff3366; top: -200px; left: -200px; }
+.blob.two { background: #6a5cff; bottom: -250px; right: -200px; animation-delay: -6s; }
+.blob.three { background: #00e0ff; top: 40%; left: 55%; animation-delay: -12s; }
 
-.tag {
-  display: inline-block;
-  background: rgba(255,51,102,0.12);
-  color: var(--accent);
-  font-family: 'Syne', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 800;
-  letter-spacing: 0.3em;
-  padding: 9px 34px;
-  border-radius: 9999px;
-  border: 1px solid rgba(255,51,102,0.4);
-  margin-bottom: 50px;
-  animation: tagPulse 4.5s ease-in-out infinite;
+@keyframes float {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  5% {
+    transform: translate(40px, -30px) scale(1.05);
+  }
+  15% {
+    transform: translate(-30px, 25px) scale(1.02);
+  }
+  25% {
+    transform: translate(30px, 20px) scale(1.08);
+  }
+  35% {
+    transform: translate(0px, 0px) scale(1);
+  }
 }
 
-h1 {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(2.8rem, 7vw, 4.8rem);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.04em;
-  margin-bottom: 60px;
+/* softer depth overlay (IMPORTANT FIX) */
+.bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 40%,
+      transparent 0%,
+      rgba(0,0,0,0.35) 55%,
+      rgba(0,0,0,0.78) 100%);
 }
 
-.message {
-  font-size: 1.17rem;
-  color: rgba(255,255,255,0.9);
-  text-align: left;
-  max-width: 100%;
-  margin: 0 auto;
-  background: rgba(255,255,255,0.02);
-  padding: 52px 46px;
-  border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+/* =======================
+   STARS
+======================= */
+
+#stars {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
 }
-
-.message p { margin-bottom: 1.85em; }
-.message strong { color: #ff99aa; }
-
-.thanks {
-  text-align: center;
-  font-size: 1.5rem;
-  color: #bbb;
-  margin: 90px 0 60px;
-  font-weight: 500;
-}
-
-.projects {
-  display: flex;
-  gap: 24px;
-  justify-content: center;      /* Centered buttons */
-  flex-wrap: wrap;
-  margin-bottom: 100px;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  background: rgba(255,255,255,0.06);
-  color: #fff;
-  border: 2px solid rgba(255,255,255,0.22);
-  padding: 22px 52px;
-  font-family: 'Syne', sans-serif;
-  font-size: 1.22rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  border-radius: 26px;
-  cursor: pointer;
-  transition: all 0.5s cubic-bezier(0.23,1,0.32,1);
-  min-width: 260px;
-}
-
-.btn:hover {
-  transform: translateY(-12px) scale(1.04);
-  background: #fff;
-  color: #000;
-  border-color: #fff;
-  box-shadow: 0 20px 50px rgba(255,51,102,0.3);
-}
-
-.footer {
-  text-align: center;
-  font-size: 0.9rem;
-  color: #555;
-  padding-top: 40px;
-}
-
-@keyframes logoGlow { 0%,100% { filter: brightness(1); } 50% { filter: brightness(1.5); } }
-@keyframes tagPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
 
 .vignette {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.88) 100%);
-  z-index: 2;
+  z-index: 3;
   pointer-events: none;
+  background: radial-gradient(circle, transparent 35%, rgba(0,0,0,0.92) 100%);
+}
+
+/* =======================
+   MAIN
+======================= */
+
+.container {
+  position: relative;
+  z-index: 10;
+  max-width: 1100px;
+  margin: auto;
+  padding: 70px 20px 120px;
+  text-align: center;
+}
+
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(3rem, 7vw, 5.8rem);
+  font-weight: 900;
+  background: linear-gradient(90deg, #fff, #ff99aa, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glow 6s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%,100% { filter: brightness(1); }
+  50% { filter: brightness(1.8); }
+}
+
+.tag {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 32px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  background: rgba(255,51,102,0.1);
+  border: 1px solid rgba(255,51,102,0.35);
+  backdrop-filter: blur(16px);
+}
+
+.grid {
+  display: flex;
+  gap: 26px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+
+.card {
+  flex: 1;
+  min-width: 320px;
+  max-width: 520px;
+
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 26px;
+
+  padding: 44px 40px;
+  text-align: left;
+
+  backdrop-filter: blur(26px);
+  -webkit-backdrop-filter: blur(26px);
+
+  box-shadow:
+    0 25px 80px rgba(0,0,0,0.65),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+
+  transition: 0.35s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255,153,170,0.4);
+}
+
+.card h2 {
+  font-family: 'Syne', sans-serif;
+  color: #ff99aa;
+  margin-bottom: 16px;
+}
+
+.card p {
+  margin-bottom: 1.1em;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.7;
+}
+
+.signature {
+  margin-top: 90px;
+  text-align: center;
+}
+
+.signature-text {
+  font-size: 2.1rem;
+  font-family: cursive;
+  transform: rotate(-2deg);
+  text-shadow: 0 0 18px rgba(255,51,102,0.35);
+}
+
+.signature-line {
+  width: 300px;
+  height: 2px;
+  margin: 12px auto 0;
+  background: linear-gradient(90deg, transparent, #ff3366, transparent);
+  animation: flicker 2.2s infinite;
+}
+
+@keyframes flicker {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.projects {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 60px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 18px 46px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  transition: 0.3s;
+}
+
+.btn:hover {
+  transform: translateY(-10px);
+  background: #fff;
+  color: #000;
+}
+
+.footer {
+  margin-top: 60px;
+  color: rgba(255,255,255,0.3);
+  font-size: 0.85rem;
 }
 </style>
 </head>
+
 <body>
 
-<canvas id="stars-canvas"></canvas>
+<div class="bg">
+  <div class="blob one"></div>
+  <div class="blob two"></div>
+  <div class="blob three"></div>
+</div>
+
+<canvas id="stars"></canvas>
 <div class="vignette"></div>
 
 <div class="container">
+
   <div class="logo">SCIENCE</div>
   <div class="tag">THE END</div>
-  
-  
-  <div class="message">
-    <p>After a long period of development, updates, and support from the community, <strong>ph-science will officially be shutting down permanently</strong> 😲</p>
-    
-    <p>This decision wasn’t made lightly. Due to major changes from the game supplier—especially the privatization of their JSON files and APIs—the platform is no longer able to function in the way it was originally designed. These changes have made it impossible to maintain key features and continue improving the experience. Because of this, development on the current version has officially come to an end.</p>
-    
-    <p>We understand that this may come as disappointing news. ph-science has been more than just a project—it’s been a place where people explored, learned, and connected. Every update, feature, and discussion was shaped by the people who used it, and that made it something truly special.</p>
-    
-    <p>Looking ahead, the focus will now shift to a new and exciting direction. The only active project moving forward will be an upcoming movie site, which aims to bring a fresh experience and new opportunities for creativity and engagement. More details about this project will be shared over time.</p>
-    
-    <p>There is also a possibility that the forums could return in the future. If they do, they may include new and improved features such as image sharing, voice recordings, and additional ways to communicate and collaborate with others across different classes and communities. While nothing is guaranteed yet, the idea is still being considered.</p>
-    
-    <p>Thank you to everyone who has been part of this journey. Whether you contributed, participated in discussions, or simply spent time on the platform, you helped make it what it was. Your support, feedback, and presence meant a lot and will not be forgotten.</p>
-    
-<p><strong>All user data has been permanently deleted and cannot be recovered. This includes:</strong></p>
-<p><strong>- Email addresses (including Google accounts)</strong></p>
-<p><strong>- Accounts (even anonymous / guests accounts)</strong></p>
-<p><strong>- User-generated content (posts, messages, uploads, votings, favorites)</strong></p>
-<p><strong>- Cookies</strong></p>
+
+  <div class="grid">
+
+    <div class="card">
+      <h2>Shutdown Notice</h2>
+      <p><strong>ph-science has permanently shut down.</strong></p>
+      <p>Backend API restrictions made the system impossible to continue.</p>
+      <p>The platform has reached its end of life.</p>
+      <p>Thank you for everything.</p>
+    </div>
+
+    <div class="card">
+      <h2>Data Deletion</h2>
+      <p><strong>All data has been permanently erased.</strong></p>
+      <p>- Emails & accounts</p>
+      <p>- Posts, messages, uploads</p>
+      <p>- Votes, favorites</p>
+      <p>- Sessions & cookies</p>
+    </div>
+
   </div>
-  
-  <div class="thanks">Fuck School</div>
-  
+
+  <div class="signature">
+    <div class="signature-text">
+      i hate being bi-polar, its awesome
+    </div>
+    <div class="signature-line"></div>
+  </div>
+
   <div class="projects">
-    <button class="btn" onclick="this.style.transform='scale(0.92)';setTimeout(()=>this.style.transform='',180)">
-      Forums ⏳ <span>🛠️</span>
-    </button>
-    <button class="btn" onclick="this.style.transform='scale(0.92)';setTimeout(()=>this.style.transform='',180)">
-      Movies Soon <span>🎥</span>
-    </button>
+    <button class="btn">Forums ⏳</button>
+    <button class="btn">Movies 🎥</button>
   </div>
-  
-  <div class="footer">
-    March 4 - April 15
-  </div>
+
+  <div class="footer">March 4 — April 15</div>
+
 </div>
 
 <script>
-// Gentle Falling Stars
-const canvas = document.getElementById('stars-canvas');
-const ctx = canvas.getContext('2d');
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
 let stars = [];
+let w, h;
+
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
 
 class Star {
   constructor() { this.reset(); }
+
   reset() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height - canvas.height;
-    this.size = Math.random() * 2.4 + 0.7;
-    this.speed = Math.random() * 1.2 + 0.6;
-    this.opacity = Math.random() * 0.8 + 0.5;
+    this.x = Math.random() * w;
+    this.y = Math.random() * h - h;
+    this.size = Math.random() * 1.6 + 0.5;
+    this.speed = Math.random() * 1.2 + 0.3;
+    this.alpha = Math.random() * 0.6 + 0.2;
   }
+
   update() {
     this.y += this.speed;
-    if (this.y > canvas.height) this.reset();
+    if (this.y > h) {
+      this.x = Math.random() * w;
+      this.y = -10;
+    }
   }
+
   draw() {
-    ctx.globalAlpha = this.opacity * (Math.sin(Date.now() * 0.003 + this.x) * 0.3 + 0.7);
-    ctx.fillStyle = '#fff';
+    ctx.globalAlpha = this.alpha;
+    ctx.fillStyle = "#fff";
     ctx.fillRect(this.x, this.y, this.size, this.size);
   }
 }
 
-function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-
-function initStars() {
+function init() {
   stars = [];
-  for (let i = 0; i < 320; i++) stars.push(new Star());
+  for (let i = 0; i < 260; i++) stars.push(new Star());
 }
 
 function animate() {
-  ctx.fillStyle = 'rgba(0,0,0,0.15)';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  stars.forEach(s => { s.update(); s.draw(); });
+  ctx.fillStyle = "rgba(0,0,0,0.25)";
+  ctx.fillRect(0, 0, w, h);
+
+  for (let s of stars) {
+    s.update();
+    s.draw();
+  }
+
   requestAnimationFrame(animate);
 }
 
-window.addEventListener('resize', () => { resize(); initStars(); });
+window.addEventListener("resize", () => {
+  resize();
+  init();
+});
+
 resize();
-initStars();
+init();
 animate();
 </script>
 

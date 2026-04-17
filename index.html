@@ -20,11 +20,10 @@ body {
   line-height:1.7;
 }
 
-/* LIGHTER OVERLAY - lets background show */
 .overlay {
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.65);   /* was 0.91 → now much lighter */
+  background:rgba(0,0,0,0.2);
   z-index:1;
 }
 
@@ -126,7 +125,7 @@ body {
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:1.6rem;
+  font-size:1.4rem;
   cursor:pointer;
   backdrop-filter:blur(12px);
   transition:.3s;
@@ -140,7 +139,7 @@ body {
   .signature { margin-top:70px; }
   .projects { margin-top:50px; }
   .btn { padding:16px 36px; font-size:1.08rem; }
-  #music-toggle { bottom:20px; right:20px; width:48px; height:48px; font-size:1.45rem; }
+  #music-toggle { bottom:20px; right:20px; width:48px; height:48px; font-size:1.3rem; }
 }
 </style>
 </head>
@@ -181,21 +180,21 @@ body {
   <div class="signature">i hate being bi-polar, its awesome</div>
 
   <div class="projects">
-    <button class="btn" onclick="alert('Forums — Coming in new project')">Forums ⏳</button>
-    <button class="btn" onclick="alert('Movies dropping soon 🔥')">Movies 🎥</button>
+    <button class="btn" onclick="alert('Forums — Coming in new project')">Forums</button>
+    <button class="btn" onclick="alert('Movies dropping soon')">Movies</button>
   </div>
 
   <div class="footer">March 4 — April 15, 2026</div>
 </div>
 
 <audio id="bg-music" loop>
-  <source src="https://ph-Science.github.io/Music/All Dreams Real.mp3" type="audio/mpeg">
+  <source src="Music/All Dreams Real.mp3" type="audio/mpeg">
 </audio>
 
-<div id="music-toggle" onclick="toggleMusic()">♪</div>
+<div id="music-toggle" onclick="toggleMusic()">▶</div>
 
 <script>
-// Stars + Music (same as before)
+// Stars with trails
 const canvas = document.getElementById('stars-canvas');
 const ctx = canvas.getContext('2d');
 let width, height;
@@ -272,7 +271,7 @@ function toggleMusic() {
     toggleBtn.textContent = '❚❚';
   } else {
     music.pause();
-    toggleBtn.textContent = '♪';
+    toggleBtn.textContent = '▶';
   }
 }
 
